@@ -3,13 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "tailwind.config": [
-        "./tailwind.config.js"
-      ]
-    }
+			"@/*": ["./*"],
+			"@/lib/*": ["./lib/*"],
+			"@/services/*": ["./services/*"],
+			"@/providers/*": ["./providers/*"],
+			"tailwind.config": ["./tailwind.config.js"]
+		}
   },
   "include": [
     "**/*.ts",

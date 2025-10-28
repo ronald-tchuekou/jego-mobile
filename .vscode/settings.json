@@ -4,6 +4,6 @@
 		"source.organizeImports": "explicit",
 		"source.sortMembers": "explicit"
 	},
-	"cSpell.words": ["jego"],
+	"cSpell.words": ["Gluestack", "jego"],
 	"tailwindCSS.experimental.classRegex": [["tva\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
 }

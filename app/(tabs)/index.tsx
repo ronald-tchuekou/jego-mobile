@@ -4,6 +4,7 @@ import { Button, ButtonText } from '@/components/ui/button'
 import { HStack } from '@/components/ui/hstack'
 import { InfoIcon } from '@/components/ui/icon'
 import { VStack } from '@/components/ui/vstack'
+import { Link } from 'expo-router'
 import { Text } from 'react-native'
 
 export default function Index() {
@@ -31,9 +32,16 @@ export default function Index() {
 				<AlertIcon as={InfoIcon} />
 				<AlertText>Description of alert!</AlertText>
 			</Alert>
-			<Button variant='solid' size='md' action='primary'>
-				<ButtonText>Click me</ButtonText>
-			</Button>
+			<Link href='/login' asChild>
+				<Button variant='solid' size='md' action='primary'>
+					<ButtonText>Login</ButtonText>
+				</Button>
+			</Link>
+			<Link href='/login' asChild>
+				<Button variant='solid' size='md' action='secondary'>
+					<ButtonText>Register</ButtonText>
+				</Button>
+			</Link>
 		</VStack>
 	)
 }
