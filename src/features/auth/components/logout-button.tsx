@@ -25,9 +25,9 @@ export const LogoutButton = () => {
 	})
 
    return (
-      <Button disabled={isPending} onPress={() => mutate(token || '')} className="rounded-lg">
-         {isPending && <ButtonSpinner className="text-white"/>}
-         <ButtonText>Déconnexion</ButtonText>
-      </Button>
-   )
+		<Button disabled={isPending} variant='outline' onPress={() => mutate(token || '')} className='rounded-lg'>
+			{isPending && <ButtonSpinner className='text-white' />}
+			<ButtonText>Déconnexion</ButtonText>
+		</Button>
+	)
 }
