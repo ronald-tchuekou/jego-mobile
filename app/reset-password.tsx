@@ -1,3 +1,4 @@
+import { BackButton } from '@/src/components/base/back-button'
 import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import {
 	FormControl,
@@ -7,40 +8,39 @@ import {
 	FormControlLabel,
 	FormControlLabelText,
 } from '@/src/components/ui/form-control'
-import { HStack } from '@/src/components/ui/hstack'
 import { AlertCircleIcon, EyeIcon, EyeOffIcon } from '@/src/components/ui/icon'
 import { Image } from '@/src/components/ui/image'
 import { Input, InputField, InputIcon, InputSlot } from '@/src/components/ui/input'
 import { VStack } from '@/src/components/ui/vstack'
-import { defaultLoginFormValue, LoginSchema, loginSchema } from '@/src/features/auth/schemas/login-schema'
+import { defaultResetPasswordValue, resetPasswordSchema, ResetPasswordSchema } from '@/src/features/auth/schemas/reset-pass-schema'
 import { IMAGES } from '@/src/lib/images'
-import AuthService from '@/src/services/auth-service'
+import AuthService, { ResetPasswordBody } from '@/src/services/auth-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { Link, useRouter } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function LoginScreen() {
+export default function ResetPasswordScreen() {
 	const login = useAuthStore((s) => s.login)
 	const router = useRouter()
 
 	const [showPassword, setShowPassword] = React.useState(false)
 
-	const form = useForm<LoginSchema>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: defaultLoginFormValue,
+	const form = useForm<ResetPasswordSchema>({
+		resolver: zodResolver(resetPasswordSchema),
+		defaultValues: defaultResetPasswordValue,
 	})
 	const {
 		formState: { errors },
 	} = form
 
 	const { mutate, isPending } = useMutation({
-		mutationFn: async (body: LoginSchema) => {
-			return AuthService.login(body)
+		mutationFn: async (body: ResetPasswordBody) => {
+			return AuthService.resetPassword(body)
 		},
 		onSuccess: (data) => {
 			login(data)
@@ -51,7 +51,12 @@ export default function LoginScreen() {
 		},
 	})
 
-	const onSubmit = form.handleSubmit((data) => mutate(data))
+	const onSubmit = form.handleSubmit((data) => mutate({
+		confirmPassword: data.passwordConfirmation,
+		password: data.password,
+		token: '',
+		userId: ''
+	}))
 
 	const handleState = () => {
 		setShowPassword((showState) => {
@@ -62,59 +67,31 @@ export default function LoginScreen() {
 	return (
 		<SafeAreaView edges={['top']} className='flex-1'>
 			<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+				<Stack.Screen
+					options={{
+						headerLeft: BackButton,
+					}}
+				/>
 				<ScrollView
 					keyboardShouldPersistTaps='handled'
 					contentContainerClassName='flex-1 items-center justify-center p-6'
 				>
 					<VStack space='md' className='w-full max-w-[420px]'>
-						<Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
-						<Text className='text-3xl font-bold mb-4 text-center'>Se connecter</Text>
+						<Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' />
+						<Text className='text-3xl font-bold mb-4 text-center'>Créer un nouveau mot de passe</Text>
 
-						<Controller
-							control={form.control}
-							name='email'
-							render={({ field }) => (
-								<FormControl isInvalid={!!errors.email} size='md' isRequired>
-									<FormControlLabel>
-										<FormControlLabelText>Adresse email</FormControlLabelText>
-									</FormControlLabel>
-									<Input size='md' className='rounded-lg'>
-										<InputField
-											inputMode='email'
-											keyboardType='email-address'
-											autoCapitalize='none'
-											autoCorrect={false}
-											placeholder='Adresse email'
-											value={field.value}
-											onChangeText={field.onChange}
-											onSubmitEditing={() => form.setFocus('password')}
-											returnKeyType='next'
-											autoFocus={true}
-										/>
-									</Input>
-									<FormControlError>
-										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-red-500' />
-										<FormControlErrorText className='text-red-500'>
-											{errors.email?.message}
-										</FormControlErrorText>
-									</FormControlError>
-								</FormControl>
-							)}
-						/>
+						<Text className='text-lg text-center'>
+							Assurez-vous que votre nouveau mot de passe est fort et sécurisé
+						</Text>
 
 						<Controller
 							control={form.control}
 							name='password'
 							render={({ field }) => (
 								<FormControl isInvalid={!!errors.password} size='md' isRequired>
-									<HStack className='justify-between'>
-										<FormControlLabel>
-											<FormControlLabelText>Mot de passe</FormControlLabelText>
-										</FormControlLabel>
-										<Link href={'/forgot-password'} className='underline text-primary-500 text-base'>
-											Mot de passe oublié ?
-										</Link>
-									</HStack>
+									<FormControlLabel>
+										<FormControlLabelText>Nouveau mot de passe</FormControlLabelText>
+									</FormControlLabel>
 									<Input size='md' className='rounded-lg' isInvalid={!!errors.password}>
 										<InputField
 											type={showPassword ? 'text' : 'password'}
@@ -140,6 +117,39 @@ export default function LoginScreen() {
 							)}
 						/>
 
+						<Controller
+							control={form.control}
+							name='passwordConfirmation'
+							render={({ field }) => (
+								<FormControl isInvalid={!!errors.passwordConfirmation} size='md' isRequired>
+									<FormControlLabel>
+										<FormControlLabelText>Mot de passe de confirmation</FormControlLabelText>
+									</FormControlLabel>
+									<Input size='md' className='rounded-lg' isInvalid={!!errors.password}>
+										<InputField
+											type={showPassword ? 'text' : 'password'}
+											autoCapitalize='none'
+											autoCorrect={false}
+											placeholder='Confirmation'
+											value={field.value}
+											onChangeText={field.onChange}
+											onSubmitEditing={onSubmit}
+											returnKeyType='done'
+										/>
+										<InputSlot className='pr-3' onPress={handleState}>
+											<InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
+										</InputSlot>
+									</Input>
+									<FormControlError>
+										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-red-500' />
+										<FormControlErrorText className='text-red-500'>
+											{errors.passwordConfirmation?.message}
+										</FormControlErrorText>
+									</FormControlError>
+								</FormControl>
+							)}
+						/>
+
 						<Button
 							action='primary'
 							variant='solid'
@@ -149,15 +159,8 @@ export default function LoginScreen() {
 							className='rounded-lg mt-2'
 						>
 							{isPending && <ButtonSpinner className='text-white' />}
-							<ButtonText>Se connecter</ButtonText>
+							<ButtonText>Valider</ButtonText>
 						</Button>
-
-						<HStack space='sm'>
-							<Text className='text-base'>Vous n&apos;avez pas de compte ? </Text>
-							<Link href='/register' className='underline text-base text-primary-500' replace>
-								Créer un compte
-							</Link>
-						</HStack>
 
 						<View className='h-6' />
 					</VStack>

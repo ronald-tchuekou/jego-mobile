@@ -1,4 +1,4 @@
-import { getApiUrl } from '@/lib/env'
+import { getApiUrl } from '@/src/lib/env'
 
 export type ApiResponse<T> = {
   data: T | null
@@ -17,7 +17,7 @@ export async function fetchHelper<T>(
   try {
     data = await response.json()
   } catch (_e) {
-    // ignore json parse error
+    console.error("Error when parsing json response => ", _e)
   }
 
   if (response.status !== 200 && response.status !== 201) {

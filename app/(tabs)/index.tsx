@@ -1,10 +1,9 @@
-import { Alert, AlertIcon, AlertText } from '@/components/ui/alert'
-import { Box } from '@/components/ui/box'
-import { Button, ButtonText } from '@/components/ui/button'
-import { HStack } from '@/components/ui/hstack'
-import { InfoIcon } from '@/components/ui/icon'
-import { VStack } from '@/components/ui/vstack'
-import { Link } from 'expo-router'
+import { Alert, AlertIcon, AlertText } from '@/src/components/ui/alert'
+import { Box } from '@/src/components/ui/box'
+import { HStack } from '@/src/components/ui/hstack'
+import { InfoIcon } from '@/src/components/ui/icon'
+import { VStack } from '@/src/components/ui/vstack'
+import { LogoutButton } from '@/src/features/auth/components/logout-button'
 import { Text } from 'react-native'
 
 export default function Index() {
@@ -32,16 +31,7 @@ export default function Index() {
 				<AlertIcon as={InfoIcon} />
 				<AlertText>Description of alert!</AlertText>
 			</Alert>
-			<Link href='/login' asChild>
-				<Button variant='solid' size='md' action='primary'>
-					<ButtonText>Login</ButtonText>
-				</Button>
-			</Link>
-			<Link href='/login' asChild>
-				<Button variant='solid' size='md' action='secondary'>
-					<ButtonText>Register</ButtonText>
-				</Button>
-			</Link>
+			<LogoutButton />
 		</VStack>
 	)
 }

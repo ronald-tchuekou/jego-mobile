@@ -1,5 +1,5 @@
-import { fetchHelper } from '@/lib/fetch-helper'
-import type { UserModel } from '@/services/auth-service'
+import { fetchHelper } from '@/src/lib/fetch-helper'
+import type { UserModel } from '@/src/services/auth-service'
 
 const UserService = {
   async revalidateMe(token: string) {

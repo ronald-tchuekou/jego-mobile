@@ -1,4 +1,4 @@
-import { fetchHelper } from '@/lib/fetch-helper'
+import { fetchHelper } from '@/src/lib/fetch-helper'
 
 export type UserRole = 'admin' | 'user' | 'company:admin' | 'company:agent'
 

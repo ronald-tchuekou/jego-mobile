@@ -4,9 +4,6 @@
     "strict": true,
     "paths": {
 			"@/*": ["./*"],
-			"@/lib/*": ["./lib/*"],
-			"@/services/*": ["./services/*"],
-			"@/providers/*": ["./providers/*"],
 			"tailwind.config": ["./tailwind.config.js"]
 		}
   },

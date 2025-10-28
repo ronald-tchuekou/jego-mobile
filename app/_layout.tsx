@@ -1,9 +1,8 @@
+import { GluestackUIProvider } from '@/src/components/ui/gluestack-ui-provider'
+import '@/src/global.css'
+import QueryProviders from '@/src/providers/query-provider'
+import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
-
-import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
-import '@/global.css'
-import QueryProviders from '@/providers/query-provider'
-import { useAuthStore } from '@/stores/auth-store'
 
 const AppStack = () => {
 	const auth = useAuthStore((s) => s.auth)
@@ -17,6 +16,8 @@ const AppStack = () => {
 			<Stack.Protected guard={!auth}>
 				<Stack.Screen name='login' options={{ headerShown: false }} />
 				<Stack.Screen name='register' options={{ headerShown: false }} />
+				<Stack.Screen name='forgot-password' options={{ title: 'Mot de passe oublié' }} />
+				<Stack.Screen name='reset-password' options={{ title: 'Réinitialiser le mot de passe' }} />
 			</Stack.Protected>
 		</Stack>
 	)

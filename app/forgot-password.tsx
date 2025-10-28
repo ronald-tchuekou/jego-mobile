@@ -1,3 +1,4 @@
+import { BackButton } from '@/src/components/base/back-button'
 import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import {
 	FormControl,
@@ -8,43 +9,44 @@ import {
 	FormControlLabelText,
 } from '@/src/components/ui/form-control'
 import { HStack } from '@/src/components/ui/hstack'
-import { AlertCircleIcon, EyeIcon, EyeOffIcon } from '@/src/components/ui/icon'
+import { AlertCircleIcon } from '@/src/components/ui/icon'
 import { Image } from '@/src/components/ui/image'
-import { Input, InputField, InputIcon, InputSlot } from '@/src/components/ui/input'
+import { Input, InputField } from '@/src/components/ui/input'
 import { VStack } from '@/src/components/ui/vstack'
-import { defaultLoginFormValue, LoginSchema, loginSchema } from '@/src/features/auth/schemas/login-schema'
+import {
+	defaultForgotPasswordValue,
+	forgotPasswordSchema,
+	ForgotPasswordSchema,
+} from '@/src/features/auth/schemas/forgot-pass-schema'
 import { IMAGES } from '@/src/lib/images'
 import AuthService from '@/src/services/auth-service'
-import { useAuthStore } from '@/src/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { Link, useRouter } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function LoginScreen() {
-	const login = useAuthStore((s) => s.login)
+export default function ForgotPasswordScreen() {
 	const router = useRouter()
 
-	const [showPassword, setShowPassword] = React.useState(false)
-
-	const form = useForm<LoginSchema>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: defaultLoginFormValue,
+	const form = useForm<ForgotPasswordSchema>({
+		resolver: zodResolver(forgotPasswordSchema),
+		defaultValues: defaultForgotPasswordValue,
 	})
 	const {
 		formState: { errors },
 	} = form
 
 	const { mutate, isPending } = useMutation({
-		mutationFn: async (body: LoginSchema) => {
-			return AuthService.login(body)
+		mutationFn: async (body: ForgotPasswordSchema) => {
+			return AuthService.forgotPassword(body.email)
 		},
-		onSuccess: (data) => {
-			login(data)
-			router.replace('/(tabs)')
+		onSuccess: () => {
+			Alert.alert("Super !", "Un lien de réinitialisation de votre mot de passe a été envoyé à votre adresse e-mail.", [
+				{text: 'Me connecter', onPress: router.back, isPreferred: true}
+			])
 		},
 		onError: (error) => {
 			Alert.alert(error.message)
@@ -53,22 +55,25 @@ export default function LoginScreen() {
 
 	const onSubmit = form.handleSubmit((data) => mutate(data))
 
-	const handleState = () => {
-		setShowPassword((showState) => {
-			return !showState
-		})
-	}
-
 	return (
 		<SafeAreaView edges={['top']} className='flex-1'>
 			<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+				<Stack.Screen
+					options={{
+						headerLeft: BackButton,
+					}}
+				/>
 				<ScrollView
 					keyboardShouldPersistTaps='handled'
 					contentContainerClassName='flex-1 items-center justify-center p-6'
 				>
 					<VStack space='md' className='w-full max-w-[420px]'>
 						<Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
-						<Text className='text-3xl font-bold mb-4 text-center'>Se connecter</Text>
+						<Text className='text-3xl font-bold mb-4 text-center'>Mot de passe oublié</Text>
+
+						<Text className='text-lg text-center'>
+							Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe
+						</Text>
 
 						<Controller
 							control={form.control}
@@ -87,7 +92,7 @@ export default function LoginScreen() {
 											placeholder='Adresse email'
 											value={field.value}
 											onChangeText={field.onChange}
-											onSubmitEditing={() => form.setFocus('password')}
+											onSubmitEditing={onSubmit}
 											returnKeyType='next'
 											autoFocus={true}
 										/>
@@ -96,44 +101,6 @@ export default function LoginScreen() {
 										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-red-500' />
 										<FormControlErrorText className='text-red-500'>
 											{errors.email?.message}
-										</FormControlErrorText>
-									</FormControlError>
-								</FormControl>
-							)}
-						/>
-
-						<Controller
-							control={form.control}
-							name='password'
-							render={({ field }) => (
-								<FormControl isInvalid={!!errors.password} size='md' isRequired>
-									<HStack className='justify-between'>
-										<FormControlLabel>
-											<FormControlLabelText>Mot de passe</FormControlLabelText>
-										</FormControlLabel>
-										<Link href={'/forgot-password'} className='underline text-primary-500 text-base'>
-											Mot de passe oublié ?
-										</Link>
-									</HStack>
-									<Input size='md' className='rounded-lg' isInvalid={!!errors.password}>
-										<InputField
-											type={showPassword ? 'text' : 'password'}
-											autoCapitalize='none'
-											autoCorrect={false}
-											placeholder='Mot de passe'
-											value={field.value}
-											onChangeText={field.onChange}
-											onSubmitEditing={onSubmit}
-											returnKeyType='done'
-										/>
-										<InputSlot className='pr-3' onPress={handleState}>
-											<InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
-										</InputSlot>
-									</Input>
-									<FormControlError>
-										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-red-500' />
-										<FormControlErrorText className='text-red-500'>
-											{errors.password?.message}
 										</FormControlErrorText>
 									</FormControlError>
 								</FormControl>
@@ -149,14 +116,14 @@ export default function LoginScreen() {
 							className='rounded-lg mt-2'
 						>
 							{isPending && <ButtonSpinner className='text-white' />}
-							<ButtonText>Se connecter</ButtonText>
+							<ButtonText>Valider</ButtonText>
 						</Button>
 
 						<HStack space='sm'>
-							<Text className='text-base'>Vous n&apos;avez pas de compte ? </Text>
-							<Link href='/register' className='underline text-base text-primary-500' replace>
-								Créer un compte
-							</Link>
+							<Text className='text-base'>Je me rappelle de mon mot de passe !</Text>
+							<Text onPress={router.back} className='underline text-base text-primary-500'>
+								Me connecter
+							</Text>
 						</HStack>
 
 						<View className='h-6' />

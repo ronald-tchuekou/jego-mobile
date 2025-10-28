@@ -8,4 +8,3 @@ export function getApiUrl(path: string = "") {
   const suffix = path.startsWith("/") ? path : `/${path}`;
   return `${base}${suffix}`;
 }
-

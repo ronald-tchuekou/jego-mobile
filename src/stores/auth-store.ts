@@ -1,5 +1,5 @@
-import { type Auth } from '@/services/auth-service'
-import UserService from '@/services/user-service'
+import { type Auth } from '@/src/services/auth-service'
+import UserService from '@/src/services/user-service'
 import * as SecureStore from 'expo-secure-store'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
