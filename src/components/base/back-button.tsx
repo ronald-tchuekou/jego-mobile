@@ -16,9 +16,9 @@ export const BackButton = ({ className }: Props) => {
 			variant='solid'
 			action='secondary'
 			size='sm'
-			className={cn('rounded-full bg-transparent w-12 h-12', className)}
+			className={cn('rounded-full bg-transparent w-10 h-10', className)}
 		>
-			<ButtonIcon as={ArrowLeftIcon} size='xl' style={{ width: 30, height: 30 }} />
+			<ButtonIcon as={ArrowLeftIcon} size='xl' style={{ width: 24, height: 24 }} />
 		</Button>
   )
 };
