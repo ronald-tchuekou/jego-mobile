@@ -65,99 +65,76 @@ export default function ForgotPasswordScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data));
 
   return (
-    <SafeAreaView edges={["top"]} className="flex-1 bg-jego-background">
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
-      >
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerClassName="flex-1 items-center justify-center p-6"
-        >
-          <VStack space="md" className="w-full max-w-[420px]">
-            <Image
-              source={IMAGES.splash}
-              className="w-40 h-20 mx-auto mb-5"
-              alt="Logo"
-            />
-            <Text className="text-3xl font-bold mb-4 text-center text-jego-foreground">
-              Mot de passe oublié
-            </Text>
+		<SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+			<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+				<ScrollView
+					keyboardShouldPersistTaps='handled'
+					contentContainerClassName='flex-1 items-center justify-center p-6'
+				>
+					<VStack space='md' className='w-full max-w-[420px]'>
+						<Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
+						<Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>Mot de passe oublié</Text>
 
-            <Text className="text-lg text-center text-jego-foreground">
-              Entrez votre adresse e-mail et nous vous enverrons un lien pour
-              réinitialiser votre mot de passe
-            </Text>
+						<Text className='text-lg text-center text-jego-foreground'>
+							Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe
+						</Text>
 
-            <Controller
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormControl isInvalid={!!errors.email} size="md" isRequired>
-                  <FormControlLabel>
-                    <FormControlLabelText>Adresse email</FormControlLabelText>
-                  </FormControlLabel>
-                  <Input size="md" className="rounded-lg border-jego-border">
-                    <InputField
-                      inputMode="email"
-                      keyboardType="email-address"
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      placeholder="Adresse email"
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      onSubmitEditing={onSubmit}
-                      returnKeyType="next"
-                      autoFocus={true}
-                    />
-                  </Input>
-                  <FormControlError>
-                    <FormControlErrorIcon
-                      as={AlertCircleIcon}
-                      size="xs"
-                      className="text-jego-destructive"
-                    />
-                    <FormControlErrorText className="text-jego-destructive">
-                      {errors.email?.message}
-                    </FormControlErrorText>
-                  </FormControlError>
-                </FormControl>
-              )}
-            />
+						<Controller
+							control={form.control}
+							name='email'
+							render={({ field }) => (
+								<FormControl isInvalid={!!errors.email} size='md' isRequired>
+									<FormControlLabel>
+										<FormControlLabelText>Adresse email</FormControlLabelText>
+									</FormControlLabel>
+									<Input size='lg' className='rounded-lg bg-jego-card'>
+										<InputField
+											inputMode='email'
+											keyboardType='email-address'
+											autoCapitalize='none'
+											autoCorrect={false}
+											placeholder='Adresse email'
+											value={field.value}
+											onChangeText={field.onChange}
+											onSubmitEditing={onSubmit}
+											returnKeyType='next'
+											autoFocus={true}
+										/>
+									</Input>
+									<FormControlError>
+										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
+										<FormControlErrorText className='text-jego-destructive'>
+											{errors.email?.message}
+										</FormControlErrorText>
+									</FormControlError>
+								</FormControl>
+							)}
+						/>
 
-            <Button
-              action="primary"
-              variant="solid"
-              size="md"
-              onPress={onSubmit}
-              isDisabled={isPending}
-              className="rounded-lg bg-jego-primary mt-2"
-            >
-              {isPending && (
-                <ButtonSpinner className="text-jego-primary-foreground" />
-              )}
-              <ButtonText className="text-jego-primary-foreground">
-                Valider
-              </ButtonText>
-            </Button>
+						<Button
+							action='primary'
+							variant='solid'
+							size='lg'
+							onPress={onSubmit}
+							isDisabled={isPending}
+							className='rounded-lg bg-jego-primary mt-2'
+						>
+							{isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
+							<ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>
+						</Button>
 
-            <HStack space="sm">
-              <Text className="text-base text-jego-foreground">
-                Je me rappelle de mon mot de passe !
-              </Text>
-              <Text
-                onPress={router.back}
-                className="underline text-base text-jego-primary"
-              >
-                Me connecter
-              </Text>
-            </HStack>
+						<HStack space='sm'>
+							<Text className='text-base text-jego-foreground'>Je me rappelle de mon mot de passe !</Text>
+							<Text onPress={router.back} className='underline text-base text-jego-primary'>
+								Me connecter
+							</Text>
+						</HStack>
 
-            <View className="h-6" />
-          </VStack>
-        </ScrollView>
-        <BackButton className="absolute top-4 left-4" />
-      </KeyboardAvoidingView>
-    </SafeAreaView>
-  );
+						<View className='h-6' />
+					</VStack>
+				</ScrollView>
+				<BackButton className='absolute top-4 left-4' />
+			</KeyboardAvoidingView>
+		</SafeAreaView>
+  )
 }

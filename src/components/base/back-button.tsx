@@ -11,14 +11,14 @@ export const BackButton = ({ className }: Props) => {
   const router = useRouter();
 
   return (
-    <Button
-      onPress={router.back}
-      variant="solid"
-      action="secondary"
-      size="sm"
-      className={cn("rounded-full bg-transparent size-16", className)}
-    >
-      <ButtonIcon as={ArrowLeftIcon} className="size-7" />
-    </Button>
-  );
+		<Button
+			onPress={router.back}
+			variant='solid'
+			action='secondary'
+			size='sm'
+			className={cn('rounded-full bg-transparent w-12 h-12', className)}
+		>
+			<ButtonIcon as={ArrowLeftIcon} size='xl' style={{ width: 30, height: 30 }} />
+		</Button>
+  )
 };

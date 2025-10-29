@@ -10,22 +10,16 @@ export default function Index() {
   const height = getStatusBarHeight();
 
   return (
-    <VStack className="flex-1 bg-jego-background">
-      <VStack
-        className="p-4 bg-jego-card border-b border-jego-border"
-        space="md"
-        style={{ paddingTop: height }}
-      >
-        <Text className="text-2xl font-bold text-jego-card-foreground">
-          Annonces
-        </Text>
-        <SearchInput
-          placeholder="Rechercher..."
-          value={search}
-          onChangeText={setSearch}
-        />
-      </VStack>
-      <PostsList search={search} />
-    </VStack>
-  );
+		<VStack className='flex-1 bg-jego-background'>
+			<VStack
+				className='p-4 bg-jego-card border-b border-jego-border'
+				space='md'
+				style={{ paddingTop: height + 10 }}
+			>
+				<Text className='text-3xl font-bold text-jego-card-foreground'>Annonces</Text>
+				<SearchInput placeholder='Rechercher...' value={search} onChangeText={setSearch} />
+			</VStack>
+			<PostsList search={search} />
+		</VStack>
+  )
 }

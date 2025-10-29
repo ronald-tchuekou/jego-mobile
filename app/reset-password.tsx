@@ -83,142 +83,111 @@ export default function ResetPasswordScreen() {
   };
 
   return (
-    <SafeAreaView edges={["top"]} className="flex-1 bg-jego-background">
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
-      >
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerClassName="flex-1 items-center justify-center p-6"
-        >
-          <VStack space="md" className="w-full max-w-[420px]">
-            <Image source={IMAGES.splash} className="w-40 h-20 mx-auto mb-5" />
-            <Text className="text-3xl font-bold mb-4 text-center text-jego-foreground">
-              Créer un nouveau mot de passe
-            </Text>
+		<SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+			<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+				<ScrollView
+					keyboardShouldPersistTaps='handled'
+					contentContainerClassName='flex-1 items-center justify-center p-6'
+				>
+					<VStack space='md' className='w-full max-w-[420px]'>
+						<Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' />
+						<Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>
+							Créer un nouveau mot de passe
+						</Text>
 
-            <Text className="text-lg text-center text-jego-foreground mb-3">
-              Assurez-vous que votre nouveau mot de passe est fort et sécurisé
-            </Text>
+						<Text className='text-lg text-center text-jego-foreground mb-3'>
+							Assurez-vous que votre nouveau mot de passe est fort et sécurisé
+						</Text>
 
-            <Controller
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormControl isInvalid={!!errors.password} size="md" isRequired>
-                  <FormControlLabel>
-                    <FormControlLabelText>
-                      Nouveau mot de passe
-                    </FormControlLabelText>
-                  </FormControlLabel>
-                  <Input
-                    size="md"
-                    className="rounded-lg border-jego-border"
-                    isInvalid={!!errors.password}
-                  >
-                    <InputField
-                      type={showPassword ? "text" : "password"}
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      placeholder="Mot de passe"
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      onSubmitEditing={onSubmit}
-                      returnKeyType="done"
-                    />
-                    <InputSlot className="pr-3" onPress={handleState}>
-                      <InputIcon
-                        as={showPassword ? EyeIcon : EyeOffIcon}
-                        className="text-jego-muted-foreground"
-                      />
-                    </InputSlot>
-                  </Input>
-                  <FormControlError>
-                    <FormControlErrorIcon
-                      as={AlertCircleIcon}
-                      size="xs"
-                      className="text-jego-destructive"
-                    />
-                    <FormControlErrorText className="text-jego-destructive">
-                      {errors.password?.message}
-                    </FormControlErrorText>
-                  </FormControlError>
-                </FormControl>
-              )}
-            />
+						<Controller
+							control={form.control}
+							name='password'
+							render={({ field }) => (
+								<FormControl isInvalid={!!errors.password} size='md' isRequired>
+									<FormControlLabel>
+										<FormControlLabelText>Nouveau mot de passe</FormControlLabelText>
+									</FormControlLabel>
+									<Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+										<InputField
+											type={showPassword ? 'text' : 'password'}
+											autoCapitalize='none'
+											autoCorrect={false}
+											placeholder='Mot de passe'
+											value={field.value}
+											onChangeText={field.onChange}
+											onSubmitEditing={onSubmit}
+											returnKeyType='done'
+										/>
+										<InputSlot className='pr-3' onPress={handleState}>
+											<InputIcon
+												as={showPassword ? EyeIcon : EyeOffIcon}
+												className='text-jego-muted-foreground'
+											/>
+										</InputSlot>
+									</Input>
+									<FormControlError>
+										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
+										<FormControlErrorText className='text-jego-destructive'>
+											{errors.password?.message}
+										</FormControlErrorText>
+									</FormControlError>
+								</FormControl>
+							)}
+						/>
 
-            <Controller
-              control={form.control}
-              name="passwordConfirmation"
-              render={({ field }) => (
-                <FormControl
-                  isInvalid={!!errors.passwordConfirmation}
-                  size="md"
-                  isRequired
-                >
-                  <FormControlLabel>
-                    <FormControlLabelText>
-                      Mot de passe de confirmation
-                    </FormControlLabelText>
-                  </FormControlLabel>
-                  <Input
-                    size="md"
-                    className="rounded-lg border-jego-border"
-                    isInvalid={!!errors.password}
-                  >
-                    <InputField
-                      type={showPassword ? "text" : "password"}
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      placeholder="Confirmation"
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      onSubmitEditing={onSubmit}
-                      returnKeyType="done"
-                    />
-                    <InputSlot className="pr-3" onPress={handleState}>
-                      <InputIcon
-                        as={showPassword ? EyeIcon : EyeOffIcon}
-                        className="text-jego-muted-foreground"
-                      />
-                    </InputSlot>
-                  </Input>
-                  <FormControlError>
-                    <FormControlErrorIcon
-                      as={AlertCircleIcon}
-                      size="xs"
-                      className="text-jego-destructive"
-                    />
-                    <FormControlErrorText className="text-jego-destructive">
-                      {errors.passwordConfirmation?.message}
-                    </FormControlErrorText>
-                  </FormControlError>
-                </FormControl>
-              )}
-            />
+						<Controller
+							control={form.control}
+							name='passwordConfirmation'
+							render={({ field }) => (
+								<FormControl isInvalid={!!errors.passwordConfirmation} size='md' isRequired>
+									<FormControlLabel>
+										<FormControlLabelText>Mot de passe de confirmation</FormControlLabelText>
+									</FormControlLabel>
+									<Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+										<InputField
+											type={showPassword ? 'text' : 'password'}
+											autoCapitalize='none'
+											autoCorrect={false}
+											placeholder='Confirmation'
+											value={field.value}
+											onChangeText={field.onChange}
+											onSubmitEditing={onSubmit}
+											returnKeyType='done'
+										/>
+										<InputSlot className='pr-3' onPress={handleState}>
+											<InputIcon
+												as={showPassword ? EyeIcon : EyeOffIcon}
+												className='text-jego-muted-foreground'
+											/>
+										</InputSlot>
+									</Input>
+									<FormControlError>
+										<FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
+										<FormControlErrorText className='text-jego-destructive'>
+											{errors.passwordConfirmation?.message}
+										</FormControlErrorText>
+									</FormControlError>
+								</FormControl>
+							)}
+						/>
 
-            <Button
-              action="primary"
-              variant="solid"
-              size="md"
-              onPress={onSubmit}
-              isDisabled={isPending}
-              className="rounded-lg mt-2 bg-jego-primary"
-            >
-              {isPending && (
-                <ButtonSpinner className="text-jego-primary-foreground" />
-              )}
-              <ButtonText className="text-jego-primary-foreground">
-                Valider
-              </ButtonText>
-            </Button>
+						<Button
+							action='primary'
+							variant='solid'
+							size='lg'
+							onPress={onSubmit}
+							isDisabled={isPending}
+							className='rounded-lg mt-2 bg-jego-primary'
+						>
+							{isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
+							<ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>
+						</Button>
 
-            <View className="h-6" />
-          </VStack>
-        </ScrollView>
-        <BackButton className="absolute top-4 left-4" />
-      </KeyboardAvoidingView>
-    </SafeAreaView>
-  );
+						<View className='h-6' />
+					</VStack>
+				</ScrollView>
+				<BackButton className='absolute top-4 left-4' />
+			</KeyboardAvoidingView>
+		</SafeAreaView>
+  )
 }
