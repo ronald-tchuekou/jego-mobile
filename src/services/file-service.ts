@@ -1,12 +1,12 @@
-import { fetchHelper } from "../lib/fetch-helper";
+import { fetchHelper } from '../lib/fetch-helper'
 
 export type UploadedFiles = {
-  message: string;
+  message: string
   data: {
-    name: string;
-    path: string;
-  }[];
-};
+    name: string
+    path: string
+  }[]
+}
 
 const FileService = {
   /**
@@ -16,25 +16,25 @@ const FileService = {
    * @returns Object
    */
   async uploadSingleFile(file: File, token: string) {
-    const formData = new FormData();
-    formData.append("files[]", file);
+    const formData = new FormData()
+    formData.append('files[]', file)
 
     const { data, error } = await fetchHelper<{
-      path: string;
-      name: string;
-      type: string;
-      finename: string;
-    }>("/files/single", {
-      method: "POST",
+      path: string
+      name: string
+      type: string
+      finename: string
+    }>('/files/single', {
+      method: 'POST',
       body: formData,
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    })
 
-    if (error) throw new Error(error);
+    if (error) throw new Error(error)
 
-    return data;
+    return data
   },
 
   /**
@@ -44,24 +44,21 @@ const FileService = {
    * @returns UploadedFiles
    */
   async uploadMultiFile(files: File[], token: string) {
-    const formData = new FormData();
+    const formData = new FormData()
     files.forEach((file) => {
-      formData.append("files[]", file);
-    });
+      formData.append('files[]', file)
+    })
 
-    const { data, error } = await fetchHelper<UploadedFiles>(
-      "/files/upload-multiple",
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    const { data, error } = await fetchHelper<UploadedFiles>('/files/upload-multiple', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
+    })
 
-    if (error) throw new Error(error);
-    return data;
+    if (error) throw new Error(error)
+    return data
   },
 
   /**
@@ -71,18 +68,15 @@ const FileService = {
    * @returns Content of the file
    */
   async loadFile(path: string, token: string): Promise<Blob> {
-    const { data, error } = await fetchHelper<Blob>(
-      `/files/load?path=${encodeURIComponent(path)}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    const { data, error } = await fetchHelper<Blob>(`/files/load?path=${encodeURIComponent(path)}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
+    })
 
-    if (error) throw new Error(error);
-    return data!;
+    if (error) throw new Error(error)
+    return data!
   },
 
   /**
@@ -92,17 +86,17 @@ const FileService = {
    * @returns void
    */
   async revertFile(path: string, token: string): Promise<void> {
-    const { error } = await fetchHelper<void>("/files/revert", {
-      method: "DELETE",
+    const { error } = await fetchHelper<void>('/files/revert', {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ path }),
-    });
+    })
 
-    if (error) throw new Error(error);
+    if (error) throw new Error(error)
   },
-};
+}
 
-export default FileService;
+export default FileService

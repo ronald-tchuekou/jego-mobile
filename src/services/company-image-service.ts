@@ -1,15 +1,15 @@
-import { CompanyModel } from "./company-service";
+import { CompanyModel } from './company-service'
 
 export type CompanyImageModel = {
-  id: string;
-  companyId: string;
-  path: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  company: CompanyModel;
-};
+  id: string
+  companyId: string
+  path: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  company: CompanyModel
+}
 
-const CompanyImageService = {};
+const CompanyImageService = {}
 
-export default CompanyImageService;
+export default CompanyImageService

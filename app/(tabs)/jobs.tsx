@@ -5,19 +5,15 @@ import { useState } from 'react'
 import { Text } from 'react-native'
 
 export default function JobsScreen() {
-	const height = getStatusBarHeight()
-	const [search, setSearch] = useState('')
+  const height = getStatusBarHeight()
+  const [search, setSearch] = useState('')
 
-	return (
-		<VStack className='flex-1 bg-jego-background'>
-			<VStack
-				className='p-4 bg-jego-card border-b border-jego-border'
-				space='md'
-				style={{ paddingTop: height + 10 }}
-			>
-				<Text className='text-3xl font-bold text-jego-card-foreground'>Offres d&apos;emploi</Text>
-				<SearchInput placeholder='Rechercher un poste...' value={search} onChangeText={setSearch} />
-			</VStack>
-		</VStack>
-	)
+  return (
+    <VStack className='flex-1 bg-jego-background'>
+      <VStack className='p-4 bg-jego-card border-b border-jego-border' space='md' style={{ paddingTop: height + 10 }}>
+        <Text className='text-3xl font-bold text-jego-card-foreground'>Offres d&apos;emploi</Text>
+        <SearchInput placeholder='Rechercher un poste...' value={search} onChangeText={setSearch} />
+      </VStack>
+    </VStack>
+  )
 }

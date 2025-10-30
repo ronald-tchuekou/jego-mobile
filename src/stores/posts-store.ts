@@ -1,15 +1,15 @@
-import { create } from "zustand";
-import { PostModel } from "../services/post-service";
+import { create } from 'zustand'
+import { PostModel } from '../services/post-service'
 
 export type PostsState = {
-  posts: PostModel[];
-  page: number;
-  totalPage: number;
-  isLoading: boolean;
-  setPosts: (posts: PostModel[], page: number, totalPage: number) => void;
-  addNewPosts: (posts: PostModel[], page: number, totalPage: number) => void;
-  setLoadingState: (isLoading: boolean) => void;
-};
+  posts: PostModel[]
+  page: number
+  totalPage: number
+  isLoading: boolean
+  setPosts: (posts: PostModel[], page: number, totalPage: number) => void
+  addNewPosts: (posts: PostModel[], page: number, totalPage: number) => void
+  setLoadingState: (isLoading: boolean) => void
+}
 
 export const usePostsStore = create<PostsState>((set) => ({
   posts: [],
@@ -17,7 +17,7 @@ export const usePostsStore = create<PostsState>((set) => ({
   totalPage: 1,
   isLoading: false,
   setPosts(posts, page, totalPage) {
-    set((state) => ({ ...state, posts, page, totalPage }));
+    set((state) => ({ ...state, posts, page, totalPage }))
   },
   addNewPosts(posts, page, totalPage) {
     set((state) => ({
@@ -25,9 +25,9 @@ export const usePostsStore = create<PostsState>((set) => ({
       posts: [...state.posts, ...posts],
       page,
       totalPage,
-    }));
+    }))
   },
   setLoadingState: (isLoading: boolean) => {
-    set((state) => ({ ...state, isLoading }));
+    set((state) => ({ ...state, isLoading }))
   },
-}));
+}))
