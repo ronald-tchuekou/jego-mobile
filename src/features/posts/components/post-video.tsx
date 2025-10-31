@@ -105,7 +105,9 @@ export function PostVideo({ medias }: PostVideoProps) {
           player={player}
           // Maintain same sizing and layout as images
           style={
-            media?.metadata?.aspectRatio ? ({ aspectRatio: media.metadata?.aspectRatio as any } as any) : undefined
+            media?.metadata?.aspectRatio
+              ? ({ aspectRatio: media.metadata.aspectRatio.replace(':', '/') as any } as any)
+              : undefined
           }
           className={`w-full h-[400px] bg-black ${media?.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'}`}
           contentFit='contain'

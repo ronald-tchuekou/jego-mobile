@@ -1,0 +1,30 @@
+{
+  "build": {
+    "development": {
+      "channel": "development",
+      "autoIncrement": true,
+      "developmentClient": true,
+      "environment": "development",
+      "distribution": "internal"
+    },
+    "preview": {
+      "channel": "preview",
+      "autoIncrement": true,
+      "developmentClient": true,
+      "environment": "preview",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "autoIncrement": true,
+      "environment": "production"
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
