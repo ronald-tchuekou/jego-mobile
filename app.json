@@ -60,6 +60,12 @@
         "projectId": "41beaa52-f2d0-4770-9bbd-faad7882ff63"
       }
     },
-    "owner": "ronald-tchuekou"
+    "owner": "ronald-tchuekou",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/41beaa52-f2d0-4770-9bbd-faad7882ff63"
+    }
   }
 }
