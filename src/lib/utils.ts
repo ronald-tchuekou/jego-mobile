@@ -1,3 +1,6 @@
+import { Platform } from "react-native"
+import { BufferConfig, SelectedTrackType } from "react-native-video"
+
 export function objectToQueryString(obj: Record<string, any>) {
   return Object.keys(obj)
     .map((key) => `${key}=${obj[key] || ''}`)
@@ -36,4 +39,21 @@ export function getColorScheme(theme: 'light' | 'dark' | undefined) {
     borderColor: theme === 'dark' ? '#3a2727' : '#ebebeb',
     cardColor: theme === 'dark' ? '#221b1b' : '#fafafa',
   }
+}
+
+export const textTracksSelectionBy = SelectedTrackType.INDEX
+export const audioTracksSelectionBy = SelectedTrackType.INDEX
+
+export const isIos = Platform.OS === 'ios'
+
+export const isAndroid = Platform.OS === 'android'
+
+export const bufferConfig: BufferConfig = {
+  minBufferMs: 15000,
+  maxBufferMs: 50000,
+  bufferForPlaybackMs: 2500,
+  bufferForPlaybackAfterRebufferMs: 5000,
+  live: {
+    targetOffsetMs: 500,
+  },
 }

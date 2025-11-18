@@ -76,7 +76,7 @@ const Avatar = React.forwardRef<React.ComponentRef<typeof UIAvatar>, IAvatarProp
     <UIAvatar
       ref={ref}
       {...props}
-      className={avatarStyle({ size, class: 'bg-transparent border border-jego-input ' + className })}
+      className={avatarStyle({ size, class: 'bg-transparent border border-jego-primary ' + className })}
       context={{ size }}
     />
   )

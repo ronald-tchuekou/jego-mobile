@@ -5,9 +5,10 @@ import { ArrowLeftIcon } from '../ui/icon'
 
 type Props = {
   className?: string
+  iconClassName?: string
 }
 
-export const BackButton = ({ className }: Props) => {
+export const BackButton = ({ className, iconClassName }: Props) => {
   const router = useRouter()
 
   return (
@@ -18,7 +19,7 @@ export const BackButton = ({ className }: Props) => {
       size='sm'
       className={cn('rounded-full bg-transparent w-10 h-10', className)}
     >
-      <ButtonIcon as={ArrowLeftIcon} size='xl' style={{ width: 24, height: 24 }} />
+      <ButtonIcon as={ArrowLeftIcon} size='xl' style={{ width: 24, height: 24 }} className={iconClassName} />
     </Button>
   )
 }

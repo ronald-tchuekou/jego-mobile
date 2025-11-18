@@ -3,6 +3,8 @@ import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { Card } from '@/src/components/ui/card'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
+import { PostImages } from '@/src/features/posts/components/post-images'
+import { PostVideo } from '@/src/features/posts/components/post-video'
 import { env } from '@/src/lib/env'
 import { IMAGES } from '@/src/lib/images'
 import { compactNumber, formatDate } from '@/src/lib/utils'
@@ -13,8 +15,6 @@ import { Text } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 import { LikePostButton } from './like-post-button'
 import { SharePostButton } from './share-post-button'
-import { PostImages } from '@/src/features/posts/components/post-images'
-import { PostVideo } from '@/src/features/posts/components/post-video'
 
 export default function PostItem({ item }: { item: PostModel }) {
   const router = useRouter()
@@ -47,7 +47,7 @@ export default function PostItem({ item }: { item: PostModel }) {
         {item.description}
       </Text>
       {mediaType === 'image' && <PostImages medias={medias} />}
-      {mediaType === 'video' && <PostVideo medias={medias} />}
+      {mediaType === 'video' && medias.length > 0 && <PostVideo video={medias[0]} post_id={item.id} />}
       <HStack className='justify-between px-1 pb-1'>
         <LikePostButton post={item} />
         <Link href={`/posts/${item.id}?focus_comment=true`} asChild>

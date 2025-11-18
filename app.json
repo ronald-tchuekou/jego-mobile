@@ -30,6 +30,7 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
+      "expo-web-browser",
       [
         "expo-splash-screen",
         {
@@ -47,6 +48,22 @@
         {
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
+        }
+      ],
+      [
+        "react-native-video",
+        {
+          "reactNativeTestApp": true,
+          "enableNotificationControls": true,
+          "enableBackgroundAudio": true,
+          "enableADSExtension": false,
+          "enableCacheExtension": false,
+          "androidExtensions": {
+            "useExoplayerRtsp": true,
+            "useExoplayerSmoothStreaming": true,
+            "useExoplayerHls": true,
+            "useExoplayerDash": true
+          }
         }
       ]
     ],
