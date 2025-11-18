@@ -1,17 +1,17 @@
 import React, { forwardRef, memo, useCallback, type Dispatch, type SetStateAction } from 'react'
 import { Alert, View } from 'react-native'
 import {
-   ResizeMode,
-   SelectedTrackType,
-   SelectedVideoTrackType,
-   VideoDecoderProperties,
-   VideoRef,
-   type AudioTrack,
-   type EnumValues,
-   type SelectedTrack,
-   type SelectedVideoTrack,
-   type TextTrack,
-   type VideoTrack,
+  ResizeMode,
+  SelectedTrackType,
+  SelectedVideoTrackType,
+  VideoDecoderProperties,
+  VideoRef,
+  type AudioTrack,
+  type EnumValues,
+  type SelectedTrack,
+  type SelectedVideoTrack,
+  type TextTrack,
+  type VideoTrack,
 } from 'react-native-video'
 
 import { audioTracksSelectionBy, isAndroid, isIos, textTracksSelectionBy } from '@/src/lib/utils'
@@ -27,7 +27,6 @@ import { VideoTrackSelector } from './video-tracks-selector'
 type Props = {
   channelDown: () => void
   channelUp: () => void
-  setFullscreen: Dispatch<SetStateAction<boolean>>
   controls: boolean
   setControls: Dispatch<SetStateAction<boolean>>
   showNotificationControls: boolean
@@ -69,7 +68,6 @@ const _Overlay = forwardRef<VideoRef, Props>((props, ref) => {
   const {
     channelUp,
     channelDown,
-    setFullscreen,
     setControls,
     controls,
     setShowNotificationControls,
@@ -116,9 +114,6 @@ const _Overlay = forwardRef<VideoRef, Props>((props, ref) => {
     })
   }, [])
 
-  const toggleFullscreen = () => {
-    setFullscreen((prev) => !prev)
-  }
   const toggleControls = () => {
     setControls((prev) => !prev)
   }
@@ -223,7 +218,6 @@ const _Overlay = forwardRef<VideoRef, Props>((props, ref) => {
                 selectedText='loop enable'
                 unselectedText='loop disable'
               />
-              <ToggleControl onPress={toggleFullscreen} text='fullscreen' />
               <ToggleControl onPress={openDecoration} text='decoration' />
               <ToggleControl
                 isSelected={showPoster}
