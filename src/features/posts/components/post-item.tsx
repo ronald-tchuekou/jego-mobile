@@ -33,7 +33,7 @@ export default function PostItem({ item }: { item: PostModel }) {
     })
 
   return (
-    <Card className='rounded-lg p-0'>
+    <Card className='p-0'>
       <HStack space='md' className='p-4'>
         <Avatar size='md'>
           <AvatarImage source={companyLogo} />

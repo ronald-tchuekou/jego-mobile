@@ -1,11 +1,12 @@
 import { Button, ButtonIcon } from '@/src/components/ui/button'
+import { Image } from '@/src/components/ui/image'
 import { env } from '@/src/lib/env'
 import { MediaModel } from '@/src/services/post-service'
+import { useQuery } from '@tanstack/react-query'
 import { Link } from 'expo-router'
+import * as VideoThumbnails from 'expo-video-thumbnails'
 import { AlertCircleIcon, PlayIcon } from 'lucide-react-native'
-import { useMemo, useRef } from 'react'
 import { Text, View } from 'react-native'
-import { Video, VideoRef } from 'react-native-video'
 import { cnBase } from 'tailwind-variants'
 
 export type PostVideoProps = {
@@ -15,25 +16,25 @@ export type PostVideoProps = {
 
 // A lightweight, Instagram-like video player optimized for feed usage
 export function PostVideo({ video, post_id }: PostVideoProps) {
-  const videoRef = useRef<VideoRef>(null)
+  // Variables
+  const sourceUri = !video ? undefined : video.url.startsWith('http') ? video.url : `${env.API_URL}/v1/${video.url}`
 
-  const sourceUri = useMemo(() => {
-    if (!video) return undefined
-    return video.url.startsWith('http') ? video.url : `${env.API_URL}/v1/${video.url}`
-  }, [video])
-
-  const metadata = useMemo(() => video.metadata, [video])
+  // Queries
+  const { data } = useQuery({
+    queryKey: ['video-thumbnail', sourceUri],
+    queryFn: () => sourceUri ? VideoThumbnails.getThumbnailAsync(sourceUri, { time: 1000 }) : null,
+    enabled: !!sourceUri,
+  })
 
   return (
     <View className='relative mb-4 w-full bg-black justify-center items-center h-[300px]'>
       {sourceUri ? (
         <>
-          <Video
-            ref={videoRef}
-            controls={false}
-            source={require('@/assets/videos/video_test_1.mov')}
+          <Image
+            source={data?.uri ? { uri: data.uri } : undefined}
             className='flex-1 bg-black border border-jego-input'
-            style={{ aspectRatio: (metadata?.height || 9) / (metadata?.width || 6) }}
+            style={{ aspectRatio: (data?.width || 9) / (data?.height || 6) }}
+            resizeMode='cover'
           />
           <View className='absolute inset-0 justify-center items-center bg-black/50'>
             <Link href={`/posts/video/${post_id}`} asChild>
