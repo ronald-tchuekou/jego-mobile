@@ -6,4 +6,5 @@ export const IMAGES = {
   android_icon_monochrome: require('../../assets/images/android-icon-monochrome.png'),
   default_company_logo: require('../../assets/images/company-image.webp'),
   default_user_avatar: require('../../assets/images/user-avatar.webp'),
+  default_company_banner_image: require('../../assets/images/company-banner-image.webp'),
 }

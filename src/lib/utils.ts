@@ -1,5 +1,6 @@
 import { Platform } from "react-native"
 import { BufferConfig, SelectedTrackType } from "react-native-video"
+import { env } from "./env"
 
 export function objectToQueryString(obj: Record<string, any>) {
   return Object.keys(obj)
@@ -56,4 +57,8 @@ export const bufferConfig: BufferConfig = {
   live: {
     targetOffsetMs: 500,
   },
+}
+
+export function getImageLink(path: string) {
+  return path.startsWith('http') ? path : `${env.API_URL}/v1${path}`
 }

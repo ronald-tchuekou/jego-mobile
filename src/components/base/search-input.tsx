@@ -1,15 +1,17 @@
 import { SearchIcon, XIcon } from 'lucide-react-native'
+import { cnBase } from 'tailwind-variants'
 import { Input, InputField, InputIcon, InputSlot } from '../ui/input'
 
 type Props = {
   placeholder: string
   value: string
   onChangeText: (text: string) => void
+  className?: string
 }
 
-export const SearchInput = ({ placeholder, value, onChangeText }: Props) => {
+export const SearchInput = ({ placeholder, value, onChangeText, className }: Props) => {
   return (
-    <Input className='rounded-full border-jego-border'>
+    <Input className={cnBase('rounded-full border-jego-border', className)}>
       <InputSlot className='pl-3'>
         <InputIcon as={SearchIcon} className='text-jego-muted-foreground' />
       </InputSlot>
