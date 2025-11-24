@@ -3,8 +3,7 @@ import { Card } from '@/src/components/ui/card'
 import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
-import { IMAGES } from '@/src/lib/images'
-import { getImageLink } from '@/src/lib/utils'
+import { getCompanyLogoUri } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
 import { IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
@@ -16,11 +15,11 @@ type Props = {
 }
 
 const CompanyItem = ({ company }: Props) => {
-  const companyLogo = company?.logo ? { uri: getImageLink(company.logo) } : IMAGES.default_company_logo
-
+  const companyLogo = getCompanyLogoUri(company.logo)
+  
   return (
     <Link href={`/company/${company.id}`}>
-      <Card className='p-0'>
+      <Card className='p-0 border border-jego-border'>
         <CompanyImageBanner company={company} className={'rounded-t-lg'} />
         <HStack className='p-3 gap-3'>
           <Avatar size='md' className='size-12 flex-none'>

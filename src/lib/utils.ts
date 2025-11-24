@@ -1,6 +1,7 @@
 import { Platform } from 'react-native'
 import { BufferConfig, SelectedTrackType } from 'react-native-video'
 import { env } from './env'
+import { IMAGES } from './images'
 
 export function objectToQueryString(obj: Record<string, any>) {
   return Object.keys(obj)
@@ -94,4 +95,22 @@ export function truncateAtWordBoundary(text: string, maxLength: number): string 
  */
 export function pluralize(word: string, count: number) {
   return count > 1 ? `${word}s` : word
+}
+
+/**
+ * Get the URI of a company logo
+ * @param logo - The logo of the company
+ * @returns The URI of the company logo
+ */
+export function getCompanyLogoUri(logo?: string | null) {
+  return logo ? { uri: `${env.API_URL}/v1/${logo}` } : IMAGES.default_company_logo
+}
+
+/**
+ * Get the URI of a user profile image
+ * @param profileImage - The profile image of the user
+ * @returns The URI of the user profile image
+ */
+export function getUserProfileImageUri(profileImage?: string | null) {
+  return profileImage ? { uri: `${env.API_URL}/v1/${profileImage}` } : IMAGES.default_user_avatar
 }

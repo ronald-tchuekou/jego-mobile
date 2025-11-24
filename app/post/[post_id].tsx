@@ -28,6 +28,7 @@ export default function PostDetailsScreen() {
   const { post_id } = useLocalSearchParams<{ post_id: string }>()
   const height = getStatusBarHeight()
   const { data, isLoading } = useGetPostById(post_id)
+  
   const company = data?.user?.company
   const companyLogo = company?.logo ? { uri: `${env.API_URL}/v1/${company?.logo}` } : IMAGES.default_company_logo
 

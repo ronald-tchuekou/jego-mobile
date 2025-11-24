@@ -34,7 +34,7 @@ export default function useGetCompanies({
       const filters: FilterQuery & {
         categoryId?: string
         status?: 'active' | 'blocked'
-      } = { page, limit: 100, status: 'active' }
+      } = { page, limit: 30, status: 'active' }
 
       if (search) filters.search = search
 

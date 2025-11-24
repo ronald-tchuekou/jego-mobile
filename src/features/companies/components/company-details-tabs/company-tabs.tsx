@@ -1,3 +1,4 @@
+import { Box } from '@/src/components/ui/box'
 import { Button, ButtonIcon } from '@/src/components/ui/button'
 import { Center } from '@/src/components/ui/center'
 import { HStack } from '@/src/components/ui/hstack'
@@ -6,6 +7,8 @@ import { BuildingIcon, ClockIcon, ImageIcon, InfoIcon, ListIcon, ListTodoIcon } 
 import { memo, useState } from 'react'
 import { Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
+import CompanyAbout from './company-about'
+import CompanyPosts from './company-posts'
 
 type Props = {
   company: CompanyModel
@@ -71,36 +74,32 @@ const CompanyTabsComponent = ({ company }: Props) => {
           </Button>
         ))}
       </HStack>
-      {activeTab === 'about' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>About Company</Text>
-        </Center>
-      )}
-      {activeTab === 'posts' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>Posts</Text>
-        </Center>
-      )}
-      {activeTab === 'services' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>Services</Text>
-        </Center>
-      )}
-      {activeTab === 'gallery' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>Gallery</Text>
-        </Center>
-      )}
-      {activeTab === 'program' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>Program</Text>
-        </Center>
-      )}
-      {activeTab === 'reviews' && (
-        <Center className='py-10'>
-          <Text className='font-body text-2xl text-center'>Reviews</Text>
-        </Center>
-      )}
+      <Box className='mt-3'>
+        {activeTab === 'about' && <CompanyAbout company={company} />}
+        {activeTab === 'posts' && (
+            <CompanyPosts company={company} />
+        )}
+        {activeTab === 'services' && (
+          <Center className='py-10'>
+            <Text className='font-body text-2xl text-center'>Services</Text>
+          </Center>
+        )}
+        {activeTab === 'gallery' && (
+          <Center className='py-10'>
+            <Text className='font-body text-2xl text-center'>Gallery</Text>
+          </Center>
+        )}
+        {activeTab === 'program' && (
+          <Center className='py-10'>
+            <Text className='font-body text-2xl text-center'>Program</Text>
+          </Center>
+        )}
+        {activeTab === 'reviews' && (
+          <Center className='py-10'>
+            <Text className='font-body text-2xl text-center'>Reviews</Text>
+          </Center>
+        )}
+      </Box>
     </View>
   )
 }

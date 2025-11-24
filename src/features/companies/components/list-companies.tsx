@@ -1,9 +1,7 @@
-import { Center } from '@/src/components/ui/center'
-import { Icon } from '@/src/components/ui/icon'
-import { VStack } from '@/src/components/ui/vstack'
+import EmptyContent from '@/src/components/base/empty-content'
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { useCompaniesViewStore } from '@/src/stores/companies-view-store'
-import { CircleSlash2Icon } from 'lucide-react-native'
-import { ActivityIndicator, FlatList, RefreshControl, Text } from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
 import { useShallow } from 'zustand/shallow'
 import useGetCompanies from '../hooks/use-get-companies'
 import CompanyItem from './company-item'
@@ -20,7 +18,7 @@ function ListCompanies({ search }: Props) {
     })),
   )
 
-   useGetCompanies({ search: search || undefined })
+  const { refetch } = useGetCompanies({ search: search })
 
   return (
     <FlatList
@@ -32,19 +30,12 @@ function ListCompanies({ search }: Props) {
       onEndReached={() => {
         // if (page < totalPage) mutate({ page: page + 1, search: search || undefined })
       }}
-      refreshControl={<RefreshControl refreshing={isLoading} />}
+      refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
       ListEmptyComponent={
-        isLoading ? (
-          <Center>
-            <ActivityIndicator size={'large'} className='text-jego-primary' />
-          </Center>
+        isLoading && companies.length === 0 ? (
+          <LoaderContent />
         ) : (
-          <Center className='w-full min-h-80'>
-            <VStack className='p-3 items-center' space='md'>
-              <Icon as={CircleSlash2Icon} className='text-jego-muted-foreground' style={{ width: 40, height: 40 }} />
-              <Text className='text-base text-jego-muted-foreground'>Aucune entreprise pour le moment.</Text>
-            </VStack>
-          </Center>
+          <EmptyContent text={'Aucune entreprise pour le moment.'} />
         )
       }
       // ListFooterComponent={

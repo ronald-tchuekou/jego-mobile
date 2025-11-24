@@ -1,14 +1,15 @@
-'use client'
-
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
-import { VStack } from '@/src/components/ui/vstack'
-import { env } from '@/src/lib/env'
-import { postCommentKey } from '@/src/lib/query-kye'
-import { formatDate } from '@/src/lib/utils'
+import { Icon } from '@/src/components/ui/icon'
+import { Menu, MenuItem, MenuItemLabel } from '@/src/components/ui/menu'
 import { Toast, ToastTitle, useToast } from '@/src/components/ui/toast'
+import { VStack } from '@/src/components/ui/vstack'
+import { postCommentKey } from '@/src/lib/query-kye'
+import { formatDate, getUserProfileImageUri } from '@/src/lib/utils'
 import PostCommentService, { PostCommentModel } from '@/src/services/post-comment-service'
+import { useAuthStore } from '@/src/stores/auth-store'
+import { useCommentStore } from '@/src/stores/comment-store'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ChevronDownIcon,
@@ -20,13 +21,8 @@ import {
 } from 'lucide-react-native'
 import React from 'react'
 import { Text } from 'react-native'
-import { useAuthStore } from '@/src/stores/auth-store'
-import CommentResponseWrapper from './comment-response-wrapper'
-import { IMAGES } from '@/src/lib/images'
-import { Menu, MenuItem, MenuItemLabel } from '@/src/components/ui/menu'
-import { Icon } from '@/src/components/ui/icon'
-import { useCommentStore } from '@/src/stores/comment-store'
 import { useShallow } from 'zustand/shallow'
+import CommentResponseWrapper from './comment-response-wrapper'
 
 type Props = { comment: PostCommentModel }
 
@@ -63,9 +59,7 @@ export default function CommentItem({ comment }: Props) {
     },
   })
 
-  const profileSrc = comment.user?.profileImage
-    ? { uri: `${env.API_URL}/v1/${comment.user.profileImage}` }
-    : IMAGES.default_user_avatar
+  const profileSrc = getUserProfileImageUri(comment.user?.profileImage)
 
   return (
     <HStack space='sm' className='items-start'>

@@ -1,8 +1,7 @@
 import { BackButton } from '@/src/components/base/back-button'
-import { Center } from '@/src/components/ui/center'
+import EmptyContent from '@/src/components/base/empty-content'
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { HStack } from '@/src/components/ui/hstack'
-import { Icon } from '@/src/components/ui/icon'
-import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
 import { CompanyDetailsCard } from '@/src/features/companies/components/company-details-card'
 import { CompanyTabs } from '@/src/features/companies/components/company-details-tabs/company-tabs'
@@ -11,7 +10,6 @@ import { companyKey } from '@/src/lib/query-kye'
 import CompanyService from '@/src/services/company-service'
 import { useQuery } from '@tanstack/react-query'
 import { useLocalSearchParams } from 'expo-router'
-import { CircleSlash2Icon } from 'lucide-react-native'
 import { ScrollView, Text, View } from 'react-native'
 
 export default function PostDetailsScreen() {
@@ -40,22 +38,16 @@ export default function PostDetailsScreen() {
       </HStack>
       <ScrollView className='flex-1 p-4'>
         {isLoading ? (
-          <Center className='min-h-32'>
-            <Spinner size={'large'} />
-          </Center>
+          <LoaderContent/>
         ) : !data ? (
-          <Center className='w-full min-h-80'>
-            <VStack className='p-3 items-center' space='md'>
-              <Icon as={CircleSlash2Icon} className='text-jego-muted-foreground' style={{ width: 40, height: 40 }} />
-              <Text className='text-base text-jego-muted-foreground'>Annonce non trouvé.</Text>
-            </VStack>
-          </Center>
+          <EmptyContent text={'Cette entreprise n\'existe pas.'} />
         ) : (
           <>
             <CompanyDetailsCard company={data} />
             <CompanyTabs company={data} />
           </>
         )}
+        <View className='h-20'/>
       </ScrollView>
     </View>
   )

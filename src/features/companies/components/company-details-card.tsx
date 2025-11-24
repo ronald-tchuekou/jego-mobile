@@ -4,8 +4,7 @@ import { Card } from '@/src/components/ui/card'
 import { Center } from '@/src/components/ui/center'
 import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
-import { IMAGES } from '@/src/lib/images'
-import { compactNumber, getImageLink, pluralize } from '@/src/lib/utils'
+import { compactNumber, getCompanyLogoUri, pluralize } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
 import { IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
@@ -21,15 +20,17 @@ type Props = {
 }
 
 const CompanyDetailsCardComponent = ({ company }: Props) => {
-  const companyLogo = company?.logo ? { uri: getImageLink(company.logo) } : IMAGES.default_company_logo
+  const companyLogo = getCompanyLogoUri(company.logo)
   const followersCount = company.followingCount || 0
+
+  console.log(companyLogo)
 
   return (
     <Card className='p-0'>
       <CompanyImageBanner company={company} className={'rounded-t-lg'} />
       <Center className='px-4 pt-8 gap-2'>
         <Avatar size='xl' className='flex-none'>
-          <AvatarImage source={companyLogo} alt={company.name} />
+          <AvatarImage source={companyLogo} alt={company.name} className=''/>
         </Avatar>
         <Text className='text-xl font-bold text-jego-foreground'>{company.name}</Text>
         {company.category?.name && <Text className='text-sm text-jego-primary'>{company.category?.name}</Text>}

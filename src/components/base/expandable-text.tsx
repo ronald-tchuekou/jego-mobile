@@ -39,7 +39,7 @@ function ExpandableTextComponent({
 
   return (
     <TouchableOpacity activeOpacity={0.8} disabled={!postId} onPress={showDetails} className='px-4 pb-3'>
-      <Text className='text-sm sm:text-base text-jego-foreground dark:text-jego-foreground leading-relaxed cursor-default'>
+      <Text className='text-base text-jego-foreground'>
         {displayText}
         {shouldTruncate && !isExpanded && reduce && <Text className='text-jego-muted-foreground'>...&nbsp;</Text>}
         {shouldTruncate && reduce && (

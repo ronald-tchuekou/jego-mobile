@@ -1,11 +1,11 @@
 'use client'
 
+import EmptyContent from '@/src/components/base/empty-content'
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { Center } from '@/src/components/ui/center'
 import { Spinner } from '@/src/components/ui/spinner'
-import { VStack } from '@/src/components/ui/vstack'
 import { usePostsStore } from '@/src/stores/posts-store'
-import { CircleSlash2Icon } from 'lucide-react-native'
-import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native'
+import { FlatList, RefreshControl, View } from 'react-native'
 import { useShallow } from 'zustand/shallow'
 import useGetPosts from '../hooks/use-get-posts'
 import PostItem from './post-item'
@@ -21,7 +21,7 @@ function PostsList({ search }: Props) {
       totalPage: s.totalPage,
     })),
   )
-  const { mutate, isPending, refetch } = useGetPosts(search)
+  const { mutate, isPending, refetch } = useGetPosts({ search, queryKeyLabel: 'posts-list' })
 
   return (
     <FlatList
@@ -34,20 +34,7 @@ function PostsList({ search }: Props) {
         if (page < totalPage) mutate({ page: page + 1, search: search || undefined })
       }}
       refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
-      ListEmptyComponent={
-        isLoading ? (
-          <Center>
-            <ActivityIndicator size={'large'} className='text-jego-primary' />
-          </Center>
-        ) : (
-          <Center className='w-full min-h-80'>
-            <VStack className='p-3 items-center' space='md'>
-              <CircleSlash2Icon size={40} color={'#666666'} />
-              <Text className='text-base text-jego-muted-foreground'>Aucun contenu pour le moment.</Text>
-            </VStack>
-          </Center>
-        )
-      }
+      ListEmptyComponent={isLoading && posts.length === 0 ? <LoaderContent /> : <EmptyContent text={'Aucun contenu pour le moment.'} />}
       ListFooterComponent={
         isPending ? (
           <Center className='py-4'>
@@ -58,7 +45,7 @@ function PostsList({ search }: Props) {
         )
       }
       renderItem={({ item }) => <PostItem item={item} />}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item, index) => `${item.id}-${index}`}
     />
   )
 }

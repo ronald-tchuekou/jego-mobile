@@ -7,7 +7,15 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
-export default function useGetPosts(search?: string) {
+type Options = {
+  queryKeyLabel?: string,
+  filters?: FilterQuery,
+  search?: string,
+}
+
+export default function useGetPosts(options?: Options) {
+ const { filters, search, queryKeyLabel } = options || {}
+
   const { setPosts, setLoadingState, addNewPosts } = usePostsStore(
     useShallow((state) => ({
       setPosts: state.setPosts,
@@ -18,13 +26,16 @@ export default function useGetPosts(search?: string) {
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: postKey.list({
-      search: search || undefined,
+      label: queryKeyLabel,
+      search: search,
+      ...(filters || {}),
     }),
     async queryFn({ queryKey }) {
-      const { search } = JSON.parse(queryKey[2].filters)
-      const filters: FilterQuery = {}
+      const { search, companyId } = JSON.parse(queryKey[2].filters)
+      const filters: FilterQuery = {limit: 30}
 
       if (search) filters.search = search
+      if (companyId) filters.companyId = companyId
 
       return PostService.getAll(filters)
     },
