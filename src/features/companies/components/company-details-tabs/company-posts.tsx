@@ -35,7 +35,7 @@ const CompanyPosts = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold mb-3'}>Annonces postées</Text>
+      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Annonces postées</Text>
       {isLoading ? (
         <Center className='p-6'>
           <Spinner size={'large'} className='text-jego-primary' />

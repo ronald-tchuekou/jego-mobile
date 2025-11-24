@@ -16,7 +16,7 @@ const CompanyPrestations = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold mb-3'}>Prestations offertes</Text>
+      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Prestations offertes</Text>
       {prestations.length === 0 ? (
         <EmptyContent text={'Aucune prestation disponible pour cette entreprise.'} />
       ) : (

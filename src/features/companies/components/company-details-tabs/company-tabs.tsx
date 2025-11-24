@@ -1,17 +1,17 @@
 import { Box } from '@/src/components/ui/box'
 import { Button, ButtonIcon } from '@/src/components/ui/button'
-import { Center } from '@/src/components/ui/center'
 import { HStack } from '@/src/components/ui/hstack'
 import { CompanyModel } from '@/src/services/company-service'
 import { BuildingIcon, ClockIcon, ImageIcon, InfoIcon, ListIcon, ListTodoIcon } from 'lucide-react-native'
 import { memo, useState } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 import CompanyAbout from './company-about'
 import CompanyGallery from './company-gallery'
 import CompanyPosts from './company-posts'
 import CompanyPrestations from './company-prestations'
 import CompanyProgram from './company-program'
+import CompanyReviews from './company-reviews'
 
 type Props = {
   company: CompanyModel
@@ -80,14 +80,10 @@ const CompanyTabsComponent = ({ company }: Props) => {
       <Box className='mt-3'>
         {activeTab === 'about' && <CompanyAbout company={company} />}
         {activeTab === 'posts' && <CompanyPosts company={company} />}
-        {activeTab === 'services' && <CompanyPrestations company={company}/>}
-        {activeTab === 'gallery' && <CompanyGallery company={company}/>}
-        {activeTab === 'program' && <CompanyProgram company={company}/>}
-        {activeTab === 'reviews' && (
-          <Center className='py-10'>
-            <Text className='font-body text-2xl text-center'>Reviews</Text>
-          </Center>
-        )}
+        {activeTab === 'services' && <CompanyPrestations company={company} />}
+        {activeTab === 'gallery' && <CompanyGallery company={company} />}
+        {activeTab === 'program' && <CompanyProgram company={company} />}
+        {activeTab === 'reviews' && <CompanyReviews company={company} />}
       </Box>
     </View>
   )

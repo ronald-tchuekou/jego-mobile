@@ -14,13 +14,13 @@ const CompanyProgram = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold mb-3'}>Horaires d&apos;ouverture</Text>
+      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Horaires d&apos;ouverture</Text>
       {!program ? (
         <EmptyContent text="Aucun horaire d'ouverture disponible pour cette entreprise." />
       ) : (
         <Box className='rounded-xl bg-jego-card border border-jego-border overflow-hidden'>
           <Table className='w-full'>
-            <TableHeader className='bg-gray-200'>
+            <TableHeader className='bg-gray-200 dark:bg-stone-700'>
               <TableRow>
                 <TableHead className='text-sm'>Jour</TableHead>
                 <TableHead className='text-sm'>Ouvert à</TableHead>
@@ -32,37 +32,37 @@ const CompanyProgram = ({ company }: Props) => {
                 <TableData className='text-sm'>Lundi</TableData>
                 <TableData className='text-sm'>{program['Lundi'].open || '- - -'}</TableData>
                 <TableData className='text-sm'>{program['Lundi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Mardi</TableData>
-                  <TableData className='text-sm'>{program['Mardi'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Mardi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Mercredi</TableData>
-                  <TableData className='text-sm'>{program['Mercredi'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Mercredi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Jeudi</TableData>
-                  <TableData className='text-sm'>{program['Jeudi'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Jeudi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Vendredi</TableData>
-                  <TableData className='text-sm'>{program['Vendredi'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Vendredi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Samedi</TableData>
-                  <TableData className='text-sm'>{program['Samedi'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Samedi'].close || '- - -'}</TableData>
-                </TableRow>
-                <TableRow>
-                  <TableData className='text-sm'>Dimanche</TableData>
-                  <TableData className='text-sm'>{program['Dimanche'].open || '- - -'}</TableData>
-                  <TableData className='text-sm'>{program['Dimanche'].close || '- - -'}</TableData>
-                </TableRow>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Mardi</TableData>
+                <TableData className='text-sm'>{program['Mardi'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Mardi'].close || '- - -'}</TableData>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Mercredi</TableData>
+                <TableData className='text-sm'>{program['Mercredi'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Mercredi'].close || '- - -'}</TableData>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Jeudi</TableData>
+                <TableData className='text-sm'>{program['Jeudi'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Jeudi'].close || '- - -'}</TableData>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Vendredi</TableData>
+                <TableData className='text-sm'>{program['Vendredi'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Vendredi'].close || '- - -'}</TableData>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Samedi</TableData>
+                <TableData className='text-sm'>{program['Samedi'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Samedi'].close || '- - -'}</TableData>
+              </TableRow>
+              <TableRow>
+                <TableData className='text-sm'>Dimanche</TableData>
+                <TableData className='text-sm'>{program['Dimanche'].open || '- - -'}</TableData>
+                <TableData className='text-sm'>{program['Dimanche'].close || '- - -'}</TableData>
+              </TableRow>
             </TableBody>
           </Table>
         </Box>
