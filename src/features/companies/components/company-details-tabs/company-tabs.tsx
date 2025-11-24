@@ -8,6 +8,7 @@ import { memo, useState } from 'react'
 import { Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 import CompanyAbout from './company-about'
+import CompanyGallery from './company-gallery'
 import CompanyPosts from './company-posts'
 import CompanyPrestations from './company-prestations'
 
@@ -79,11 +80,7 @@ const CompanyTabsComponent = ({ company }: Props) => {
         {activeTab === 'about' && <CompanyAbout company={company} />}
         {activeTab === 'posts' && <CompanyPosts company={company} />}
         {activeTab === 'services' && <CompanyPrestations company={company}/>}
-        {activeTab === 'gallery' && (
-          <Center className='py-10'>
-            <Text className='font-body text-2xl text-center'>Gallery</Text>
-          </Center>
-        )}
+        {activeTab === 'gallery' && <CompanyGallery company={company}/>}
         {activeTab === 'program' && (
           <Center className='py-10'>
             <Text className='font-body text-2xl text-center'>Program</Text>

@@ -1,5 +1,5 @@
 import { Image } from '@/src/components/ui/image'
-import { env } from '@/src/lib/env'
+import { getImageUri } from '@/src/lib/utils'
 import { MediaModel } from '@/src/services/post-service'
 import { memo, useCallback, useState } from 'react'
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, View } from 'react-native'
@@ -14,7 +14,7 @@ function PostImagesComponents({ medias }: Props) {
   const [page, setPage] = useState<number>(0)
   const [width, setWidth] = useState<number>(0)
 
-  const imageUrl = media.url.startsWith('http') ? media.url : `${env.API_URL}/v1/${media.url}`
+  const imageUrl = getImageUri(media.url)
 
   const onMomentumEnd = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -31,11 +31,11 @@ function PostImagesComponents({ medias }: Props) {
 
   const renderItem = useCallback(
     ({ item }: { item: MediaModel }) => {
-      const imgUrl = item.url.startsWith('http') ? item.url : `${env.API_URL}/v1/${item.url}`
+      const imgUrl = getImageUri(item.url)
       return (
         <View style={{ width }}>
           <Image
-            source={{ uri: imgUrl }}
+            source={imgUrl}
             style={item.metadata?.aspectRatio ? { aspectRatio: item.metadata?.aspectRatio } : undefined}
             className={`w-full h-[400px] bg-black ${
               item.metadata?.aspectRatio ? `aspect-${item.metadata.aspectRatio}` : 'aspect-video'
@@ -52,7 +52,7 @@ function PostImagesComponents({ medias }: Props) {
   if (medias.length === 1)
     return (
       <Image
-        source={{ uri: imageUrl }}
+        source={imageUrl}
         style={media.metadata?.aspectRatio ? { aspectRatio: media.metadata?.aspectRatio } : undefined}
         className={`w-full h-[400px] bg-black mb-4 ${
           media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'

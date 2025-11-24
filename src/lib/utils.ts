@@ -114,3 +114,12 @@ export function getCompanyLogoUri(logo?: string | null) {
 export function getUserProfileImageUri(profileImage?: string | null) {
   return profileImage ? { uri: `${env.API_URL}/v1/${profileImage}` } : IMAGES.default_user_avatar
 }
+
+/**
+ * Get the URI of an image
+ * @param path - The path of the image
+ * @returns The URI of the image
+ */
+export function getImageUri(path: string) {
+  return { uri: getImageLink(path) }
+}

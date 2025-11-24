@@ -23,8 +23,6 @@ const CompanyDetailsCardComponent = ({ company }: Props) => {
   const companyLogo = getCompanyLogoUri(company.logo)
   const followersCount = company.followingCount || 0
 
-  console.log(companyLogo)
-
   return (
     <Card className='p-0'>
       <CompanyImageBanner company={company} className={'rounded-t-lg'} />
