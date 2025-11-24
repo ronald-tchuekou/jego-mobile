@@ -1,8 +1,10 @@
 import { BackButton } from '@/src/components/base/back-button'
+import { ExpandableText } from '@/src/components/base/expandable-text'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { Center } from '@/src/components/ui/center'
 import { HStack } from '@/src/components/ui/hstack'
+import { Icon } from '@/src/components/ui/icon'
 import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
 import { CommentInput } from '@/src/features/post-comments/components/comment-input'
@@ -30,7 +32,7 @@ export default function PostDetailsScreen() {
   const companyLogo = company?.logo ? { uri: `${env.API_URL}/v1/${company?.logo}` } : IMAGES.default_company_logo
 
   return (
-    <VStack className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-jego-background'>
       <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
         <BackButton />
         <Avatar size='md'>
@@ -38,7 +40,7 @@ export default function PostDetailsScreen() {
         </Avatar>
         <VStack className='flex-1'>
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            {company?.name || '- - -'}
+            {company?.name || data?.user?.displayName || '- - -'}
           </Text>
           <Text className='text-sm text-typography-600'>{data?.createdAt ? formatDate(data.createdAt) : '- - -'}</Text>
         </VStack>
@@ -51,7 +53,7 @@ export default function PostDetailsScreen() {
         ) : !data ? (
           <Center className='w-full min-h-80'>
             <VStack className='p-3 items-center' space='md'>
-              <CircleSlash2Icon size={40} color={'#666666'} />
+              <Icon as={CircleSlash2Icon} className='text-jego-muted-foreground' style={{ width: 40, height: 40 }} />
               <Text className='text-base text-jego-muted-foreground'>Annonce non trouvé.</Text>
             </VStack>
           </Center>
@@ -60,7 +62,7 @@ export default function PostDetailsScreen() {
         )}
       </ScrollView>
       {data && <CommentInput post={data} />}
-    </VStack>
+    </View>
   )
 }
 
@@ -71,9 +73,9 @@ const Content = ({ post }: { post: PostModel }) => {
   return (
     <>
       <View className={'h-3'} />
-      <Text className='text-base text-jego-muted-foreground px-4 pb-2'>{post.description}</Text>
-      {mediaType === 'image' ? <PostImages medias={medias} /> : <View className='h-3' />}
-      {mediaType === 'video' && medias.length > 0 && <PostVideo video={medias[0]} post_id={post.id} />}
+      <ExpandableText text={post.description} className='px-4 pb-2' reduce={false} />
+      {mediaType === 'image' && medias.length > 0 && <PostImages medias={medias} />}
+      {mediaType === 'video' && medias.length > 0 && medias[0] && <PostVideo video={medias[0]} post_id={post.id} />}
       <HStack className='justify-between px-1'>
         <LikePostButton post={post} />
         <Button size='lg' variant='link' className='px-4'>

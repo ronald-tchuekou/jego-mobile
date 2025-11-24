@@ -78,7 +78,7 @@ export default function ResetPasswordScreen() {
           contentContainerClassName='flex-1 items-center justify-center p-6'
         >
           <VStack space='md' className='w-full max-w-[420px]'>
-            <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' />
+            <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
             <Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>
               Créer un nouveau mot de passe
             </Text>

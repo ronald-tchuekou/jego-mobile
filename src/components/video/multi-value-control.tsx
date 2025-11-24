@@ -1,12 +1,6 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { ResizeMode } from 'react-native-video';
+import React from 'react'
+import { StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native'
+import { ResizeMode } from 'react-native-video'
 
 /*
  * MultiValueControl displays a list clickable text view
@@ -14,11 +8,11 @@ import { ResizeMode } from 'react-native-video';
 
 interface MultiValueControlType<T> {
   // a list a string or number to be displayed
-  values: T[];
+  values: T[]
   // The selected value in values
-  selected?: T;
+  selected?: T
   // callback to press onPress
-  onPress: (arg: T) => void;
+  onPress: (arg: T) => void
 }
 
 export const MultiValueControl = <T extends number | string | ResizeMode>({
@@ -26,33 +20,28 @@ export const MultiValueControl = <T extends number | string | ResizeMode>({
   selected,
   onPress,
 }: MultiValueControlType<T>) => {
-  const selectedStyle: TextStyle = StyleSheet.flatten([
-    styles.option,
-    {fontWeight: 'bold'},
-  ]);
+  const selectedStyle: TextStyle = StyleSheet.flatten([styles.option, { fontWeight: 'bold' }])
 
-  const unselectedStyle: TextStyle = StyleSheet.flatten([
-    styles.option,
-    {fontWeight: 'normal'},
-  ]);
+  const unselectedStyle: TextStyle = StyleSheet.flatten([styles.option, { fontWeight: 'normal' }])
 
   return (
     <View style={styles.container}>
-      {values.map(value => {
-        const _style = value === selected ? selectedStyle : unselectedStyle;
+      {values.map((value) => {
+        const _style = value === selected ? selectedStyle : unselectedStyle
         return (
           <TouchableOpacity
             key={value}
             onPress={() => {
-              onPress?.(value);
-            }}>
+              onPress?.(value)
+            }}
+          >
             <Text style={_style}>{value}</Text>
           </TouchableOpacity>
-        );
+        )
       })}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   option: {
@@ -69,6 +58,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
 
-export default MultiValueControl;
+export default MultiValueControl

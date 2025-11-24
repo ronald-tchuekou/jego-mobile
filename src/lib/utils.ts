@@ -1,6 +1,6 @@
-import { Platform } from "react-native"
-import { BufferConfig, SelectedTrackType } from "react-native-video"
-import { env } from "./env"
+import { Platform } from 'react-native'
+import { BufferConfig, SelectedTrackType } from 'react-native-video'
+import { env } from './env'
 
 export function objectToQueryString(obj: Record<string, any>) {
   return Object.keys(obj)
@@ -61,4 +61,37 @@ export const bufferConfig: BufferConfig = {
 
 export function getImageLink(path: string) {
   return path.startsWith('http') ? path : `${env.API_URL}/v1${path}`
+}
+
+/**
+ * Truncate a text at the last word boundary before the max length
+ * @param text - The text to truncate
+ * @param maxLength - The maximum length of the text
+ * @returns The truncated text
+ */
+export function truncateAtWordBoundary(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text
+
+  // Find the last space before the max length
+  let truncateIndex = maxLength
+  while (truncateIndex > 0 && text[truncateIndex] !== ' ') {
+    truncateIndex--
+  }
+
+  // If no space found, truncate at max length
+  if (truncateIndex === 0) {
+    truncateIndex = maxLength
+  }
+
+  return text.substring(0, truncateIndex)
+}
+
+/**
+ * Pluralize a word
+ * @param word - The word to pluralize
+ * @param count - The count of the word
+ * @returns The pluralized word
+ */
+export function pluralize(word: string, count: number) {
+  return count > 1 ? `${word}s` : word
 }

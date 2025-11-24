@@ -1,25 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { PanResponder, View } from 'react-native';
-import styles from './styles';
+import React, { useCallback, useEffect, useState } from 'react'
+import { PanResponder, View } from 'react-native'
+import styles from './styles'
 
 interface SeekerProps {
-  currentTime: number;
-  duration: number;
-  isLoading: boolean;
-  isUISeeking: boolean;
-  videoSeek: (arg0: number) => void;
+  currentTime: number
+  duration: number
+  isLoading: boolean
+  isUISeeking: boolean
+  videoSeek: (arg0: number) => void
 }
 
-export const Seeker = ({
-  currentTime,
-  duration,
-  isLoading,
-  isUISeeking,
-  videoSeek,
-}: SeekerProps) => {
-  const [seeking, setSeeking] = useState(false);
-  const [seekerPosition, setSeekerPosition] = useState(0);
-  const [seekerWidth, setSeekerWidth] = useState(0);
+export const Seeker = ({ currentTime, duration, isLoading, isUISeeking, videoSeek }: SeekerProps) => {
+  const [seeking, setSeeking] = useState(false)
+  const [seekerPosition, setSeekerPosition] = useState(0)
+  const [seekerWidth, setSeekerWidth] = useState(0)
 
   /**
    * Set the position of the seekbar's components
@@ -31,14 +25,14 @@ export const Seeker = ({
   const updateSeekerPosition = useCallback(
     (position = 0) => {
       if (position <= 0) {
-        position = 0;
+        position = 0
       } else if (position >= seekerWidth) {
-        position = seekerWidth;
+        position = seekerWidth
       }
-      setSeekerPosition(position);
+      setSeekerPosition(position)
     },
     [seekerWidth],
-  );
+  )
 
   /**
    * Return the time that the video should be at
@@ -47,9 +41,9 @@ export const Seeker = ({
    * @return {float} time in ms based on seekerPosition.
    */
   const calculateTimeFromSeekerPosition = () => {
-    const percent = seekerPosition / seekerWidth;
-    return duration * percent;
-  };
+    const percent = seekerPosition / seekerWidth
+    return duration * percent
+  }
 
   /**
    * Get our seekbar responder going
@@ -66,17 +60,17 @@ export const Seeker = ({
      * position in the onProgress listener.
      */
     onPanResponderGrant: (evt, _gestureState) => {
-      const position = evt.nativeEvent.locationX;
-      updateSeekerPosition(position);
-      setSeeking(true);
+      const position = evt.nativeEvent.locationX
+      updateSeekerPosition(position)
+      setSeeking(true)
     },
 
     /**
      * When panning, update the seekbar position, duh.
      */
     onPanResponderMove: (evt, _gestureState) => {
-      const position = evt.nativeEvent.locationX;
-      updateSeekerPosition(position);
+      const position = evt.nativeEvent.locationX
+      updateSeekerPosition(position)
     },
 
     /**
@@ -85,36 +79,28 @@ export const Seeker = ({
      * onEnd callback
      */
     onPanResponderRelease: (_evt, _gestureState) => {
-      const time = calculateTimeFromSeekerPosition();
+      const time = calculateTimeFromSeekerPosition()
       if (time >= duration && !isLoading) {
         // FIXME ...
         // state.paused = true;
         // this.onEnd();
       } else {
-        videoSeek(time);
-        setSeeking(false);
+        videoSeek(time)
+        setSeeking(false)
       }
     },
-  });
+  })
 
   useEffect(() => {
     if (!isLoading && !seeking && !isUISeeking) {
-      const percent = currentTime / duration;
-      const position = seekerWidth * percent;
-      updateSeekerPosition(position);
+      const percent = currentTime / duration
+      const position = seekerWidth * percent
+      updateSeekerPosition(position)
     }
-  }, [
-    currentTime,
-    duration,
-    isLoading,
-    seekerWidth,
-    seeking,
-    isUISeeking,
-    updateSeekerPosition,
-  ]);
+  }, [currentTime, duration, isLoading, seekerWidth, seeking, isUISeeking, updateSeekerPosition])
 
   if (!seekPanResponder) {
-    return null;
+    return null
   }
   const seekerStyle = [
     styles.seekbarFill,
@@ -122,31 +108,29 @@ export const Seeker = ({
       width: seekerPosition > 0 ? seekerPosition : 0,
       backgroundColor: '#FFF',
     },
-  ];
+  ]
 
   const seekerPositionStyle = [
     styles.seekbarHandle,
     {
       left: seekerPosition > 0 ? seekerPosition : 0,
     },
-  ];
+  ]
 
-  const seekerPointerStyle = [styles.seekbarCircle, {backgroundColor: '#FFF'}];
+  const seekerPointerStyle = [styles.seekbarCircle, { backgroundColor: '#FFF' }]
 
   return (
-    <View
-      style={styles.seekbarContainer}
-      {...seekPanResponder.panHandlers}
-      {...styles.generalControls}>
+    <View style={styles.seekbarContainer} {...seekPanResponder.panHandlers} {...styles.generalControls}>
       <View
         style={styles.seekbarTrack}
-        onLayout={event => setSeekerWidth(event.nativeEvent.layout.width)}
-        pointerEvents={'none'}>
+        onLayout={(event) => setSeekerWidth(event.nativeEvent.layout.width)}
+        pointerEvents={'none'}
+      >
         <View style={seekerStyle} pointerEvents={'none'} />
       </View>
       <View style={seekerPositionStyle} pointerEvents={'none'}>
         <View style={seekerPointerStyle} pointerEvents={'none'} />
       </View>
     </View>
-  );
-};
+  )
+}

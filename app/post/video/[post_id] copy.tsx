@@ -51,13 +51,13 @@ export default function PostVideoPlayerScreen() {
   const company = useMemo(() => data?.user?.company, [data])
   const companyLogo = useMemo(
     () => (company?.logo ? { uri: `${env.API_URL}/v1/${company?.logo}` } : IMAGES.default_company_logo),
-    [company]
+    [company],
   )
-  const video = useMemo(() => data?.medias[0], [data])
-  const sourceUri = useMemo(() => {
-    if (!video) return undefined
-    return video.url.startsWith('http') ? video.url : `${env.API_URL}/v1/${video.url}`
-  }, [video])
+  // const video = useMemo(() => data?.medias[0], [data])
+  // const sourceUri = useMemo(() => {
+  //   if (!video) return undefined
+  //   return video.url.startsWith('http') ? video.url : `${env.API_URL}/v1/${video.url}`
+  // }, [video])
 
   const onLoad = (data: OnLoadData) => {
     setDuration(data.duration)

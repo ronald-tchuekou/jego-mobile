@@ -5,7 +5,7 @@ import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
 import { usePostsStore } from '@/src/stores/posts-store'
 import { CircleSlash2Icon } from 'lucide-react-native'
-import { FlatList, RefreshControl, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native'
 import { useShallow } from 'zustand/shallow'
 import useGetPosts from '../hooks/use-get-posts'
 import PostItem from './post-item'
@@ -28,13 +28,18 @@ function PostsList({ search }: Props) {
       className='flex-1'
       contentContainerClassName='p-4 gap-4'
       data={posts}
+      refreshing={isLoading || isPending}
       onEndReachedThreshold={0.5}
       onEndReached={() => {
         if (page < totalPage) mutate({ page: page + 1, search: search || undefined })
       }}
       refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
       ListEmptyComponent={
-        isLoading ? undefined : (
+        isLoading ? (
+          <Center>
+            <ActivityIndicator size={'large'} className='text-jego-primary' />
+          </Center>
+        ) : (
           <Center className='w-full min-h-80'>
             <VStack className='p-3 items-center' space='md'>
               <CircleSlash2Icon size={40} color={'#666666'} />

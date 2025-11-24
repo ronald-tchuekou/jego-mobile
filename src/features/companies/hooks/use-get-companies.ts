@@ -19,7 +19,7 @@ export default function useGetCompanies({
       setCompanies: state.setCompanies,
       setLoadingCompanies: state.setLoadingCompanies,
       addNewCompanies: state.addNewCompanies,
-    }))
+    })),
   )
 
   const { data, isLoading, refetch } = useQuery({

@@ -1,18 +1,14 @@
-import { Picker } from '@react-native-picker/picker';
-import React from 'react';
-import { Text } from 'react-native';
-import {
-  SelectedTrackType,
-  type AudioTrack,
-  type SelectedTrack,
-} from 'react-native-video';
-import styles from './styles';
+import { Picker } from '@react-native-picker/picker'
+import React from 'react'
+import { Text } from 'react-native'
+import { SelectedTrackType, type AudioTrack, type SelectedTrack } from 'react-native-video'
+import styles from './styles'
 
 export interface AudioTrackSelectorType {
-  audioTracks: AudioTrack[];
-  selectedAudioTrack: SelectedTrack | undefined;
-  onValueChange: (arg0: string | number) => void;
-  audioTracksSelectionBy: SelectedTrackType;
+  audioTracks: AudioTrack[]
+  selectedAudioTrack: SelectedTrack | undefined
+  onValueChange: (arg0: string | number) => void
+  audioTracksSelectionBy: SelectedTrackType
 }
 
 export const AudioTrackSelector = ({
@@ -30,10 +26,11 @@ export const AudioTrackSelector = ({
         selectedValue={selectedAudioTrack?.value}
         onValueChange={(itemValue) => {
           if (itemValue !== 'empty') {
-            console.log('on audio value change ' + itemValue);
-            onValueChange(itemValue);
+            console.log('on audio value change ' + itemValue)
+            onValueChange(itemValue)
           }
-        }}>
+        }}
+      >
         {audioTracks?.length <= 0 ? (
           <Picker.Item label={'empty'} value={'empty'} key={'empty'} />
         ) : (
@@ -41,27 +38,25 @@ export const AudioTrackSelector = ({
         )}
         {audioTracks.map((track) => {
           if (!track) {
-            return;
+            return
           }
-          let value;
+          let value
           if (audioTracksSelectionBy === SelectedTrackType.INDEX) {
-            value = track.index;
+            value = track.index
           } else if (audioTracksSelectionBy === SelectedTrackType.LANGUAGE) {
-            value = track.language;
+            value = track.language
           } else if (audioTracksSelectionBy === SelectedTrackType.TITLE) {
-            value = track.title;
+            value = track.title
           }
           return (
             <Picker.Item
-              label={`${
-                track.title || track.language || `Track ${track.index}`
-              }${track.selected ? ' (Selected)' : ''}`}
+              label={`${track.title || track.language || `Track ${track.index}`}${track.selected ? ' (Selected)' : ''}`}
               value={`${value}`}
               key={`${value}`}
             />
-          );
+          )
         })}
       </Picker>
     </>
-  );
-};
+  )
+}

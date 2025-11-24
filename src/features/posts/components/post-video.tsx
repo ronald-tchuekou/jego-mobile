@@ -22,22 +22,22 @@ export function PostVideo({ video, post_id }: PostVideoProps) {
   // Queries
   const { data } = useQuery({
     queryKey: ['video-thumbnail', sourceUri],
-    queryFn: () => sourceUri ? VideoThumbnails.getThumbnailAsync(sourceUri, { time: 1000 }) : null,
+    queryFn: () => (sourceUri ? VideoThumbnails.getThumbnailAsync(sourceUri, { time: 1000 }) : null),
     enabled: !!sourceUri,
   })
 
   return (
     <View className='relative mb-4 w-full bg-black justify-center items-center h-[300px]'>
-      {sourceUri ? (
+      {sourceUri && data?.uri ? (
         <>
           <Image
-            source={data?.uri ? { uri: data.uri } : undefined}
+            source={{ uri: data.uri }}
             className='flex-1 bg-black border border-jego-input'
             style={{ aspectRatio: (data?.width || 9) / (data?.height || 6) }}
             resizeMode='cover'
           />
           <View className='absolute inset-0 justify-center items-center bg-black/50'>
-            <Link href={`/posts/video/${post_id}`} asChild>
+            <Link href={`/post/video/${post_id}`} asChild>
               <Button size='lg' className='size-12 rounded-full'>
                 <ButtonIcon as={PlayIcon} className={cnBase('stroke-white fill-white')} />
               </Button>

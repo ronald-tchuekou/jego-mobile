@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { CompanyModel } from "../services/company-service";
+import { create } from 'zustand'
+import { CompanyModel } from '../services/company-service'
 
-export type ViewMode = "map" | "list";
+export type ViewMode = 'map' | 'list'
 
 export type CompaniesViewState = {
   viewMode: ViewMode

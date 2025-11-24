@@ -1,12 +1,12 @@
-import React, { FC, memo } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
+import React, { FC, memo } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import styles from './styles'
 
 type Props = {
-  srcListId: number;
-  showRNVControls: boolean;
-  toggleControls: () => void;
-};
+  srcListId: number
+  showRNVControls: boolean
+  toggleControls: () => void
+}
 
 const srcList = [
   {
@@ -20,28 +20,20 @@ const srcList = [
   },
 ]
 
-const _TopControl: FC<Props> = ({
-  toggleControls,
-  showRNVControls,
-  srcListId,
-}) => {
+const _TopControl: FC<Props> = ({ toggleControls, showRNVControls, srcListId }) => {
   return (
     <View style={styles.topControlsContainer}>
-      <Text style={styles.controlOption}>
-        {(srcList[srcListId] as any)?.description ||
-          'local file'}
-      </Text>
+      <Text style={styles.controlOption}>{(srcList[srcListId] as any)?.description || 'local file'}</Text>
       <View>
         <TouchableOpacity
           onPress={() => {
-            toggleControls();
-          }}>
-          <Text style={styles.leftRightControlOption}>
-            {showRNVControls ? 'Hide controls' : 'Show controls'}
-          </Text>
+            toggleControls()
+          }}
+        >
+          <Text style={styles.leftRightControlOption}>{showRNVControls ? 'Hide controls' : 'Show controls'}</Text>
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
-export const TopControl = memo(_TopControl);
+  )
+}
+export const TopControl = memo(_TopControl)

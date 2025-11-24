@@ -28,7 +28,7 @@ function VideoPlayer({ sourceUri }: Props) {
       player.addListener('statusChange', (status) => {
         console.log('status', status)
       })
-    }
+    },
   )
 
   // Reactive player states
@@ -40,9 +40,7 @@ function VideoPlayer({ sourceUri }: Props) {
   const duration = (player as any).duration ?? 0
 
   const effectiveProgress =
-    duration > 0
-      ? (isSeeking && seekingProgress !== null ? seekingProgress : currentTime / duration)
-      : 0
+    duration > 0 ? (isSeeking && seekingProgress !== null ? seekingProgress : currentTime / duration) : 0
 
   function clamp(value: number, min: number, max: number) {
     'worklet'
@@ -106,12 +104,7 @@ function VideoPlayer({ sourceUri }: Props) {
       >
         <View style={styles.progressTrack} />
         <View style={[styles.progressFill, { width: effectiveProgress * progressBarWidth }]} />
-        <View
-          style={[
-            styles.progressThumb,
-            { left: effectiveProgress * progressBarWidth - THUMB_RADIUS },
-          ]}
-        />
+        <View style={[styles.progressThumb, { left: effectiveProgress * progressBarWidth - THUMB_RADIUS }]} />
       </View>
     </TouchableOpacity>
   )

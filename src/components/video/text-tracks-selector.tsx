@@ -1,18 +1,14 @@
-import { Picker } from '@react-native-picker/picker';
-import React from 'react';
-import { Text } from 'react-native';
-import {
-  type SelectedTrack,
-  SelectedTrackType,
-  type TextTrack,
-} from 'react-native-video';
-import styles from './styles';
+import { Picker } from '@react-native-picker/picker'
+import React from 'react'
+import { Text } from 'react-native'
+import { type SelectedTrack, SelectedTrackType, type TextTrack } from 'react-native-video'
+import styles from './styles'
 
 export interface TextTrackSelectorType {
-  textTracks: TextTrack[];
-  selectedTextTrack: SelectedTrack | undefined;
-  onValueChange: (arg0: string) => void;
-  textTracksSelectionBy: string;
+  textTracks: TextTrack[]
+  selectedTextTrack: SelectedTrack | undefined
+  onValueChange: (arg0: string) => void
+  textTracksSelectionBy: string
 }
 
 export const TextTrackSelector = ({
@@ -30,9 +26,10 @@ export const TextTrackSelector = ({
         selectedValue={`${selectedTextTrack?.value}`}
         onValueChange={(itemValue) => {
           if (itemValue !== 'empty') {
-            onValueChange(itemValue);
+            onValueChange(itemValue)
           }
-        }}>
+        }}
+      >
         {textTracks?.length <= 0 ? (
           <Picker.Item label={'empty'} value={'empty'} key={'empty'} />
         ) : (
@@ -40,15 +37,15 @@ export const TextTrackSelector = ({
         )}
         {textTracks.map((track) => {
           if (!track) {
-            return;
+            return
           }
-          let value;
+          let value
           if (textTracksSelectionBy === SelectedTrackType.INDEX) {
-            value = track.index;
+            value = track.index
           } else if (textTracksSelectionBy === SelectedTrackType.LANGUAGE) {
-            value = track.language;
+            value = track.language
           } else if (textTracksSelectionBy === SelectedTrackType.TITLE) {
-            value = track.title;
+            value = track.title
           }
           return (
             <Picker.Item
@@ -58,9 +55,9 @@ export const TextTrackSelector = ({
               value={value}
               key={value}
             />
-          );
+          )
         })}
       </Picker>
     </>
-  );
-};
+  )
+}

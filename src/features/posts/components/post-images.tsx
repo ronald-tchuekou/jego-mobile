@@ -1,14 +1,14 @@
-import { MediaModel } from '@/src/services/post-service'
-import { env } from '@/src/lib/env'
 import { Image } from '@/src/components/ui/image'
+import { env } from '@/src/lib/env'
+import { MediaModel } from '@/src/services/post-service'
+import { memo, useCallback, useState } from 'react'
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, View } from 'react-native'
-import { useCallback, useState } from 'react'
 
 type Props = {
   medias: MediaModel[]
 }
 
-export function PostImages({ medias }: Props) {
+function PostImagesComponents({ medias }: Props) {
   const media = medias[0]
 
   const [page, setPage] = useState<number>(0)
@@ -93,3 +93,5 @@ export function PostImages({ medias }: Props) {
     </View>
   )
 }
+
+export const PostImages = memo(PostImagesComponents)

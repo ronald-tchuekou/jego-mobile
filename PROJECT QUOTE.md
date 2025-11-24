@@ -1,62 +1,62 @@
-PROJECT QUOTE
-=============
+# PROJECT QUOTE
 
-All-Mercy Mental Health Application
-====================================
+# All-Mercy Mental Health Application
 
 ---
 
-Date: November 14, 2025
-Project Duration: 2.5 months (10 weeks)
-Quote Validity: 30 days from issue date
+Date: November 14, 2025 Project Duration: 2.5 months (10 weeks) Quote Validity: 30 days from issue date
 
 ---
 
-CLIENT INFORMATION
-==================
+# CLIENT INFORMATION
 
-Attention: Deric
-Project: All-Mercy Mental Health Application
-Issue Date: November 14, 2025
+Attention: Deric Project: All-Mercy Mental Health Application Issue Date: November 14, 2025
 
 ---
 
-EXECUTIVE SUMMARY
-=================
+# EXECUTIVE SUMMARY
 
-Following the analysis of the All-Mercy App Visual Blueprint specifications document, this quote presents the complete development of a mental health mobile application with integrated administrative dashboard. The project will be delivered over a period of 2.5 months (10 weeks), including both main components: the mobile application and the administrative dashboard.
+Following the analysis of the All-Mercy App Visual Blueprint specifications document, this quote presents the complete
+development of a mental health mobile application with integrated administrative dashboard. The project will be
+delivered over a period of 2.5 months (10 weeks), including both main components: the mobile application and the
+administrative dashboard.
 
 ---
 
-PROJECT SCOPE
-=============
+# PROJECT SCOPE
 
 1. MOBILE APPLICATION
----------------------
+
+---
 
 Home Screen (Dashboard)
+
 - Central hub with greeting and quick access buttons
 - Bottom navigation bar (Home, Tools, Meditations, Challenges, Profile)
 
 10 Core Modules:
 
 Module 1: Daily Check-In
+
 - Mood selector (Calm, Stressed, Anxious, Sad, etc.)
 - Optional notes and AI-generated Mercy Messages
 - Data saved to mood tracker for analytics
 
 Module 2: Today's Teaching (Audio/Video Player)
+
 - 1-3 minute reflections from Dr. Mercy Ngeusang
 - Favorite, journal reflection, and sharing features
 - Auto-suggest next feature integration
 
 Module 3: Guided Calm (Meditation Player)
+
 - 5 categories: Morning Calm, Sleep Peacefully, Faith Over Fear, Letting Go of Bitterness, Breathe Before You React
 - Audio controls with timer
 - Post-session reflection prompts
 - Safety banner with help access
 
 Module 4: Therapy Tools (CBT and Coping Exercises)
+
 - Reframe a Thought
 - 5-Minute Calmness Reset
 - Gratitude Builder
@@ -66,24 +66,28 @@ Module 4: Therapy Tools (CBT and Coping Exercises)
 - Connection to clinician booking
 
 Module 5: My Care Plan (Medication and Appointments)
+
 - For All-Mercy Patients: Medication list, reminders, refill requests, appointment info
 - For General Users: Educational videos and FAQs
 - Smart alerts for low mood or missed medications
 - Secure telehealth portal link
 
 Module 6: Journal
+
 - Daily writing prompts
 - Emotion tags
 - PDF export functionality
 - Privacy toggle for provider sharing (for patients)
 
 Module 7: Growth Challenges
+
 - Examples: 7 Days of Gratitude, Faith Over Fear, Calmness in the Storm, Boundaries and Balance
 - Daily tasks and reflections
 - Progress tracker with completion badges
 - Encouragement messaging
 
 Module 8: Reach Out for Help (Safety Hub)
+
 - Accessible from all screens
 - Crisis resources (988 Suicide and Crisis Lifeline, findahelpline.com)
 - Emergency messaging
@@ -91,6 +95,7 @@ Module 8: Reach Out for Help (Safety Hub)
 - Self-care resources (grounding exercises, meditations)
 
 Module 9: Profile/Settings
+
 - Account management
 - Notification preferences
 - Subscription and payment information
@@ -98,6 +103,7 @@ Module 9: Profile/Settings
 - About All-Mercy page
 
 Module 10: Emergency and Safety Integration
+
 - Keyword detection (hopeless, harm, cannot go on)
 - Immediate crisis support pop-up
 - Staff alert system through admin panel
@@ -105,18 +111,22 @@ Module 10: Emergency and Safety Integration
 ---
 
 2. ADMIN DASHBOARD
-------------------
+
+---
 
 Content Management System
+
 - Upload new teachings, meditations, and exercises
 - Content versioning and scheduling
 
 User Management
+
 - User database with subscription management
 - User activity tracking
 - Account status management
 
 Analytics Dashboard
+
 - Real-time engagement metrics
 - Mood tracking analytics
 - High-risk mood identification
@@ -124,16 +134,19 @@ Analytics Dashboard
 - Feature usage reports
 
 Crisis Alert System
+
 - Automated flagging of distressed users
 - Staff notification system
 - Alert history and follow-up tracking
 
 Communication Tools
+
 - Broadcast messaging to all users
 - Targeted messaging by user segment
 - Push notification management
 
 Reporting
+
 - Weekly and monthly summary reports
 - Exportable data for analysis
 - Compliance and safety reports
@@ -141,41 +154,47 @@ Reporting
 ---
 
 3. TECHNICAL FEATURES
----------------------
+
+---
 
 Backend and Infrastructure:
+
 - Secure authentication system (JWT/OAuth)
 - RESTful API for app-dashboard communication
 - Database architecture for user data storage
 - Cloud hosting setup (AWS/Google Cloud/Azure)
 
 Media and Content:
+
 - Audio/video player integration
 - Streaming optimization
 - Content delivery network (CDN) setup
 
 Notifications and Alerts:
+
 - Push notification system
 - In-app notification center
 - Email notification integration
 
 Security and Compliance:
+
 - HIPAA-compliant data handling
 - End-to-end encryption for sensitive data
 - Secure file storage for journal entries
 - Privacy controls and data export
 
 Export and Integration:
+
 - PDF generation for journal entries
 - Telehealth portal integration (if API provided)
 - Third-party service integrations
 
 ---
 
-DEVELOPMENT TIMELINE
-====================
+# DEVELOPMENT TIMELINE
 
 Phase 1: Setup and Architecture (Weeks 1-2)
+
 - Environment configuration
 - Project structure setup
 - Database architecture design
@@ -183,6 +202,7 @@ Phase 1: Setup and Architecture (Weeks 1-2)
 - Development workflow establishment
 
 Phase 2: Mobile App Development (Weeks 3-6)
+
 - Implementation of 10 core modules
 - UI/UX integration with provided designs
 - Audio/video player integration
@@ -190,6 +210,7 @@ Phase 2: Mobile App Development (Weeks 3-6)
 - User authentication and profile management
 
 Phase 3: Admin Dashboard (Weeks 7-8)
+
 - Admin interface development
 - Content management system
 - Analytics dashboard implementation
@@ -197,6 +218,7 @@ Phase 3: Admin Dashboard (Weeks 7-8)
 - User management features
 
 Phase 4: Testing and Deployment (Weeks 9-10)
+
 - Quality assurance testing
 - Bug fixes and optimization
 - Performance tuning
@@ -206,8 +228,7 @@ Phase 4: Testing and Deployment (Weeks 9-10)
 
 ---
 
-CONDITIONS AND REQUIREMENTS
-============================
+# CONDITIONS AND REQUIREMENTS
 
 Client Must Provide:
 
@@ -234,8 +255,7 @@ Important Notes:
 
 ---
 
-DELIVERABLES
-============
+# DELIVERABLES
 
 - Complete mobile application (iOS/Android) with all features
 - Responsive web admin dashboard
@@ -249,8 +269,7 @@ DELIVERABLES
 
 ---
 
-EXCLUSIONS
-==========
+# EXCLUSIONS
 
 The following items are NOT included in this quote:
 
@@ -265,8 +284,7 @@ The following items are NOT included in this quote:
 
 ---
 
-INVESTMENT
-==========
+# INVESTMENT
 
 Total Project Amount: TO BE DETERMINED
 
@@ -274,14 +292,12 @@ Based on budget and payment terms to be discussed
 
 Suggested Payment Schedule:
 
-Initial Deposit - Project kickoff: 30% (TBD)
-Midpoint Payment - End of Week 6 (Mobile App Complete): 40% (TBD)
-Final Payment - Project delivery: 30% (TBD)
+Initial Deposit - Project kickoff: 30% (TBD) Midpoint Payment - End of Week 6 (Mobile App Complete): 40% (TBD) Final
+Payment - Project delivery: 30% (TBD)
 
 ---
 
-TERMS AND CONDITIONS
-====================
+# TERMS AND CONDITIONS
 
 1. This quote is valid for 30 days from the issue date
 2. Project begins upon receipt of initial deposit and all required assets
@@ -296,32 +312,29 @@ TERMS AND CONDITIONS
 
 ---
 
-ACCEPTANCE
-==========
+# ACCEPTANCE
 
 By signing below, both parties agree to the terms and conditions outlined in this quote.
 
 For the Service Provider:
 
-Signature: _________________________________
+Signature: ******\*\*\*\*******\_******\*\*\*\*******
 
-Name: _________________________________
+Name: ******\*\*\*\*******\_******\*\*\*\*******
 
-Date: _________________________________
-
+Date: ******\*\*\*\*******\_******\*\*\*\*******
 
 For the Client:
 
-Signature: _________________________________
+Signature: ******\*\*\*\*******\_******\*\*\*\*******
 
 Name: Deric
 
-Date: _________________________________
+Date: ******\*\*\*\*******\_******\*\*\*\*******
 
 ---
 
-CONTACT
-=======
+# CONTACT
 
 For any questions regarding this quote, please do not hesitate to reach out.
 

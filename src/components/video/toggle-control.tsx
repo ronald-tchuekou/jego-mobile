@@ -1,12 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import {
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native'
 
 /*
  * ToggleControl displays a 2 states clickable text
@@ -14,44 +8,32 @@ import {
 
 interface ToggleControlType {
   // boolean indicating if text is selected state
-  isSelected?: boolean;
+  isSelected?: boolean
   // value of text when selected
-  selectedText?: string;
+  selectedText?: string
   // value of text when NOT selected
-  unselectedText?: string;
+  unselectedText?: string
   // default text if no only one text field is needed
-  text?: string;
+  text?: string
   // callback called when pressing the component
-  onPress: () => void;
+  onPress: () => void
 }
 
-export const ToggleControl = ({
-  isSelected,
-  selectedText,
-  unselectedText,
-  text,
-  onPress,
-}: ToggleControlType) => {
-  const selectedStyle: TextStyle = StyleSheet.flatten([
-    styles.controlOption,
-    {fontWeight: 'bold'},
-  ]);
+export const ToggleControl = ({ isSelected, selectedText, unselectedText, text, onPress }: ToggleControlType) => {
+  const selectedStyle: TextStyle = StyleSheet.flatten([styles.controlOption, { fontWeight: 'bold' }])
 
-  const unselectedStyle: TextStyle = StyleSheet.flatten([
-    styles.controlOption,
-    {fontWeight: 'normal'},
-  ]);
+  const unselectedStyle: TextStyle = StyleSheet.flatten([styles.controlOption, { fontWeight: 'normal' }])
 
-  const style = isSelected ? selectedStyle : unselectedStyle;
-  const _text = text ? text : isSelected ? selectedText : unselectedText;
+  const style = isSelected ? selectedStyle : unselectedStyle
+  const _text = text ? text : isSelected ? selectedText : unselectedText
   return (
     <View style={styles.resizeModeControl}>
       <TouchableOpacity onPress={onPress}>
         <Text style={style}>{_text}</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   controlOption: {
@@ -68,6 +50,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
 
-export default ToggleControl;
+export default ToggleControl

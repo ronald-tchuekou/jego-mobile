@@ -1,4 +1,3 @@
-
 export const globalStyles = {
   button_icon: {
     sm: {
