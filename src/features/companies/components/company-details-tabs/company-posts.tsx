@@ -1,13 +1,14 @@
 import EmptyContent from '@/src/components/base/empty-content'
 import { Center } from '@/src/components/ui/center'
 import { Spinner } from '@/src/components/ui/spinner'
+import { VStack } from '@/src/components/ui/vstack'
 import PostItem from '@/src/features/posts/components/post-item'
 import { postKey } from '@/src/lib/query-kye'
 import { CompanyModel } from '@/src/services/company-service'
 import PostService from '@/src/services/post-service'
 import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 
 type Props = {
   company: CompanyModel
@@ -42,11 +43,11 @@ const CompanyPosts = ({ company }: Props) => {
       ) : !posts || posts.length === 0 ? (
         <EmptyContent text={'Aucune post disponible pour cette entreprise.'} />
       ) : (
-        <View className={'space-y-4'}>
+        <VStack space='md'>
           {posts.map((post) => (
             <PostItem key={post.id} item={post} showDetails={false} />
           ))}
-        </View>
+        </VStack>
       )}
     </>
   )

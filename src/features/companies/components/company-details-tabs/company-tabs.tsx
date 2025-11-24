@@ -9,6 +9,7 @@ import { Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 import CompanyAbout from './company-about'
 import CompanyPosts from './company-posts'
+import CompanyPrestations from './company-prestations'
 
 type Props = {
   company: CompanyModel
@@ -76,14 +77,8 @@ const CompanyTabsComponent = ({ company }: Props) => {
       </HStack>
       <Box className='mt-3'>
         {activeTab === 'about' && <CompanyAbout company={company} />}
-        {activeTab === 'posts' && (
-            <CompanyPosts company={company} />
-        )}
-        {activeTab === 'services' && (
-          <Center className='py-10'>
-            <Text className='font-body text-2xl text-center'>Services</Text>
-          </Center>
-        )}
+        {activeTab === 'posts' && <CompanyPosts company={company} />}
+        {activeTab === 'services' && <CompanyPrestations company={company}/>}
         {activeTab === 'gallery' && (
           <Center className='py-10'>
             <Text className='font-body text-2xl text-center'>Gallery</Text>
