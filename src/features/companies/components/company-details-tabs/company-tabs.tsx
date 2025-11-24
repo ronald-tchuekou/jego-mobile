@@ -11,6 +11,7 @@ import CompanyAbout from './company-about'
 import CompanyGallery from './company-gallery'
 import CompanyPosts from './company-posts'
 import CompanyPrestations from './company-prestations'
+import CompanyProgram from './company-program'
 
 type Props = {
   company: CompanyModel
@@ -81,11 +82,7 @@ const CompanyTabsComponent = ({ company }: Props) => {
         {activeTab === 'posts' && <CompanyPosts company={company} />}
         {activeTab === 'services' && <CompanyPrestations company={company}/>}
         {activeTab === 'gallery' && <CompanyGallery company={company}/>}
-        {activeTab === 'program' && (
-          <Center className='py-10'>
-            <Text className='font-body text-2xl text-center'>Program</Text>
-          </Center>
-        )}
+        {activeTab === 'program' && <CompanyProgram company={company}/>}
         {activeTab === 'reviews' && (
           <Center className='py-10'>
             <Text className='font-body text-2xl text-center'>Reviews</Text>
