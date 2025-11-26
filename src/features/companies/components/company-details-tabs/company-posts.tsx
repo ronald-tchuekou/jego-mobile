@@ -13,7 +13,7 @@ type Props = {
 }
 
 const CompanyPosts = ({ company }: Props) => {
-  const { posts, isLoading} = useGetPosts({ filters: { companyId: company.id }, queryKeyLabel: 'company-posts' })
+  const { posts, isLoading } = useGetPosts({ filters: { companyId: company.id }, queryKeyLabel: 'company-posts' })
 
   return (
     <>

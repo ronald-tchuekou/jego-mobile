@@ -13,9 +13,7 @@ const CompanyAbout = ({ company }: Props) => {
       {!company.description ? (
         <EmptyContent text={'Aucune description disponible pour cette entreprise.'} />
       ) : (
-        <Text className='text-base text-jego-foreground'>
-          {company.description}
-        </Text>
+        <Text className='text-base text-jego-foreground'>{company.description}</Text>
       )}
     </>
   )

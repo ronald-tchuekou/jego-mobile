@@ -20,22 +20,22 @@ const CompanyRatingAverage = ({ companyId }: Props) => {
     },
   })
 
-  if (isLoading) return <Skeleton className='w-32 h-8' />
-
   const ratingValue = rating?.averageRating || 0
 
   return (
-    <HStack space='md' className='items-center my-2'>
-      <Rating
-        style={{ backgroundColor: 'transparent' }}
-        rating={ratingValue}
-        maxRating={5}
-        size={20}
-        scale={1}
-        disabled
-      />
-      <Text className='text-base text-jego-muted-foreground'>{ratingValue.toFixed(1)}/5</Text>
-    </HStack>
+    <Skeleton variant='sharp' className='w-[100px] h-[35px]' isLoaded={!isLoading}>
+      <HStack space='md' className='items-center my-2'>
+        <Rating
+          style={{ backgroundColor: 'transparent' }}
+          rating={ratingValue}
+          maxRating={5}
+          size={20}
+          scale={1}
+          disabled
+        />
+        <Text className='text-base text-jego-muted-foreground'>{ratingValue.toFixed(1)}/5</Text>
+      </HStack>
+    </Skeleton>
   )
 }
 

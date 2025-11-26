@@ -45,13 +45,7 @@ const CompanyReviews = ({ company }: Props) => {
                   <VStack space='xs'>
                     <Text className={'line-clamp-1 text-jego-foreground font-bold'}>{review.user.displayName}</Text>
                     <HStack space='md' className={'flex items-center'}>
-                      <Rating
-                        disabled
-                        scale={1}
-                        size={15}
-                        rating={review.rating}
-                        maxRating={5}
-                      />
+                      <Rating disabled scale={1} size={15} rating={review.rating} maxRating={5} />
                       <Text className={'block text-xs text-jego-muted-foreground'}>{formatDate(review.createdAt)}</Text>
                     </HStack>
                   </VStack>

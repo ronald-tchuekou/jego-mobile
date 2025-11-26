@@ -2,7 +2,7 @@
   "expo": {
     "name": "JeGo",
     "slug": "jego",
-    "version": "1.0.0",
+    "version": "2025.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "jego",
@@ -64,6 +64,12 @@
             "useExoplayerHls": true,
             "useExoplayerDash": true
           }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "L'application accède à vos photos pour vous permettre de les partager avec vos amis."
         }
       ]
     ],

@@ -56,9 +56,7 @@ const CompanyDetailsCardComponent = ({ company }: Props) => {
         </HStack>
         <HStack className='items-start gap-2 mt-2'>
           <Icon as={IconMapPinFilled} size='lg' className='text-jego-muted-foreground' />
-          <Text className='text-sm flex-1 text-jego-muted-foreground'>
-            {company.address || '- - -'}
-          </Text>
+          <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.address || '- - -'}</Text>
         </HStack>
       </View>
       <HStack space='md' className='px-4 mb-5'>

@@ -38,16 +38,16 @@ export default function PostDetailsScreen() {
       </HStack>
       <ScrollView className='flex-1 p-4'>
         {isLoading ? (
-          <LoaderContent/>
+          <LoaderContent />
         ) : !data ? (
-          <EmptyContent text={'Cette entreprise n\'existe pas.'} />
+          <EmptyContent text={"Cette entreprise n'existe pas."} />
         ) : (
           <>
             <CompanyDetailsCard company={data} />
             <CompanyTabs company={data} />
           </>
         )}
-        <View className='h-20'/>
+        <View className='h-20' />
       </ScrollView>
     </View>
   )

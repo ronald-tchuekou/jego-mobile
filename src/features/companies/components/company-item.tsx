@@ -17,7 +17,7 @@ type Props = {
 
 const CompanyItem = ({ company }: Props) => {
   const companyLogo = getCompanyLogoUri(company.logo)
-  
+
   return (
     <Link href={`/company/${company.id}`}>
       <Card className='p-0 border border-jego-border'>

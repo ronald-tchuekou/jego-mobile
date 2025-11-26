@@ -26,14 +26,14 @@ export function SharePostButton({ post }: Props) {
   })
 
   const handleClick = async () => {
-      await Share.share({
-        title: 'Consulter un peut cette annonce !',
-        message: "Voici le lien de l'annonce 👇",
-        url: `${env.APP_URL}/posts/${post.id}`,
-      })
+    await Share.share({
+      title: 'Consulter un peut cette annonce !',
+      message: "Voici le lien de l'annonce 👇",
+      url: `${env.APP_URL}/posts/${post.id}`,
+    })
 
-      setShares(s => s + 1)
-      mutate(post.id)
+    setShares((s) => s + 1)
+    mutate(post.id)
   }
 
   return (

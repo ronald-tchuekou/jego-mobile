@@ -9,8 +9,6 @@ export type ApiResponse<T> = {
 export async function fetchHelper<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
   const url = `${getApiUrl('/v1')}${path}`
 
-  console.log('url  => ', url)
-
   const response = await fetch(url, options)
   let data: any = null
   try {

@@ -17,7 +17,7 @@ import useGetPostById from '@/src/features/posts/hooks/use-get-post-by-id'
 import { env } from '@/src/lib/env'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { IMAGES } from '@/src/lib/images'
-import { compactNumber, formatDate } from '@/src/lib/utils'
+import { compactNumber, formatDate, getUserProfileImageUri } from '@/src/lib/utils'
 import { PostModel } from '@/src/services/post-service'
 import { useLocalSearchParams } from 'expo-router'
 import { CircleSlash2Icon, MessageCircleMoreIcon } from 'lucide-react-native'
@@ -28,16 +28,17 @@ export default function PostDetailsScreen() {
   const { post_id } = useLocalSearchParams<{ post_id: string }>()
   const height = getStatusBarHeight()
   const { data, isLoading } = useGetPostById(post_id)
-  
+
   const company = data?.user?.company
   const companyLogo = company?.logo ? { uri: `${env.API_URL}/v1/${company?.logo}` } : IMAGES.default_company_logo
+  const profileSrc = getUserProfileImageUri(data?.user?.profileImage)
 
   return (
     <View className='flex-1 bg-jego-background'>
       <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
         <BackButton />
         <Avatar size='md'>
-          <AvatarImage source={companyLogo} />
+          <AvatarImage source={company ? companyLogo : profileSrc} />
         </Avatar>
         <VStack className='flex-1'>
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>

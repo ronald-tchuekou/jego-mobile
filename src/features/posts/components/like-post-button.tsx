@@ -22,11 +22,11 @@ export function LikePostButton({ post }: Props) {
 
   const handleClick = () => {
     if (isLiked) {
-      setLikes(s => s - 1)
+      setLikes((s) => s - 1)
       setIsLiked(false)
       deleteLike()
     } else {
-      setLikes(s => s + 1)
+      setLikes((s) => s + 1)
       setIsLiked(true)
       createLike()
     }

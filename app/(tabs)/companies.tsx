@@ -18,11 +18,7 @@ export default function CompaniesScreen() {
       <VStack className='p-4 bg-jego-card border-b border-jego-border' space='md' style={{ paddingTop: height + 10 }}>
         <Text className='text-3xl font-bold text-jego-card-foreground'>Entreprises</Text>
         <HStack className='gap-2'>
-          <SearchInput
-            className='flex-1'
-            placeholder='Rechercher une entreprise...'
-            onChangeText={setSearch}
-          />
+          <SearchInput className='flex-1' placeholder='Rechercher une entreprise...' onChangeText={setSearch} />
           <Button
             variant='outline'
             size='lg'

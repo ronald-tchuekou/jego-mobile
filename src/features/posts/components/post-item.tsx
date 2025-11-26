@@ -15,7 +15,7 @@ import { cnBase } from 'tailwind-variants'
 import { LikePostButton } from './like-post-button'
 import { SharePostButton } from './share-post-button'
 
-export default function PostItem({ item, showDetails = true }: { item: PostModel, showDetails?: boolean }) {
+export default function PostItem({ item, showDetails = true }: { item: PostModel; showDetails?: boolean }) {
   const company = item.user?.company
   const companyLogo = getCompanyLogoUri(company?.logo)
   const medias = item.medias
