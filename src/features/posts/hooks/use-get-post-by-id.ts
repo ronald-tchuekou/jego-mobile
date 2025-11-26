@@ -1,5 +1,3 @@
-'use client'
-
 import { postKey } from '@/src/lib/query-kye'
 import PostService from '@/src/services/post-service'
 import { useQuery } from '@tanstack/react-query'

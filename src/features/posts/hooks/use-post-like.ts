@@ -1,5 +1,3 @@
-'use client'
-
 import { postLikeKey } from '@/src/lib/query-kye'
 import PostLikeService from '@/src/services/post-like-service'
 import { useAuthStore } from '@/src/stores/auth-store'

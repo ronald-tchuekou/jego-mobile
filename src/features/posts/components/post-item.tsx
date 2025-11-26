@@ -46,10 +46,10 @@ export default function PostItem({ item, showDetails = true }: { item: PostModel
         <LikePostButton post={item} />
         <Link href={`/post/${item.id}?focus_comment=true`} asChild>
           <Button size='lg' variant='link' className='px-4'>
-            <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
-            <ButtonText size='sm' className='text-jego-muted-foreground'>
+            <ButtonText size='lg' className='text-jego-muted-foreground'>
               {compactNumber(item.commentCount)}
             </ButtonText>
+            <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
           </Button>
         </Link>
         <SharePostButton post={item} />
