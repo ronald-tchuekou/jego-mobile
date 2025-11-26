@@ -5,8 +5,9 @@ import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
 import { getCompanyLogoUri } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
-import { IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
+import { IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
+import { MailIcon } from 'lucide-react-native'
 import { Text } from 'react-native'
 import { CompanyImageBanner } from './company-image-banner'
 
@@ -26,19 +27,19 @@ const CompanyItem = ({ company }: Props) => {
             <AvatarImage source={companyLogo} alt={company.name} />
           </Avatar>
           <VStack className='flex-1'>
-            <Text className='font-medium text-base text-jego-foreground'>{company.name} </Text>
+            <Text className='font-medium text-lg text-jego-foreground'>{company.name} </Text>
             {company.category?.name && <Text className='text-xs text-jego-primary'>{company.category?.name}</Text>}
             <HStack className='items-start gap-1.5 mt-2'>
-              <Icon as={IconMailFilled} size='sm' className='text-jego-foreground' />
-              <Text className='text-xs flex-1 text-jego-foreground'>{company.email || '- - -'}</Text>
+              <Icon as={MailIcon} size='lg' className='text-jego-muted-foreground' />
+              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.email || '- - -'}</Text>
             </HStack>
             <HStack className='items-start gap-1.5 mt-1'>
-              <Icon as={IconPhoneFilled} size='sm' className='text-jego-foreground' />
-              <Text className='text-xs flex-1 text-jego-foreground'>{company.phone || '- - -'}</Text>
+              <Icon as={IconPhoneFilled} size='lg' className='text-jego-muted-foreground' />
+              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.phone || '- - -'}</Text>
             </HStack>
             <HStack className='items-start gap-1.5 mt-1'>
-              <Icon as={IconMapPinFilled} size='sm' className='text-jego-foreground' />
-              <Text className='text-xs flex-1 text-jego-foreground'>{company.address || '- - -'}</Text>
+              <Icon as={IconMapPinFilled} size='lg' className='text-jego-muted-foreground' />
+              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.address || '- - -'}</Text>
             </HStack>
           </VStack>
         </HStack>

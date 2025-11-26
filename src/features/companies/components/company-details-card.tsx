@@ -6,8 +6,9 @@ import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { compactNumber, getCompanyLogoUri, pluralize } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
-import { IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
+import { IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
+import { MailIcon } from 'lucide-react-native'
 import { memo } from 'react'
 import { Text, View } from 'react-native'
 import ChatButton from './chat-button'
@@ -42,16 +43,22 @@ const CompanyDetailsCardComponent = ({ company }: Props) => {
           {compactNumber(followersCount)} {pluralize('follower', followersCount)}
         </Text>
         <HStack className='items-start gap-2 mt-4'>
-          <Icon as={IconMailFilled} size='lg' className='text-jego-foreground' />
-          <Text className='text-sm flex-1 text-jego-foreground'>{company.email || '- - -'}</Text>
+          <Icon as={MailIcon} size='lg' className='text-jego-muted-foreground' />
+          <Text className='text-sm flex-1 text-jego-muted-foreground'>
+            <Link href={`mailto:${company.email}`}>{company.email || '- - -'}</Link>
+          </Text>
         </HStack>
         <HStack className='items-start gap-2 mt-2'>
-          <Icon as={IconPhoneFilled} size='lg' className='text-jego-foreground' />
-          <Text className='text-sm flex-1 text-jego-foreground'>{company.phone || '- - -'}</Text>
+          <Icon as={IconPhoneFilled} size='lg' className='text-jego-muted-foreground' />
+          <Text className='text-sm flex-1 text-jego-muted-foreground'>
+            <Link href={`tel:${company.phone}`}>{company.phone || '- - -'}</Link>
+          </Text>
         </HStack>
         <HStack className='items-start gap-2 mt-2'>
-          <Icon as={IconMapPinFilled} size='lg' className='text-jego-foreground' />
-          <Text className='text-sm flex-1 text-jego-foreground'>{company.address || '- - -'}</Text>
+          <Icon as={IconMapPinFilled} size='lg' className='text-jego-muted-foreground' />
+          <Text className='text-sm flex-1 text-jego-muted-foreground'>
+            {company.address || '- - -'}
+          </Text>
         </HStack>
       </View>
       <HStack space='md' className='px-4 mb-5'>

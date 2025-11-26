@@ -8,9 +8,9 @@ import { VStack } from '@/src/components/ui/vstack'
 import { formatDate, getUserProfileImageUri } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
 import { useCompanyReviewsStore } from '@/src/stores/company-reviews-store'
+import { Rating } from '@kolking/react-native-rating'
 import { memo } from 'react'
 import { Text } from 'react-native'
-import { Rating } from 'react-native-ratings'
 import { useShallow } from 'zustand/shallow'
 import useGetCompanyReview from '../../hooks/use-get-company-review'
 
@@ -46,11 +46,11 @@ const CompanyReviews = ({ company }: Props) => {
                     <Text className={'line-clamp-1 text-jego-foreground font-bold'}>{review.user.displayName}</Text>
                     <HStack space='md' className={'flex items-center'}>
                       <Rating
-                        startingValue={review.rating}
-                        ratingCount={5}
-                        imageSize={15}
-                        readonly
-                        style={{ backgroundColor: 'transparent' }}
+                        disabled
+                        scale={1}
+                        size={15}
+                        rating={review.rating}
+                        maxRating={5}
                       />
                       <Text className={'block text-xs text-jego-muted-foreground'}>{formatDate(review.createdAt)}</Text>
                     </HStack>

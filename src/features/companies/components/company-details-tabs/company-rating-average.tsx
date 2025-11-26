@@ -2,10 +2,10 @@ import { HStack } from '@/src/components/ui/hstack'
 import { Skeleton } from '@/src/components/ui/skeleton'
 import { companyReviewKey } from '@/src/lib/query-kye'
 import CompanyReviewService from '@/src/services/company-review-service'
+import { Rating } from '@kolking/react-native-rating'
 import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
 import { Text } from 'react-native'
-import { Rating } from 'react-native-ratings'
 
 type Props = {
   companyId: string
@@ -26,7 +26,14 @@ const CompanyRatingAverage = ({ companyId }: Props) => {
 
   return (
     <HStack space='md' className='items-center my-2'>
-      <Rating style={{ backgroundColor: 'transparent' }} startingValue={ratingValue} ratingCount={5} imageSize={20} showRating={false} readonly />
+      <Rating
+        style={{ backgroundColor: 'transparent' }}
+        rating={ratingValue}
+        maxRating={5}
+        size={20}
+        scale={1}
+        disabled
+      />
       <Text className='text-base text-jego-muted-foreground'>{ratingValue.toFixed(1)}/5</Text>
     </HStack>
   )
