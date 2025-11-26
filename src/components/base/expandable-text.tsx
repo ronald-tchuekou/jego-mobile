@@ -35,24 +35,21 @@ function ExpandableTextComponent({ postId, text, maxLength = 150, className = ''
       activeOpacity={0.8}
       disabled={!postId}
       onPress={showDetails}
-      className={cnBase('px-4 pb-3', className)}
+      className={cnBase('pb-3', className)}
     >
       <Text className='text-base text-jego-foreground'>
         {displayText}
         {shouldTruncate && !isExpanded && reduce && <Text className='text-jego-muted-foreground'>...&nbsp;</Text>}
-        {shouldTruncate && reduce && (
-          <>
-            {isExpanded && '\n'}
-            <Text
-              onPress={(e) => {
-                e.stopPropagation()
-                setIsExpanded(!isExpanded)
-              }}
-              className='font-bold text-jego-primary'
-            >
-              {isExpanded ? 'Voir moins' : 'Voir plus'}
-            </Text>
-          </>
+        {shouldTruncate && reduce && !isExpanded && (
+          <Text
+            onPress={(e) => {
+              e.stopPropagation()
+              setIsExpanded((s) => !s)
+            }}
+            className='font-bold text-jego-primary'
+          >
+            {isExpanded ? 'Voir moins' : 'Voir plus'}
+          </Text>
         )}
       </Text>
     </TouchableOpacity>
