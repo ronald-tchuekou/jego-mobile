@@ -21,7 +21,6 @@ export default function CompaniesScreen() {
           <SearchInput
             className='flex-1'
             placeholder='Rechercher une entreprise...'
-            value={search}
             onChangeText={setSearch}
           />
           <Button
