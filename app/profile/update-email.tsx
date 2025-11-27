@@ -9,7 +9,7 @@ import {
   FormControlLabelText,
 } from '@/src/components/ui/form-control'
 import { HStack } from '@/src/components/ui/hstack'
-import { Input, InputField } from '@/src/components/ui/input'
+import { Input, InputField, InputIcon, InputSlot } from '@/src/components/ui/input'
 import { VStack } from '@/src/components/ui/vstack'
 import {
   defaultUpdateEmailValue,
@@ -72,7 +72,9 @@ export default function UpdateEmailScreen() {
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
             Changer votre adresse e-mail
           </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Entrez votre nouveau courriel et votre mot de passe.</Text>
+          <Text className='text-sm text-jego-muted-foreground'>
+            Entrez votre nouveau courriel et votre mot de passe.
+          </Text>
         </VStack>
       </HStack>
 
@@ -132,19 +134,10 @@ export default function UpdateEmailScreen() {
                       returnKeyType='done'
                       onSubmitEditing={onSubmit}
                     />
+                    <InputSlot className='pr-3' onPress={() => setShowPassword((v) => !v)}>
+                      <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    </InputSlot>
                   </Input>
-                  <HStack className='mt-1' space='xs'>
-                    <Button
-                      variant='link'
-                      action='secondary'
-                      onPress={() => setShowPassword((v) => !v)}
-                      className='px-0'
-                    >
-                      <ButtonText className='text-jego-muted-foreground'>
-                        {showPassword ? 'Masquer' : 'Afficher'} le mot de passe
-                      </ButtonText>
-                    </Button>
-                  </HStack>
                   <FormControlError>
                     <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
                     <FormControlErrorText className='text-jego-destructive'>
@@ -164,7 +157,7 @@ export default function UpdateEmailScreen() {
               className='rounded-lg mt-2 bg-jego-primary'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Mettre à jour l'e-mail</ButtonText>
+              <ButtonText className='text-jego-primary-foreground'>Mettre à jour l&apos;e-mail</ButtonText>
             </Button>
           </VStack>
           <View className='h-20' />
