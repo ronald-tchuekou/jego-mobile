@@ -5,12 +5,14 @@ import { ProfileImage } from '@/src/features/profile/components/profile-image'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { IconLockFilled, IconLogout, IconTrash } from '@tabler/icons-react-native'
 import Constants from 'expo-constants'
+import { useRouter } from 'expo-router'
 import { MailIcon, UserIcon } from 'lucide-react-native'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 
 export default function ProfileScreen() {
   const height = getStatusBarHeight()
+  const router = useRouter()
 
   return (
     <VStack className='flex-1 bg-jego-background'>
@@ -25,7 +27,7 @@ export default function ProfileScreen() {
         <ProfileImage />
         {/* Action list */}
         <Card className='mt-5 p-0'>
-          <ActionItem icon={UserIcon} title='Informations personnelles' onPress={() => {}} />
+          <ActionItem icon={UserIcon} title='Informations personnelles' onPress={() => router.push('/profile/update-info')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={MailIcon} title='Adresse email' onPress={() => {}} />
           <View className='h-[1px] bg-jego-border' />

@@ -5,6 +5,7 @@ import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
@@ -20,6 +21,7 @@ const AppStack = () => {
           <Stack.Screen name='company/[company_id]' options={{ headerShown: false }} />
           <Stack.Screen name='chat/[conversation_id]' options={{ headerShown: false }} />
           <Stack.Screen name='appointments/edit/[company_id]' options={{ headerShown: false }} />
+          <Stack.Screen name='profile/update-info' options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={!auth}>
@@ -36,10 +38,12 @@ const AppStack = () => {
 
 export default function RootLayout() {
   return (
-    <GluestackUIProvider>
-      <QueryProviders>
-        <AppStack />
-      </QueryProviders>
-    </GluestackUIProvider>
+    <KeyboardProvider>
+      <GluestackUIProvider>
+        <QueryProviders>
+          <AppStack />
+        </QueryProviders>
+      </GluestackUIProvider>
+    </KeyboardProvider>
   )
 }

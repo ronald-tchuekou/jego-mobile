@@ -21,12 +21,13 @@ const CompanyRatingAverage = ({ companyId }: Props) => {
   })
 
   const ratingValue = rating?.averageRating || 0
-
+  
   return (
     <Skeleton variant='sharp' className='w-[100px] h-[35px]' isLoaded={!isLoading}>
       <HStack space='md' className='items-center my-2'>
         <Rating
           style={{ backgroundColor: 'transparent' }}
+          baseColor={'rgba(150, 150, 150, 0.4)'}
           rating={ratingValue}
           maxRating={5}
           size={20}
