@@ -22,6 +22,8 @@ const AppStack = () => {
           <Stack.Screen name='chat/[conversation_id]' options={{ headerShown: false }} />
           <Stack.Screen name='appointments/edit/[company_id]' options={{ headerShown: false }} />
           <Stack.Screen name='profile/update-info' options={{ headerShown: false }} />
+          <Stack.Screen name='profile/update-email' options={{ headerShown: false }} />
+          <Stack.Screen name='profile/verify-email-change' options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={!auth}>

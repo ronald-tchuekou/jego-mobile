@@ -29,7 +29,7 @@ export default function ProfileScreen() {
         <Card className='mt-5 p-0'>
           <ActionItem icon={UserIcon} title='Informations personnelles' onPress={() => router.push('/profile/update-info')} />
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem icon={MailIcon} title='Adresse email' onPress={() => {}} />
+          <ActionItem icon={MailIcon} title='Adresse email' onPress={() => router.push('/profile/update-email')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconLockFilled} title='Mot de passe' onPress={() => {}} />
           <View className='h-[1px] bg-jego-border' />
