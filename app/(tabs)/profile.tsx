@@ -31,7 +31,7 @@ export default function ProfileScreen() {
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={MailIcon} title='Adresse email' onPress={() => router.push('/profile/update-email')} />
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem icon={IconLockFilled} title='Mot de passe' onPress={() => {}} />
+          <ActionItem icon={IconLockFilled} title='Mot de passe' onPress={() => router.push('/profile/update-password')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconLogout} title='Déconnexion' onPress={() => {}} />
         </Card>
