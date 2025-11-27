@@ -1,4 +1,5 @@
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
+import { Box } from '@/src/components/ui/box'
 import { Button, ButtonText } from '@/src/components/ui/button'
 import { Card } from '@/src/components/ui/card'
 import { Center } from '@/src/components/ui/center'
@@ -77,6 +78,10 @@ export const ProfileImage = () => {
             </Center>
           )}
         </Avatar>
+        <Box>
+          <Text className='text-center text-lg font-bold text-jego-foreground'>{auth?.user?.displayName}</Text>
+          <Text className='text-center text-sm text-jego-muted-foreground'>{auth?.user?.email}</Text>
+        </Box>
         <Text className='text-sm text-jego-muted-foreground text-center'>
           Formats acceptés: JPEG, PNG, WebP {'\n'}Taille maximale: 2MB
         </Text>
