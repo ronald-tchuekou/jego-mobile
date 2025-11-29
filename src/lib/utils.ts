@@ -167,7 +167,6 @@ export function checkUserNowAccess(errorMessage: string) {
 }
 
 export function getFileTypeName(type: string) {
-  console.log('type', type)
   switch (type) {
     case 'application/pdf':
     case 'application':
