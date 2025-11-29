@@ -31,17 +31,30 @@ export default function ProfileScreen() {
         <ProfileImage />
         {/* Action list */}
         <Card className='mt-5 p-0'>
-          <ActionItem icon={UserIcon} title='Informations personnelles' onPress={() => router.push('/profile/update-info')} />
+          <ActionItem
+            icon={UserIcon}
+            title='Informations personnelles'
+            onPress={() => router.push('/profile/update-info')}
+          />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={MailIcon} title='Adresse email' onPress={() => router.push('/profile/update-email')} />
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem icon={IconLockFilled} title='Mot de passe' onPress={() => router.push('/profile/update-password')} />
+          <ActionItem
+            icon={IconLockFilled}
+            title='Mot de passe'
+            onPress={() => router.push('/profile/update-password')}
+          />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconLogout} title='Déconnexion' onPress={() => logoutModalRef.current?.open()} />
         </Card>
         <Text className='text-base font-medium text-jego-foreground mt-5'>Zone dangereuse</Text>
         <Card className='mt-3 p-0'>
-          <ActionItem destructive icon={IconTrash} title='Supprimer le compte' onPress={() => {}} />
+          <ActionItem
+            destructive
+            icon={IconTrash}
+            title='Supprimer le compte'
+            onPress={() => router.push('/profile/delete-account')}
+          />
         </Card>
         <View className='h-5' />
         <Text className='text-sm text-jego-muted-foreground text-center'>{`Version ${Constants.expoConfig?.version}`}</Text>

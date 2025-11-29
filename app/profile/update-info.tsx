@@ -25,9 +25,10 @@ import { useRouter } from 'expo-router'
 import { AlertCircleIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, Platform, ScrollView, Text, View } from 'react-native'
+import { Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 export default function UpdateUserInfoScreen() {
   const height = getStatusBarHeight()
@@ -63,11 +64,21 @@ export default function UpdateUserInfoScreen() {
     },
     onSuccess: () => {
       revalidate()
-      Alert.alert('Succès', 'Vos informations ont été mises à jour.')
+      Toast.show({
+        text1: 'Succès',
+        text2: 'Vos informations ont été mises à jour.',
+        type: 'success',
+        visibilityTime: 6000
+      })
       router.back()
     },
     onError: (error: any) => {
-      Alert.alert('Erreur', error?.message || 'Une erreur est survenue lors de la mise à jour de vos informations.')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error?.message || 'Une erreur est survenue lors de la mise à jour de vos informations.',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 

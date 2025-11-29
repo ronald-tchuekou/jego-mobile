@@ -25,8 +25,9 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 export default function ResetPasswordScreen() {
   const login = useAuthStore((s) => s.login)
@@ -51,7 +52,12 @@ export default function ResetPasswordScreen() {
       router.replace('/(tabs)')
     },
     onError: (error) => {
-      Alert.alert(error.message)
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error.message,
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 
@@ -159,7 +165,7 @@ export default function ResetPasswordScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-lg mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-jego-primary'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
               <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>

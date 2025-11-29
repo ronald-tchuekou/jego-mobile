@@ -25,8 +25,9 @@ import { useRouter } from 'expo-router'
 import { AlertCircleIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, Platform, ScrollView, Text, View } from 'react-native'
+import { Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
+import Toast from 'react-native-toast-message'
 
 export default function VerifyEmailChangeScreen() {
   const height = getStatusBarHeight()
@@ -49,11 +50,21 @@ export default function VerifyEmailChangeScreen() {
     },
     onSuccess: async () => {
       await revalidate()
-      Alert.alert('Succès', 'Votre nouvelle adresse e-mail a été confirmée.')
+      Toast.show({
+        text1: 'Succès',
+        text2: 'Votre nouvelle adresse e-mail a été confirmée.',
+        type: 'success',
+        visibilityTime: 6000
+      })
       router.back()
     },
     onError: (error: any) => {
-      Alert.alert('Erreur', error?.message || 'Code invalide. Veuillez réessayer.')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error?.message || 'Code invalide. Veuillez réessayer.',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 
@@ -65,7 +76,7 @@ export default function VerifyEmailChangeScreen() {
         <BackButton />
         <VStack className='flex-1'>
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Vérifier le changement d'e-mail
+            Vérifier le changement d&apos;e-mail
           </Text>
           <Text className='text-sm text-jego-muted-foreground'>
             Entrez le code envoyé à votre nouvelle adresse e-mail.
@@ -112,7 +123,7 @@ export default function VerifyEmailChangeScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-lg mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-jego-primary'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
               <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>

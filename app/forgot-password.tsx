@@ -25,8 +25,9 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 export default function ForgotPasswordScreen() {
   const router = useRouter()
@@ -44,12 +45,22 @@ export default function ForgotPasswordScreen() {
       return AuthService.forgotPassword(body.email)
     },
     onSuccess: () => {
-      Alert.alert('Super !', 'Un lien de réinitialisation de votre mot de passe a été envoyé à votre adresse e-mail.', [
-        { text: 'Me connecter', onPress: router.back, isPreferred: true },
-      ])
+      Toast.show({
+        text1: 'Super !',
+        text2: 'Un lien de réinitialisation de votre mot de passe a été envoyé à votre adresse e-mail.',
+        type: 'success',
+        visibilityTime: 8000
+      })
+      router.dismissAll()
+      router.push('/login')
     },
     onError: (error) => {
-      Alert.alert(error.message)
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error.message,
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 
@@ -108,7 +119,7 @@ export default function ForgotPasswordScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-lg bg-jego-primary mt-2'
+              className='rounded-full bg-jego-primary mt-2'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
               <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>

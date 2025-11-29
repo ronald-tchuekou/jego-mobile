@@ -25,8 +25,9 @@ import { useRouter } from 'expo-router'
 import { AlertCircleIcon, EyeIcon, EyeOffIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, Platform, ScrollView, Text, View } from 'react-native'
+import { Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
+import Toast from 'react-native-toast-message'
 
 export default function UpdateEmailScreen() {
   const height = getStatusBarHeight()
@@ -51,14 +52,21 @@ export default function UpdateEmailScreen() {
       return UserService.updateMeEmail(body, auth.token)
     },
     onSuccess: () => {
-      Alert.alert(
-        'Vérification requise',
-        "Un code de vérification a été envoyé à votre nouvelle adresse e-mail. Veuillez le saisir pour confirmer le changement.",
-        [{ text: 'OK', onPress: () => router.push('/profile/verify-email-change') }],
-      )
+      Toast.show({
+        text1: 'Vérification requise',
+        text2: "Un code de vérification a été envoyé à votre nouvelle adresse e-mail. Veuillez le saisir pour confirmer le changement.",
+        type: 'success',
+        visibilityTime: 6000
+      })
+        router.push('/profile/verify-email-change')
     },
     onError: (error: any) => {
-      Alert.alert('Erreur', error?.message || "Une erreur est survenue lors de la mise à jour de l'adresse e-mail.")
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error?.message || "Une erreur est survenue lors de la mise à jour de l'adresse e-mail.",
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 

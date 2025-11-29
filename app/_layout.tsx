@@ -12,6 +12,8 @@ const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
   const { colorScheme } = useColorScheme()
 
+  console.log(JSON.stringify(auth, null, 2))
+
   return (
     <>
       <Stack>
@@ -26,6 +28,7 @@ const AppStack = () => {
           <Stack.Screen name='profile/update-email' options={{ headerShown: false }} />
           <Stack.Screen name='profile/verify-email-change' options={{ headerShown: false }} />
           <Stack.Screen name='profile/update-password' options={{ headerShown: false }} />
+          <Stack.Screen name='profile/delete-account' options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={!auth}>
