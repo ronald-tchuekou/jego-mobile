@@ -3,7 +3,7 @@ import ChatService from '@/src/services/chat-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
-import { Alert } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 const useStartConversation = () => {
   const auth = useAuthStore((state) => state.auth)
@@ -41,7 +41,12 @@ const useStartConversation = () => {
     },
     onError: (error) => {
       console.error('Failed to start conversation:', error)
-      Alert.alert('Impossible de démarrer la conversation')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: 'Impossible de démarrer la conversation',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 

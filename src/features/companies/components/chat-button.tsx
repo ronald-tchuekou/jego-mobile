@@ -4,7 +4,7 @@ import { UserModel } from '@/src/services/auth-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { MessageCircleMoreIcon } from 'lucide-react-native'
 import { memo } from 'react'
-import { Alert } from 'react-native'
+import Toast from 'react-native-toast-message'
 import { cnBase } from 'tailwind-variants'
 import useStartConversation from '../../chat/hooks/use-start-conversation'
 
@@ -30,12 +30,22 @@ const ChatButton = ({ companyUsers, className }: Props) => {
       startConversation({ participantId: companyAdmin.id })
     } catch (error) {
       console.error('Error starting chat:', error)
-      Alert.alert('Impossible de démarrer la conversation')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: 'Impossible de démarrer la conversation',
+        type: 'error',
+        visibilityTime: 6000
+      })
     }
   }
 
   if (error) {
-    Alert.alert("Erreur lors de l'ouverture de la conversation")
+    Toast.show({
+      text1: 'Une erreur est survenue',
+      text2: 'Erreur lors de l&apos;ouverture de la conversation',
+      type: 'error',
+      visibilityTime: 6000
+    })
   }
 
   return (
