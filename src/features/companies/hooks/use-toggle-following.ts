@@ -3,7 +3,7 @@ import CompanyFollowingService, { CreateCompanyFollowingDto } from '@/src/servic
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { Alert } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 export default function useToggleFollowing(companyId: string) {
   const auth = useAuthStore((s) => s.auth)
@@ -33,7 +33,12 @@ export default function useToggleFollowing(companyId: string) {
       refetch()
     },
     onError: (error) => {
-      Alert.alert(error.message)
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error.message,
+        type: 'error',
+        visibilityTime: 6000
+      })
       console.error('createFollowing error ==> ', error)
     },
   })
@@ -45,7 +50,12 @@ export default function useToggleFollowing(companyId: string) {
       refetch()
     },
     onError: (error) => {
-      Alert.alert(error.message)
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error.message,
+        type: 'error',
+        visibilityTime: 6000
+      })
       console.error('deleteFollowing error ==> ', error)
     },
   })
