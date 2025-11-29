@@ -5,6 +5,7 @@ import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import Toast from 'react-native-toast-message'
 
@@ -28,6 +29,7 @@ const AppStack = () => {
           <Stack.Screen name='profile/update-password' options={{ headerShown: false }} />
           <Stack.Screen name='profile/delete-account' options={{ headerShown: false }} />
           <Stack.Screen name='profile/cv-files' options={{ headerShown: false }} />
+          <Stack.Screen name='job/[job_id]' options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={!auth}>
@@ -46,10 +48,12 @@ export default function RootLayout() {
   return (
     <KeyboardProvider>
       <GluestackUIProvider>
-        <QueryProviders>
-          <AppStack />
-          <Toast />
-        </QueryProviders>
+        <GestureHandlerRootView>
+          <QueryProviders>
+            <AppStack />
+            <Toast visibilityTime={10000}/>
+          </QueryProviders>
+        </GestureHandlerRootView>
       </GluestackUIProvider>
     </KeyboardProvider>
   )
