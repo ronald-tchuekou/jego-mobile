@@ -21,7 +21,7 @@ const CompanyRatingAverage = ({ companyId }: Props) => {
   })
 
   const ratingValue = rating?.averageRating || 0
-  
+
   return (
     <Skeleton variant='sharp' className='w-[100px] h-[35px]' isLoaded={!isLoading}>
       <HStack space='md' className='items-center my-2'>

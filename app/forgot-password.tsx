@@ -49,7 +49,7 @@ export default function ForgotPasswordScreen() {
         text1: 'Super !',
         text2: 'Un lien de réinitialisation de votre mot de passe a été envoyé à votre adresse e-mail.',
         type: 'success',
-        visibilityTime: 8000
+        visibilityTime: 8000,
       })
       router.dismissAll()
       router.push('/login')
@@ -59,7 +59,7 @@ export default function ForgotPasswordScreen() {
         text1: 'Une erreur est survenue',
         text2: error.message,
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })

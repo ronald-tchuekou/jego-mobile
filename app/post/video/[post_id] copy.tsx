@@ -107,7 +107,7 @@ export default function PostVideoPlayerScreen() {
       text1: 'Une erreur est survenue',
       text2: JSON.stringify(err),
       type: 'error',
-      visibilityTime: 6000
+      visibilityTime: 6000,
     })
   }
 

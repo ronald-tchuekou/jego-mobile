@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message'
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
   const { colorScheme } = useColorScheme()
-  
+
   return (
     <>
       <Stack>

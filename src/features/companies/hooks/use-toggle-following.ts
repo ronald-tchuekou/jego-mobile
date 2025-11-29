@@ -37,7 +37,7 @@ export default function useToggleFollowing(companyId: string) {
         text1: 'Une erreur est survenue',
         text2: error.message,
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
       console.error('createFollowing error ==> ', error)
     },
@@ -54,7 +54,7 @@ export default function useToggleFollowing(companyId: string) {
         text1: 'Une erreur est survenue',
         text2: error.message,
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
       console.error('deleteFollowing error ==> ', error)
     },

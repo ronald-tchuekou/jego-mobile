@@ -38,9 +38,7 @@ export default function UpdateEmailScreen() {
 
   const form = useForm<UpdateEmailSchema>({
     resolver: zodResolver(updateEmailSchema),
-    defaultValues: auth?.user
-      ? { email: auth.user.email || '', password: '' }
-      : defaultUpdateEmailValue,
+    defaultValues: auth?.user ? { email: auth.user.email || '', password: '' } : defaultUpdateEmailValue,
   })
   const {
     formState: { errors },
@@ -54,18 +52,19 @@ export default function UpdateEmailScreen() {
     onSuccess: () => {
       Toast.show({
         text1: 'Vérification requise',
-        text2: "Un code de vérification a été envoyé à votre nouvelle adresse e-mail. Veuillez le saisir pour confirmer le changement.",
+        text2:
+          'Un code de vérification a été envoyé à votre nouvelle adresse e-mail. Veuillez le saisir pour confirmer le changement.',
         type: 'success',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
-        router.push('/profile/verify-email-change')
+      router.push('/profile/verify-email-change')
     },
     onError: (error: any) => {
       Toast.show({
         text1: 'Une erreur est survenue',
         text2: error?.message || "Une erreur est survenue lors de la mise à jour de l'adresse e-mail.",
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })

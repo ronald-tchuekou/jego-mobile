@@ -56,7 +56,7 @@ export default function ResetPasswordScreen() {
         text1: 'Une erreur est survenue',
         text2: error.message,
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })

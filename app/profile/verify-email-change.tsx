@@ -54,7 +54,7 @@ export default function VerifyEmailChangeScreen() {
         text1: 'Succès',
         text2: 'Votre nouvelle adresse e-mail a été confirmée.',
         type: 'success',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
       router.back()
     },
@@ -63,7 +63,7 @@ export default function VerifyEmailChangeScreen() {
         text1: 'Une erreur est survenue',
         text2: error?.message || 'Code invalide. Veuillez réessayer.',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })
@@ -135,5 +135,3 @@ export default function VerifyEmailChangeScreen() {
     </View>
   )
 }
-
-

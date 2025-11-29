@@ -45,7 +45,7 @@ const useStartConversation = () => {
         text1: 'Une erreur est survenue',
         text2: 'Impossible de démarrer la conversation',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })

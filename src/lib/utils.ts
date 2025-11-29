@@ -165,3 +165,18 @@ export function copyToClipboard(text: string) {
 export function checkUserNowAccess(errorMessage: string) {
   return errorMessage.toLocaleLowerCase().includes('unauthorized access')
 }
+
+export function getFileTypeName(type: string) {
+  console.log('type', type)
+  switch (type) {
+    case 'application/pdf':
+    case 'application':
+      return 'PDF'
+    case 'application/msword':
+      return 'DOC'
+    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+      return 'DOCX'
+    default:
+      return type
+  }
+}

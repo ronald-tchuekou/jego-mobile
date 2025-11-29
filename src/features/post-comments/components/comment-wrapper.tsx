@@ -20,7 +20,7 @@ export default function CommentWrapper({ post }: Props) {
     <View className='px-4'>
       <Text className='text-xl font-semibold text-jego-foreground mt-2 mb-5'>Commentaires</Text>
       {isLoading ? (
-        <LoaderContent/>
+        <LoaderContent />
       ) : comments.length === 0 ? (
         <Center className='w-full'>
           <VStack className='p-3 items-center' space='md'>

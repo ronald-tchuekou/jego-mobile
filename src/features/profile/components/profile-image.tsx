@@ -43,7 +43,7 @@ export const ProfileImage = () => {
         text1: 'Une erreur est survenue',
         text2: error.message || 'Une erreur est survenue lors de la mise à jour de votre photo de profil',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })
@@ -56,7 +56,7 @@ export const ProfileImage = () => {
         text1: 'Permission required',
         text2: 'Permission to access the media library is required.',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
       return
     }

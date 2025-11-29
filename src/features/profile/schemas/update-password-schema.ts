@@ -25,5 +25,3 @@ export const defaultUpdatePasswordValue: UpdatePasswordSchema = {
   newPassword: '',
   confirmNewPassword: '',
 }
-
-

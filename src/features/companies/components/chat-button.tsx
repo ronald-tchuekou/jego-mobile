@@ -34,7 +34,7 @@ const ChatButton = ({ companyUsers, className }: Props) => {
         text1: 'Une erreur est survenue',
         text2: 'Impossible de démarrer la conversation',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     }
   }
@@ -44,7 +44,7 @@ const ChatButton = ({ companyUsers, className }: Props) => {
       text1: 'Une erreur est survenue',
       text2: 'Erreur lors de l&apos;ouverture de la conversation',
       type: 'error',
-      visibilityTime: 6000
+      visibilityTime: 6000,
     })
   }
 

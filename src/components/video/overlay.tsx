@@ -111,7 +111,7 @@ const _Overlay = forwardRef<VideoRef, Props>((props, ref) => {
           Toast.show({
             text1: 'Widevine level: ' + widevineLevel + '\n hevc: ' + hevc + '\n avc: ' + avc,
             type: 'info',
-            visibilityTime: 6000
+            visibilityTime: 6000,
           })
         })
       })

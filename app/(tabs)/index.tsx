@@ -2,22 +2,12 @@ import { SearchInput } from '@/src/components/base/search-input'
 import { VStack } from '@/src/components/ui/vstack'
 import PostsList from '@/src/features/posts/components/posts-list'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
-import * as Network from "expo-network"
-import { useEffect, useState } from 'react'
-import { Alert, Text, View } from 'react-native'
+import { useState } from 'react'
+import { Text, View } from 'react-native'
 
 export default function Index() {
   const [search, setSearch] = useState('')
   const height = getStatusBarHeight()
-
-  const networkState = Network.useNetworkState()
-
-  useEffect(() => {
-    if (networkState && networkState.isConnected === false) {
-      Alert.alert('Pas de connexion internet', 'Vous êtes actuellement hors-ligne.')
-    }
-  }, [networkState])
-
 
   return (
     <View className='flex-1 bg-jego-background'>

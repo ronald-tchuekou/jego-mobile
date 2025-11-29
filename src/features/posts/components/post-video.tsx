@@ -17,11 +17,7 @@ export type PostVideoProps = {
 // A lightweight, Instagram-like video player optimized for feed usage
 export function PostVideo({ video, post_id }: PostVideoProps) {
   // Variables
-  const sourceUri = !video
-    ? undefined
-    : video.url.startsWith('http')
-      ? video.url
-      : getVideoUri(video.url)
+  const sourceUri = !video ? undefined : video.url.startsWith('http') ? video.url : getVideoUri(video.url)
 
   // Queries
   const { data } = useQuery({

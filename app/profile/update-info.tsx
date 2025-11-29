@@ -68,7 +68,7 @@ export default function UpdateUserInfoScreen() {
         text1: 'Succès',
         text2: 'Vos informations ont été mises à jour.',
         type: 'success',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
       router.back()
     },
@@ -77,7 +77,7 @@ export default function UpdateUserInfoScreen() {
         text1: 'Une erreur est survenue',
         text2: error?.message || 'Une erreur est survenue lors de la mise à jour de vos informations.',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })

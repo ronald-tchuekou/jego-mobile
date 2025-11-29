@@ -44,7 +44,7 @@ export function useEditPostComment(props?: Props) {
         text1: 'Une erreur est survenue',
         text2: e.message || 'Une erreur est survenue.',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })
@@ -63,7 +63,7 @@ export function useEditPostComment(props?: Props) {
         text1: 'Une erreur est survenue',
         text2: e.message || 'Une erreur est survenue.',
         type: 'error',
-        visibilityTime: 6000
+        visibilityTime: 6000,
       })
     },
   })
