@@ -1,9 +1,9 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import { postCommentKey } from '@/src/lib/query-kye'
 import PostCommentService, { PostCommentModel } from '@/src/services/post-comment-service'
 import { useAuthStore } from '@/src/stores/auth-store'
+import { useQuery } from '@tanstack/react-query'
 
 export default function useGetPostComments(postId: string) {
   const auth = useAuthStore((s) => s.auth)
@@ -22,7 +22,7 @@ export default function useGetPostComments(postId: string) {
   })
 
   return {
-    isLoading: isLoading,
+    isLoading,
     refetch,
     comments: data?.data || [],
     total: data?.meta.total || 0,

@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import PostCommentService, { PostCommentModel } from '@/src/services/post-comment-service'
 import { postCommentKey, postCommentResponseKey, postKey } from '@/src/lib/query-kye'
-import { useAuthStore } from '@/src/stores/auth-store'
-import { Alert } from 'react-native'
 import PostCommentResponseService, { PostCommentResponseModel } from '@/src/services/post-comment-response-service'
+import PostCommentService, { PostCommentModel } from '@/src/services/post-comment-service'
+import { useAuthStore } from '@/src/stores/auth-store'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import Toast from 'react-native-toast-message'
 
 type Props = { onSuccess?: VoidFunction }
 
@@ -40,7 +40,12 @@ export function useEditPostComment(props?: Props) {
     },
     onSuccess: onMutateSuccess,
     onError: (e) => {
-      Alert.alert(e.message || 'Une erreur est survenue.')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: e.message || 'Une erreur est survenue.',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 
@@ -54,7 +59,12 @@ export function useEditPostComment(props?: Props) {
     },
     onSuccess: onMutateSuccess,
     onError: (e) => {
-      Alert.alert(e.message || 'Une erreur est survenue.')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: e.message || 'Une erreur est survenue.',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 

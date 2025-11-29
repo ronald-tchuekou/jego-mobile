@@ -1,8 +1,8 @@
 'use client'
 
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { Center } from '@/src/components/ui/center'
 import { Icon } from '@/src/components/ui/icon'
-import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
 import useGetPostComments from '@/src/features/post-comments/hooks/use-get-post-comments'
 import { PostModel } from '@/src/services/post-service'
@@ -20,9 +20,7 @@ export default function CommentWrapper({ post }: Props) {
     <View className='px-4'>
       <Text className='text-xl font-semibold text-jego-foreground mt-2 mb-5'>Commentaires</Text>
       {isLoading ? (
-        <Center>
-          <Spinner />
-        </Center>
+        <LoaderContent/>
       ) : comments.length === 0 ? (
         <Center className='w-full'>
           <VStack className='p-3 items-center' space='md'>
