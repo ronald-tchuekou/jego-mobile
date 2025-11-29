@@ -6,6 +6,7 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
+import Toast from 'react-native-toast-message'
 
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
@@ -45,6 +46,7 @@ export default function RootLayout() {
       <GluestackUIProvider>
         <QueryProviders>
           <AppStack />
+          <Toast />
         </QueryProviders>
       </GluestackUIProvider>
     </KeyboardProvider>

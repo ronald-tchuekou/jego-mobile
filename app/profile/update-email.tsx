@@ -154,7 +154,7 @@ export default function UpdateEmailScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-lg mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-jego-primary'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
               <ButtonText className='text-jego-primary-foreground'>Mettre à jour l&apos;e-mail</ButtonText>
@@ -166,5 +166,3 @@ export default function UpdateEmailScreen() {
     </View>
   )
 }
-
-

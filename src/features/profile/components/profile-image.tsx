@@ -5,7 +5,7 @@ import { Card } from '@/src/components/ui/card'
 import { Center } from '@/src/components/ui/center'
 import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
-import { getUserProfileImageUri } from '@/src/lib/utils'
+import { copyToClipboard, getUserProfileImageUri } from '@/src/lib/utils'
 import UserService from '@/src/services/user-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useMutation } from '@tanstack/react-query'
@@ -79,13 +79,23 @@ export const ProfileImage = () => {
           )}
         </Avatar>
         <Box>
-          <Text className='text-center text-lg font-bold text-jego-foreground'>{auth?.user?.displayName}</Text>
-          <Text className='text-center text-sm text-jego-muted-foreground'>{auth?.user?.email}</Text>
+          <Text selectable className='text-center text-lg font-bold text-jego-foreground'>
+            {auth?.user?.displayName}
+          </Text>
+          <Text
+            onPress={() => {
+              if (auth?.user?.email) copyToClipboard(auth.user.email)
+            }}
+            selectable
+            className='text-center text-sm text-jego-muted-foreground'
+          >
+            {auth?.user?.email}
+          </Text>
         </Box>
         <Text className='text-sm text-jego-muted-foreground text-center'>
           Formats acceptés: JPEG, PNG, WebP {'\n'}Taille maximale: 2MB
         </Text>
-        <Button disabled={isPending} className='bg-jego-primary rounded-lg' onPress={pickImage}>
+        <Button disabled={isPending} className='bg-jego-primary rounded-full' onPress={pickImage}>
           <ButtonText className='text-jego-primary-foreground'>Changer la photo de profil</ButtonText>
         </Button>
       </VStack>

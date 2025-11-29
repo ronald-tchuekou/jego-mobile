@@ -25,11 +25,13 @@ import { useRouter } from 'expo-router'
 import { AlertCircleIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, Platform, ScrollView, Text, TextInput, View } from 'react-native'
+import { Alert, Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function UpdateUserInfoScreen() {
   const height = getStatusBarHeight()
+  const insets = useSafeAreaInsets()
   const router = useRouter()
   const auth = useAuthStore((s) => s.auth)
   const user = auth?.user
@@ -303,15 +305,6 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Pays</FormControlLabelText>
                   </FormControlLabel>
-                  <TextInput
-                    ref={field.ref}
-                    testID='country'
-                    placeholder='Pays'
-                    value={field.value}
-                    onChangeText={field.onChange}
-                    returnKeyType='done'
-                    onSubmitEditing={onSubmit}
-                  />
                   <Input size='xl' className='rounded-lg bg-jego-card'>
                     <InputField
                       ref={field.ref}
@@ -332,21 +325,22 @@ export default function UpdateUserInfoScreen() {
                 </FormControl>
               )}
             />
-
-            <Button
-              action='primary'
-              variant='solid'
-              size='lg'
-              onPress={onSubmit}
-              isDisabled={isPending}
-              className='rounded-lg mt-2 bg-jego-primary'
-            >
-              {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Mettre à jour</ButtonText>
-            </Button>
           </VStack>
           <View className='h-20' />
         </ScrollView>
+        <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: insets.bottom }}>
+          <Button
+            action='primary'
+            variant='solid'
+            size='lg'
+            onPress={onSubmit}
+            isDisabled={isPending}
+            className='rounded-full mt-2 bg-jego-primary'
+          >
+            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
+            <ButtonText className='text-jego-primary-foreground'>Mettre à jour</ButtonText>
+          </Button>
+        </View>
       </KeyboardAvoidingView>
     </View>
   )

@@ -1,4 +1,6 @@
+import * as Clipboard from 'expo-clipboard'
 import { Platform } from 'react-native'
+import Toast from 'react-native-toast-message'
 import { BufferConfig, SelectedTrackType } from 'react-native-video'
 import { env } from './env'
 import { IMAGES } from './images'
@@ -122,4 +124,26 @@ export function getUserProfileImageUri(profileImage?: string | null) {
  */
 export function getImageUri(path: string) {
   return { uri: getImageLink(path) }
+}
+
+/**
+ * Copy text to clipboard
+ * @param text - The text to copy
+ */
+export function copyToClipboard(text: string) {
+  if (!text) return
+
+  Clipboard.setStringAsync(text)
+    .then(() => {
+      Toast.show({
+        type: 'success',
+        text1: 'Texte copié avec succès',
+      })
+    })
+    .catch((error) => {
+      Toast.show({
+        type: 'error',
+        text1: 'Erreur lors de la copie',
+      })
+    })
 }

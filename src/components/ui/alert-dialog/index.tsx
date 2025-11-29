@@ -1,21 +1,21 @@
 'use client';
-import React from 'react';
 import { createAlertDialog } from '@gluestack-ui/core/alert-dialog/creator';
-import { tva } from '@gluestack-ui/utils/nativewind-utils';
 import {
-  withStyleContext,
+  tva,
   useStyleContext,
+  withStyleContext,
 } from '@gluestack-ui/utils/nativewind-utils';
+import React from 'react';
 
-import { cssInterop } from 'nativewind';
 import type { VariantProps } from '@gluestack-ui/utils/nativewind-utils';
 import {
-  Motion,
   AnimatePresence,
   createMotionAnimatedComponent,
+  Motion,
   MotionComponentProps,
 } from '@legendapp/motion';
-import { View, Pressable, ScrollView, ViewStyle } from 'react-native';
+import { cssInterop } from 'nativewind';
+import { Pressable, ScrollView, View, ViewStyle } from 'react-native';
 
 const SCOPE = 'ALERT_DIALOG';
 
@@ -85,7 +85,7 @@ const alertDialogFooterStyle = tva({
   base: 'flex-row justify-end items-center gap-3',
 });
 
-const alertDialogBodyStyle = tva({ base: '' });
+const alertDialogBodyStyle = tva({ base: 'py-6' });
 
 const alertDialogBackdropStyle = tva({
   base: 'absolute left-0 top-0 right-0 bottom-0 bg-background-dark web:cursor-default',
@@ -286,11 +286,6 @@ AlertDialogBody.displayName = 'AlertDialogBody';
 AlertDialogBackdrop.displayName = 'AlertDialogBackdrop';
 
 export {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogCloseButton,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogBody,
-  AlertDialogBackdrop,
+  AlertDialog, AlertDialogBackdrop, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader
 };
+

@@ -7,14 +7,14 @@ import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { globalStyles } from '@/src/lib/global-styles'
 import { FilterIcon } from 'lucide-react-native'
 import { useState } from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 
 export default function CompaniesScreen() {
   const height = getStatusBarHeight()
   const [search, setSearch] = useState('')
 
   return (
-    <VStack className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-jego-background'>
       <VStack className='p-4 bg-jego-card border-b border-jego-border' space='md' style={{ paddingTop: height + 10 }}>
         <Text className='text-3xl font-bold text-jego-card-foreground'>Entreprises</Text>
         <HStack className='gap-2'>
@@ -31,6 +31,6 @@ export default function CompaniesScreen() {
         </HStack>
       </VStack>
       <ListCompanies search={search} />
-    </VStack>
+    </View>
   )
 }

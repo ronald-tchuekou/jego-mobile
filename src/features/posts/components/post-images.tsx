@@ -16,6 +16,8 @@ function PostImagesComponents({ medias }: Props) {
 
   const imageUrl = getImageUri(media.url)
 
+  console.log("Image URL:", imageUrl);
+
   const onMomentumEnd = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
       const x = e.nativeEvent.contentOffset.x

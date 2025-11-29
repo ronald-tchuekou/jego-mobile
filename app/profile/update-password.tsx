@@ -1,4 +1,5 @@
 import { BackButton } from '@/src/components/base/back-button'
+import { Alert, AlertIcon, AlertText } from '@/src/components/ui/alert'
 import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import {
   FormControl,
@@ -22,11 +23,12 @@ import { useAuthStore } from '@/src/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
-import { AlertCircleIcon, EyeIcon, EyeOffIcon } from 'lucide-react-native'
+import { AlertCircleIcon, EyeIcon, EyeOffIcon, InfoIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Alert, Platform, ScrollView, Text, View } from 'react-native'
+import { Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
+import Toast from 'react-native-toast-message'
 
 export default function UpdatePasswordScreen() {
   const height = getStatusBarHeight()
@@ -53,11 +55,19 @@ export default function UpdatePasswordScreen() {
     },
     onSuccess: async () => {
       await revalidate()
-      Alert.alert('Succès', 'Votre mot de passe a été mis à jour.')
+      Toast.show({
+        type: 'success',
+        text1: 'Succès',
+        text2: 'Votre mot de passe a été mis à jour.',
+      })
       router.back()
     },
     onError: (error: any) => {
-      Alert.alert('Erreur', error?.message || 'Une erreur est survenue lors de la mise à jour du mot de passe.')
+      Toast.show({
+        type: 'error',
+        text1: 'Erreur',
+        text2: error?.message || 'Une erreur est survenue lors de la mise à jour du mot de passe.',
+      })
     },
   })
 
@@ -185,13 +195,27 @@ export default function UpdatePasswordScreen() {
               )}
             />
 
+            {/* Advices */}
+            <Alert className='items-start bg-sky-500/10' action='info' variant='solid'>
+              <AlertIcon as={InfoIcon} size='lg' />
+              <AlertText size='sm' className='flex-1'>
+                <Text className='font-bold text-base'>Conseils de sécurité :</Text>
+                {'\n'}
+                <Text>
+                  • Utilisez un mot de passe unique que vous n&apos;utilisez nulle part ailleurs{'\n'}• Combinez lettres
+                  majuscules, minuscules, chiffres et symboles{'\n'}• Évitez les informations personnelles facilement
+                  devinables{'\n'}• Considérez l&apos;utilisation d&apos;un gestionnaire de mots de passe
+                </Text>
+              </AlertText>
+            </Alert>
+
             <Button
               action='primary'
               variant='solid'
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-lg mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-jego-primary'
             >
               {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
               <ButtonText className='text-jego-primary-foreground'>Mettre à jour le mot de passe</ButtonText>
@@ -203,5 +227,3 @@ export default function UpdatePasswordScreen() {
     </View>
   )
 }
-
-
