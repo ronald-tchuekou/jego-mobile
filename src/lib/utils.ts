@@ -63,7 +63,7 @@ export const bufferConfig: BufferConfig = {
 }
 
 export function getImageLink(path: string) {
-  return path.startsWith('http') ? path : `${env.API_URL}/v1${path}`
+  return path.startsWith('http') ? path : `${env.API_URL}/v1/${path}`
 }
 
 /**
@@ -105,7 +105,7 @@ export function pluralize(word: string, count: number) {
  * @returns The URI of the company logo
  */
 export function getCompanyLogoUri(logo?: string | null) {
-  return logo ? { uri: `${env.API_URL}/v1/${logo}` } : IMAGES.default_company_logo
+  return logo ? { uri: getImageLink(logo) } : IMAGES.default_company_logo
 }
 
 /**
@@ -114,7 +114,7 @@ export function getCompanyLogoUri(logo?: string | null) {
  * @returns The URI of the user profile image
  */
 export function getUserProfileImageUri(profileImage?: string | null) {
-  return profileImage ? { uri: `${env.API_URL}/v1/${profileImage}` } : IMAGES.default_user_avatar
+  return profileImage ? { uri: getImageLink(profileImage) } : IMAGES.default_user_avatar
 }
 
 /**
@@ -124,6 +124,15 @@ export function getUserProfileImageUri(profileImage?: string | null) {
  */
 export function getImageUri(path: string) {
   return { uri: getImageLink(path) }
+}
+
+/**
+ * Get the URI of a video
+ * @param path - The path of the video
+ * @returns The URI of the video
+ */
+export function getVideoUri(path: string) {
+  return getImageLink(path).replace('storage', 'stream-v2')
 }
 
 /**
@@ -146,4 +155,13 @@ export function copyToClipboard(text: string) {
         text1: 'Erreur lors de la copie',
       })
     })
+}
+
+/**
+ * Check if the error message is related to user not having access
+ * @param errorMessage - The error message
+ * @returns True if the error message is related to user not having access, false otherwise
+ */
+export function checkUserNowAccess(errorMessage: string) {
+  return errorMessage.toLocaleLowerCase().includes('unauthorized access')
 }
