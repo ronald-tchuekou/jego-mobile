@@ -46,7 +46,7 @@ const JobApplicationService = {
     return data
   },
 
-  async create(body: Partial<JobApplicationModel>, token: string) {
+  async create(body: Pick<JobApplicationModel, 'jobId' | 'userId' | 'resumePath'>, token: string) {
     const { data, error } = await fetchHelper<JobApplicationModel>('/job-applications', {
       method: 'POST',
       body: JSON.stringify(body),
