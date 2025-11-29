@@ -26,7 +26,7 @@ const SocialLinks = ({ company }: Props) => {
   }
 
   return (
-    <HStack space='md' className='flex-wrap'>
+    <HStack space='md' className='flex-wrap items-center'>
       {website && (
         <Button variant='solid' className='bg-jego-accent rounded-xl px-3' size='md' onPress={() => openLink(website)}>
           <Icon as={LinkIcon} size='lg' className='text-jego-accent-foreground' />
