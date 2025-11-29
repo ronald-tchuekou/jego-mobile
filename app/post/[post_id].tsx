@@ -1,11 +1,10 @@
 import { BackButton } from '@/src/components/base/back-button'
+import EmptyContent from '@/src/components/base/empty-content'
 import { ExpandableText } from '@/src/components/base/expandable-text'
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
-import { Center } from '@/src/components/ui/center'
 import { HStack } from '@/src/components/ui/hstack'
-import { Icon } from '@/src/components/ui/icon'
-import { Spinner } from '@/src/components/ui/spinner'
 import { VStack } from '@/src/components/ui/vstack'
 import { CommentInput } from '@/src/features/post-comments/components/comment-input'
 import CommentWrapper from '@/src/features/post-comments/components/comment-wrapper'
@@ -20,7 +19,7 @@ import { IMAGES } from '@/src/lib/images'
 import { compactNumber, formatDate, getUserProfileImageUri } from '@/src/lib/utils'
 import { PostModel } from '@/src/services/post-service'
 import { useLocalSearchParams } from 'expo-router'
-import { CircleSlash2Icon, MessageCircleMoreIcon } from 'lucide-react-native'
+import { MessageCircleMoreIcon } from 'lucide-react-native'
 import { ScrollView, Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 
@@ -49,16 +48,9 @@ export default function PostDetailsScreen() {
       </HStack>
       <ScrollView className='flex-1'>
         {isLoading ? (
-          <Center className='min-h-32'>
-            <Spinner size={'large'} />
-          </Center>
+          <LoaderContent/>
         ) : !data ? (
-          <Center className='w-full min-h-80'>
-            <VStack className='p-3 items-center' space='md'>
-              <Icon as={CircleSlash2Icon} className='text-jego-muted-foreground' style={{ width: 40, height: 40 }} />
-              <Text className='text-base text-jego-muted-foreground'>Annonce non trouvé.</Text>
-            </VStack>
-          </Center>
+          <EmptyContent text="Cette annonce n'existe pas." />
         ) : (
           <Content post={data} />
         )}
