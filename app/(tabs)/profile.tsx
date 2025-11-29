@@ -4,7 +4,7 @@ import { VStack } from '@/src/components/ui/vstack'
 import { ProfileImage } from '@/src/features/profile/components/profile-image'
 import { LogoutModal, LogoutModalRef } from '@/src/features/profile/modals/logout-modal'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
-import { IconLockFilled, IconLogout, IconTrash } from '@tabler/icons-react-native'
+import { IconFileCv, IconLockFilled, IconLogout, IconTrash } from '@tabler/icons-react-native'
 import Constants from 'expo-constants'
 import { useRouter } from 'expo-router'
 import { MailIcon, UserIcon } from 'lucide-react-native'
@@ -44,6 +44,8 @@ export default function ProfileScreen() {
             title='Mot de passe'
             onPress={() => router.push('/profile/update-password')}
           />
+          <View className='h-[1px] bg-jego-border' />
+          <ActionItem icon={IconFileCv} title='Mes CV' onPress={() => router.push('/profile/cv-files')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconLogout} title='Déconnexion' onPress={() => logoutModalRef.current?.open()} />
         </Card>
