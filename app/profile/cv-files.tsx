@@ -192,22 +192,27 @@ export default function UserCvFilesScreen() {
               ))}
             </VStack>
           ) : (
-            <EmptyContent text='Aucun CV pour le moment. Ajoutez votre premier CV pour vos candidatures.'/>
+            <EmptyContent text='Aucun CV pour le moment. Ajoutez votre premier CV pour vos candidatures.' />
           )}
 
-          <Text className='text-sm text-jego-muted-foreground mt-3'>Formats acceptés: PDF, DOC, DOCX • Taille max: 5MB</Text>
-
-          <Button
-            action='primary'
-            variant='solid'
-            size='lg'
-            onPress={pickDocument}
-            isDisabled={isMutating}
-            className='rounded-full bg-jego-primary'
-          >
-            {uploadMutation.isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Ajouter un CV</ButtonText>
-          </Button>
+          {(data?.data?.length || 0) < 3 && (
+            <>
+              <Text className='text-sm text-jego-muted-foreground mt-3'>
+                Formats acceptés: PDF, DOC, DOCX • Taille max: 5MB
+              </Text>
+              <Button
+                action='primary'
+                variant='solid'
+                size='lg'
+                onPress={pickDocument}
+                isDisabled={isMutating}
+                className='rounded-full bg-jego-primary'
+              >
+                {uploadMutation.isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
+                <ButtonText className='text-jego-primary-foreground'>Ajouter un CV</ButtonText>
+              </Button>
+            </>
+          )}
         </VStack>
         <View className='h-20' />
       </ScrollView>
