@@ -129,7 +129,11 @@ export default function UserCvFilesScreen() {
   const pickDocument = async () => {
     try {
       const result = await DocumentPicker.getDocumentAsync({
-        type: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+        type: [
+          'application/pdf', // .pdf
+          'application/msword', // .doc
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+        ],
         multiple: false,
         copyToCacheDirectory: true,
       })
@@ -307,5 +311,4 @@ export default function UserCvFilesScreen() {
     </View>
   )
 }
-
 

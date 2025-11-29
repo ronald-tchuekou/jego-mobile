@@ -71,6 +71,12 @@
         {
           "photosPermission": "L'application accède à vos photos pour vous permettre de les partager avec vos amis."
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "experiments": {
