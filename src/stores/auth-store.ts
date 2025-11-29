@@ -10,8 +10,8 @@ type AuthState = {
   auth: Auth | null
   hydrated: boolean
   login: (auth: Auth) => void
-  logout: () => void
-  revalidate: () => Promise<void>
+  logout: VoidFunction
+  revalidate: VoidFunction
   _setHydrated: (v: boolean) => void
 }
 

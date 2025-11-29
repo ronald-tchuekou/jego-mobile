@@ -1,17 +1,20 @@
 import {
-   AlertDialog,
-   AlertDialogBackdrop,
-   AlertDialogBody,
-   AlertDialogContent,
-   AlertDialogFooter,
-   AlertDialogHeader,
+  AlertDialog,
+  AlertDialogBackdrop,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
 } from '@/src/components/ui/alert-dialog'
 import { Button, ButtonText } from '@/src/components/ui/button'
+import { Spinner } from '@/src/components/ui/spinner'
+import { checkUserNowAccess } from '@/src/lib/utils'
 import AuthService from '@/src/services/auth-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useMutation } from '@tanstack/react-query'
 import { useImperativeHandle, useState } from 'react'
 import { Text } from 'react-native'
+import Toast from 'react-native-toast-message'
 import { useShallow } from 'zustand/shallow'
 
 export type LogoutModalRef = {
@@ -32,14 +35,24 @@ export const LogoutModal = ({ ref }: Props) => {
   )
 
   const { mutate: doLogout, isPending: loggingOut } = useMutation({
-    mutationFn: async () => {
-      if (auth?.token) {
-        await AuthService.logout(auth.token)
-      }
+    mutationFn: async (token: string) => {
+      return AuthService.logout(token)
     },
     onSuccess: () => {
       setOpen(false)
       logout()
+    },
+    onError: (error) => {
+      const noAccess = checkUserNowAccess(error.message)
+      if (noAccess) {
+        setOpen(false)
+        logout()
+      } else {
+        Toast.show({
+          text1: 'Une erreur est survenue lors de la déconnexion',
+          type: 'error',
+        })
+      }
     },
   })
 
@@ -70,10 +83,23 @@ export const LogoutModal = ({ ref }: Props) => {
           >
             <ButtonText className='text-jego-muted-foreground'>NON</ButtonText>
           </Button>
-          <Button disabled={loggingOut} className='flex-1 rounded-full' variant='solid' onPress={() => doLogout()}>
-            <ButtonText className='text-jego-primary-foreground'>
-              OUI
-            </ButtonText>
+          <Button
+            disabled={loggingOut}
+            className='flex-1 rounded-full bg-jego-primary'
+            variant='solid'
+            onPress={() => {
+              if (auth?.token) {
+                doLogout(auth.token)
+              } else {
+                Toast.show({
+                  text1: "Vous n'êtes pas connecté",
+                  type: 'error',
+                })
+              }
+            }}
+          >
+            {loggingOut && <Spinner className='text-jego-primary-foreground' />}
+            {!loggingOut && <ButtonText className='text-jego-primary-foreground'>OUI</ButtonText>}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

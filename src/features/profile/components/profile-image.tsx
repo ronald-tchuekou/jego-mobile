@@ -10,7 +10,8 @@ import UserService from '@/src/services/user-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useMutation } from '@tanstack/react-query'
 import * as ImagePicker from 'expo-image-picker'
-import { Alert, Text } from 'react-native'
+import { Text } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 export const ProfileImage = () => {
   const auth = useAuthStore((state) => state.auth)
@@ -38,7 +39,12 @@ export const ProfileImage = () => {
       revalidate()
     },
     onError: (error) => {
-      Alert.alert('Erreur', error.message || 'Une erreur est survenue lors de la mise à jour de votre photo de profil')
+      Toast.show({
+        text1: 'Une erreur est survenue',
+        text2: error.message || 'Une erreur est survenue lors de la mise à jour de votre photo de profil',
+        type: 'error',
+        visibilityTime: 6000
+      })
     },
   })
 
@@ -46,7 +52,12 @@ export const ProfileImage = () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
 
     if (!permissionResult.granted) {
-      Alert.alert('Permission required', 'Permission to access the media library is required.')
+      Toast.show({
+        text1: 'Permission required',
+        text2: 'Permission to access the media library is required.',
+        type: 'error',
+        visibilityTime: 6000
+      })
       return
     }
 
