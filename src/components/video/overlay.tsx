@@ -1,5 +1,7 @@
+import { audioTracksSelectionBy, isAndroid, isIos, textTracksSelectionBy } from '@/src/lib/utils'
 import React, { forwardRef, memo, useCallback, type Dispatch, type SetStateAction } from 'react'
-import { Alert, View } from 'react-native'
+import { View } from 'react-native'
+import Toast from 'react-native-toast-message'
 import {
   ResizeMode,
   SelectedTrackType,
@@ -13,8 +15,6 @@ import {
   type TextTrack,
   type VideoTrack,
 } from 'react-native-video'
-
-import { audioTracksSelectionBy, isAndroid, isIos, textTracksSelectionBy } from '@/src/lib/utils'
 import { AudioTrackSelector } from './audio-tracks-selector'
 import { MultiValueControl } from './multi-value-control'
 import { Seeker } from './seeker'
@@ -108,7 +108,11 @@ const _Overlay = forwardRef<VideoRef, Props>((props, ref) => {
     VideoDecoderProperties.getWidevineLevel().then((widevineLevel: number) => {
       VideoDecoderProperties.isHEVCSupported().then((hevc: string) => {
         VideoDecoderProperties.isCodecSupported('video/avc', 1920, 1080).then((avc: string) => {
-          Alert.alert('Widevine level: ' + widevineLevel + '\n hevc: ' + hevc + '\n avc: ' + avc)
+          Toast.show({
+            text1: 'Widevine level: ' + widevineLevel + '\n hevc: ' + hevc + '\n avc: ' + avc,
+            type: 'info',
+            visibilityTime: 6000
+          })
         })
       })
     })

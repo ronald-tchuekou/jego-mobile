@@ -16,8 +16,9 @@ import { useLocalSearchParams } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { MessageCircleMoreIcon, PlayIcon } from 'lucide-react-native'
 import { useMemo, useRef, useState } from 'react'
-import { Alert, Dimensions, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 import Video, {
   BufferingStrategyType,
   OnAudioFocusChangedData,
@@ -102,7 +103,12 @@ export default function PostVideoPlayerScreen() {
 
   const onError = (err: OnVideoErrorData) => {
     console.log('onError:', JSON.stringify(err))
-    Alert.alert('error: ' + JSON.stringify(err))
+    Toast.show({
+      text1: 'Une erreur est survenue',
+      text2: JSON.stringify(err),
+      type: 'error',
+      visibilityTime: 6000
+    })
   }
 
   const _renderLoader =

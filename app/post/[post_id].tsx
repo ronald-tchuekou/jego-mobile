@@ -81,10 +81,10 @@ const Content = ({ post }: { post: PostModel }) => {
       <HStack className='justify-between px-1'>
         <LikePostButton post={post} />
         <Button size='lg' variant='link' className='px-4'>
-          <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
-          <ButtonText size='sm' className='text-jego-muted-foreground'>
+          <ButtonText size='lg' className='text-jego-muted-foreground'>
             {compactNumber(post.commentCount)}
           </ButtonText>
+          <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
         </Button>
         <SharePostButton post={post} />
       </HStack>

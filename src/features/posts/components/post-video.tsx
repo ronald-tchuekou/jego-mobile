@@ -1,6 +1,6 @@
 import { Button, ButtonIcon } from '@/src/components/ui/button'
 import { Image } from '@/src/components/ui/image'
-import { env } from '@/src/lib/env'
+import { getVideoUri } from '@/src/lib/utils'
 import { MediaModel } from '@/src/services/post-service'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'expo-router'
@@ -17,7 +17,11 @@ export type PostVideoProps = {
 // A lightweight, Instagram-like video player optimized for feed usage
 export function PostVideo({ video, post_id }: PostVideoProps) {
   // Variables
-  const sourceUri = !video ? undefined : video.url.startsWith('http') ? video.url : `${env.API_URL}/v1/${video.url}`
+  const sourceUri = !video
+    ? undefined
+    : video.url.startsWith('http')
+      ? video.url
+      : getVideoUri(video.url)
 
   // Queries
   const { data } = useQuery({
@@ -27,16 +31,19 @@ export function PostVideo({ video, post_id }: PostVideoProps) {
   })
 
   return (
-    <View className='relative mb-4 w-full bg-black justify-center items-center h-[300px]'>
+    <View className='relative mb-4 w-full bg-black h-[300px]'>
       {sourceUri && data?.uri ? (
         <>
           <Image
-            source={{ uri: data.uri }}
-            className='flex-1 bg-black border border-jego-input'
-            style={{ aspectRatio: (data?.width || 9) / (data?.height || 6) }}
-            resizeMode='cover'
+            source={data?.uri}
+            style={video.metadata?.aspectRatio ? { aspectRatio: video.metadata?.aspectRatio } : undefined}
+            className={`w-full h-[300px] bg-black ${
+              video.metadata?.aspectRatio ? `aspect-${video.metadata.aspectRatio}` : 'aspect-video'
+            }`}
+            resizeMode='contain'
+            alt={video.name || 'Video thumbnail'}
           />
-          <View className='absolute inset-0 justify-center items-center bg-black/50'>
+          <View className='absolute inset-0 justify-center items-center bg-black/20'>
             <Link href={`/post/video/${post_id}`} asChild>
               <Button size='lg' className='size-12 rounded-full'>
                 <ButtonIcon as={PlayIcon} className={cnBase('stroke-white fill-white')} />
