@@ -20,7 +20,7 @@ const CompanyItem = ({ company }: Props) => {
 
   return (
     <Link href={`/company/${company.id}`}>
-      <Card className='p-0 border border-jego-border'>
+      <Card className='p-0 border-2 border-jego-border'>
         <CompanyImageBanner company={company} className={'rounded-t-lg'} />
         <HStack className='p-3 gap-3'>
           <Avatar size='md' className='size-12 flex-none'>
