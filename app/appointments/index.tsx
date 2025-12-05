@@ -10,6 +10,7 @@ import useGetAppointments from '@/src/features/appointments/hooks/use-get-appoin
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { IconCalendar } from '@tabler/icons-react-native'
+import { Link } from 'expo-router'
 import React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 
@@ -27,7 +28,9 @@ export default function AppointmentsListScreen() {
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
             Mes rendez-vous
           </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Consultez vos rendez-vous pris avec les entreprises.</Text>
+          <Text className='text-sm text-jego-muted-foreground'>
+            Consultez vos rendez-vous pris avec les entreprises.
+          </Text>
         </VStack>
       </HStack>
 
@@ -39,27 +42,29 @@ export default function AppointmentsListScreen() {
             {appointments.map((appointment) => {
               const logo = getCompanyLogoUri(appointment.company?.logo)
               return (
-                <Card key={appointment.id} className='p-3'>
-                  <HStack className='items-start' space='md'>
-                    <Avatar size='md' className='size-12 flex-none'>
-                      <AvatarImage source={logo} alt={appointment.company?.name || ''} />
-                    </Avatar>
-                    <VStack className='flex-1' space='xs'>
-                      <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
-                        {appointment.company?.name}
-                      </Text>
-                      <HStack className='items-center gap-1'>
-                        <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
-                        <Text className='text-xs text-jego-muted-foreground'>
-                          {formatDate(appointment.date)} • {appointment.time}
+                <Card key={appointment.id} className='p-0'>
+                  <Link href={`/appointments/${appointment.id}`}>
+                    <HStack className='items-start p-3' space='md'>
+                      <Avatar size='md' className='size-12 flex-none'>
+                        <AvatarImage source={logo} alt={appointment.company?.name || ''} />
+                      </Avatar>
+                      <VStack className='flex-1' space='xs'>
+                        <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
+                          {appointment.company?.name}
                         </Text>
-                      </HStack>
-                      <Text className='text-base text-jego-foreground mt-2' numberOfLines={2}>
-                        {appointment.subject}
-                      </Text>
-                      <StatusPill status={appointment.status} />
-                    </VStack>
-                  </HStack>
+                        <HStack className='items-center gap-1'>
+                          <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
+                          <Text className='text-xs text-jego-muted-foreground'>
+                            {formatDate(appointment.date)} • {appointment.time}
+                          </Text>
+                        </HStack>
+                        <Text className='text-base text-jego-foreground mt-2' numberOfLines={2}>
+                          {appointment.subject}
+                        </Text>
+                        <StatusPill status={appointment.status} />
+                      </VStack>
+                    </HStack>
+                  </Link>
                 </Card>
               )
             })}
@@ -100,4 +105,3 @@ function StatusPill({ status }: { status: string }) {
     </View>
   )
 }
-
