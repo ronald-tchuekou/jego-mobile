@@ -4,7 +4,7 @@ import { VStack } from '@/src/components/ui/vstack'
 import { ProfileImage } from '@/src/features/profile/components/profile-image'
 import { LogoutModal, LogoutModalRef } from '@/src/features/profile/modals/logout-modal'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
-import { IconFileCv, IconLockFilled, IconLogout, IconTrash } from '@tabler/icons-react-native'
+import { IconBriefcase, IconCalendar, IconFileCv, IconHeartHandshake, IconLock, IconLogout, IconTrash } from '@tabler/icons-react-native'
 import Constants from 'expo-constants'
 import { useRouter } from 'expo-router'
 import { MailIcon, UserIcon } from 'lucide-react-native'
@@ -29,8 +29,21 @@ export default function ProfileScreen() {
       </VStack>
       <ScrollView className='p-4'>
         <ProfileImage />
-        {/* Action list */}
-        <Card className='mt-5 p-0'>
+
+        {/* Opérations */}
+        <Text className='text-base font-medium text-jego-foreground mt-5'>Opérations</Text>
+        <Card className='p-0'>
+          <View className='h-[1px] bg-jego-border' />
+          <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => {}} />
+          <View className='h-[1px] bg-jego-border' />
+          <ActionItem icon={IconBriefcase} title='Mes candidatures' onPress={() => {}} />
+          <View className='h-[1px] bg-jego-border' />
+          <ActionItem icon={IconHeartHandshake} title='Mes followings' onPress={() => {}} />
+        </Card>
+
+        {/* Gestion du compte */}
+        <Text className='text-base font-medium text-jego-foreground mt-5'>Gestion du compte</Text>
+        <Card className='p-0'>
           <ActionItem
             icon={UserIcon}
             title='Informations personnelles'
@@ -39,11 +52,7 @@ export default function ProfileScreen() {
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={MailIcon} title='Adresse email' onPress={() => router.push('/profile/update-email')} />
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem
-            icon={IconLockFilled}
-            title='Mot de passe'
-            onPress={() => router.push('/profile/update-password')}
-          />
+          <ActionItem icon={IconLock} title='Mot de passe' onPress={() => router.push('/profile/update-password')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconFileCv} title='Mes CV' onPress={() => router.push('/profile/cv-files')} />
           <View className='h-[1px] bg-jego-border' />
