@@ -34,7 +34,7 @@ export default function ProfileScreen() {
         <Text className='text-base font-medium text-jego-foreground mt-5'>Opérations</Text>
         <Card className='p-0'>
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => {}} />
+          <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => router.push('/appointments')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconBriefcase} title='Mes candidatures' onPress={() => {}} />
           <View className='h-[1px] bg-jego-border' />
