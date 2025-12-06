@@ -18,13 +18,22 @@ export function compactNumber(num: number) {
 }
 
 // Helper function to format date
-export function formatDate(date: string | Date | null) {
+export function formatDate(date: string | Date | null, type: 'date' | 'time' = 'date') {
   if (!date) return 'Jamais'
-  return Intl.DateTimeFormat('fr-FR', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).format(new Date(date))
+
+  const dateFormater =
+    type === 'date'
+      ? Intl.DateTimeFormat('fr-FR', {
+          year: 'numeric',
+          day: 'numeric',
+          month: 'short',
+        })
+      : Intl.DateTimeFormat('fr-FR', {
+          hour: 'numeric',
+          minute: 'numeric',
+      })
+  
+  return dateFormater.format(new Date(date))
 }
 
 export function formatPrice(price: number) {
