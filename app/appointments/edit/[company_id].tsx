@@ -11,6 +11,7 @@ import {
 } from '@/src/components/ui/form-control'
 import { HStack } from '@/src/components/ui/hstack'
 import { Input, InputField } from '@/src/components/ui/input'
+import { Textarea, TextareaInput } from '@/src/components/ui/textarea'
 import { VStack } from '@/src/components/ui/vstack'
 import {
   defaultEditAppointmentValue,
@@ -31,6 +32,7 @@ import { Platform, ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
+import { cnBase } from 'tailwind-variants'
 
 export default function EditAppointmentScreen() {
   const { company_id } = useLocalSearchParams<{ company_id: string }>()
@@ -183,15 +185,14 @@ export default function EditAppointmentScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Décrivez votre besoin</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='lg' className='rounded-lg bg-jego-card h-[200px] py-2'>
-                    <InputField
+                  <Textarea size='lg' className={cnBase('rounded-lg p-1 bg-jego-card h-[200px]')}>
+                    <TextareaInput
                       ref={field.ref}
                       placeholder='Décrivez votre besoin, les services et autre...'
                       value={field.value}
                       onChangeText={field.onChange}
-                      multiline
                     />
-                  </Input>
+                  </Textarea>
                   <FormControlError>
                     <FormControlErrorIcon />
                     <FormControlErrorText className='text-jego-destructive'>
