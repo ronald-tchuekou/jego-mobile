@@ -1,3 +1,4 @@
+import { AppointmentStatusLabel } from '@/src/components/base/appointment-status-label'
 import { BackButton } from '@/src/components/base/back-button'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
@@ -53,7 +54,7 @@ export default function AppointmentDetailsScreen() {
                 </HStack>
               </VStack>
             </HStack>
-            <StatusPill status={appointment?.status || ''} />
+            <AppointmentStatusLabel status={appointment?.status || ''} />
           </Card>
 
           <Card className='p-4 mt-4'>
@@ -92,33 +93,3 @@ export default function AppointmentDetailsScreen() {
     </View>
   )
 }
-
-function StatusPill({ status }: { status: string }) {
-  if (!status) return null
-  const label =
-    status === 'pending'
-      ? 'En attente'
-      : status === 'confirmed'
-        ? 'Confirmé'
-        : status === 'cancelled'
-          ? 'Annulé'
-          : status === 'completed'
-            ? 'Terminé'
-            : status
-
-  const colorClasses =
-    status === 'pending'
-      ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/30'
-      : status === 'confirmed'
-        ? 'bg-green-500/10 text-green-600 border-green-500/30'
-        : status === 'cancelled'
-          ? 'bg-red-500/10 text-red-600 border-red-500/30'
-          : 'bg-blue-500/10 text-blue-600 border-blue-500/30'
-
-  return (
-    <View className={`self-start mt-4 px-2 py-1 rounded-full border ${colorClasses}`}>
-      <Text className='text-xs'>{label}</Text>
-    </View>
-  )
-}
-
