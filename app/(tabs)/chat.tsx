@@ -3,6 +3,7 @@ import { VStack } from '@/src/components/ui/vstack'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { useState } from 'react'
 import { Text, View } from 'react-native'
+import ConversationsList from '@/src/features/chat/components/conversations-list'
 
 export default function ChatScreen() {
   const height = getStatusBarHeight()
@@ -14,6 +15,7 @@ export default function ChatScreen() {
         <Text className='text-3xl font-bold text-jego-card-foreground'>Messages</Text>
         <SearchInput placeholder='Rechercher un contact...' onChangeText={setSearch} />
       </VStack>
+      <ConversationsList search={search} />
     </View>
   )
 }

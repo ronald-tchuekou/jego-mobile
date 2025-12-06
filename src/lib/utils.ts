@@ -188,3 +188,21 @@ export function getFileTypeName(type: string) {
       return type
   }
 }
+
+/**
+ * Format a message time to a relative date
+ * @param d - The date to format
+ * @returns The formatted relative date
+ */
+export function fmtMsgTime(d: string | Date) {
+  const t = new Date(d).getTime()
+  const n = Date.now()
+  const s = Math.floor((n - t) / 1000)
+  if (s < 60) return "À l'instant"
+  if (s < 3600) return `Y'a ${Math.floor(s / 60)} min`
+  if (s < 86400) return `y'a ${Math.floor(s / 3600)} h`
+  if (s < 172800) return 'Hier'
+  if (s < 2592000) return `Y'a ${Math.floor(s / 86400)} js`
+  const date = new Date(d)
+  return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+}
