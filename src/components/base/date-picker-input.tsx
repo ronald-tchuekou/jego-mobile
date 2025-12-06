@@ -1,12 +1,12 @@
 import { formatDate } from '@/src/lib/utils'
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
-import { IconX } from '@tabler/icons-react-native'
 import { CalendarDaysIcon, ClockIcon } from 'lucide-react-native'
 import { useState } from 'react'
-import { Modal, Platform, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, Text, TouchableOpacity } from 'react-native'
 import { cnBase } from 'tailwind-variants'
-import { Button, ButtonIcon } from '../ui/button'
-import { Icon } from '../ui/icon'
+import { Heading } from '../ui/heading'
+import { CloseIcon, Icon } from '../ui/icon'
+import { Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalHeader } from '../ui/modal'
 
 type Props = {
   date?: Date
@@ -51,35 +51,25 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
             mode={type}
             onChange={changeHandler}
             accentColor='#ff1800'
+            is24Hour={true}
           />
         ) : (
           <Modal
-            transparent
-            visible={visible}
-            onDismiss={() => setVisible(false)}
-            onRequestClose={() => setVisible(false)}
+            isOpen={visible}
+            onClose={() => {
+              setVisible(false)
+            }}
+            size='md'
           >
-            <View className='flex-1 justify-center items-center bg-black/30 p-4'>
-              <View
-                style={{
-                  minHeight: 300,
-                  maxWidth: 400,
-                }}
-                className='bg-jego-card rounded-xl p-2 w-full items-center relative'
-              >
-                <Button
-                  size='sm'
-                  variant='outline'
-                  action='negative'
-                  onPress={() => setVisible(false)}
-                  style={{ height: 40, width: 40 }}
-                  className='absolute top-1 right-1 z-10 rounded-full border-jego-border'
-                >
-                  <ButtonIcon as={IconX} size='lg' className='text-jego-foreground' />
-                </Button>
-                <Text className='text-jego-foreground text-xl font-bold p-2'>
-                  {type === 'date' ? 'Choisir une date' : 'Choisir une heure'}
-                </Text>
+            <ModalBackdrop />
+            <ModalContent className='bg-jego-card' style={{minWidth: 380}}>
+              <ModalHeader>
+                <Heading size='lg'>{type === 'date' ? 'Choisir une date' : 'Choisir une heure'}</Heading>
+                <ModalCloseButton>
+                  <Icon as={CloseIcon} />
+                </ModalCloseButton>
+              </ModalHeader>
+              <ModalBody>
                 <DateTimePicker
                   locale='fr-FR'
                   testID='datePicker'
@@ -89,9 +79,10 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
                   onChange={changeHandler}
                   className='w-full'
                   accentColor='#ff1800'
+                  is24Hour={true}
                 />
-              </View>
-            </View>
+              </ModalBody>
+            </ModalContent>
           </Modal>
         )
       ) : null}
