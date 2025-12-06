@@ -25,6 +25,7 @@ const AppStack = () => {
           <Stack.Screen name='appointments/index' options={{ headerShown: false }} />
           <Stack.Screen name='appointments/[appointment_id]' options={{ headerShown: false }} />
           <Stack.Screen name='appointments/edit/[company_id]' options={{ headerShown: false }} />
+          <Stack.Screen name='job-applications/index' options={{ headerShown: false }} />
           <Stack.Screen name='profile/update-info' options={{ headerShown: false }} />
           <Stack.Screen name='profile/update-email' options={{ headerShown: false }} />
           <Stack.Screen name='profile/verify-email-change' options={{ headerShown: false }} />

@@ -36,7 +36,7 @@ export default function ProfileScreen() {
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => router.push('/appointments')} />
           <View className='h-[1px] bg-jego-border' />
-          <ActionItem icon={IconBriefcase} title='Mes candidatures' onPress={() => {}} />
+          <ActionItem icon={IconBriefcase} title='Mes candidatures' onPress={() => router.push('/job-applications')} />
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconHeartHandshake} title='Mes followings' onPress={() => {}} />
         </Card>

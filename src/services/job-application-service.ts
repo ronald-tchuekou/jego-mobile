@@ -116,7 +116,7 @@ const JobApplicationService = {
 
   async getByUserId(userId: string, filter: FilterQuery, token: string) {
     const query = objectToQueryString(filter)
-    const { data, error } = await fetchHelper<PaginateResponse<JobModel>>(`/job-applications/user/${userId}?${query}`, {
+    const { data, error } = await fetchHelper<PaginateResponse<JobApplicationModel>>(`/job-applications/user/${userId}?${query}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
