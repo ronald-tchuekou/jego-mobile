@@ -32,7 +32,7 @@ export default function ProfileScreen() {
 
         {/* Opérations */}
         <Text className='text-base font-medium text-jego-foreground mt-5'>Opérations</Text>
-        <Card className='p-0'>
+        <Card className='mt-2 p-0'>
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => router.push('/appointments')} />
           <View className='h-[1px] bg-jego-border' />
@@ -43,7 +43,7 @@ export default function ProfileScreen() {
 
         {/* Gestion du compte */}
         <Text className='text-base font-medium text-jego-foreground mt-5'>Gestion du compte</Text>
-        <Card className='p-0'>
+        <Card className='mt-2 p-0'>
           <ActionItem
             icon={UserIcon}
             title='Informations personnelles'
@@ -58,8 +58,10 @@ export default function ProfileScreen() {
           <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconLogout} title='Déconnexion' onPress={() => logoutModalRef.current?.open()} />
         </Card>
+
+        {/* Danger zone */}
         <Text className='text-base font-medium text-jego-foreground mt-5'>Zone dangereuse</Text>
-        <Card className='mt-3 p-0'>
+        <Card className='mt-2 p-0'>
           <ActionItem
             destructive
             icon={IconTrash}
