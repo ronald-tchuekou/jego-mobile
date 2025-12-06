@@ -1,4 +1,5 @@
 import { BackButton } from '@/src/components/base/back-button'
+import { DatePickerInput } from '@/src/components/base/date-picker-input'
 import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import {
   FormControl,
@@ -16,7 +17,9 @@ import {
   editAppointmentSchema,
   EditAppointmentSchema,
 } from '@/src/features/appointments/schemas/edit-appointment-schema'
+import { CompanyInfo } from '@/src/features/companies/components/company-info'
 import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
+import { formatDate } from '@/src/lib/utils'
 import CompanyAppointmentRequestService from '@/src/services/company-appointment-request-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -36,7 +39,7 @@ export default function EditAppointmentScreen() {
   const auth = useAuthStore((s) => s.auth)
   const queryClient = useQueryClient()
   const insets = useSafeAreaInsets()
-  
+
   const form = useForm<EditAppointmentSchema>({
     resolver: zodResolver(editAppointmentSchema),
     defaultValues: { ...defaultEditAppointmentValue, companyId: company_id || '' },
@@ -83,14 +86,17 @@ export default function EditAppointmentScreen() {
         style={{ paddingTop: height + 10 }}
       >
         <BackButton />
-        <Text className='font-semibold text-xl text-jego-foreground' numberOfLines={1}>
-          Prendre rendez-vous
-        </Text>
+        <Text className='font-semibold text-xl text-jego-foreground'>Prendre rendez-vous</Text>
       </HStack>
 
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
         <ScrollView keyboardShouldPersistTaps='handled' className='flex-1' contentContainerClassName='p-4'>
           <VStack space='md'>
+            {/* Company info */}
+            <VStack space='sm' className='mb-5'>
+              <Text className='text-lg font-medium text-jego-foreground'>Chez</Text>
+              <CompanyInfo companyId={company_id} />
+            </VStack>
             {/* Date */}
             <Controller
               control={form.control}
@@ -98,18 +104,12 @@ export default function EditAppointmentScreen() {
               render={({ field }) => (
                 <FormControl isInvalid={!!errors.date} isRequired size='md'>
                   <FormControlLabel>
-                    <FormControlLabelText>Date du rendez-vous (YYYY-MM-DD)</FormControlLabelText>
+                    <FormControlLabelText>Date du rendez-vous</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='lg' className='rounded-lg bg-jego-card'>
-                    <InputField
-                      ref={field.ref}
-                      placeholder='2025-12-31'
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      returnKeyType='next'
-                      onSubmitEditing={() => form.setFocus('time')}
-                    />
-                  </Input>
+                  <DatePickerInput
+                    date={field.value ? new Date(field.value) : undefined}
+                    onChange={(date) => field.onChange(date.toISOString().split('T')[0])}
+                  />
                   <FormControlError>
                     <FormControlErrorIcon />
                     <FormControlErrorText className='text-jego-destructive'>
@@ -127,18 +127,14 @@ export default function EditAppointmentScreen() {
               render={({ field }) => (
                 <FormControl isInvalid={!!errors.time} isRequired size='md'>
                   <FormControlLabel>
-                    <FormControlLabelText>Heure du rendez-vous (HH:mm)</FormControlLabelText>
+                    <FormControlLabelText>Heure du rendez-vous</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='lg' className='rounded-lg bg-jego-card'>
-                    <InputField
-                      ref={field.ref}
-                      placeholder='14:30'
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      returnKeyType='next'
-                      onSubmitEditing={() => form.setFocus('subject')}
-                    />
-                  </Input>
+                  <DatePickerInput
+                    placeholder='A quelle heure ?'
+                    date={field.value ? new Date(`2000-01-01T${field.value}`) : undefined}
+                    onChange={(date) => field.onChange(formatDate(date, 'time'))}
+                    type='time'
+                  />
                   <FormControlError>
                     <FormControlErrorIcon />
                     <FormControlErrorText className='text-jego-destructive'>
@@ -187,7 +183,7 @@ export default function EditAppointmentScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Décrivez votre besoin</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='lg' className='rounded-lg bg-jego-card h-[200px]'>
+                  <Input size='lg' className='rounded-lg bg-jego-card h-[200px] py-2'>
                     <InputField
                       ref={field.ref}
                       placeholder='Décrivez votre besoin, les services et autre...'
@@ -206,7 +202,7 @@ export default function EditAppointmentScreen() {
               )}
             />
 
-            <View className='h-20'/>
+            <View className='h-20 w-full' />
           </VStack>
         </ScrollView>
         <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: insets.bottom }}>
