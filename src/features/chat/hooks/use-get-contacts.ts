@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 const useGetContacts = () => {
   const auth = useAuthStore((state) => state.auth)
 
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, refetch, isRefetching } = useQuery({
     queryKey: chatKey.list({ label: 'contacts' }),
     async queryFn() {
       if (!auth?.token) return []
@@ -15,7 +15,7 @@ const useGetContacts = () => {
     enabled: !!auth?.token,
   })
 
-  return { isLoading, data }
+  return { isLoading, data, refetch, isRefetching }
 }
 
 export default useGetContacts

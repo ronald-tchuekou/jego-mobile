@@ -1,18 +1,17 @@
 import EmptyContent from '@/src/components/base/empty-content'
 import { LoaderContent } from '@/src/components/base/loader-content'
-import { Conversation } from '@/src/services/chat-service'
+import { useAuthStore } from '@/src/stores/auth-store'
+import { useRouter } from 'expo-router'
 import { FlatList, RefreshControl } from 'react-native'
 import useGetContacts from '../hooks/use-get-contacts'
 import ConversationItem from './conversation-item'
-import { useRouter } from 'expo-router'
-import { useAuthStore } from '@/src/stores/auth-store'
 
 type Props = {
   search?: string
 }
 
 export default function ConversationsList({ search }: Props) {
-  const { isLoading, data } = useGetContacts()
+  const { isLoading, data, refetch, isRefetching} = useGetContacts()
   const router = useRouter()
   const auth = useAuthStore((state) => state.auth)
   const currentUserId = auth?.user?.id
@@ -21,8 +20,7 @@ export default function ConversationsList({ search }: Props) {
     ? data?.filter((conversation) => {
         const participant1 = conversation.participants[0]
         const participant2 = conversation.participants[1]
-        const otherParticipant =
-          participant1?.userId === currentUserId ? participant2?.user : participant1?.user
+        const otherParticipant = participant1?.userId === currentUserId ? participant2?.user : participant1?.user
 
         if (!otherParticipant) return false
 
@@ -40,15 +38,8 @@ export default function ConversationsList({ search }: Props) {
     <FlatList
       className='flex-1'
       data={filteredConversations || []}
-      refreshing={isLoading}
-      refreshControl={<RefreshControl refreshing={isLoading} />}
-      ListEmptyComponent={
-        isLoading ? (
-          <LoaderContent />
-        ) : (
-          <EmptyContent text={'Pas de conversation pour le moment.'} />
-        )
-      }
+      refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
+      ListEmptyComponent={isLoading ? <LoaderContent /> : <EmptyContent text={'Pas de conversation pour le moment.'} />}
       renderItem={({ item }) => (
         <ConversationItem
           conversation={item}
@@ -60,4 +51,3 @@ export default function ConversationsList({ search }: Props) {
     />
   )
 }
-
