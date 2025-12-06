@@ -1,3 +1,4 @@
+import { AppointmentStatusLabel } from '@/src/components/base/appointment-status-label'
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
 import { LoaderContent } from '@/src/components/base/loader-content'
@@ -12,11 +13,11 @@ import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { IconCalendar } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
 import React from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { FlatList, RefreshControl, Text, View } from 'react-native'
 
 export default function AppointmentsListScreen() {
   const height = getStatusBarHeight()
-  const { appointments, isLoading } = useGetAppointments({
+  const { appointments, isLoading, refetch, isRefetching } = useGetAppointments({
     filters: { page: 1, limit: 30 },
   })
 
@@ -34,74 +35,50 @@ export default function AppointmentsListScreen() {
         </VStack>
       </HStack>
 
-      <ScrollView className='flex-1' contentContainerClassName='p-4'>
-        {isLoading ? (
+      {isLoading ? (
+        <View className='flex-1'>
           <LoaderContent />
-        ) : appointments.length ? (
-          <VStack space='md'>
-            {appointments.map((appointment) => {
-              const logo = getCompanyLogoUri(appointment.company?.logo)
-              return (
-                <Card key={appointment.id} className='p-0'>
-                  <Link href={`/appointments/${appointment.id}`}>
-                    <HStack className='items-start p-3' space='md'>
-                      <Avatar size='md' className='size-12 flex-none'>
-                        <AvatarImage source={logo} alt={appointment.company?.name || ''} />
-                      </Avatar>
-                      <VStack className='flex-1' space='xs'>
-                        <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
-                          {appointment.company?.name}
+        </View>
+      ) : (
+        <FlatList
+          data={appointments}
+          refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item: appointment }) => {
+            const logo = getCompanyLogoUri(appointment.company?.logo)
+            return (
+              <Card className='p-0 mx-4 mb-4'>
+                <Link href={`/appointments/${appointment.id}`}>
+                  <HStack className='items-start p-3' space='md'>
+                    <Avatar size='md' className='size-12 flex-none'>
+                      <AvatarImage source={logo} alt={appointment.company?.name || ''} />
+                    </Avatar>
+                    <VStack className='flex-1' space='xs'>
+                      <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
+                        {appointment.company?.name}
+                      </Text>
+                      <HStack className='items-center gap-1'>
+                        <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
+                        <Text className='text-xs text-jego-muted-foreground'>
+                          {formatDate(appointment.date)} • {appointment.time}
                         </Text>
-                        <HStack className='items-center gap-1'>
-                          <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
-                          <Text className='text-xs text-jego-muted-foreground'>
-                            {formatDate(appointment.date)} • {appointment.time}
-                          </Text>
-                        </HStack>
-                        <Text className='text-base text-jego-foreground mt-2' numberOfLines={2}>
-                          {appointment.subject}
-                        </Text>
-                        <StatusPill status={appointment.status} />
-                      </VStack>
-                    </HStack>
-                  </Link>
-                </Card>
-              )
-            })}
-          </VStack>
-        ) : (
-          <EmptyContent text='Aucun rendez-vous pour le moment.' />
-        )}
-        <View className='h-20' />
-      </ScrollView>
-    </View>
-  )
-}
-
-function StatusPill({ status }: { status: string }) {
-  const label =
-    status === 'pending'
-      ? 'En attente'
-      : status === 'confirmed'
-        ? 'Confirmé'
-        : status === 'cancelled'
-          ? 'Annulé'
-          : status === 'completed'
-            ? 'Terminé'
-            : status
-
-  const colorClasses =
-    status === 'pending'
-      ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/30'
-      : status === 'confirmed'
-        ? 'bg-green-500/10 text-green-600 border-green-500/30'
-        : status === 'cancelled'
-          ? 'bg-red-500/10 text-red-600 border-red-500/30'
-          : 'bg-blue-500/10 text-blue-600 border-blue-500/30'
-
-  return (
-    <View className={`self-start mt-1 px-2 py-1 rounded-full border ${colorClasses}`}>
-      <Text className='text-xs'>{label}</Text>
+                      </HStack>
+                      <Text className='text-base text-jego-foreground mt-2' numberOfLines={2}>
+                        {appointment.subject}
+                      </Text>
+                      <AppointmentStatusLabel status={appointment.status} />
+                    </VStack>
+                  </HStack>
+                </Link>
+              </Card>
+            )
+          }}
+          ListEmptyComponent={<EmptyContent text='Aucun rendez-vous pour le moment.' />}
+          ListFooterComponent={<View className='h-20' />}
+          contentContainerClassName='py-4'
+          className='flex-1'
+        />
+      )}
     </View>
   )
 }
