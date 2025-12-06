@@ -1,4 +1,5 @@
 import { fetchHelper } from '../lib/fetch-helper'
+import { objectToQueryString } from '../lib/utils'
 import { UserModel } from './auth-service'
 import { CompanyModel } from './company-service'
 
@@ -29,6 +30,22 @@ const CompanyFollowingService = {
     )
     if (error) throw new Error(error)
     return data?.data || null
+  },
+
+  async getUserFollowings(userId: string, filter: FilterQuery, token: string) {
+    const query = objectToQueryString(filter)
+    const { data, error } = await fetchHelper<PaginateResponse<CompanyFollowingModel>>(
+      `/company-following/user/${userId}?${query}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+    if (error) throw new Error(error)
+    return data
   },
 
   async createOne(body: CreateCompanyFollowingDto, token: string) {

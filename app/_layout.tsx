@@ -33,6 +33,7 @@ const AppStack = () => {
           <Stack.Screen name='profile/delete-account' options={{ headerShown: false }} />
           <Stack.Screen name='profile/cv-files' options={{ headerShown: false }} />
           <Stack.Screen name='job/[job_id]' options={{ headerShown: false }} />
+          <Stack.Screen name='followings/index' options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={!auth}>
