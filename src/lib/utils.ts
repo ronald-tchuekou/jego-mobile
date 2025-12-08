@@ -36,6 +36,14 @@ export function formatDate(date: string | Date | null, type: 'date' | 'time' = '
   return dateFormater.format(new Date(date))
 }
 
+export function compactDate(date: number| Date) {
+  return Intl.DateTimeFormat('fr-FR', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date)
+}
+
 export function formatPrice(price: number) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
