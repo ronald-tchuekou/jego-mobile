@@ -1,6 +1,7 @@
 import { GluestackUIProvider } from '@/src/components/ui/gluestack-ui-provider'
 import '@/src/global.css'
 import QueryProviders from '@/src/providers/query-provider'
+import { TransmitProvider } from '@/src/providers/transmit-provider'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
@@ -54,8 +55,10 @@ export default function RootLayout() {
       <GluestackUIProvider>
         <GestureHandlerRootView>
           <QueryProviders>
-            <AppStack />
-            <Toast visibilityTime={10000}/>
+            <TransmitProvider>
+              <AppStack />
+              <Toast visibilityTime={10000} />
+            </TransmitProvider>
           </QueryProviders>
         </GestureHandlerRootView>
       </GluestackUIProvider>
