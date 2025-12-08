@@ -3,15 +3,20 @@ import { LoaderContent } from '@/src/components/base/loader-content'
 import { Icon } from '@/src/components/ui/icon'
 import { globalStyles } from '@/src/lib/global-styles'
 import { IMAGES } from '@/src/lib/images'
+import { chatKey, notificationKey } from '@/src/lib/query-kye'
 import { getImageLink } from '@/src/lib/utils'
+import { useTransmitContext } from '@/src/providers/transmit-provider'
+import ChatService, { MessageType } from '@/src/services/chat-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { IconSend2 } from '@tabler/icons-react-native'
+import { useQueryClient } from '@tanstack/react-query'
 import 'dayjs/locale/fr'
 import { useColorScheme } from 'nativewind'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Platform } from 'react-native'
 import { Bubble, GiftedChat, IMessage, InputToolbar, Send } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 import useGetMessages from '../hooks/use-get-messages'
 
 type Props = {
@@ -25,6 +30,8 @@ export default function MessagesList({ conversationId }: Props) {
   const isDark = colorScheme === 'dark'
   const theme = isDark ? 'dark' : 'light'
   const insets = useSafeAreaInsets()
+  const { isConnected, subscribe } = useTransmitContext()
+  const queryClient = useQueryClient()
 
   const [text, setText] = useState('')
 
@@ -38,7 +45,9 @@ export default function MessagesList({ conversationId }: Props) {
           user: {
             _id: message.sender.id,
             name: `${message.sender.firstName} ${message.sender.lastName}`.trim(),
-            avatar: message.sender.profileImage ? getImageLink(message.sender.profileImage) : IMAGES.default_user_avatar
+            avatar: message.sender.profileImage
+              ? getImageLink(message.sender.profileImage)
+              : IMAGES.default_user_avatar,
           },
         }) as IMessage,
     ) || []
@@ -48,10 +57,59 @@ export default function MessagesList({ conversationId }: Props) {
   const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
   const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
 
-  const onSend = (newMessages: IMessage[] = []) => {
-    //setMessages((prevMessages) => GiftedChat.append(prevMessages, newMessages))
-    console.log('Message to send : ', newMessages)
+  const onSend = async () => {
+    if (!auth?.token)
+      return Toast.show({
+        text1: 'Oops !',
+        text2: 'Une erreur est survenue, veuillez reprendre.',
+        type: 'error',
+        visibilityTime: 6000,
+      })
+
+    try {
+      await ChatService.sendMessage(
+        {
+          conversationId,
+          content: text,
+          type: MessageType.TEXT,
+        },
+        auth?.token || '',
+      )
+
+      // Invalidate and refetch messages
+      queryClient.invalidateQueries({
+        queryKey: chatKey.list({ label: 'messages', conversationId }),
+      }).then()
+
+      // Also invalidate conversations to update last message
+      queryClient
+        .invalidateQueries({
+          queryKey: chatKey.list({ label: 'contacts' }),
+        })
+        .then()
+    } catch (error) {
+      Toast.show({
+        text1: 'Oops !',
+        text2: 'Une erreur est survenue, veuillez reprendre.',
+        type: 'error',
+        visibilityTime: 6000,
+      })
+      console.error('Failed to send message:', error)
+    }
   }
+
+  useEffect(() => {
+    if (isConnected) {
+      const unsubscribeNotify = subscribe(`conversation.${conversationId}`, () => {
+        queryClient.invalidateQueries({ queryKey: notificationKey.all }).then()
+        queryClient.invalidateQueries({ queryKey: chatKey.all }).then()
+      })
+
+      return () => {
+        unsubscribeNotify()
+      }
+    }
+  }, [isConnected, subscribe, conversationId, queryClient])
 
   return (
     <GiftedChat
