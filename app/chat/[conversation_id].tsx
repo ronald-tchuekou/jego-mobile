@@ -1,19 +1,19 @@
 import { BackButton } from '@/src/components/base/back-button'
+import EmptyContent from '@/src/components/base/empty-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
-import MessageInput from '@/src/features/chat/components/message-input'
 import MessagesList from '@/src/features/chat/components/messages-list'
 import useGetConversation from '@/src/features/chat/hooks/use-get-conversation'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { getUserProfileImageUri } from '@/src/lib/utils'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useLocalSearchParams } from 'expo-router'
 import { Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function ConversationScreen() {
   const { conversation_id } = useLocalSearchParams<{ conversation_id: string }>()
-  const height = getStatusBarHeight()
+  const insets = useSafeAreaInsets()
   const { data: conversation } = useGetConversation(conversation_id || null)
   const auth = useAuthStore((state) => state.auth)
   const currentUserId = auth?.user?.id
@@ -33,17 +33,11 @@ export default function ConversationScreen() {
 
   const otherParticipant = getOtherParticipant()
 
-  if (!conversation_id) {
-    return (
-      <View className='flex-1 bg-jego-background'>
-        <Text className='text-center text-jego-muted-foreground p-4'>Aucune conversation sélectionnée</Text>
-      </View>
-    )
-  }
+  if (!conversation_id) return <EmptyContent text='Aucune conversation sélectionnée' />
 
   return (
-    <View className='flex-1 bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
+    <View className='flex-1 bg-jego-card' style={{paddingBottom: insets.bottom}}>
+      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: insets.top }}>
         <BackButton />
         <Avatar size='md'>
           <AvatarImage source={getUserProfileImageUri(otherParticipant?.profileImage)} />
@@ -58,7 +52,7 @@ export default function ConversationScreen() {
         </VStack>
       </HStack>
       <MessagesList conversationId={conversation_id} />
-      <MessageInput conversationId={conversation_id} />
+      {/* <MessageInput conversationId={conversation_id} /> */}
     </View>
   )
 }
