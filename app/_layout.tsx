@@ -8,7 +8,10 @@ import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
+import { install } from 'react-native-quick-crypto'
 import Toast from 'react-native-toast-message'
+
+install()
 
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
