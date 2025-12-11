@@ -9,11 +9,10 @@ import { getUserProfileImageUri } from '@/src/lib/utils'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useLocalSearchParams } from 'expo-router'
 import { Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function ConversationScreen() {
   const { conversation_id } = useLocalSearchParams<{ conversation_id: string }>()
-  const insets = useSafeAreaInsets()
   const { data: conversation } = useGetConversation(conversation_id || null)
   const auth = useAuthStore((state) => state.auth)
   const currentUserId = auth?.user?.id
@@ -36,22 +35,21 @@ export default function ConversationScreen() {
   if (!conversation_id) return <EmptyContent text='Aucune conversation sélectionnée' />
 
   return (
-    <View className='flex-1 bg-jego-card' style={{ paddingBottom: insets.bottom }}>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: insets.top }}>
+    <SafeAreaView className='flex-1 bg-jego-card'>
+      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border items-center'>
         <BackButton />
         <Avatar size='md'>
           <AvatarImage source={getUserProfileImageUri(otherParticipant?.profileImage)} />
         </Avatar>
         <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+          <Text className='font-semibold text-lg text-jego-foreground' numberOfLines={1}>
             {otherParticipant ? `${otherParticipant.firstName} ${otherParticipant.lastName}` : 'Utilisateur'}
-          </Text>
-          <Text className='text-sm text-jego-primary' numberOfLines={1}>
-            {otherParticipant?.email || ''}
           </Text>
         </VStack>
       </HStack>
-      <MessagesList conversationId={conversation_id} />
-    </View>
+      <View className={'bg-jego-background flex-1'}>
+        <MessagesList conversationId={conversation_id} />
+      </View>
+    </SafeAreaView>
   )
 }
