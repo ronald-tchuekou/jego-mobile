@@ -33,7 +33,7 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
       >
         <Text
           className={cnBase(
-            'text-left text-lg text-jego-foreground font-medium',
+            'text-left text-lg text-jego-foreground font-normal',
             !date ? 'text-jego-muted-foreground' : undefined,
           )}
         >
@@ -62,7 +62,7 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
             size='md'
           >
             <ModalBackdrop />
-            <ModalContent className='bg-jego-card' style={{minWidth: 380}}>
+            <ModalContent className='bg-jego-card' style={{ minWidth: 380 }}>
               <ModalHeader>
                 <Heading size='lg'>{type === 'date' ? 'Choisir une date' : 'Choisir une heure'}</Heading>
                 <ModalCloseButton>
