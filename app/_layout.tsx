@@ -1,17 +1,13 @@
 import { GluestackUIProvider } from '@/src/components/ui/gluestack-ui-provider'
 import '@/src/global.css'
 import QueryProviders from '@/src/providers/query-provider'
-import { TransmitProvider } from '@/src/providers/transmit-provider'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
-import { install } from 'react-native-quick-crypto'
 import Toast from 'react-native-toast-message'
-
-install()
 
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
@@ -58,10 +54,8 @@ export default function RootLayout() {
       <GluestackUIProvider>
         <GestureHandlerRootView>
           <QueryProviders>
-            <TransmitProvider>
-              <AppStack />
-              <Toast visibilityTime={10000} />
-            </TransmitProvider>
+            <AppStack />
+            <Toast visibilityTime={10000} />
           </QueryProviders>
         </GestureHandlerRootView>
       </GluestackUIProvider>
