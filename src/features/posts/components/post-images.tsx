@@ -2,7 +2,8 @@ import { Image } from '@/src/components/ui/image'
 import { getImageUri } from '@/src/lib/utils'
 import { MediaModel } from '@/src/services/post-service'
 import { memo, useCallback, useState } from 'react'
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, View } from 'react-native'
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from 'react-native'
+import { useRouter } from 'expo-router'
 
 type Props = {
   medias: MediaModel[]
@@ -10,6 +11,8 @@ type Props = {
 
 function PostImagesComponents({ medias }: Props) {
   const media = medias[0]
+
+  const router = useRouter()
 
   const [page, setPage] = useState<number>(0)
   const [width, setWidth] = useState<number>(0)
@@ -33,7 +36,10 @@ function PostImagesComponents({ medias }: Props) {
     ({ item }: { item: MediaModel }) => {
       const imgUrl = getImageUri(item.url)
       return (
-        <View style={{ width }}>
+        <TouchableOpacity
+          onPress={() => router.push(`/preview/image?url=${imgUrl.uri}&tag=${item.id}`)}
+          style={{ width }}
+        >
           <Image
             source={imgUrl}
             style={item.metadata?.aspectRatio ? { aspectRatio: item.metadata?.aspectRatio } : undefined}
@@ -43,23 +49,31 @@ function PostImagesComponents({ medias }: Props) {
             resizeMode='contain'
             alt={item.name || 'Media'}
           />
-        </View>
+        </TouchableOpacity>
       )
     },
-    [width],
+    [router, width],
   )
 
   if (medias.length === 1)
     return (
-      <Image
-        source={imageUrl}
-        style={media.metadata?.aspectRatio ? { aspectRatio: media.metadata?.aspectRatio } : undefined}
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => router.push(`/preview/image?url=${imageUrl.uri}&tag=${media.id}`)}
         className={`w-full h-[400px] bg-black mb-4 ${
           media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'
         }`}
-        resizeMode='contain'
-        alt={media.name || 'Media'}
-      />
+      >
+        <Image
+          source={imageUrl}
+          style={media.metadata?.aspectRatio ? { aspectRatio: media.metadata?.aspectRatio } : undefined}
+          className={`w-full h-[400px] bg-black mb-4 ${
+            media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'
+          }`}
+          resizeMode='contain'
+          alt={media.name || 'Media'}
+        />
+      </TouchableOpacity>
     )
 
   return (

@@ -6,35 +6,32 @@ import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
-import { CommentInput } from '@/src/features/post-comments/components/comment-input'
 import CommentWrapper from '@/src/features/post-comments/components/comment-wrapper'
 import { LikePostButton } from '@/src/features/posts/components/like-post-button'
 import { PostImages } from '@/src/features/posts/components/post-images'
 import { PostVideo } from '@/src/features/posts/components/post-video'
 import { SharePostButton } from '@/src/features/posts/components/share-post-button'
 import useGetPostById from '@/src/features/posts/hooks/use-get-post-by-id'
-import { env } from '@/src/lib/env'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
-import { IMAGES } from '@/src/lib/images'
-import { compactNumber, formatDate, getUserProfileImageUri } from '@/src/lib/utils'
+import { compactNumber, formatDate, getCompanyLogoUri, getUserProfileImageUri } from '@/src/lib/utils'
 import { PostModel } from '@/src/services/post-service'
 import { useLocalSearchParams } from 'expo-router'
 import { MessageCircleMoreIcon } from 'lucide-react-native'
 import { ScrollView, Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { CommentInput } from '@/src/features/post-comments/components/comment-input'
 
 export default function PostDetailsScreen() {
   const { post_id } = useLocalSearchParams<{ post_id: string }>()
-  const height = getStatusBarHeight()
   const { data, isLoading } = useGetPostById(post_id)
 
   const company = data?.user?.company
-  const companyLogo = company?.logo ? { uri: `${env.API_URL}/v1/${company?.logo}` } : IMAGES.default_company_logo
+  const companyLogo = getCompanyLogoUri(company?.logo)
   const profileSrc = getUserProfileImageUri(data?.user?.profileImage)
 
   return (
-    <View className='flex-1 bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
+    <SafeAreaView className='bg-jego-card' style={{ flex: 1 }}>
+      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border'>
         <BackButton />
         <Avatar size='md'>
           <AvatarImage source={company ? companyLogo : profileSrc} />
@@ -46,9 +43,9 @@ export default function PostDetailsScreen() {
           <Text className='text-sm text-typography-600'>{data?.createdAt ? formatDate(data.createdAt) : '- - -'}</Text>
         </VStack>
       </HStack>
-      <ScrollView className='flex-1'>
+      <ScrollView className='bg-jego-background' contentContainerClassName={'bg-jego-background'} style={{ flex: 1 }}>
         {isLoading ? (
-          <LoaderContent/>
+          <LoaderContent />
         ) : !data ? (
           <EmptyContent text="Cette annonce n'existe pas." />
         ) : (
@@ -56,7 +53,7 @@ export default function PostDetailsScreen() {
         )}
       </ScrollView>
       {data && <CommentInput post={data} />}
-    </View>
+    </SafeAreaView>
   )
 }
 

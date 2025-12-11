@@ -3,7 +3,8 @@ import { Grid, GridItem } from '@/src/components/ui/grid'
 import { getImageUri } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
 import { memo } from 'react'
-import { Image, Text } from 'react-native'
+import { Image, Text, TouchableOpacity } from 'react-native'
+import { useRouter } from 'expo-router'
 
 type Props = {
   company: CompanyModel
@@ -11,6 +12,11 @@ type Props = {
 
 const CompanyGallery = ({ company }: Props) => {
   const images = company.images
+  const router = useRouter()
+
+  const openImage = (image: string, id: string) => {
+    router.push(`/preview/image?url=${image}&tag=${id}`)
+  }
 
   return (
     <>
@@ -23,14 +29,20 @@ const CompanyGallery = ({ company }: Props) => {
             const imgUrl = getImageUri(image.path)
 
             return (
-              <GridItem key={image.id} _extra={{ className: 'col-span-1' }}>
-                <Image
-                  key={image.id}
-                  source={imgUrl}
+              <GridItem key={image.id} _extra={{ className: 'col-span-1' }} className={`flex-1 h-[150px] bg-black`}>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={() => openImage(imgUrl.uri, image.id)}
                   className={`flex-1 h-[150px] bg-black`}
-                  resizeMode='contain'
-                  alt={image.name || 'Image'}
-                />
+                >
+                  <Image
+                    key={image.id}
+                    source={imgUrl}
+                    className={`flex-1 h-[150px] bg-black`}
+                    resizeMode='contain'
+                    alt={image.name || 'Image'}
+                  />
+                </TouchableOpacity>
               </GridItem>
             )
           })}
