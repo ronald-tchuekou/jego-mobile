@@ -25,7 +25,7 @@ import { useRouter } from 'expo-router'
 import { AlertCircleIcon, EyeIcon, EyeOffIcon } from 'lucide-react-native'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Platform, ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import Toast from 'react-native-toast-message'
 
@@ -85,7 +85,7 @@ export default function UpdateEmailScreen() {
         </VStack>
       </HStack>
 
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView keyboardShouldPersistTaps='handled' className='flex-1' contentContainerClassName='p-4'>
           <VStack space='lg'>
             <Controller
