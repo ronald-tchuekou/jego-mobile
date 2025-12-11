@@ -205,7 +205,7 @@ export default function UserCvFilesScreen() {
                 variant='solid'
                 size='lg'
                 onPress={pickDocument}
-                isDisabled={isMutating}
+                isDisabled={isMutating || isFetching}
                 className='rounded-full bg-jego-primary'
               >
                 {uploadMutation.isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
