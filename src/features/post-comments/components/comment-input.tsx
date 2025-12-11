@@ -5,17 +5,16 @@ import { HStack } from '@/src/components/ui/hstack'
 import { PostModel } from '@/src/services/post-service'
 import { SendIcon, XIcon } from 'lucide-react-native'
 import React, { useEffect, useRef } from 'react'
-import { KeyboardAvoidingView, Platform, Text, TextInput } from 'react-native'
+import { Text, TextInput } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSearchParams } from 'expo-router/build/hooks'
 import { useCommentStore } from '@/src/stores/comment-store'
 import { useShallow } from 'zustand/shallow'
 import { useEditPostComment } from '@/src/features/post-comments/hooks/use-edit-post-comment'
 import { VStack } from '@/src/components/ui/vstack'
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 
 type Props = { post: PostModel }
-
-const isIOS = Platform.OS === 'ios'
 
 export function CommentInput({ post }: Props) {
   const inputRef = useRef<TextInput>(null)
@@ -56,7 +55,7 @@ export function CommentInput({ post }: Props) {
   }, [comment, parentId])
 
   return (
-    <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined}>
+    <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
       <VStack
         style={{ paddingBottom: insets.bottom + 3 }}
         className={'p-4 border-t border-jego-input bg-jego-card'}
