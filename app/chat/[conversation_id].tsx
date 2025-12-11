@@ -36,7 +36,7 @@ export default function ConversationScreen() {
   if (!conversation_id) return <EmptyContent text='Aucune conversation sélectionnée' />
 
   return (
-    <View className='flex-1 bg-jego-card' style={{paddingBottom: insets.bottom}}>
+    <View className='flex-1 bg-jego-card' style={{ paddingBottom: insets.bottom }}>
       <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: insets.top }}>
         <BackButton />
         <Avatar size='md'>
@@ -52,7 +52,6 @@ export default function ConversationScreen() {
         </VStack>
       </HStack>
       <MessagesList conversationId={conversation_id} />
-      {/* <MessageInput conversationId={conversation_id} /> */}
     </View>
   )
 }

@@ -14,21 +14,21 @@ const useStartConversation = () => {
     mutationFn: async ({ participantId }: { participantId: string }) => {
       if (!auth?.token) throw new Error('Not authenticated')
 
-      const conversation = await ChatService.createConversation(
+      return await ChatService.createConversation(
         {
           participantIds: [participantId],
         },
         auth.token,
       )
-
-      return conversation
     },
     onSuccess: (conversation) => {
       if (conversation) {
         // Invalidate conversations list to show the updated/new one
-        queryClient.invalidateQueries({
-          queryKey: chatKey.list({ label: 'contacts' }),
-        })
+        queryClient
+          .invalidateQueries({
+            queryKey: chatKey.list({ label: 'contacts' }),
+          })
+          .then()
 
         // Navigate to the chat page with the conversation
         router.push({

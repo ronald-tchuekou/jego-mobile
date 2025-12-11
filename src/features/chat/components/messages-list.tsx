@@ -3,16 +3,15 @@ import { LoaderContent } from '@/src/components/base/loader-content'
 import { Icon } from '@/src/components/ui/icon'
 import { globalStyles } from '@/src/lib/global-styles'
 import { IMAGES } from '@/src/lib/images'
-import { chatKey, notificationKey } from '@/src/lib/query-kye'
+import { chatKey } from '@/src/lib/query-kye'
 import { getImageLink } from '@/src/lib/utils'
-import { useTransmitContext } from '@/src/providers/transmit-provider'
 import ChatService, { MessageType } from '@/src/services/chat-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { IconSend2 } from '@tabler/icons-react-native'
 import { useQueryClient } from '@tanstack/react-query'
 import 'dayjs/locale/fr'
 import { useColorScheme } from 'nativewind'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Platform } from 'react-native'
 import { Bubble, GiftedChat, IMessage, InputToolbar, Send } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -30,7 +29,6 @@ export default function MessagesList({ conversationId }: Props) {
   const isDark = colorScheme === 'dark'
   const theme = isDark ? 'dark' : 'light'
   const insets = useSafeAreaInsets()
-  const { isConnected, subscribe } = useTransmitContext()
   const queryClient = useQueryClient()
 
   const [text, setText] = useState('')
@@ -77,14 +75,9 @@ export default function MessagesList({ conversationId }: Props) {
       )
 
       // Invalidate and refetch messages
-      queryClient.invalidateQueries({
-        queryKey: chatKey.list({ label: 'messages', conversationId }),
-      }).then()
-
-      // Also invalidate conversations to update last message
       queryClient
         .invalidateQueries({
-          queryKey: chatKey.list({ label: 'contacts' }),
+          queryKey: chatKey.all,
         })
         .then()
     } catch (error) {
@@ -97,19 +90,6 @@ export default function MessagesList({ conversationId }: Props) {
       console.error('Failed to send message:', error)
     }
   }
-
-  useEffect(() => {
-    if (isConnected) {
-      const unsubscribeNotify = subscribe(`conversation.${conversationId}`, () => {
-        queryClient.invalidateQueries({ queryKey: notificationKey.all }).then()
-        queryClient.invalidateQueries({ queryKey: chatKey.all }).then()
-      })
-
-      return () => {
-        unsubscribeNotify()
-      }
-    }
-  }, [isConnected, subscribe, conversationId, queryClient])
 
   return (
     <GiftedChat
