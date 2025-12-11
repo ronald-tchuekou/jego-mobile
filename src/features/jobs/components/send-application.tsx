@@ -4,20 +4,21 @@ import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
-import { jobKey, userCVKey } from '@/src/lib/query-kye'
+import { applicationKey, jobKey, userCVKey } from '@/src/lib/query-kye'
 import { getFileTypeName } from '@/src/lib/utils'
 import JobApplicationService from '@/src/services/job-application-service'
 import { JobModel } from '@/src/services/job-service'
 import UserCvService from '@/src/services/user-cv-service'
 import { useAuthStore } from '@/src/stores/auth-store'
-import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet'
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { IconCircle, IconCircleFilled, IconFileCv } from '@tabler/icons-react-native'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
+import { useColorScheme } from 'nativewind'
+import { globalStyles } from '@/src/lib/global-styles'
 
 type Props = {
   job: JobModel | null
@@ -26,12 +27,12 @@ type Props = {
 const SendApplication = ({ job }: Props) => {
   const bottomSheetRef = useRef<BottomSheet>(null)
 
-  const insets = useSafeAreaInsets()
   const router = useRouter()
   const queryClient = useQueryClient()
   const auth = useAuthStore((s) => s.auth)
   const token = auth?.token
   const userId = auth?.user?.id
+  const { colorScheme } = useColorScheme()
 
   const alreadyApplied = !!job && !!userId ? !!job.applications?.some((a) => a.userId === userId) : false
 
@@ -59,7 +60,8 @@ const SendApplication = ({ job }: Props) => {
       })
       closeSheet()
       if (job?.id) {
-        queryClient.invalidateQueries({ queryKey: jobKey.detail(job.id) })
+        queryClient.invalidateQueries({ queryKey: jobKey.all }).then()
+        queryClient.invalidateQueries({ queryKey: applicationKey.all }).then()
       }
     },
     onError: (error) => {
@@ -73,7 +75,7 @@ const SendApplication = ({ job }: Props) => {
     },
   })
 
-  const snapPoints = useMemo(() => ['40%'], [])
+  const snapPoints = useMemo(() => ['50%'], [])
   const cvList = data?.data || []
 
   const openSheet = useCallback(() => {
@@ -116,14 +118,9 @@ const SendApplication = ({ job }: Props) => {
     sendMutation.mutate({ jobId: job.id, resumePath: selectedCvPath, token, userId })
   }
 
-  const renderBackdrop = useCallback(
-    (props: any) => <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} pressBehavior='close' />,
-    [],
-  )
-
   return (
     <>
-      <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: insets.bottom }}>
+      <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: 12 }}>
         {alreadyApplied ? (
           <View className='mt-2 rounded-full border border-jego-border py-3 px-4 bg-jego-card'>
             <Text className='text-center text-sm text-jego-muted-foreground'>Vous avez déjà postulé à ce job.</Text>
@@ -146,14 +143,18 @@ const SendApplication = ({ job }: Props) => {
         ref={bottomSheetRef}
         index={-1}
         snapPoints={snapPoints}
-        backdropComponent={renderBackdrop}
+        backdropComponent={undefined}
         onChange={(i) => setIsOpen(i >= 0)}
         backgroundStyle={{
-          backgroundColor: 'transparent',
+          elevation: 10,
+          borderRadius: 30,
+          borderWidth: 1,
+          borderColor: globalStyles.colors.border[colorScheme === 'dark' ? 'dark' : 'light'],
+          backgroundColor: globalStyles.colors.card[colorScheme === 'dark' ? 'dark' : 'light'],
         }}
-           handleIndicatorStyle={{
-            backgroundColor: 'red',
-           }}
+        handleIndicatorStyle={{
+          backgroundColor: 'red',
+        }}
       >
         <BottomSheetView className='px-5 py-4 bg-jego-card rounded-t-2xl'>
           <Text className='text-xl font-semibold text-jego-foreground'>Envoyer ma candidature</Text>
@@ -221,35 +222,35 @@ const SendApplication = ({ job }: Props) => {
 
           <View className='h-6' />
 
-          {!!cvList?.length && (
-            <HStack className='mb-8' space='md'>
-              <Button
-                action='secondary'
-                variant='outline'
-                size='lg'
-                className='rounded-full flex-1'
-                onPress={closeSheet}
-              >
-                <ButtonText>Annuler</ButtonText>
-              </Button>
-              <Button
-                action='primary'
-                variant='solid'
-                size='lg'
-                className='rounded-full bg-jego-primary flex-1'
-                disabled={!selectedCvPath || sendMutation.isPending || !job}
-                onPress={handleSubmitApplication}
-              >
-                <ButtonText className='text-jego-primary-foreground'>
-                  {sendMutation.isPending ? (
-                    <ButtonSpinner className='text-jego-primary-foreground' />
-                  ) : (
-                    <ButtonText className='text-jego-primary-foreground'>Envoyer</ButtonText>
-                  )}
-                </ButtonText>
-              </Button>
-            </HStack>
-          )}
+          <HStack className='pb-8' space='md'>
+            <Button
+              action='secondary'
+              variant='outline'
+              size='lg'
+              className='rounded-full flex-1'
+              isDisabled={sendMutation.isPending}
+              onPress={closeSheet}
+            >
+              <ButtonText className={'text-jego-secondary-foreground'}>Annuler</ButtonText>
+            </Button>
+            <Button
+              action='primary'
+              variant='solid'
+              size='lg'
+              className='rounded-full bg-jego-primary flex-1'
+              isDisabled={!selectedCvPath || sendMutation.isPending || !job}
+              onPress={handleSubmitApplication}
+            >
+              <ButtonText className='text-jego-primary-foreground'>
+                {sendMutation.isPending ? (
+                  <ButtonSpinner className='text-jego-primary-foreground' />
+                ) : (
+                  <ButtonText className='text-jego-primary-foreground'>Envoyer</ButtonText>
+                )}
+              </ButtonText>
+            </Button>
+          </HStack>
+          <View className={'h-10'} />
         </BottomSheetView>
       </BottomSheet>
     </>

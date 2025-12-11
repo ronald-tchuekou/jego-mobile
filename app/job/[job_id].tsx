@@ -9,24 +9,20 @@ import { CalendarDaysIcon, GlobeIcon, Icon, MailIcon, PhoneIcon } from '@/src/co
 import { VStack } from '@/src/components/ui/vstack'
 import SendApplication from '@/src/features/jobs/components/send-application'
 import useGetJob from '@/src/features/jobs/hooks/use-get-job'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { JobModel, JobStatus } from '@/src/services/job-service'
 import { IconMapPinFilled, IconUsers } from '@tabler/icons-react-native'
 import { Link, useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function JobDetailsScreen() {
-  const insets = useSafeAreaInsets()
-
   const { job_id } = useLocalSearchParams<{ job_id: string }>()
-  const height = getStatusBarHeight()
   const { job, isLoading } = useGetJob(job_id)
 
   return (
-    <View className='flex-1 bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
+    <SafeAreaView className='flex-1 bg-jego-card'>
+      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border'>
         <BackButton />
         <VStack className='flex-1'>
           <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
@@ -35,7 +31,7 @@ export default function JobDetailsScreen() {
           <Text className='text-sm text-typography-600'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
         </VStack>
       </HStack>
-      <ScrollView className='flex-1'>
+      <ScrollView className='flex-1 bg-jego-background' contentContainerClassName={'bg-jego-background'}>
         {isLoading ? (
           <LoaderContent />
         ) : !job ? (
@@ -46,7 +42,7 @@ export default function JobDetailsScreen() {
         <View className='h-20' />
       </ScrollView>
       <SendApplication job={job} />
-    </View>
+    </SafeAreaView>
   )
 }
 
