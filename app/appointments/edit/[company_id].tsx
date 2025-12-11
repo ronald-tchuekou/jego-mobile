@@ -19,7 +19,6 @@ import {
   EditAppointmentSchema,
 } from '@/src/features/appointments/schemas/edit-appointment-schema'
 import { CompanyInfo } from '@/src/features/companies/components/company-info'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { formatDate } from '@/src/lib/utils'
 import CompanyAppointmentRequestService from '@/src/services/company-appointment-request-service'
 import { useAuthStore } from '@/src/stores/auth-store'
@@ -28,19 +27,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Platform, ScrollView, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import { cnBase } from 'tailwind-variants'
+import { appointmentKey } from '@/src/lib/query-kye'
+import { ScrollView } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function EditAppointmentScreen() {
   const { company_id } = useLocalSearchParams<{ company_id: string }>()
-  const height = getStatusBarHeight()
   const router = useRouter()
   const auth = useAuthStore((s) => s.auth)
   const queryClient = useQueryClient()
-  const insets = useSafeAreaInsets()
 
   const form = useForm<EditAppointmentSchema>({
     resolver: zodResolver(editAppointmentSchema),
@@ -60,7 +59,7 @@ export default function EditAppointmentScreen() {
     },
     onSuccess: () => {
       // Optionally invalidate related queries
-      queryClient.invalidateQueries({ queryKey: ['appointments'] })
+      queryClient.invalidateQueries({ queryKey: appointmentKey.all }).then()
       Toast.show({
         type: 'success',
         text1: 'Rendez-vous envoyé',
@@ -81,18 +80,17 @@ export default function EditAppointmentScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <View className='flex-1 bg-jego-background'>
-      <HStack
-        space='md'
-        className='p-4 bg-jego-card border-b border-jego-border items-center'
-        style={{ paddingTop: height + 10 }}
-      >
+    <SafeAreaView className='flex-1 bg-jego-card'>
+      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border items-center' style={{}}>
         <BackButton />
         <Text className='font-semibold text-xl text-jego-foreground'>Prendre rendez-vous</Text>
       </HStack>
-
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-        <ScrollView keyboardShouldPersistTaps='handled' className='flex-1' contentContainerClassName='p-4'>
+      <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
+        <ScrollView
+          keyboardShouldPersistTaps='handled'
+          className='flex-1 bg-jego-background'
+          contentContainerClassName='p-4 bg-jego-background'
+        >
           <VStack space='md'>
             {/* Company info */}
             <VStack space='sm' className='mb-5'>
@@ -206,7 +204,7 @@ export default function EditAppointmentScreen() {
             <View className='h-20 w-full' />
           </VStack>
         </ScrollView>
-        <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: insets.bottom }}>
+        <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: 12 }}>
           <Button
             action='primary'
             variant='solid'
@@ -220,6 +218,6 @@ export default function EditAppointmentScreen() {
           </Button>
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   )
 }
