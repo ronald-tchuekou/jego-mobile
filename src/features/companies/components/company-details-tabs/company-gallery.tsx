@@ -15,7 +15,7 @@ const CompanyGallery = ({ company }: Props) => {
   const router = useRouter()
 
   const openImage = (image: string, id: string) => {
-    router.push(`/preview/image?url=${image}&tag=${id}`)
+    router.push(`/preview/image?url=${image}&tag=${id}&title=${company.name}`)
   }
 
   return (

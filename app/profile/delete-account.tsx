@@ -29,6 +29,7 @@ import { ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import Toast from 'react-native-toast-message'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function DeleteAccountScreen() {
   const router = useRouter()
@@ -72,15 +73,17 @@ export default function DeleteAccountScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }} className='bg-jego-card'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border'>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Supprimer le compte
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Cette action est irréversible.</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer withTopInset={false}>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Supprimer le compte
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Cette action est irréversible.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView

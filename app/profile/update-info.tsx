@@ -6,7 +6,7 @@ import {
   FormControlErrorIcon,
   FormControlErrorText,
   FormControlLabel,
-  FormControlLabelText
+  FormControlLabelText,
 } from '@/src/components/ui/form-control'
 import { HStack } from '@/src/components/ui/hstack'
 import { Input, InputField } from '@/src/components/ui/input'
@@ -14,7 +14,7 @@ import { VStack } from '@/src/components/ui/vstack'
 import {
   defaultUpdateUserInfoValue,
   updateUserInfoSchema,
-  type UpdateUserInfoSchema
+  type UpdateUserInfoSchema,
 } from '@/src/features/profile/schemas/update-user-info-schema'
 import UserService from '@/src/services/user-service'
 import { useAuthStore } from '@/src/stores/auth-store'
@@ -28,6 +28,7 @@ import { ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function UpdateUserInfoScreen() {
   const router = useRouter()
@@ -83,15 +84,18 @@ export default function UpdateUserInfoScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }} className='bg-jego-card'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border'>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Information personnelles
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Mettez à jour vos informations de profil.</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer withTopInset={false}>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Information personnelles
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Mettez à jour vos informations de profil.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
+
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView
           keyboardShouldPersistTaps='handled'

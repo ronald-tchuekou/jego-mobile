@@ -1,21 +1,19 @@
 import { SearchInput } from '@/src/components/base/search-input'
 import { Button, ButtonIcon } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
-import { VStack } from '@/src/components/ui/vstack'
 import ListCompanies from '@/src/features/companies/components/list-companies'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { globalStyles } from '@/src/lib/global-styles'
 import { FilterIcon } from 'lucide-react-native'
 import { useState } from 'react'
 import { Text, View } from 'react-native'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function CompaniesScreen() {
-  const height = getStatusBarHeight()
   const [search, setSearch] = useState('')
 
   return (
     <View className='flex-1 bg-jego-background'>
-      <VStack className='p-4 bg-jego-card border-b border-jego-border' space='md' style={{ paddingTop: height + 10 }}>
+      <HeaderContainer>
         <Text className='text-3xl font-bold text-jego-card-foreground'>Entreprises</Text>
         <HStack className='gap-2'>
           <SearchInput className='flex-1' placeholder='Rechercher une entreprise...' onChangeText={setSearch} />
@@ -29,7 +27,7 @@ export default function CompaniesScreen() {
             <ButtonIcon as={FilterIcon} size='lg' />
           </Button>
         </HStack>
-      </VStack>
+      </HeaderContainer>
       <ListCompanies search={search} />
     </View>
   )

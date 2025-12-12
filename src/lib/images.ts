@@ -7,4 +7,5 @@ export const IMAGES = {
   default_company_logo: require('../../assets/images/company-image.webp'),
   default_user_avatar: require('../../assets/images/user-avatar.webp'),
   default_company_banner_image: require('../../assets/images/company-banner-image.webp'),
+  image_loader: require('../../assets/images/image_loader.gif'),
 }

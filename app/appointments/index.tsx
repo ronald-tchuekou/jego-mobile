@@ -8,32 +8,33 @@ import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
 import useGetAppointments from '@/src/features/appointments/hooks/use-get-appointments'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { IconCalendar } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function AppointmentsListScreen() {
-  const height = getStatusBarHeight()
   const { appointments, isLoading, refetch, isRefetching } = useGetAppointments({
     filters: { page: 1, limit: 30 },
   })
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Mes rendez-vous
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>
-            Consultez vos rendez-vous pris avec les entreprises.
-          </Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Mes rendez-vous
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>
+              Consultez vos rendez-vous pris avec les entreprises.
+            </Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       {isLoading ? (
         <View className='flex-1'>
@@ -51,7 +52,7 @@ export default function AppointmentsListScreen() {
                 <Link href={`/appointments/${appointment.id}`}>
                   <HStack className='items-start p-3' space='md'>
                     <Avatar size='md' className='size-12 flex-none'>
-                      <AvatarImage source={logo} alt={appointment.company?.name || ''} />
+                      <AvatarImage source={logo as any} alt={appointment.company?.name || ''} />
                     </Avatar>
                     <VStack className='flex-1' space='xs'>
                       <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>

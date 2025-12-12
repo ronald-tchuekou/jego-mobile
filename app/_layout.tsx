@@ -18,8 +18,8 @@ const AppStack = () => {
       <Stack>
         <Stack.Protected guard={!!auth}>
           <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-          <Stack.Screen name='post/[post_id]' options={{ headerShown: false }} />
-          <Stack.Screen name='post/video/[post_id]' options={{ headerShown: false }} />
+          <Stack.Screen name='post/[post_id]/index' options={{ headerShown: false }} />
+          <Stack.Screen name='post/[post_id]/video/index' options={{ headerShown: false }} />
           <Stack.Screen name='company/[company_id]' options={{ headerShown: false }} />
           <Stack.Screen name='chat/[conversation_id]' options={{ headerShown: false }} />
           <Stack.Screen name='appointments/index' options={{ headerShown: false }} />

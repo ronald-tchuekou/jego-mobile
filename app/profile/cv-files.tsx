@@ -6,7 +6,6 @@ import { Card } from '@/src/components/ui/card'
 import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { userCVKey } from '@/src/lib/query-kye'
 import { formatDate, getFileTypeName } from '@/src/lib/utils'
 import FileService from '@/src/services/file-service'
@@ -18,9 +17,9 @@ import * as DocumentPicker from 'expo-document-picker'
 import React from 'react'
 import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Toast from 'react-native-toast-message'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function UserCvFilesScreen() {
-  const height = getStatusBarHeight()
   const auth = useAuthStore((s) => s.auth)
   const queryClient = useQueryClient()
 
@@ -146,15 +145,17 @@ export default function UserCvFilesScreen() {
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Mes CV
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Gérez vos fichiers CV pour vos candidatures.</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Mes CV
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Gérez vos fichiers CV pour vos candidatures.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       <ScrollView className='flex-1' contentContainerClassName='p-4'>
         <VStack space='lg'>

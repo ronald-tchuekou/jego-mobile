@@ -1,7 +1,6 @@
 import * as Clipboard from 'expo-clipboard'
 import { Platform } from 'react-native'
 import Toast from 'react-native-toast-message'
-import { BufferConfig, SelectedTrackType } from 'react-native-video'
 import { env } from './env'
 import { IMAGES } from './images'
 
@@ -31,17 +30,9 @@ export function formatDate(date: string | Date | null, type: 'date' | 'time' = '
       : Intl.DateTimeFormat('fr-FR', {
           hour: 'numeric',
           minute: 'numeric',
-      })
-  
-  return dateFormater.format(new Date(date))
-}
+        })
 
-export function compactDate(date: number| Date) {
-  return Intl.DateTimeFormat('fr-FR', {
-    month: 'numeric',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(date)
+  return dateFormater.format(new Date(date))
 }
 
 export function formatPrice(price: number) {
@@ -62,24 +53,7 @@ export function getColorScheme(theme: 'light' | 'dark' | undefined) {
   }
 }
 
-export const textTracksSelectionBy = SelectedTrackType.INDEX
-export const audioTracksSelectionBy = SelectedTrackType.INDEX
-
-export const isIos = Platform.OS === 'ios'
-
-export const isAndroid = Platform.OS === 'android'
-
-export const bufferConfig: BufferConfig = {
-  minBufferMs: 15000,
-  maxBufferMs: 50000,
-  bufferForPlaybackMs: 2500,
-  bufferForPlaybackAfterRebufferMs: 5000,
-  live: {
-    targetOffsetMs: 500,
-  },
-}
-
-export function getImageLink(path: string) {
+export function getFullUrl(path: string) {
   return path.startsWith('http') ? path : `${env.API_URL}/v1/${path}`
 }
 
@@ -122,7 +96,9 @@ export function pluralize(word: string, count: number) {
  * @returns The URI of the company logo
  */
 export function getCompanyLogoUri(logo?: string | null) {
-  return logo ? { uri: getImageLink(logo) } : IMAGES.default_company_logo
+  return logo
+    ? { uri: getFullUrl(logo), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
+    : IMAGES.default_company_logo
 }
 
 /**
@@ -131,7 +107,9 @@ export function getCompanyLogoUri(logo?: string | null) {
  * @returns The URI of the user profile image
  */
 export function getUserProfileImageUri(profileImage?: string | null) {
-  return profileImage ? { uri: getImageLink(profileImage) } : IMAGES.default_user_avatar
+  return profileImage
+    ? { uri: getFullUrl(profileImage), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
+    : IMAGES.default_user_avatar
 }
 
 /**
@@ -140,7 +118,7 @@ export function getUserProfileImageUri(profileImage?: string | null) {
  * @returns The URI of the image
  */
 export function getImageUri(path: string) {
-  return { uri: getImageLink(path) }
+  return { uri: getFullUrl(path), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
 }
 
 /**
@@ -149,7 +127,7 @@ export function getImageUri(path: string) {
  * @returns The URI of the video
  */
 export function getVideoUri(path: string) {
-  return getImageLink(path).replace('storage', 'stream-v2')
+  return getFullUrl(path).replace('storage', 'stream-v2')
 }
 
 /**
@@ -166,7 +144,7 @@ export function copyToClipboard(text: string) {
         text1: 'Texte copié avec succès',
       })
     })
-    .catch((error) => {
+    .catch(() => {
       Toast.show({
         type: 'error',
         text1: 'Erreur lors de la copie',

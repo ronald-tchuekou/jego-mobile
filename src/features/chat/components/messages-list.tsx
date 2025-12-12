@@ -4,7 +4,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { globalStyles } from '@/src/lib/global-styles'
 import { IMAGES } from '@/src/lib/images'
 import { chatKey } from '@/src/lib/query-kye'
-import { getImageLink } from '@/src/lib/utils'
+import { getFullUrl } from '@/src/lib/utils'
 import ChatService, { MessageType } from '@/src/services/chat-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { IconSend2 } from '@tabler/icons-react-native'
@@ -43,9 +43,7 @@ export default function MessagesList({ conversationId }: Props) {
           user: {
             _id: message.sender.id,
             name: `${message.sender.firstName} ${message.sender.lastName}`.trim(),
-            avatar: message.sender.profileImage
-              ? getImageLink(message.sender.profileImage)
-              : IMAGES.default_user_avatar,
+            avatar: message.sender.profileImage ? getFullUrl(message.sender.profileImage) : IMAGES.default_user_avatar,
           },
         }) as IMessage,
     ) || []
@@ -104,7 +102,7 @@ export default function MessagesList({ conversationId }: Props) {
       user={{
         _id: user?.id || 1,
         name: `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
-        avatar: user?.profileImage ? getImageLink(user?.profileImage) : IMAGES.default_user_avatar,
+        avatar: user?.profileImage ? getFullUrl(user?.profileImage) : IMAGES.default_user_avatar,
       }}
       renderChatEmpty={() => (isLoading ? <LoaderContent /> : <EmptyContent text='.' />)}
       renderBubble={(props) => (

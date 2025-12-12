@@ -40,7 +40,9 @@ export default function PostItem({ item, showDetails = true }: { item: PostModel
         </HStack>
       </Link>
       <ExpandableText text={item.description} className='px-4 pb-2' postId={item.id} />
-      {mediaType === 'image' && medias.length > 0 && <PostImages medias={medias} />}
+      {mediaType === 'image' && medias.length > 0 && (
+        <PostImages medias={medias} author={item.user.company?.name || item.user.displayName} />
+      )}
       {mediaType === 'video' && medias.length > 0 && medias[0] && <PostVideo video={medias[0]} post_id={item.id} />}
       <HStack className='justify-between px-1 pb-1'>
         <LikePostButton post={item} />

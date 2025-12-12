@@ -8,9 +8,10 @@ import { cnBase } from 'tailwind-variants'
 
 type Props = {
   post: PostModel
+  orientation?: 'horizontal' | 'vertical'
 }
 
-export function LikePostButton({ post }: Props) {
+export function LikePostButton({ post, orientation = 'horizontal' }: Props) {
   const [likes, setLikes] = useState<number>(post.likeCount)
   const [isLiked, setIsLiked] = useState(false)
 
@@ -32,6 +33,25 @@ export function LikePostButton({ post }: Props) {
     }
   }
 
+  if (orientation === 'vertical')
+    return (
+      <Button
+        size='lg'
+        variant='link'
+        style={{ height: 50 }}
+        onPress={handleClick}
+        className='p-4 gap-0 flex-col items-center'
+      >
+        <ButtonIcon
+          as={HeartIcon}
+          className={cnBase('stroke-white fill-white', isLiked ? 'fill-jego-primary stroke-jego-primary' : undefined)}
+        />
+        <ButtonText size='lg' className='text-white'>
+          {compactNumber(likes)}
+        </ButtonText>
+      </Button>
+    )
+
   return (
     <Button size='lg' variant='link' onPress={handleClick} className='px-4'>
       <ButtonText size='lg' className='text-jego-muted-foreground'>
@@ -40,7 +60,7 @@ export function LikePostButton({ post }: Props) {
       <ButtonIcon
         as={HeartIcon}
         className={cnBase(
-          'stroke-jego-muted-foreground',
+          'stroke-jego-muted-foreground fill-jego-muted-foreground',
           isLiked ? 'fill-jego-primary stroke-jego-primary' : undefined,
         )}
       />

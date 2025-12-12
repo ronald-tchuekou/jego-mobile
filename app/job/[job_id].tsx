@@ -15,6 +15,7 @@ import { IconMapPinFilled, IconUsers } from '@tabler/icons-react-native'
 import { Link, useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function JobDetailsScreen() {
   const { job_id } = useLocalSearchParams<{ job_id: string }>()
@@ -22,15 +23,18 @@ export default function JobDetailsScreen() {
 
   return (
     <SafeAreaView className='flex-1 bg-jego-card'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border'>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            {job?.title || '- - -'}
-          </Text>
-          <Text className='text-sm text-typography-600'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer withTopInset={false}>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              {job?.title || '- - -'}
+            </Text>
+            <Text className='text-sm text-typography-600'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
+
       <ScrollView className='flex-1 bg-jego-background' contentContainerClassName={'bg-jego-background'}>
         {isLoading ? (
           <LoaderContent />
@@ -119,7 +123,10 @@ const Content = ({ job }: { job: JobModel }) => {
                 <HStack space='md'>
                   {/* Company Avatar */}
                   <Avatar size='lg' className='size-20'>
-                    <AvatarImage source={getCompanyLogoUri(job.companyLogo || undefined)} alt={job.companyName || ''} />
+                    <AvatarImage
+                      source={getCompanyLogoUri(job.companyLogo || undefined) as any}
+                      alt={job.companyName || ''}
+                    />
                   </Avatar>
 
                   {/* Company Info */}

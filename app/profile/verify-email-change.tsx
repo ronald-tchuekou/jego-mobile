@@ -16,7 +16,6 @@ import {
   type VerifyEmailChangeSchema,
   verifyEmailChangeSchema,
 } from '@/src/features/profile/schemas/update-email-schema'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import UserService from '@/src/services/user-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,9 +27,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { ScrollView, Text, View } from 'react-native'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import Toast from 'react-native-toast-message'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function VerifyEmailChangeScreen() {
-  const height = getStatusBarHeight()
   const router = useRouter()
   const auth = useAuthStore((s) => s.auth)
   const revalidate = useAuthStore((s) => s.revalidate)
@@ -72,17 +71,19 @@ export default function VerifyEmailChangeScreen() {
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Vérifier le changement d&apos;e-mail
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>
-            Entrez le code envoyé à votre nouvelle adresse e-mail.
-          </Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Vérifier le changement d&apos;e-mail
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>
+              Entrez le code envoyé à votre nouvelle adresse e-mail.
+            </Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView keyboardShouldPersistTaps='handled' className='flex-1' contentContainerClassName='p-4'>

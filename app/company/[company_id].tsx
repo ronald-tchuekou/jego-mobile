@@ -5,16 +5,15 @@ import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
 import { CompanyDetailsCard } from '@/src/features/companies/components/company-details-card'
 import { CompanyTabs } from '@/src/features/companies/components/company-details-tabs/company-tabs'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { companyKey } from '@/src/lib/query-kye'
 import CompanyService from '@/src/services/company-service'
 import { useQuery } from '@tanstack/react-query'
 import { useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function PostDetailsScreen() {
   const { company_id } = useLocalSearchParams<{ company_id: string }>()
-  const height = getStatusBarHeight()
 
   const { data, isLoading } = useQuery({
     queryKey: companyKey.detail(company_id),
@@ -27,15 +26,18 @@ export default function PostDetailsScreen() {
 
   return (
     <View className='flex-1 bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            {data?.name || '- - -'}
-          </Text>
-          <Text className='text-sm text-jego-primary'>{data?.category?.name || '- - -'}</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              {data?.name || '- - -'}
+            </Text>
+            <Text className='text-sm text-jego-primary'>{data?.category?.name || '- - -'}</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
+
       <ScrollView className='flex-1 p-4'>
         {isLoading ? (
           <LoaderContent />

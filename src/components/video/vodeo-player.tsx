@@ -1,151 +1,104 @@
-import { useEvent } from 'expo'
 import { useVideoPlayer, VideoView } from 'expo-video'
-import { PlayIcon } from 'lucide-react-native'
-import { memo, useRef, useState } from 'react'
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { AlertCircleIcon, PlayIcon } from 'lucide-react-native'
+import { Platform, Text, TouchableOpacity, View } from 'react-native'
 import { Center } from '../ui/center'
-
-const { width, height } = Dimensions.get('window')
+import { Icon } from '@/src/components/ui/icon'
+import { cnBase } from 'tailwind-variants'
+import { useEvent } from 'expo'
+import { Spinner } from '@/src/components/ui/spinner'
+import { PlayerIndicator } from '@/src/components/video/player-indicator'
+import { Slider, SliderFilledTrack, SliderTrack } from '@/src/components/ui/slider'
 
 type Props = {
   sourceUri: string
 }
 
 function VideoPlayer({ sourceUri }: Props) {
-  // Refs
-  const wasPlayingRef = useRef(false)
-
-  // States
-  const [paused] = useState(false)
-  const [progressBarWidth, setProgressBarWidth] = useState(0)
-  const [isSeeking, setIsSeeking] = useState(false)
-  const [seekingProgress, setSeekingProgress] = useState<number | null>(null)
-
   const player = useVideoPlayer(
-    'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    {
+      uri: sourceUri,
+      useCaching: Platform.OS === 'android',
+    },
     (player) => {
       player.play()
-      player.addListener('statusChange', (status) => {
-        console.log('status', status)
-      })
+      player.loop = true
     },
   )
 
-  // Reactive player states
+  // evets
   const { isPlaying } = useEvent(player, 'playingChange', { isPlaying: player.playing })
-  // Trigger re-renders on time updates; read values from the player
-  useEvent(player, 'timeUpdate')
-  const currentTime = player.currentTime ?? 0
-  // Some type definitions may not expose duration; fall back to 0 if missing
-  const duration = (player as any).duration ?? 0
-
-  const effectiveProgress =
-    duration > 0 ? (isSeeking && seekingProgress !== null ? seekingProgress : currentTime / duration) : 0
-
-  function clamp(value: number, min: number, max: number) {
-    'worklet'
-    return Math.max(min, Math.min(max, value))
-  }
-
-  function progressFromX(x: number) {
-    if (progressBarWidth <= 0) return 0
-    return clamp(x / progressBarWidth, 0, 1)
-  }
-
-  function handleSeekPreview(x: number) {
-    if (duration <= 0) return
-    const nextProgress = progressFromX(x)
-    setSeekingProgress(nextProgress)
-  }
-
-  function handleSeekCommit(x: number) {
-    if (duration <= 0) return
-    const nextProgress = progressFromX(x)
-    const nextTime = nextProgress * duration
-    player.currentTime = nextTime
-    setSeekingProgress(null)
-    setIsSeeking(false)
-    if (wasPlayingRef.current) {
-      player.play()
-      wasPlayingRef.current = false
-    }
-  }
-
-  function handleSeekStart(x: number) {
-    if (duration <= 0) return
-    wasPlayingRef.current = isPlaying
-    if (isPlaying) {
-      player.pause()
-    }
-    setIsSeeking(true)
-    handleSeekPreview(x)
-  }
+  const { status, error } = useEvent(player, 'statusChange', { status: player.status })
 
   return (
-    <TouchableOpacity style={styles.video} className='relative'>
-      <VideoView player={player} nativeControls={false} style={styles.video} />
-      {paused && (
-        <View className='absolute top-0 left-0 right-0 bottom-0 justify-center items-center'>
-          <Center className='bg-jego-primary/20 rounded-full p-3'>
-            <PlayIcon fill={'#f00'} color={'#f00'} size={40} />
-          </Center>
-        </View>
-      )}
-      {/* Progress bar overlay */}
-      <View
-        className='absolute left-0 right-0'
-        style={styles.progressContainer}
-        onLayout={(e) => setProgressBarWidth(e.nativeEvent.layout.width)}
-        onStartShouldSetResponder={() => true}
-        onMoveShouldSetResponder={() => true}
-        onResponderGrant={(e) => handleSeekStart(e.nativeEvent.locationX)}
-        onResponderMove={(e) => handleSeekPreview(e.nativeEvent.locationX)}
-        onResponderRelease={(e) => handleSeekCommit(e.nativeEvent.locationX)}
-      >
-        <View style={styles.progressTrack} />
-        <View style={[styles.progressFill, { width: effectiveProgress * progressBarWidth }]} />
-        <View style={[styles.progressThumb, { left: effectiveProgress * progressBarWidth - THUMB_RADIUS }]} />
+    <>
+      <View className='flex-1 relative'>
+        {error ? (
+          <View className='flex-1 flex items-center justify-center gap-3 text-muted-foreground p-16'>
+            <Icon
+              as={AlertCircleIcon}
+              size={'lg'}
+              style={{ width: 50, height: 50 }}
+              className='text-jego-muted-foreground'
+            />
+            <Text className='text-base text-jego-muted-foreground text-center'>
+              Nous avons rencontré un problème lors de la récupération de la vidéo.
+            </Text>
+          </View>
+        ) : (
+          <VideoView player={player} nativeControls={false} style={{ flex: 1 }} className={'bg-black'} />
+        )}
+        {!error && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              if (!isPlaying) {
+                player.play()
+              } else {
+                player.pause()
+              }
+            }}
+            className={cnBase(
+              'absolute top-0 left-0 right-0 bottom-0 justify-center items-center bg-black/40',
+              (isPlaying || status !== 'loading') && 'bg-transparent',
+            )}
+          >
+            {status === 'loading' ? (
+              <Center className='bg-white/30 rounded-full border border-white/70 p-5'>
+                <Spinner className={'text-jego-primary'} size={'large'} />
+              </Center>
+            ) : !isPlaying ? (
+              <Center className='bg-white/30 rounded-full border border-white/70 p-5'>
+                <Icon
+                  as={PlayIcon}
+                  className={'text-jego-primary fill-jego-primary'}
+                  style={{ width: 40, height: 40 }}
+                />
+              </Center>
+            ) : null}
+          </TouchableOpacity>
+        )}
       </View>
-    </TouchableOpacity>
+      <View className={'w-full p-1'}>
+        {status !== 'loading' && !error ? (
+          <PlayerIndicator player={player} />
+        ) : (
+          <Slider
+            defaultValue={player.currentTime}
+            value={player.currentTime}
+            maxValue={player.duration}
+            size='sm'
+            orientation='horizontal'
+            isDisabled={false}
+            isReversed={false}
+          >
+            <SliderTrack className={'bg-white/50'}>
+              <SliderFilledTrack className={'bg-jego-primary'} />
+            </SliderTrack>
+          </Slider>
+        )}
+      </View>
+    </>
   )
 }
 
-const THUMB_RADIUS = 6
-
-const styles = StyleSheet.create({
-  video: {
-    width: width,
-    height: height - 250,
-  },
-  progressContainer: {
-    bottom: 12,
-    height: 24,
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  },
-  progressTrack: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.35)',
-  },
-  progressFill: {
-    position: 'absolute',
-    left: 16,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#FFFFFF',
-  },
-  progressThumb: {
-    position: 'absolute',
-    top: (24 - THUMB_RADIUS * 2) / 2,
-    width: THUMB_RADIUS * 2,
-    height: THUMB_RADIUS * 2,
-    borderRadius: THUMB_RADIUS,
-    backgroundColor: '#FFFFFF',
-  },
-})
-
-export default memo(VideoPlayer)
+export default VideoPlayer

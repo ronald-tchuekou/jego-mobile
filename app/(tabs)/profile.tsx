@@ -1,32 +1,33 @@
 import { Card } from '@/src/components/ui/card'
 import { Icon } from '@/src/components/ui/icon'
-import { VStack } from '@/src/components/ui/vstack'
 import { ProfileImage } from '@/src/features/profile/components/profile-image'
 import { LogoutModal, LogoutModalRef } from '@/src/features/profile/modals/logout-modal'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
-import { IconBriefcase, IconCalendar, IconFileCv, IconHeartHandshake, IconLock, IconLogout, IconTrash } from '@tabler/icons-react-native'
+import {
+  IconBriefcase,
+  IconCalendar,
+  IconFileCv,
+  IconHeartHandshake,
+  IconLock,
+  IconLogout,
+  IconTrash,
+} from '@tabler/icons-react-native'
 import Constants from 'expo-constants'
 import { useRouter } from 'expo-router'
 import { MailIcon, UserIcon } from 'lucide-react-native'
 import React, { useRef } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function ProfileScreen() {
   const logoutModalRef = useRef<LogoutModalRef>(null)
-
-  const height = getStatusBarHeight()
   const router = useRouter()
 
   return (
     <View className='flex-1 bg-jego-background'>
-      <VStack
-        className='px-4 pb-4 bg-jego-card border-b border-jego-border'
-        space='md'
-        style={{ paddingTop: height + 10 }}
-      >
+      <HeaderContainer>
         <Text className='text-3xl font-bold text-jego-card-foreground'>Gestion du compte</Text>
-      </VStack>
+      </HeaderContainer>
       <ScrollView className='p-4'>
         <ProfileImage />
 

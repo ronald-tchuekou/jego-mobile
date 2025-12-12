@@ -12,9 +12,10 @@ import { cnBase } from 'tailwind-variants'
 
 type Props = {
   post: PostModel
+  orientation?: 'horizontal' | 'vertical'
 }
 
-export function SharePostButton({ post }: Props) {
+export function SharePostButton({ post, orientation = 'horizontal' }: Props) {
   const auth = useAuthStore((state) => state.auth)
   const [shares, setShares] = useState<number>(post.shareCount)
 
@@ -35,6 +36,22 @@ export function SharePostButton({ post }: Props) {
     setShares((s) => s + 1)
     mutate(post.id)
   }
+
+  if (orientation === 'vertical')
+    return (
+      <Button
+        size='lg'
+        variant='link'
+        style={{ height: 50 }}
+        onPress={handleClick}
+        className='p-4 gap-0 flex-col items-center'
+      >
+        <ButtonIcon as={ShareIcon} className={cnBase('stroke-white ')} />
+        <ButtonText size='lg' className='text-white'>
+          {compactNumber(shares)}
+        </ButtonText>
+      </Button>
+    )
 
   return (
     <Button size='lg' variant='link' onPress={handleClick} className='px-4' disabled={isPending}>

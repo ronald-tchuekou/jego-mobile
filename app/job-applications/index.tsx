@@ -5,29 +5,28 @@ import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
 import JobApplicationItem from '@/src/features/job-applications/components/job-application-item'
 import useGetJobApplications from '@/src/features/job-applications/hooks/use-get-job-applications'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function JobApplicationsListScreen() {
-  const height = getStatusBarHeight()
   const { applications, isLoading, refetch, isRefetching } = useGetJobApplications({
     filters: { page: 1, limit: 30 },
   })
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Mes candidatures
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>
-            Toutes vos candidatures de jobs.
-          </Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Mes candidatures
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Toutes vos candidatures de jobs.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       {isLoading ? (
         <View className='flex-1'>
@@ -48,4 +47,3 @@ export default function JobApplicationsListScreen() {
     </View>
   )
 }
-

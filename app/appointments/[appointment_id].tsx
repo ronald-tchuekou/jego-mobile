@@ -7,15 +7,14 @@ import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
 import useGetAppointment from '@/src/features/appointments/hooks/use-get-appointment'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { IconCalendar, IconMail, IconPhone } from '@tabler/icons-react-native'
 import { useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ScrollView, Text, View } from 'react-native'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function AppointmentDetailsScreen() {
-  const height = getStatusBarHeight()
   const { appointment_id } = useLocalSearchParams<{ appointment_id: string }>()
   const { appointment, isLoading } = useGetAppointment(appointment_id)
 
@@ -23,15 +22,17 @@ export default function AppointmentDetailsScreen() {
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Détails du rendez-vous
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>Informations complètes sur votre rendez-vous.</Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Détails du rendez-vous
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Informations complètes sur votre rendez-vous.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       {isLoading ? (
         <LoaderContent />
@@ -40,7 +41,7 @@ export default function AppointmentDetailsScreen() {
           <Card className='p-4'>
             <HStack className='items-start' space='md'>
               <Avatar size='md' className='size-12 flex-none'>
-                <AvatarImage source={logo} alt={appointment?.company?.name || ''} />
+                <AvatarImage source={logo as any} alt={appointment?.company?.name || ''} />
               </Avatar>
               <VStack className='flex-1' space='xs'>
                 <Text className='text-lg font-semibold text-jego-foreground' numberOfLines={1}>

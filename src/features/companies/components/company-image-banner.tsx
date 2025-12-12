@@ -1,6 +1,6 @@
 import { Image } from '@/src/components/ui/image'
 import { IMAGES } from '@/src/lib/images'
-import { getImageLink } from '@/src/lib/utils'
+import { getFullUrl } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
 import { memo, useState } from 'react'
 import { Text, View } from 'react-native'
@@ -15,7 +15,7 @@ const CompanyImageBannerComponent = ({ company, className }: Props) => {
   const [hasError, setHasError] = useState(false)
 
   const companyImageBanner = company?.bannerImage
-    ? { uri: getImageLink(company.bannerImage) }
+    ? { uri: getFullUrl(company.bannerImage) }
     : IMAGES.default_company_banner_image
 
   return (

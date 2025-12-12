@@ -8,33 +8,32 @@ import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
 import useGetUserFollowings from '@/src/features/followings/hooks/use-get-user-followings'
 import { getCompanyLogoUri } from '@/src/lib/utils'
-import { getStatusBarHeight } from '@/src/lib/get-status-bar-height'
 import { IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
 import { MailIcon } from 'lucide-react-native'
 import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
 import { CompanyImageBanner } from '@/src/features/companies/components/company-image-banner'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function FollowingsScreen() {
-  const height = getStatusBarHeight()
   const { followings, isLoading, refetch, isRefetching } = useGetUserFollowings({
     filters: { page: 1, limit: 30 },
   })
 
   return (
     <View style={{ flex: 1 }} className='bg-jego-background'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border' style={{ paddingTop: height + 10 }}>
-        <BackButton />
-        <VStack className='flex-1'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
-            Mes followings
-          </Text>
-          <Text className='text-sm text-jego-muted-foreground'>
-            Toutes les entreprises que vous suivez.
-          </Text>
-        </VStack>
-      </HStack>
+      <HeaderContainer>
+        <HStack space='md'>
+          <BackButton />
+          <VStack className='flex-1'>
+            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+              Mes followings
+            </Text>
+            <Text className='text-sm text-jego-muted-foreground'>Toutes les entreprises que vous suivez.</Text>
+          </VStack>
+        </HStack>
+      </HeaderContainer>
 
       {isLoading ? (
         <View className='flex-1'>
@@ -55,7 +54,7 @@ export default function FollowingsScreen() {
                   <CompanyImageBanner company={company} className={'rounded-t-lg'} />
                   <HStack className='p-3 gap-3'>
                     <Avatar size='md' className='size-12 flex-none'>
-                      <AvatarImage source={companyLogo} alt={company.name} />
+                      <AvatarImage source={companyLogo as any} alt={company.name} />
                     </Avatar>
                     <VStack className='flex-1'>
                       <Text className='font-medium text-lg text-jego-foreground'>{company.name}</Text>
@@ -89,4 +88,3 @@ export default function FollowingsScreen() {
     </View>
   )
 }
-

@@ -1,15 +1,17 @@
 import { Image } from '@/src/components/ui/image'
 import { getImageUri } from '@/src/lib/utils'
 import { MediaModel } from '@/src/services/post-service'
-import { memo, useCallback, useState } from 'react'
+import { useState } from 'react'
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from 'react-native'
 import { useRouter } from 'expo-router'
+import { IMAGES } from '@/src/lib/images'
 
 type Props = {
+  author: string
   medias: MediaModel[]
 }
 
-function PostImagesComponents({ medias }: Props) {
+export function PostImages({ medias, author }: Props) {
   const media = medias[0]
 
   const router = useRouter()
@@ -19,47 +21,39 @@ function PostImagesComponents({ medias }: Props) {
 
   const imageUrl = getImageUri(media.url)
 
-  const onMomentumEnd = useCallback(
-    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const x = e.nativeEvent.contentOffset.x
-      if (width > 0) setPage(Math.round(x / width))
-    },
-    [width],
-  )
+  const onMomentumEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const x = e.nativeEvent.contentOffset.x
+    if (width > 0) setPage(Math.round(x / width))
+  }
 
-  const getItemLayout = useCallback(
-    (_: unknown, index: number) => ({ length: width || 0, offset: (width || 0) * index, index }),
-    [width],
-  )
+  const getItemLayout = (_: unknown, index: number) => ({ length: width || 0, offset: (width || 0) * index, index })
 
-  const renderItem = useCallback(
-    ({ item }: { item: MediaModel }) => {
-      const imgUrl = getImageUri(item.url)
-      return (
-        <TouchableOpacity
-          onPress={() => router.push(`/preview/image?url=${imgUrl.uri}&tag=${item.id}`)}
-          style={{ width }}
-        >
-          <Image
-            source={imgUrl}
-            style={item.metadata?.aspectRatio ? { aspectRatio: item.metadata?.aspectRatio } : undefined}
-            className={`w-full h-[400px] bg-black ${
-              item.metadata?.aspectRatio ? `aspect-${item.metadata.aspectRatio}` : 'aspect-video'
-            }`}
-            resizeMode='contain'
-            alt={item.name || 'Media'}
-          />
-        </TouchableOpacity>
-      )
-    },
-    [router, width],
-  )
+  const renderItem = ({ item }: { item: MediaModel }) => {
+    const imgUrl = getImageUri(item.url)
+    return (
+      <TouchableOpacity
+        onPress={() => router.push(`/preview/image?url=${imgUrl.uri}&tag=${item.id}&title=${author}`)}
+        style={{ width }}
+      >
+        <Image
+          source={imgUrl}
+          style={item.metadata?.aspectRatio ? { aspectRatio: item.metadata?.aspectRatio } : undefined}
+          className={`w-full h-[400px] bg-black ${
+            item.metadata?.aspectRatio ? `aspect-${item.metadata.aspectRatio}` : 'aspect-video'
+          }`}
+          defaultSource={IMAGES.image_loader}
+          resizeMode='contain'
+          alt={item.name || 'Media'}
+        />
+      </TouchableOpacity>
+    )
+  }
 
   if (medias.length === 1)
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => router.push(`/preview/image?url=${imageUrl.uri}&tag=${media.id}`)}
+        onPress={() => router.push(`/preview/image?url=${imageUrl.uri}&tag=${media.id}&title=${author}`)}
         className={`w-full h-[400px] bg-black mb-4 ${
           media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'
         }`}
@@ -70,6 +64,7 @@ function PostImagesComponents({ medias }: Props) {
           className={`w-full h-[400px] bg-black mb-4 ${
             media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'
           }`}
+          defaultSource={IMAGES.image_loader}
           resizeMode='contain'
           alt={media.name || 'Media'}
         />
@@ -107,5 +102,3 @@ function PostImagesComponents({ medias }: Props) {
     </View>
   )
 }
-
-export const PostImages = memo(PostImagesComponents)

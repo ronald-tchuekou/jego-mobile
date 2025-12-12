@@ -34,6 +34,7 @@ import { cnBase } from 'tailwind-variants'
 import { appointmentKey } from '@/src/lib/query-kye'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function EditAppointmentScreen() {
   const { company_id } = useLocalSearchParams<{ company_id: string }>()
@@ -81,10 +82,13 @@ export default function EditAppointmentScreen() {
 
   return (
     <SafeAreaView className='flex-1 bg-jego-card'>
-      <HStack space='md' className='p-4 bg-jego-card border-b border-jego-border items-center' style={{}}>
-        <BackButton />
-        <Text className='font-semibold text-xl text-jego-foreground'>Prendre rendez-vous</Text>
-      </HStack>
+      <HeaderContainer withTopInset={false}>
+        <HStack space='md' className='items-center'>
+          <BackButton />
+          <Text className='font-semibold text-xl text-jego-foreground'>Prendre rendez-vous</Text>
+        </HStack>
+      </HeaderContainer>
+
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView
           keyboardShouldPersistTaps='handled'
