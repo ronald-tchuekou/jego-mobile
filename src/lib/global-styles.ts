@@ -1,40 +1,40 @@
 export const globalStyles = {
   colors: {
     card: {
-      light: '#fafafa',
-      dark: '#221b1b',
+      light: '#FAFAFAFF',
+      dark: '#221B1BFF',
     },
     'card-foreground': {
-      light: '#413030',
-      dark: '#e0e7ff',
+      light: '#413030FF',
+      dark: '#E0E7FFFF',
     },
     background: {
-      light: '#ffffff',
-      dark: '#231f1f',
+      light: '#FFFFFFFF',
+      dark: '#231F1FFF',
     },
     foreground: {
-      light: '#413030',
-      dark: '#ffe5e5',
+      light: '#413030FF',
+      dark: '#FFE5E5FF',
     },
     primary: {
-      light: '#e7000b',
-      dark: '#e7000b',
+      light: '#E7000BFF',
+      dark: '#E7000BFF',
     },
     'primary-foreground': {
-      light: '#fef2f2',
-      dark: '#f9fafb',
+      light: '#FEF2F2FF',
+      dark: '#F9FAFBFF',
     },
     muted: {
-      light: '#f9fafb',
-      dark: '#362626',
+      light: '#F9FAFBFF',
+      dark: '#362626FF',
     },
     'muted-foreground': {
-      light: '#6a7282',
-      dark: '#b09c9c',
+      light: '#6A7282FF',
+      dark: '#B09C9CFF',
     },
     border: {
-      light: '#ebebeb',
-      dark: '#3a2727',
+      light: '#EBEBEBFF',
+      dark: '#3A2727FF',
     },
   },
   button_icon: {
