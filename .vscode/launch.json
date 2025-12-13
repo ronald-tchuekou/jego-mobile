@@ -1,0 +1,46 @@
+{
+   "configurations": [
+      {
+         "name": "Radon IDE panel",
+         "type": "radon-ide",
+         "request": "launch",
+         "appRoot": "./",
+         "env": {
+            "EXPO_PUBLIC_API_URL": "https://dev.api.jego.cm",
+            "EXPO_PUBLIC_APP_URL": "https://dev.jego.cm"
+         },
+         "ios": {},
+         "isExpo": false,
+         "android": {},
+         "usePrebuild": true
+      },
+      {
+         "name": "Radon IDE panel",
+         "type": "radon-ide",
+         "request": "launch",
+         "appRoot": "./",
+         "env": {
+            "EXPO_PUBLIC_API_URL": "https://dev.api.jego.cm",
+            "EXPO_PUBLIC_APP_URL": "https://dev.jego.cm"
+         },
+         "ios": {},
+         "isExpo": false,
+         "android": {},
+         "usePrebuild": true
+      },
+      {
+         "name": "Configuration 1",
+         "type": "radon-ide",
+         "request": "launch",
+         "appRoot": "./",
+         "env": {
+            "EXPO_PUBLIC_API_URL": "https://dev.api.jego.cm",
+            "EXPO_PUBLIC_APP_URL": "https://dev.jego.cm"
+         },
+         "ios": {},
+         "isExpo": false,
+         "android": {},
+         "usePrebuild": true
+      }
+   ]
+}
