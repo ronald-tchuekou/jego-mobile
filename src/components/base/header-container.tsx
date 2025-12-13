@@ -15,7 +15,7 @@ export const HeaderContainer = ({ className, children, withTopInset = true }: Pr
 
   return (
     <View
-      className={cnBase('bg-jego-card border-b border-jego-border', className)}
+      className={cnBase('bg-card border-b border-border', className)}
       style={{ paddingTop: withTopInset ? insets.top : 0 }}
     >
       <VStack className='p-4' space='md'>

@@ -1,5 +1,4 @@
 import * as Clipboard from 'expo-clipboard'
-import { Platform } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { env } from './env'
 import { IMAGES } from './images'
@@ -97,7 +96,7 @@ export function pluralize(word: string, count: number) {
  */
 export function getCompanyLogoUri(logo?: string | null) {
   return logo
-    ? { uri: getFullUrl(logo), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
+    ? { uri: getFullUrl(logo) }
     : IMAGES.default_company_logo
 }
 
@@ -108,7 +107,7 @@ export function getCompanyLogoUri(logo?: string | null) {
  */
 export function getUserProfileImageUri(profileImage?: string | null) {
   return profileImage
-    ? { uri: getFullUrl(profileImage), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
+    ? { uri: getFullUrl(profileImage)}
     : IMAGES.default_user_avatar
 }
 
@@ -118,7 +117,7 @@ export function getUserProfileImageUri(profileImage?: string | null) {
  * @returns The URI of the image
  */
 export function getImageUri(path: string) {
-  return { uri: getFullUrl(path), cache: Platform.OS === 'android' ? 'only-if-cached' : undefined }
+  return { uri: getFullUrl(path)}
 }
 
 /**
@@ -191,4 +190,11 @@ export function fmtMsgTime(d: string | Date) {
   if (s < 2592000) return `Y'a ${Math.floor(s / 86400)} js`
   const date = new Date(d)
   return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+}
+
+export function removeLineBreaks(text: string): string {
+  return text
+    .replace(/\r?\n|\r/g, ' ') // remplace les retours à la ligne par un espace
+    .replace(/\s+/g, ' ') // supprime les espaces multiples
+    .trim() // enlève les espaces au début et à la fin
 }

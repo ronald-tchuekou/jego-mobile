@@ -23,14 +23,14 @@ export const SearchInput = ({ placeholder, onChangeText, className }: Props) => 
   }
 
   return (
-    <Input className={cnBase('rounded-full border-jego-border', className)}>
+    <Input className={cnBase('rounded-full border-border', className)}>
       <InputSlot className='pl-3'>
-        <InputIcon as={SearchIcon} className='text-jego-muted-foreground' />
+        <InputIcon as={SearchIcon} className='text-muted-foreground' />
       </InputSlot>
       <InputField placeholder={placeholder} value={value} onChangeText={handleChangeText} />
       {!!value.trim() && (
         <InputSlot className='px-3' onPress={() => handleChangeText('')}>
-          <InputIcon as={XIcon} className='text-jego-muted-foreground' />
+          <InputIcon as={XIcon} className='text-muted-foreground' />
         </InputSlot>
       )}
     </Input>

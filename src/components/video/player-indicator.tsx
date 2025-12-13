@@ -33,7 +33,7 @@ export const PlayerIndicator = ({ player }: Props) => {
       isReversed={false}
     >
       <SliderTrack className={'bg-white/50'}>
-        <SliderFilledTrack className={'bg-jego-primary'} />
+        <SliderFilledTrack className={'bg-primary'} />
       </SliderTrack>
     </Slider>
   )

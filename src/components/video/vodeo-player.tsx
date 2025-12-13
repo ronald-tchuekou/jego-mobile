@@ -1,19 +1,20 @@
+import { Icon } from '@/src/components/ui/icon'
+import { Slider, SliderFilledTrack, SliderTrack } from '@/src/components/ui/slider'
+import { Spinner } from '@/src/components/ui/spinner'
+import { PlayerIndicator } from '@/src/components/video/player-indicator'
+import { useEvent } from 'expo'
 import { useVideoPlayer, VideoView } from 'expo-video'
 import { AlertCircleIcon, PlayIcon } from 'lucide-react-native'
 import { Platform, Text, TouchableOpacity, View } from 'react-native'
-import { Center } from '../ui/center'
-import { Icon } from '@/src/components/ui/icon'
 import { cnBase } from 'tailwind-variants'
-import { useEvent } from 'expo'
-import { Spinner } from '@/src/components/ui/spinner'
-import { PlayerIndicator } from '@/src/components/video/player-indicator'
-import { Slider, SliderFilledTrack, SliderTrack } from '@/src/components/ui/slider'
+import { Center } from '../ui/center'
 
 type Props = {
   sourceUri: string
+  thumbnail?: string
 }
 
-function VideoPlayer({ sourceUri }: Props) {
+function VideoPlayer({ sourceUri, thumbnail }: Props) {
   const player = useVideoPlayer(
     {
       uri: sourceUri,
@@ -38,9 +39,9 @@ function VideoPlayer({ sourceUri }: Props) {
               as={AlertCircleIcon}
               size={'lg'}
               style={{ width: 50, height: 50 }}
-              className='text-jego-muted-foreground'
+              className='text-muted-foreground'
             />
-            <Text className='text-base text-jego-muted-foreground text-center'>
+            <Text className='text-base text-muted-foreground text-center'>
               Nous avons rencontré un problème lors de la récupération de la vidéo.
             </Text>
           </View>
@@ -64,15 +65,11 @@ function VideoPlayer({ sourceUri }: Props) {
           >
             {status === 'loading' ? (
               <Center className='bg-white/30 rounded-full border border-white/70 p-5'>
-                <Spinner className={'text-jego-primary'} size={'large'} />
+                <Spinner className={'text-primary'} size={'large'} />
               </Center>
             ) : !isPlaying ? (
               <Center className='bg-white/30 rounded-full border border-white/70 p-5'>
-                <Icon
-                  as={PlayIcon}
-                  className={'text-jego-primary fill-jego-primary'}
-                  style={{ width: 40, height: 40 }}
-                />
+                <Icon as={PlayIcon} className={'text-primary fill-primary'} style={{ width: 40, height: 40 }} />
               </Center>
             ) : null}
           </TouchableOpacity>
@@ -92,7 +89,7 @@ function VideoPlayer({ sourceUri }: Props) {
             isReversed={false}
           >
             <SliderTrack className={'bg-white/50'}>
-              <SliderFilledTrack className={'bg-jego-primary'} />
+              <SliderFilledTrack className={'bg-primary'} />
             </SliderTrack>
           </Slider>
         )}

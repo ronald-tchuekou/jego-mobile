@@ -29,17 +29,17 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={() => setVisible(true)}
-        className='px-3 border border-jego-border bg-jego-card flex-row rounded-lg h-12 justify-between items-center'
+        className='px-3 border border-border bg-card flex-row rounded-lg h-12 justify-between items-center'
       >
         <Text
           className={cnBase(
-            'text-left text-lg text-jego-foreground font-normal',
-            !date ? 'text-jego-muted-foreground' : undefined,
+            'text-left text-lg text-foreground font-normal',
+            !date ? 'text-muted-foreground' : undefined,
           )}
         >
           {date ? formatDate(date, type) : placeholder || 'Choisir une date'}
         </Text>
-        <Icon as={type === 'date' ? CalendarDaysIcon : ClockIcon} size='xl' className='text-jego-muted-foreground' />
+        <Icon as={type === 'date' ? CalendarDaysIcon : ClockIcon} size='xl' className='text-muted-foreground' />
       </TouchableOpacity>
       {visible ? (
         Platform.OS === 'android' ? (
@@ -62,7 +62,7 @@ export const DatePickerInput = ({ date, onChange, type = 'date', placeholder }: 
             size='md'
           >
             <ModalBackdrop />
-            <ModalContent className='bg-jego-card' style={{ minWidth: 380 }}>
+            <ModalContent className='bg-card' style={{ minWidth: 380 }}>
               <ModalHeader>
                 <Heading size='lg'>{type === 'date' ? 'Choisir une date' : 'Choisir une heure'}</Heading>
                 <ModalCloseButton>

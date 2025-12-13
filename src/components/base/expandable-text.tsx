@@ -1,4 +1,4 @@
-import { truncateAtWordBoundary } from '@/src/lib/utils'
+import { removeLineBreaks, truncateAtWordBoundary } from '@/src/lib/utils'
 import { useRouter } from 'expo-router'
 import { memo, useState } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
@@ -18,8 +18,9 @@ function ExpandableTextComponent({ postId, text, maxLength = 150, className = ''
   const [isExpanded, setIsExpanded] = useState(false)
 
   // Initialize truncation logic
-  const shouldTruncate = text.length > maxLength
-  const truncatedText = shouldTruncate ? truncateAtWordBoundary(text, maxLength) : text
+  const formateText = removeLineBreaks(text)
+  const shouldTruncate = formateText.length > maxLength
+  const truncatedText = shouldTruncate ? truncateAtWordBoundary(formateText, maxLength) : text
   const displayText = !reduce ? text : isExpanded ? text : truncatedText
 
   const showDetails = () => {
@@ -37,16 +38,16 @@ function ExpandableTextComponent({ postId, text, maxLength = 150, className = ''
       onPress={showDetails}
       className={cnBase('pb-3', className)}
     >
-      <Text className='text-base text-jego-foreground'>
+      <Text className='text-base text-foreground'>
         {displayText}
-        {shouldTruncate && !isExpanded && reduce && <Text className='text-jego-muted-foreground'>...&nbsp;</Text>}
+        {shouldTruncate && !isExpanded && reduce && <Text className='text-muted-foreground'>...&nbsp;</Text>}
         {shouldTruncate && reduce && !isExpanded && (
           <Text
             onPress={(e) => {
               e.stopPropagation()
               setIsExpanded((s) => !s)
             }}
-            className='font-bold text-jego-primary'
+            className='font-bold text-primary'
           >
             {isExpanded ? 'Voir moins' : 'Voir plus'}
           </Text>
