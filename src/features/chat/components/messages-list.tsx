@@ -10,13 +10,13 @@ import { useAuthStore } from '@/src/stores/auth-store'
 import { IconSend2 } from '@tabler/icons-react-native'
 import { useQueryClient } from '@tanstack/react-query'
 import 'dayjs/locale/fr'
-import { useColorScheme } from 'nativewind'
-import { useState } from 'react'
 import { Platform } from 'react-native'
 import { Bubble, GiftedChat, IMessage, InputToolbar, Send } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import useGetMessages from '../hooks/use-get-messages'
+import useTheme from '@/src/hooks/use-theme'
+import * as Device from 'expo-device'
 
 type Props = {
   conversationId: string
@@ -25,13 +25,9 @@ type Props = {
 export default function MessagesList({ conversationId }: Props) {
   const auth = useAuthStore((state) => state.auth)
   const { isLoading, data } = useGetMessages(conversationId)
-  const { colorScheme } = useColorScheme()
-  const isDark = colorScheme === 'dark'
-  const theme = isDark ? 'dark' : 'light'
+  const theme = useTheme()
   const insets = useSafeAreaInsets()
   const queryClient = useQueryClient()
-
-  const [text, setText] = useState('')
 
   const messages: IMessage[] =
     data?.map(
@@ -48,12 +44,19 @@ export default function MessagesList({ conversationId }: Props) {
         }) as IMessage,
     ) || []
 
+  const hasBottomNavigationWidgets = Number(Device.osVersion?.split('.')[0]) <= 13
   const user = auth?.user
-  const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
+  const tabarHeight = 50
+  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: hasBottomNavigationWidgets ? 0 : 45 })
+  const keyboardVerticalOffset = insets.bottom + tabarHeight + keyboardTopToolbarHeight
 
-  const onSend = async () => {
+  const onSend = async (messages: IMessage[]) => {
+    const lastMessage = messages.pop()
+
+    if (!lastMessage) return
+
+    const text = lastMessage.text
+
     if (!auth?.token)
       return Toast.show({
         text1: 'Oops !',
@@ -92,7 +95,6 @@ export default function MessagesList({ conversationId }: Props) {
   return (
     <GiftedChat
       locale='fr-FR'
-      text={text}
       isSendButtonAlwaysVisible
       isAvatarOnTop={false}
       isAvatarVisibleForEveryMessage={false}
@@ -130,7 +132,6 @@ export default function MessagesList({ conversationId }: Props) {
       )}
       messagesContainerStyle={{ backgroundColor: globalStyles.colors.background[theme], borderWidth: 0 }}
       textInputProps={{
-        value: text,
         numberOfLines: 5,
         style: {
           backgroundColor: globalStyles.colors.muted[theme],
@@ -141,7 +142,6 @@ export default function MessagesList({ conversationId }: Props) {
           borderColor: globalStyles.colors.border[theme],
           marginRight: 8,
         },
-        onChangeText: setText,
       }}
       renderSend={(props) => {
         const disabled = !(props.text ?? '').trim()
@@ -158,7 +158,7 @@ export default function MessagesList({ conversationId }: Props) {
               backgroundColor: globalStyles.colors.primary[theme],
             }}
           >
-            <Icon as={IconSend2} style={{ height: 30, width: 30 }} className='text-jego-primary-foreground' />
+            <Icon as={IconSend2} style={{ height: 30, width: 30 }} className='text-primary-foreground' />
           </Send>
         )
       }}

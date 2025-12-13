@@ -78,7 +78,7 @@ export default function ResetPasswordScreen() {
   }
 
   return (
-    <SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+    <SafeAreaView edges={['top']} className='flex-1 bg-background'>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps='handled'
         bottomOffset={62}
@@ -86,11 +86,9 @@ export default function ResetPasswordScreen() {
       >
         <VStack space='md' className='w-full max-w-[420px]'>
           <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
-          <Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>
-            Créer un nouveau mot de passe
-          </Text>
+          <Text className='text-3xl font-bold mb-4 text-center text-foreground'>Créer un nouveau mot de passe</Text>
 
-          <Text className='text-lg text-center text-jego-foreground mb-3'>
+          <Text className='text-lg text-center text-foreground mb-3'>
             Assurez-vous que votre nouveau mot de passe est fort et sécurisé
           </Text>
 
@@ -102,7 +100,7 @@ export default function ResetPasswordScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Nouveau mot de passe</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+                <Input size='lg' className='rounded-lg bg-card' isInvalid={!!errors.password}>
                   <InputField
                     type={showPassword ? 'text' : 'password'}
                     autoCapitalize='none'
@@ -114,14 +112,12 @@ export default function ResetPasswordScreen() {
                     returnKeyType='done'
                   />
                   <InputSlot className='pr-3' onPress={handleState}>
-                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                   </InputSlot>
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
-                    {errors.password?.message}
-                  </FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.password?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -135,7 +131,7 @@ export default function ResetPasswordScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Mot de passe de confirmation</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+                <Input size='lg' className='rounded-lg bg-card' isInvalid={!!errors.password}>
                   <InputField
                     type={showPassword ? 'text' : 'password'}
                     autoCapitalize='none'
@@ -147,12 +143,12 @@ export default function ResetPasswordScreen() {
                     returnKeyType='done'
                   />
                   <InputSlot className='pr-3' onPress={handleState}>
-                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                   </InputSlot>
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>
                     {errors.passwordConfirmation?.message}
                   </FormControlErrorText>
                 </FormControlError>
@@ -166,10 +162,10 @@ export default function ResetPasswordScreen() {
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>Valider</ButtonText>
           </Button>
 
           <View className='h-6' />

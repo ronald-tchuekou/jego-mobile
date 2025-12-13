@@ -20,26 +20,26 @@ const CompanyItem = ({ company }: Props) => {
 
   return (
     <Link href={`/company/${company.id}`}>
-      <Card className='p-0 border-2 border-jego-border'>
+      <Card className='p-0 border-2 border-border'>
         <CompanyImageBanner company={company} className={'rounded-t-lg'} />
         <HStack className='p-3 gap-3'>
           <Avatar size='md' className='size-12 flex-none'>
             <AvatarImage source={companyLogo} alt={company.name} />
           </Avatar>
           <VStack className='flex-1'>
-            <Text className='font-medium text-lg text-jego-foreground'>{company.name} </Text>
-            {company.category?.name && <Text className='text-xs text-jego-primary'>{company.category?.name}</Text>}
+            <Text className='font-medium text-lg text-foreground'>{company.name} </Text>
+            {company.category?.name && <Text className='text-xs text-primary'>{company.category?.name}</Text>}
             <HStack className='items-start gap-1.5 mt-2'>
-              <Icon as={MailIcon} size='lg' className='text-jego-muted-foreground' />
-              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.email || '- - -'}</Text>
+              <Icon as={MailIcon} size='lg' className='text-muted-foreground' />
+              <Text className='text-sm flex-1 text-muted-foreground'>{company.email || '- - -'}</Text>
             </HStack>
             <HStack className='items-start gap-1.5 mt-1'>
-              <Icon as={IconPhoneFilled} size='lg' className='text-jego-muted-foreground' />
-              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.phone || '- - -'}</Text>
+              <Icon as={IconPhoneFilled} size='lg' className='text-muted-foreground' />
+              <Text className='text-sm flex-1 text-muted-foreground'>{company.phone || '- - -'}</Text>
             </HStack>
             <HStack className='items-start gap-1.5 mt-1'>
-              <Icon as={IconMapPinFilled} size='lg' className='text-jego-muted-foreground' />
-              <Text className='text-sm flex-1 text-jego-muted-foreground'>{company.address || '- - -'}</Text>
+              <Icon as={IconMapPinFilled} size='lg' className='text-muted-foreground' />
+              <Text className='text-sm flex-1 text-muted-foreground'>{company.address || '- - -'}</Text>
             </HStack>
           </VStack>
         </HStack>

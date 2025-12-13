@@ -1,6 +1,7 @@
 import { AppointmentStatusLabel } from '@/src/components/base/appointment-status-label'
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
+import { HeaderContainer } from '@/src/components/base/header-container'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Card } from '@/src/components/ui/card'
@@ -13,7 +14,6 @@ import { IconCalendar } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, RefreshControl, Text, View } from 'react-native'
-import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function AppointmentsListScreen() {
   const { appointments, isLoading, refetch, isRefetching } = useGetAppointments({
@@ -21,17 +21,15 @@ export default function AppointmentsListScreen() {
   })
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Mes rendez-vous
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>
-              Consultez vos rendez-vous pris avec les entreprises.
-            </Text>
+            <Text className='text-sm text-muted-foreground'>Consultez vos rendez-vous pris avec les entreprises.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
@@ -52,19 +50,19 @@ export default function AppointmentsListScreen() {
                 <Link href={`/appointments/${appointment.id}`}>
                   <HStack className='items-start p-3' space='md'>
                     <Avatar size='md' className='size-12 flex-none'>
-                      <AvatarImage source={logo as any} alt={appointment.company?.name || ''} />
+                      <AvatarImage source={logo} alt={appointment.company?.name || ''} />
                     </Avatar>
                     <VStack className='flex-1' space='xs'>
-                      <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
+                      <Text className='text-base font-medium text-foreground' numberOfLines={1}>
                         {appointment.company?.name}
                       </Text>
                       <HStack className='items-center gap-1'>
-                        <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
-                        <Text className='text-xs text-jego-muted-foreground'>
+                        <Icon as={IconCalendar} size='sm' className='text-muted-foreground' />
+                        <Text className='text-xs text-muted-foreground'>
                           {formatDate(appointment.date)} • {appointment.time}
                         </Text>
                       </HStack>
-                      <Text className='text-base text-jego-foreground mt-2' numberOfLines={2}>
+                      <Text className='text-base text-foreground mt-2' numberOfLines={2}>
                         {appointment.subject}
                       </Text>
                       <AppointmentStatusLabel status={appointment.status} />

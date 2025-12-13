@@ -32,10 +32,10 @@ export default function PostItem({ item, showDetails = true }: { item: PostModel
             <AvatarImage source={company ? companyLogo : profileSrc} />
           </Avatar>
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground'>
+            <Text className='font-semibold text-base text-card-foreground'>
               {company?.name || item.user?.displayName}
             </Text>
-            <Text className='text-sm text-typography-600'>{formatDate(item.createdAt)}</Text>
+            <Text className='text-sm text-muted-foreground'>{formatDate(item.createdAt)}</Text>
           </VStack>
         </HStack>
       </Link>
@@ -48,10 +48,10 @@ export default function PostItem({ item, showDetails = true }: { item: PostModel
         <LikePostButton post={item} />
         <Link href={`/post/${item.id}?focus_comment=true`} asChild>
           <Button size='lg' variant='link' className='px-4'>
-            <ButtonText size='lg' className='text-jego-muted-foreground'>
+            <ButtonText size='lg' className='text-muted-foreground'>
               {compactNumber(item.commentCount)}
             </ButtonText>
-            <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
+            <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-muted-foreground')} />
           </Button>
         </Link>
         <SharePostButton post={item} />

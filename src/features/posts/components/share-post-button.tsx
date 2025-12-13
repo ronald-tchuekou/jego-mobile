@@ -54,11 +54,11 @@ export function SharePostButton({ post, orientation = 'horizontal' }: Props) {
     )
 
   return (
-    <Button size='lg' variant='link' onPress={handleClick} className='px-4' disabled={isPending}>
-      <ButtonText size='lg' className='text-jego-muted-foreground'>
+    <Button size='lg' variant='link' onPress={handleClick} className='px-4' isDisabled={isPending}>
+      <ButtonText size='lg' className='text-muted-foreground'>
         {compactNumber(shares)}
       </ButtonText>
-      <ButtonIcon as={ShareIcon} className={cnBase('stroke-jego-muted-foreground')} />
+      <ButtonIcon as={ShareIcon} className={cnBase('stroke-muted-foreground')} />
     </Button>
   )
 }

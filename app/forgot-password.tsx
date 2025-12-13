@@ -68,7 +68,7 @@ export default function ForgotPasswordScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+    <SafeAreaView edges={['top']} className='flex-1 bg-background'>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps='handled'
         bottomOffset={62}
@@ -76,9 +76,9 @@ export default function ForgotPasswordScreen() {
       >
         <VStack space='md' className='w-full max-w-[420px]'>
           <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
-          <Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>Mot de passe oublié</Text>
+          <Text className='text-3xl font-bold mb-4 text-center text-foreground'>Mot de passe oublié</Text>
 
-          <Text className='text-lg text-center text-jego-foreground'>
+          <Text className='text-lg text-center text-foreground'>
             Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe
           </Text>
 
@@ -90,7 +90,7 @@ export default function ForgotPasswordScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Adresse email</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card'>
+                <Input size='lg' className='rounded-lg bg-card'>
                   <InputField
                     inputMode='email'
                     keyboardType='email-address'
@@ -105,8 +105,8 @@ export default function ForgotPasswordScreen() {
                   />
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>{errors.email?.message}</FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.email?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -118,15 +118,15 @@ export default function ForgotPasswordScreen() {
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full bg-jego-primary mt-2'
+            className='rounded-full bg-primary mt-2'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>Valider</ButtonText>
           </Button>
 
           <HStack space='sm'>
-            <Text className='text-base text-jego-foreground'>Je me rappelle de mon mot de passe !</Text>
-            <Text onPress={router.back} className='underline text-base text-jego-primary'>
+            <Text className='text-base text-foreground'>Je me rappelle de mon mot de passe !</Text>
+            <Text onPress={router.back} className='underline text-base text-primary'>
               Me connecter
             </Text>
           </HStack>

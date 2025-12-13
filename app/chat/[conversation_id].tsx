@@ -1,5 +1,6 @@
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
+import { HeaderContainer } from '@/src/components/base/header-container'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
@@ -10,7 +11,6 @@ import { useAuthStore } from '@/src/stores/auth-store'
 import { useLocalSearchParams } from 'expo-router'
 import { Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function ConversationScreen() {
   const { conversation_id } = useLocalSearchParams<{ conversation_id: string }>()
@@ -36,22 +36,22 @@ export default function ConversationScreen() {
   if (!conversation_id) return <EmptyContent text='Aucune conversation sélectionnée' />
 
   return (
-    <SafeAreaView className='flex-1 bg-jego-card'>
+    <SafeAreaView className='flex-1 bg-card'>
       <HeaderContainer withTopInset={false}>
         <HStack space='md' className='items-center'>
           <BackButton />
           <Avatar size='md'>
-            <AvatarImage source={getUserProfileImageUri(otherParticipant?.profileImage) as any} />
+            <AvatarImage source={getUserProfileImageUri(otherParticipant?.profileImage)} />
           </Avatar>
           <VStack className='flex-1'>
-            <Text className='font-semibold text-lg text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-lg text-foreground' numberOfLines={1}>
               {otherParticipant ? `${otherParticipant.firstName} ${otherParticipant.lastName}` : 'Utilisateur'}
             </Text>
           </VStack>
         </HStack>
       </HeaderContainer>
 
-      <View className={'bg-jego-background flex-1'}>
+      <View className={'bg-background flex-1'}>
         <MessagesList conversationId={conversation_id} />
       </View>
     </SafeAreaView>

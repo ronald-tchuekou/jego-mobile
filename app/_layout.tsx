@@ -56,7 +56,7 @@ export default function RootLayout() {
         <GestureHandlerRootView>
           <QueryProviders>
             <AppStack />
-            <Toast visibilityTime={10000} />
+            <Toast visibilityTime={6000} />
           </QueryProviders>
         </GestureHandlerRootView>
       </GluestackUIProvider>

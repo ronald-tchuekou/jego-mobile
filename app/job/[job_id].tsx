@@ -1,5 +1,6 @@
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
+import { HeaderContainer } from '@/src/components/base/header-container'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Badge, BadgeText } from '@/src/components/ui/badge'
@@ -15,19 +16,18 @@ import { IconMapPinFilled, IconUsers } from '@tabler/icons-react-native'
 import { Link, useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function JobDetailsScreen() {
   const { job_id } = useLocalSearchParams<{ job_id: string }>()
   const { job, isLoading } = useGetJob(job_id)
 
   return (
-    <SafeAreaView className='flex-1 bg-jego-card'>
+    <SafeAreaView className='flex-1 bg-card'>
       <HeaderContainer withTopInset={false}>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {job?.title || '- - -'}
             </Text>
             <Text className='text-sm text-typography-600'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
@@ -35,7 +35,7 @@ export default function JobDetailsScreen() {
         </HStack>
       </HeaderContainer>
 
-      <ScrollView className='flex-1 bg-jego-background' contentContainerClassName={'bg-jego-background'}>
+      <ScrollView className='flex-1 bg-background' contentContainerClassName={'bg-background'}>
         {isLoading ? (
           <LoaderContent />
         ) : !job ? (
@@ -71,38 +71,38 @@ const Content = ({ job }: { job: JobModel }) => {
               </Badge>
             )}
           </HStack>
-          <Text className='text-2xl font-bold text-jego-foreground'>{job.title}</Text>
+          <Text className='text-2xl font-bold text-foreground'>{job.title}</Text>
 
           {/* Meta info */}
           <VStack className='gap-2'>
             {!!job.user?.displayName && (
-              <Text className='text-sm text-jego-muted-foreground'>Par {job.user.displayName}</Text>
+              <Text className='text-sm text-muted-foreground'>Par {job.user.displayName}</Text>
             )}
             <HStack className='items-center gap-1'>
-              <Icon as={CalendarDaysIcon} size='sm' className='text-jego-muted-foreground' />
-              <Text className='text-sm text-jego-muted-foreground'>Publié le {formatDate(job.createdAt)}</Text>
+              <Icon as={CalendarDaysIcon} size='sm' className='text-muted-foreground' />
+              <Text className='text-sm text-muted-foreground'>Publié le {formatDate(job.createdAt)}</Text>
             </HStack>
             {new Date(job.updatedAt).toDateString() !== new Date(job.createdAt).toDateString() && (
               <HStack className='items-center gap-1'>
-                <Icon as={CalendarDaysIcon} size='sm' className='text-jego-muted-foreground' />
-                <Text className='text-sm text-jego-muted-foreground'>Modifié le {formatDate(job.updatedAt)}</Text>
+                <Icon as={CalendarDaysIcon} size='sm' className='text-muted-foreground' />
+                <Text className='text-sm text-muted-foreground'>Modifié le {formatDate(job.updatedAt)}</Text>
               </HStack>
             )}
             {!!job.expiresAt && new Date(job.expiresAt) > new Date() && (
               <HStack className='items-center gap-1'>
-                <Icon as={CalendarDaysIcon} size='sm' className='text-jego-muted-foreground' />
-                <Text className='text-sm text-jego-muted-foreground'>Expire le {formatDate(job.expiresAt)}</Text>
+                <Icon as={CalendarDaysIcon} size='sm' className='text-muted-foreground' />
+                <Text className='text-sm text-muted-foreground'>Expire le {formatDate(job.expiresAt)}</Text>
               </HStack>
             )}
           </VStack>
 
           {/* Description */}
-          {!!job.description && <Text className='text-base leading-6 text-jego-foreground'>{job.description}</Text>}
+          {!!job.description && <Text className='text-base leading-6 text-foreground'>{job.description}</Text>}
 
           {/* Applications count */}
           <HStack className='items-center gap-1'>
-            <Icon as={IconUsers} size='sm' className='text-jego-muted-foreground' />
-            <Text className='text-sm text-jego-muted-foreground'>{job.applicationCount} candidatures</Text>
+            <Icon as={IconUsers} size='sm' className='text-muted-foreground' />
+            <Text className='text-sm text-muted-foreground'>{job.applicationCount} candidatures</Text>
           </HStack>
 
           {/* Company Information */}
@@ -116,23 +116,20 @@ const Content = ({ job }: { job: JobModel }) => {
             job.companyZip ||
             job.companyCountry ||
             job.companyLogo) && (
-            <Card className='p-0 border border-jego-border'>
+            <Card className='p-0 border border-border'>
               <VStack className='gap-4 p-4'>
-                <Text className='text-lg font-semibold text-jego-foreground'>Informations sur l&apos;entreprise</Text>
+                <Text className='text-lg font-semibold text-foreground'>Informations sur l&apos;entreprise</Text>
 
                 <HStack space='md'>
                   {/* Company Avatar */}
                   <Avatar size='lg' className='size-20'>
-                    <AvatarImage
-                      source={getCompanyLogoUri(job.companyLogo || undefined) as any}
-                      alt={job.companyName || ''}
-                    />
+                    <AvatarImage source={getCompanyLogoUri(job.companyLogo || undefined)} alt={job.companyName || ''} />
                   </Avatar>
 
                   {/* Company Info */}
                   <VStack space='md' className='flex-1'>
                     {!!job.companyName && (
-                      <Text className='text-base font-medium text-jego-foreground'>{job.companyName}</Text>
+                      <Text className='text-base font-medium text-foreground'>{job.companyName}</Text>
                     )}
 
                     {(job.companyAddress ||
@@ -141,12 +138,12 @@ const Content = ({ job }: { job: JobModel }) => {
                       job.companyZip ||
                       job.companyCountry) && (
                       <HStack className='items-start gap-2'>
-                        <Icon as={IconMapPinFilled} size='md' className='text-jego-muted-foreground' />
+                        <Icon as={IconMapPinFilled} size='md' className='text-muted-foreground' />
                         <VStack className='flex-1 gap-1'>
                           {!!job.companyAddress && (
-                            <Text className='text-sm text-jego-muted-foreground'>{job.companyAddress}</Text>
+                            <Text className='text-sm text-muted-foreground'>{job.companyAddress}</Text>
                           )}
-                          <Text className='text-sm text-jego-muted-foreground'>
+                          <Text className='text-sm text-muted-foreground'>
                             {[job.companyCity, job.companyState, job.companyZip, job.companyCountry]
                               .filter(Boolean)
                               .join(', ')}
@@ -157,8 +154,8 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!website && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={GlobeIcon} size='md' className='text-jego-muted-foreground' />
-                        <Text className='text-sm text-jego-primary'>
+                        <Icon as={GlobeIcon} size='md' className='text-muted-foreground' />
+                        <Text className='text-sm text-primary'>
                           <Link href={website as any}>{job.companyWebsite}</Link>
                         </Text>
                       </HStack>
@@ -166,8 +163,8 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!job.companyEmail && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={MailIcon} size='md' className='text-jego-muted-foreground' />
-                        <Text className='text-sm text-jego-primary'>
+                        <Icon as={MailIcon} size='md' className='text-muted-foreground' />
+                        <Text className='text-sm text-primary'>
                           <Link href={`mailto:${job.companyEmail}`}>{job.companyEmail}</Link>
                         </Text>
                       </HStack>
@@ -175,8 +172,8 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!job.companyPhone && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={PhoneIcon} size='md' className='text-jego-muted-foreground' />
-                        <Text className='text-sm text-jego-primary'>
+                        <Icon as={PhoneIcon} size='md' className='text-muted-foreground' />
+                        <Text className='text-sm text-primary'>
                           <Link href={`tel:${job.companyPhone}`}>{job.companyPhone}</Link>
                         </Text>
                       </HStack>

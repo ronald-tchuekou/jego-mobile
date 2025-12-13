@@ -17,24 +17,21 @@ const ChatButton = ({ companyUsers, className }: Props) => {
   const auth = useAuthStore((state) => state.auth)
   const { startConversation, isStarting, error } = useStartConversation()
 
-  const companyAdmin =
-    companyUsers.find((user) => user.role === 'company:admin' && user.companyId) ||
-    companyUsers.find((user) => user.role === 'company:agent' && user.companyId)
+  const companyAdmin = companyUsers.find((user) => user.role === 'company:admin' && user.companyId)
 
-  if (!auth?.user || !companyUsers?.length || !companyAdmin || companyAdmin.id === auth.user.id) {
+  if (!auth?.user || !companyAdmin || (companyAdmin && companyAdmin.id === auth.user.id)) {
     return null
   }
 
   const handleStartChat = () => {
     try {
-      startConversation({ participantId: companyAdmin.id })
+      startConversation({ participantId: companyAdmin?.id || '' })
     } catch (error) {
       console.error('Error starting chat:', error)
       Toast.show({
         text1: 'Une erreur est survenue',
         text2: 'Impossible de démarrer la conversation',
         type: 'error',
-        visibilityTime: 6000,
       })
     }
   }
@@ -44,18 +41,17 @@ const ChatButton = ({ companyUsers, className }: Props) => {
       text1: 'Une erreur est survenue',
       text2: 'Erreur lors de l&apos;ouverture de la conversation',
       type: 'error',
-      visibilityTime: 6000,
     })
   }
 
   return (
     <Button
       onPress={handleStartChat}
-      disabled={isStarting || !companyAdmin}
+      isDisabled={isStarting || !companyAdmin}
       variant='outline'
-      className={cnBase('rounded-xl bg-jego-background border-jego-border size-9', className)}
+      className={cnBase('rounded-xl bg-background border-border size-9', className)}
     >
-      {isStarting ? <Spinner /> : <ButtonIcon as={MessageCircleMoreIcon} size='lg' className='text-jego-foreground' />}
+      {isStarting ? <Spinner /> : <ButtonIcon as={MessageCircleMoreIcon} size='lg' className='text-foreground' />}
     </Button>
   )
 }

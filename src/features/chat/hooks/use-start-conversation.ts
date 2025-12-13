@@ -14,7 +14,7 @@ const useStartConversation = () => {
     mutationFn: async ({ participantId }: { participantId: string }) => {
       if (!auth?.token) throw new Error('Not authenticated')
 
-      return await ChatService.createConversation(
+      return ChatService.createConversation(
         {
           participantIds: [participantId],
         },
@@ -45,7 +45,6 @@ const useStartConversation = () => {
         text1: 'Une erreur est survenue',
         text2: 'Impossible de démarrer la conversation',
         type: 'error',
-        visibilityTime: 6000,
       })
     },
   })

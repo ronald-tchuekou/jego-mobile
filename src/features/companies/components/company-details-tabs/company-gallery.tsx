@@ -20,7 +20,7 @@ const CompanyGallery = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Gallérie de l&apos;entreprise</Text>
+      <Text className={'text-xl font-semibold text-foreground mb-3'}>Gallérie de l&apos;entreprise</Text>
       {images.length === 0 ? (
         <EmptyContent text={'Aucune image disponible pour cette entreprise.'} />
       ) : (

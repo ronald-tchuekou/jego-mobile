@@ -2,19 +2,19 @@
 
 import { Button, ButtonIcon, ButtonSpinner } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
+import { VStack } from '@/src/components/ui/vstack'
+import { useEditPostComment } from '@/src/features/post-comments/hooks/use-edit-post-comment'
+import useGranularAnimation from '@/src/hooks/use-granular-animation'
 import { PostModel } from '@/src/services/post-service'
+import { useCommentStore } from '@/src/stores/comment-store'
+import { useSearchParams } from 'expo-router/build/hooks'
 import { SendIcon, XIcon } from 'lucide-react-native'
 import React, { useEffect, useRef } from 'react'
 import { Keyboard, Text, TextInput } from 'react-native'
-import { useSearchParams } from 'expo-router/build/hooks'
-import { useCommentStore } from '@/src/stores/comment-store'
-import { useShallow } from 'zustand/shallow'
-import { useEditPostComment } from '@/src/features/post-comments/hooks/use-edit-post-comment'
-import { VStack } from '@/src/components/ui/vstack'
-import useGranularAnimation from '@/src/hooks/use-granular-animation'
 import { useAnimatedStyle } from 'react-native-reanimated'
 import { AnimatedView } from 'react-native-reanimated/src/component/View'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useShallow } from 'zustand/shallow'
 
 type Props = { post: PostModel }
 
@@ -60,14 +60,14 @@ export function CommentInput({ post }: Props) {
   }, [comment, parentId])
 
   return (
-    <VStack className={'p-4 border-t border-jego-input bg-jego-card'}>
+    <VStack className={'p-4 border-t border-input bg-card'}>
       <HStack className={'justify-between w-full'}>
-        <Text className={'text-lg font-medium text-jego-foreground'}>
+        <Text className={'text-lg font-medium text-foreground'}>
           {parentId ? 'Répondre' : comment ? 'Modifier' : 'Commenter'}
         </Text>
         {(parentId || comment) && (
           <Button
-            disabled={isCreatingPostComment || isEditingPostComment}
+            isDisabled={isCreatingPostComment || isEditingPostComment}
             action={'secondary'}
             className={'p-0 rounded-full'}
             style={{ width: 28, height: 28 }}
@@ -85,9 +85,7 @@ export function CommentInput({ post }: Props) {
           ref={inputRef}
           multiline
           numberOfLines={7}
-          className={
-            'flex-1 px-3 py-3 bg-gray-100 dark:bg-gray-600 border-jego-border border rounded-xl text-jego-foreground'
-          }
+          className={'flex-1 px-3 py-3 bg-gray-100 dark:bg-gray-600 border-border border rounded-xl text-foreground'}
           placeholder={'Taper votre message...'}
           value={value}
           onChangeText={setValue}
@@ -105,9 +103,9 @@ export function CommentInput({ post }: Props) {
           onPress={handleSubmit}
         >
           {isCreatingPostComment || isEditingPostComment ? (
-            <ButtonSpinner className={'text-jego-primary-foreground'} />
+            <ButtonSpinner className={'text-primary-foreground'} />
           ) : (
-            <ButtonIcon as={SendIcon} className={'text-jego-primary-foreground'} />
+            <ButtonIcon as={SendIcon} className={'text-primary-foreground'} />
           )}
         </Button>
       </HStack>

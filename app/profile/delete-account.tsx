@@ -72,15 +72,15 @@ export default function DeleteAccountScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <SafeAreaView style={{ flex: 1 }} className='bg-jego-card'>
+    <SafeAreaView style={{ flex: 1 }} className='bg-card'>
       <HeaderContainer withTopInset={false}>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Supprimer le compte
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>Cette action est irréversible.</Text>
+            <Text className='text-sm text-muted-foreground'>Cette action est irréversible.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
@@ -88,8 +88,8 @@ export default function DeleteAccountScreen() {
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView
           keyboardShouldPersistTaps='handled'
-          className='flex-1 bg-jego-background'
-          contentContainerClassName='p-4 bg-jego-background'
+          className='flex-1 bg-background'
+          contentContainerClassName='p-4 bg-background'
         >
           <VStack space='lg'>
             <Controller
@@ -100,7 +100,7 @@ export default function DeleteAccountScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Mot de passe</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='password'
@@ -114,12 +114,12 @@ export default function DeleteAccountScreen() {
                       onSubmitEditing={() => form.setFocus('confirmation')}
                     />
                     <InputSlot className='pr-3' onPress={() => setShowPassword((v) => !v)}>
-                      <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                      <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                     </InputSlot>
                   </Input>
                   <FormControlError className='items-start'>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive mt-1' />
-                    <FormControlErrorText className='text-jego-destructive flex-1'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive mt-1' />
+                    <FormControlErrorText className='text-destructive flex-1'>
                       {errors.password?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -135,7 +135,7 @@ export default function DeleteAccountScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Tapez &quot;SUPPRIMER&quot; pour confirmer</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='confirmation'
@@ -149,8 +149,8 @@ export default function DeleteAccountScreen() {
                     />
                   </Input>
                   <FormControlError className='items-start'>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive mt-1' />
-                    <FormControlErrorText className='text-jego-destructive flex-1'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive mt-1' />
+                    <FormControlErrorText className='text-destructive flex-1'>
                       {errors.confirmation?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -159,7 +159,7 @@ export default function DeleteAccountScreen() {
             />
 
             {/* Alert */}
-            <Alert className='items-start bg-jego-destructive/10' action='error' variant='solid'>
+            <Alert className='items-start bg-destructive/10' action='error' variant='solid'>
               <AlertIcon as={AlertTriangleIcon} size='lg' />
               <AlertText size='sm' className='flex-1'>
                 <Text className='font-bold text-base'>
@@ -177,10 +177,10 @@ export default function DeleteAccountScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-full mt-2 bg-jego-destructive'
+              className='rounded-full mt-2 bg-destructive'
             >
-              {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Supprimer mon compte</ButtonText>
+              {isPending && <ButtonSpinner className='text-primary-foreground' />}
+              <ButtonText className='text-primary-foreground'>Supprimer mon compte</ButtonText>
             </Button>
           </VStack>
           <View className='h-20' />

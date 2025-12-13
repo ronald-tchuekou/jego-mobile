@@ -12,9 +12,9 @@ export default function CompaniesScreen() {
   const [search, setSearch] = useState('')
 
   return (
-    <View className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-background'>
       <HeaderContainer>
-        <Text className='text-3xl font-bold text-jego-card-foreground'>Entreprises</Text>
+        <Text className='text-3xl font-bold text-card-foreground'>Entreprises</Text>
         <HStack className='gap-2'>
           <SearchInput className='flex-1' placeholder='Rechercher une entreprise...' onChangeText={setSearch} />
           <Button

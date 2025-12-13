@@ -1,11 +1,13 @@
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
 import { ExpandableText } from '@/src/components/base/expandable-text'
+import { HeaderContainer } from '@/src/components/base/header-container'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
+import { CommentInput } from '@/src/features/post-comments/components/comment-input'
 import CommentWrapper from '@/src/features/post-comments/components/comment-wrapper'
 import { LikePostButton } from '@/src/features/posts/components/like-post-button'
 import { PostImages } from '@/src/features/posts/components/post-images'
@@ -17,10 +19,8 @@ import { PostModel } from '@/src/services/post-service'
 import { useLocalSearchParams } from 'expo-router'
 import { MessageCircleMoreIcon } from 'lucide-react-native'
 import { ScrollView, Text, View } from 'react-native'
-import { cnBase } from 'tailwind-variants'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { CommentInput } from '@/src/features/post-comments/components/comment-input'
-import { HeaderContainer } from '@/src/components/base/header-container'
+import { cnBase } from 'tailwind-variants'
 
 export default function PostDetailsScreen() {
   const { post_id } = useLocalSearchParams<{ post_id: string }>()
@@ -31,15 +31,15 @@ export default function PostDetailsScreen() {
   const profileSrc = getUserProfileImageUri(data?.user?.profileImage)
 
   return (
-    <SafeAreaView className='bg-jego-card' style={{ flex: 1 }}>
+    <SafeAreaView className='bg-card' style={{ flex: 1 }}>
       <HeaderContainer withTopInset={false}>
         <HStack space='md'>
           <BackButton />
           <Avatar size='md'>
-            <AvatarImage source={(company ? companyLogo : profileSrc) as any} />
+            <AvatarImage source={company ? companyLogo : profileSrc} />
           </Avatar>
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {company?.name || data?.user?.displayName || '- - -'}
             </Text>
             <Text className='text-sm text-typography-600'>
@@ -49,7 +49,7 @@ export default function PostDetailsScreen() {
         </HStack>
       </HeaderContainer>
 
-      <ScrollView className='bg-jego-background' contentContainerClassName={'bg-jego-background'} style={{ flex: 1 }}>
+      <ScrollView className='bg-background' contentContainerClassName={'bg-background'} style={{ flex: 1 }}>
         {isLoading ? (
           <LoaderContent />
         ) : !data ? (
@@ -78,10 +78,10 @@ const Content = ({ post }: { post: PostModel }) => {
       <HStack className='justify-between px-1'>
         <LikePostButton post={post} />
         <Button size='lg' variant='link' className='px-4'>
-          <ButtonText size='lg' className='text-jego-muted-foreground'>
+          <ButtonText size='lg' className='text-muted-foreground'>
             {compactNumber(post.commentCount)}
           </ButtonText>
-          <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-jego-muted-foreground')} />
+          <ButtonIcon as={MessageCircleMoreIcon} className={cnBase('stroke-muted-foreground')} />
         </Button>
         <SharePostButton post={post} />
       </HStack>

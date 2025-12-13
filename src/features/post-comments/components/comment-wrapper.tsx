@@ -18,14 +18,14 @@ export default function CommentWrapper({ post }: Props) {
 
   return (
     <View className='px-4'>
-      <Text className='text-xl font-semibold text-jego-foreground mt-2 mb-5'>Commentaires</Text>
+      <Text className='text-xl font-semibold text-foreground mt-2 mb-5'>Commentaires</Text>
       {isLoading ? (
         <LoaderContent />
       ) : comments.length === 0 ? (
         <Center className='w-full'>
           <VStack className='p-3 items-center' space='md'>
-            <Icon as={MessageCircleOffIcon} className='text-jego-muted-foreground' style={{ width: 40, height: 40 }} />
-            <Text className='text-sm text-jego-muted-foreground text-center'>
+            <Icon as={MessageCircleOffIcon} className='text-muted-foreground' style={{ width: 40, height: 40 }} />
+            <Text className='text-sm text-muted-foreground text-center'>
               Pas de commentaire pour le moment, soyez le premier à ajouter un commentaire.
             </Text>
           </VStack>

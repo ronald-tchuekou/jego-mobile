@@ -67,7 +67,7 @@ export default function RegisterScreen() {
   }
 
   return (
-    <SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+    <SafeAreaView edges={['top']} className='flex-1 bg-background'>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps='handled'
         bottomOffset={62}
@@ -75,7 +75,7 @@ export default function RegisterScreen() {
       >
         <VStack space='md' className='w-full max-w-[420px]'>
           <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Jego Logo' />
-          <Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>Créer un compte</Text>
+          <Text className='text-3xl font-bold mb-4 text-center text-foreground'>Créer un compte</Text>
 
           <Controller
             control={form.control}
@@ -85,7 +85,7 @@ export default function RegisterScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Prénom</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card'>
+                <Input size='lg' className='rounded-lg bg-card'>
                   <InputField
                     ref={field.ref}
                     placeholder='Prénom'
@@ -99,10 +99,8 @@ export default function RegisterScreen() {
                   />
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
-                    {errors.firstName?.message}
-                  </FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.firstName?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -116,7 +114,7 @@ export default function RegisterScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Nom</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card'>
+                <Input size='lg' className='rounded-lg bg-card'>
                   <InputField
                     ref={field.ref}
                     placeholder='Nom'
@@ -129,10 +127,8 @@ export default function RegisterScreen() {
                   />
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
-                    {errors.lastName?.message}
-                  </FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.lastName?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -146,7 +142,7 @@ export default function RegisterScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Adresse email</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card'>
+                <Input size='lg' className='rounded-lg bg-card'>
                   <InputField
                     ref={field.ref}
                     inputMode='email'
@@ -161,8 +157,8 @@ export default function RegisterScreen() {
                   />
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>{errors.email?.message}</FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.email?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -176,7 +172,7 @@ export default function RegisterScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Mot de passe</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+                <Input size='lg' className='rounded-lg bg-card' isInvalid={!!errors.password}>
                   <InputField
                     ref={field.ref}
                     type={showPassword ? 'text' : 'password'}
@@ -189,14 +185,12 @@ export default function RegisterScreen() {
                     onSubmitEditing={() => form.setFocus('confirmPassword')}
                   />
                   <InputSlot className='pr-3' onPress={handleState}>
-                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                   </InputSlot>
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
-                    {errors.password?.message}
-                  </FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.password?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -210,7 +204,7 @@ export default function RegisterScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Confirmer le mot de passe</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.confirmPassword}>
+                <Input size='lg' className='rounded-lg bg-card' isInvalid={!!errors.confirmPassword}>
                   <InputField
                     ref={field.ref}
                     type={showPassword ? 'text' : 'password'}
@@ -223,12 +217,12 @@ export default function RegisterScreen() {
                     onSubmitEditing={onSubmit}
                   />
                   <InputSlot className='pr-3' onPress={handleState}>
-                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                   </InputSlot>
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>
                     {errors.confirmPassword?.message}
                   </FormControlErrorText>
                 </FormControlError>
@@ -242,15 +236,15 @@ export default function RegisterScreen() {
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>M&apos;inscrire</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>M&apos;inscrire</ButtonText>
           </Button>
 
           <HStack space='sm'>
-            <Text className='text-base text-jego-foreground'>Vous avez déjà un compte ? </Text>
-            <Link href='/login' className='underline text-base text-jego-primary' replace>
+            <Text className='text-base text-foreground'>Vous avez déjà un compte ? </Text>
+            <Link href='/login' className='underline text-base text-primary' replace>
               Me connecter
             </Link>
           </HStack>

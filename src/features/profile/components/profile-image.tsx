@@ -78,19 +78,19 @@ export const ProfileImage = () => {
     <Card>
       <VStack space='lg'>
         <VStack>
-          <Text className='text-lg font-bold text-jego-foreground'>Photo de profil</Text>
-          <Text className='text-sm text-jego-muted-foreground'>Mettez à jour votre photo de profil</Text>
+          <Text className='text-lg font-bold text-foreground'>Photo de profil</Text>
+          <Text className='text-sm text-muted-foreground'>Mettez à jour votre photo de profil</Text>
         </VStack>
         <Avatar size='2xl' className='mx-auto relative'>
           <AvatarImage source={profileImage} />
           {isPending && (
             <Center className='absolute inset-0 bg-black/20 rounded-full'>
-              <Spinner className='text-jego-primary' />
+              <Spinner className='text-primary' />
             </Center>
           )}
         </Avatar>
         <Box>
-          <Text selectable className='text-center text-lg font-bold text-jego-foreground'>
+          <Text selectable className='text-center text-lg font-bold text-foreground'>
             {auth?.user?.displayName}
           </Text>
           <Text
@@ -98,16 +98,16 @@ export const ProfileImage = () => {
               if (auth?.user?.email) copyToClipboard(auth.user.email)
             }}
             selectable
-            className='text-center text-sm text-jego-muted-foreground'
+            className='text-center text-sm text-muted-foreground'
           >
             {auth?.user?.email}
           </Text>
         </Box>
-        <Text className='text-sm text-jego-muted-foreground text-center'>
+        <Text className='text-sm text-muted-foreground text-center'>
           Formats acceptés: JPEG, PNG, WebP {'\n'}Taille maximale: 2MB
         </Text>
-        <Button disabled={isPending} className='bg-jego-primary rounded-full' onPress={pickImage}>
-          <ButtonText className='text-jego-primary-foreground'>Changer la photo de profil</ButtonText>
+        <Button isDisabled={isPending} className='bg-primary rounded-full' onPress={pickImage}>
+          <ButtonText className='text-primary-foreground'>Changer la photo de profil</ButtonText>
         </Button>
       </VStack>
     </Card>

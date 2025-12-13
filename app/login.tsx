@@ -67,7 +67,7 @@ export default function LoginScreen() {
   }
 
   return (
-    <SafeAreaView edges={['top']} className='flex-1 bg-jego-background'>
+    <SafeAreaView edges={['top']} className='flex-1 bg-background'>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps='handled'
         bottomOffset={62}
@@ -75,7 +75,7 @@ export default function LoginScreen() {
       >
         <VStack space='md' className='w-full max-w-[420px]'>
           <Image source={IMAGES.splash} className='w-40 h-20 mx-auto mb-5' alt='Logo' />
-          <Text className='text-3xl font-bold mb-4 text-center text-jego-foreground'>Se connecter</Text>
+          <Text className='text-3xl font-bold mb-4 text-center text-foreground'>Se connecter</Text>
 
           <Controller
             control={form.control}
@@ -85,7 +85,7 @@ export default function LoginScreen() {
                 <FormControlLabel>
                   <FormControlLabelText>Adresse email</FormControlLabelText>
                 </FormControlLabel>
-                <Input size='lg' className='rounded-lg bg-jego-card'>
+                <Input size='lg' className='rounded-lg bg-card'>
                   <InputField
                     ref={field.ref}
                     inputMode='email'
@@ -101,8 +101,8 @@ export default function LoginScreen() {
                   />
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>{errors.email?.message}</FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.email?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -117,11 +117,11 @@ export default function LoginScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Mot de passe</FormControlLabelText>
                   </FormControlLabel>
-                  <Link href={'/forgot-password'} className='underline text-jego-primary text-base'>
+                  <Link href={'/forgot-password'} className='underline text-primary text-base'>
                     Mot de passe oublié ?
                   </Link>
                 </HStack>
-                <Input size='lg' className='rounded-lg bg-jego-card' isInvalid={!!errors.password}>
+                <Input size='lg' className='rounded-lg bg-card' isInvalid={!!errors.password}>
                   <InputField
                     ref={field.ref}
                     type={showPassword ? 'text' : 'password'}
@@ -134,14 +134,12 @@ export default function LoginScreen() {
                     returnKeyType='done'
                   />
                   <InputSlot className='pr-3' onPress={handleState}>
-                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                    <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                   </InputSlot>
                 </Input>
                 <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                  <FormControlErrorText className='text-jego-destructive'>
-                    {errors.password?.message}
-                  </FormControlErrorText>
+                  <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                  <FormControlErrorText className='text-destructive'>{errors.password?.message}</FormControlErrorText>
                 </FormControlError>
               </FormControl>
             )}
@@ -153,15 +151,15 @@ export default function LoginScreen() {
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Se connecter</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>Se connecter</ButtonText>
           </Button>
 
           <HStack space='sm'>
-            <Text className='text-base text-jego-foreground'>Vous n&apos;avez pas de compte ? </Text>
-            <Link href='/register' className='underline text-base text-jego-primary' replace>
+            <Text className='text-base text-foreground'>Vous n&apos;avez pas de compte ? </Text>
+            <Link href='/register' className='underline text-base text-primary' replace>
               Créer un compte
             </Link>
           </HStack>

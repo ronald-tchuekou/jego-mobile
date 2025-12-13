@@ -1,5 +1,6 @@
 import { BackButton } from '@/src/components/base/back-button'
 import EmptyContent from '@/src/components/base/empty-content'
+import { HeaderContainer } from '@/src/components/base/header-container'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
@@ -10,7 +11,6 @@ import CompanyService from '@/src/services/company-service'
 import { useQuery } from '@tanstack/react-query'
 import { useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
-import { HeaderContainer } from '@/src/components/base/header-container'
 
 export default function PostDetailsScreen() {
   const { company_id } = useLocalSearchParams<{ company_id: string }>()
@@ -25,15 +25,15 @@ export default function PostDetailsScreen() {
   })
 
   return (
-    <View className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {data?.name || '- - -'}
             </Text>
-            <Text className='text-sm text-jego-primary'>{data?.category?.name || '- - -'}</Text>
+            <Text className='text-sm text-primary'>{data?.category?.name || '- - -'}</Text>
           </VStack>
         </HStack>
       </HeaderContainer>

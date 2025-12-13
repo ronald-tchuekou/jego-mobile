@@ -69,17 +69,17 @@ export default function CommentItem({ comment }: Props) {
       <VStack className='flex-1'>
         <HStack className='justify-between'>
           <VStack>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {comment.user.displayName}
             </Text>
-            <Text className='text-xs text-jego-muted-foreground'>{formatDate(comment.createdAt)}</Text>
+            <Text className='text-xs text-muted-foreground'>{formatDate(comment.createdAt)}</Text>
           </VStack>
           {isOwner && (
             <Menu
               placement={'bottom right'}
               trigger={({ ...props }) => (
                 <Button {...props} size={'sm'} variant={'link'} className={'p-2'}>
-                  <ButtonIcon as={MoreHorizontalIcon} className={'text-jego-foreground'} />
+                  <ButtonIcon as={MoreHorizontalIcon} className={'text-foreground'} />
                 </Button>
               )}
             >
@@ -88,15 +88,15 @@ export default function CommentItem({ comment }: Props) {
                 <MenuItemLabel className={'ml-2'}>Modifier</MenuItemLabel>
               </MenuItem>
               <MenuItem textValue={'Supprimer'} onPress={() => deleteMutation.mutate()}>
-                <Icon size={'sm'} as={Trash2Icon} className={'text-jego-destructive'} />
-                <MenuItemLabel className={'text-jego-destructive ml-2'}>Supprimer</MenuItemLabel>
+                <Icon size={'sm'} as={Trash2Icon} className={'text-destructive'} />
+                <MenuItemLabel className={'text-destructive ml-2'}>Supprimer</MenuItemLabel>
               </MenuItem>
             </Menu>
           )}
         </HStack>
 
         <VStack className={'mt-1'}>
-          <Text className='text-sm text-jego-foreground'>{comment.comment}</Text>
+          <Text className='text-sm text-foreground'>{comment.comment}</Text>
           <HStack className='gap-5'>
             <Button
               variant='link'
@@ -113,7 +113,7 @@ export default function CommentItem({ comment }: Props) {
               action='secondary'
               size='sm'
               className={'h-7'}
-              disabled={deleteMutation.isPending}
+              isDisabled={deleteMutation.isPending}
               onPress={() => setParentId(comment.id)}
             >
               <ButtonIcon as={MessageSquareMoreIcon} />

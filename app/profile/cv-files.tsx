@@ -144,15 +144,15 @@ export default function UserCvFilesScreen() {
   const isMutating = uploadMutation.isPending || deleteMutation.isPending
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Mes CV
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>Gérez vos fichiers CV pour vos candidatures.</Text>
+            <Text className='text-sm text-muted-foreground'>Gérez vos fichiers CV pour vos candidatures.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
@@ -167,12 +167,12 @@ export default function UserCvFilesScreen() {
               {data.data.map((cv) => (
                 <Card key={cv.id} className='p-4'>
                   <HStack className='items-center' space='md'>
-                    <Icon as={IconFileCv} size='xl' className='text-jego-foreground' />
+                    <Icon as={IconFileCv} size='xl' className='text-foreground' />
                     <VStack className='flex-1'>
-                      <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
+                      <Text className='text-base font-medium text-foreground' numberOfLines={1}>
                         {cv.name}
                       </Text>
-                      <Text className='text-xs text-jego-muted-foreground' numberOfLines={1}>
+                      <Text className='text-xs text-muted-foreground' numberOfLines={1}>
                         {getFileTypeName(cv.type)} • Ajouté le {formatDate(cv.createdAt)}
                       </Text>
                     </VStack>
@@ -180,11 +180,11 @@ export default function UserCvFilesScreen() {
                       <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => confirmDelete(cv)}
-                        className='h-10 px-3 rounded-full border border-jego-destructive/40 justify-center'
+                        className='h-10 px-3 rounded-full border border-destructive/40 justify-center'
                       >
                         <HStack className='items-center' space='xs'>
-                          <Icon as={IconTrash} className='text-jego-destructive' size='sm' />
-                          <Text className='text-sm text-jego-destructive'>Supprimer</Text>
+                          <Icon as={IconTrash} className='text-destructive' size='sm' />
+                          <Text className='text-sm text-destructive'>Supprimer</Text>
                         </HStack>
                       </TouchableOpacity>
                     </HStack>
@@ -198,7 +198,7 @@ export default function UserCvFilesScreen() {
 
           {(data?.data?.length || 0) < 3 && (
             <>
-              <Text className='text-sm text-jego-muted-foreground mt-3'>
+              <Text className='text-sm text-muted-foreground mt-3'>
                 Formats acceptés: PDF, DOC, DOCX • Taille max: 5MB
               </Text>
               <Button
@@ -207,10 +207,10 @@ export default function UserCvFilesScreen() {
                 size='lg'
                 onPress={pickDocument}
                 isDisabled={isMutating || isFetching}
-                className='rounded-full bg-jego-primary'
+                className='rounded-full bg-primary'
               >
-                {uploadMutation.isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-                <ButtonText className='text-jego-primary-foreground'>Ajouter un CV</ButtonText>
+                {uploadMutation.isPending && <ButtonSpinner className='text-primary-foreground' />}
+                <ButtonText className='text-primary-foreground'>Ajouter un CV</ButtonText>
               </Button>
             </>
           )}

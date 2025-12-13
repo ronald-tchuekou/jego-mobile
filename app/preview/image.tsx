@@ -1,15 +1,14 @@
 import { BackButton } from '@/src/components/base/back-button'
+import EmptyContent from '@/src/components/base/empty-content'
+import { Center } from '@/src/components/ui/center'
+import { HStack } from '@/src/components/ui/hstack'
+import { VStack } from '@/src/components/ui/vstack'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { Dimensions, StatusBar, Text, View } from 'react-native'
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
-import { VStack } from '@/src/components/ui/vstack'
-import { HStack } from '@/src/components/ui/hstack'
-import EmptyContent from '@/src/components/base/empty-content'
-import { Center } from '@/src/components/ui/center'
-import { IMAGES } from '@/src/lib/images'
 
 type Params = {
   url?: string
@@ -96,7 +95,7 @@ export default function ImagePreviewScreen() {
       <HStack
         space='md'
         style={{ top: insets.top }}
-        className='px-4 absolute top-0 left-0 z-10 bg-jego-transparent items-center'
+        className='px-4 absolute top-0 left-0 z-10 bg-transparent items-center'
       >
         <BackButton iconClassName={'text-white'} />
         <VStack className='flex-1'>
@@ -117,7 +116,6 @@ export default function ImagePreviewScreen() {
               source={{ uri: url, cache: 'force-cache' }}
               resizeMode='contain'
               alt={tag || ''}
-              defaultSource={IMAGES.image_loader}
               style={[{ width: '100%', height: '100%' }, animatedStyles]}
               onLoadStart={() => {
                 setOnError(false)

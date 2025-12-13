@@ -83,15 +83,15 @@ export default function UpdateUserInfoScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <SafeAreaView style={{ flex: 1 }} className='bg-jego-card'>
+    <SafeAreaView style={{ flex: 1 }} className='bg-card'>
       <HeaderContainer withTopInset={false}>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Information personnelles
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>Mettez à jour vos informations de profil.</Text>
+            <Text className='text-sm text-muted-foreground'>Mettez à jour vos informations de profil.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
@@ -99,8 +99,8 @@ export default function UpdateUserInfoScreen() {
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView
           keyboardShouldPersistTaps='handled'
-          className='flex-1 bg-jego-background'
-          contentContainerClassName='p-4 bg-jego-background'
+          className='flex-1 bg-background'
+          contentContainerClassName='p-4 bg-background'
         >
           <VStack space='lg'>
             <Controller
@@ -111,7 +111,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Prénom</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='firstName'
@@ -126,8 +126,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>
                       {errors.firstName?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -143,7 +143,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Nom</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='lastName'
@@ -157,10 +157,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.lastName?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.lastName?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -174,7 +172,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Téléphone</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='phone'
@@ -187,10 +185,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.phone?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.phone?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -204,7 +200,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Adresse</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='address'
@@ -216,10 +212,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.address?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.address?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -233,7 +227,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Ville</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='city'
@@ -245,10 +239,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.city?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.city?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -262,7 +254,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Région/État</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='state'
@@ -274,10 +266,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.state?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.state?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -291,7 +281,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Code postal</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='zipCode'
@@ -304,10 +294,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.zipCode?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.zipCode?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -321,7 +309,7 @@ export default function UpdateUserInfoScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Pays</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='country'
@@ -333,10 +321,8 @@ export default function UpdateUserInfoScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.country?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.country?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -344,17 +330,17 @@ export default function UpdateUserInfoScreen() {
           </VStack>
           <View className='h-20' />
         </ScrollView>
-        <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: 12 }}>
+        <View className='px-4 py-2 bg-card border-t border-border' style={{ paddingBottom: 12 }}>
           <Button
             action='primary'
             variant='solid'
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Mettre à jour</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>Mettre à jour</ButtonText>
           </Button>
         </View>
       </KeyboardAvoidingView>

@@ -14,11 +14,11 @@ const CompanyProgram = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Horaires d&apos;ouverture</Text>
+      <Text className={'text-xl font-semibold text-foreground mb-3'}>Horaires d&apos;ouverture</Text>
       {!program ? (
         <EmptyContent text="Aucun horaire d'ouverture disponible pour cette entreprise." />
       ) : (
-        <Box className='rounded-xl bg-jego-card border border-jego-border overflow-hidden'>
+        <Box className='rounded-xl bg-card border border-border overflow-hidden'>
           <Table className='w-full'>
             <TableHeader className='bg-gray-200 dark:bg-stone-700'>
               <TableRow>

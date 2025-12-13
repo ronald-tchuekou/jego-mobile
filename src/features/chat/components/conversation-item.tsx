@@ -34,27 +34,23 @@ export default function ConversationItem({ conversation, currentUserId, onPress 
   if (!otherParticipant) return null
 
   return (
-    <Pressable
-      onPress={onPress}
-      className='flex-row items-center gap-3 p-4 border-b border-jego-border active:bg-jego-card'
-    >
+    <Pressable onPress={onPress} className='flex-row items-center gap-3 p-4 border-b border-border active:bg-card'>
       <Avatar size='md'>
         <AvatarImage source={getUserProfileImageUri(otherParticipant.profileImage)} />
       </Avatar>
       <VStack className='flex-1 min-w-0' space='xs'>
         <HStack className='items-center justify-between'>
-          <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+          <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
             {otherParticipant.firstName} {otherParticipant.lastName}
           </Text>
           {lastMessage && (
-            <Text className='text-xs text-jego-muted-foreground'>{fmtMsgTime(new Date(lastMessage.createdAt))}</Text>
+            <Text className='text-xs text-muted-foreground'>{fmtMsgTime(new Date(lastMessage.createdAt))}</Text>
           )}
         </HStack>
-        <Text className='text-sm text-jego-muted-foreground' numberOfLines={1}>
+        <Text className='text-sm text-muted-foreground' numberOfLines={1}>
           {lastMessage?.content || '- - -'}
         </Text>
       </VStack>
     </Pressable>
   )
 }
-

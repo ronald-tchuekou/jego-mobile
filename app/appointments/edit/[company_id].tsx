@@ -81,24 +81,24 @@ export default function EditAppointmentScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <SafeAreaView className='flex-1 bg-jego-card'>
+    <SafeAreaView className='flex-1 bg-card'>
       <HeaderContainer withTopInset={false}>
         <HStack space='md' className='items-center'>
           <BackButton />
-          <Text className='font-semibold text-xl text-jego-foreground'>Prendre rendez-vous</Text>
+          <Text className='font-semibold text-xl text-foreground'>Prendre rendez-vous</Text>
         </HStack>
       </HeaderContainer>
 
       <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
         <ScrollView
           keyboardShouldPersistTaps='handled'
-          className='flex-1 bg-jego-background'
-          contentContainerClassName='p-4 bg-jego-background'
+          className='flex-1 bg-background'
+          contentContainerClassName='p-4'
         >
           <VStack space='md'>
             {/* Company info */}
             <VStack space='sm' className='mb-5'>
-              <Text className='text-lg font-medium text-jego-foreground'>Chez</Text>
+              <Text className='text-lg font-medium text-foreground'>Chez</Text>
               <CompanyInfo companyId={company_id} />
             </VStack>
             {/* Date */}
@@ -116,9 +116,7 @@ export default function EditAppointmentScreen() {
                   />
                   <FormControlError>
                     <FormControlErrorIcon />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.date?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorText className='text-destructive'>{errors.date?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -141,9 +139,7 @@ export default function EditAppointmentScreen() {
                   />
                   <FormControlError>
                     <FormControlErrorIcon />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.time?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorText className='text-destructive'>{errors.time?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -158,7 +154,7 @@ export default function EditAppointmentScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Objet du rendez-vous</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='lg' className='rounded-lg bg-jego-card'>
+                  <Input size='lg' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       placeholder="Entrez l'objet"
@@ -170,9 +166,7 @@ export default function EditAppointmentScreen() {
                   </Input>
                   <FormControlError>
                     <FormControlErrorIcon />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.subject?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorText className='text-destructive'>{errors.subject?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -187,7 +181,7 @@ export default function EditAppointmentScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Décrivez votre besoin</FormControlLabelText>
                   </FormControlLabel>
-                  <Textarea size='lg' className={cnBase('rounded-lg p-1 bg-jego-card h-[200px]')}>
+                  <Textarea size='lg' className={cnBase('rounded-lg p-1 bg-card h-[200px]')}>
                     <TextareaInput
                       ref={field.ref}
                       placeholder='Décrivez votre besoin, les services et autre...'
@@ -197,9 +191,7 @@ export default function EditAppointmentScreen() {
                   </Textarea>
                   <FormControlError>
                     <FormControlErrorIcon />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.content?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorText className='text-destructive'>{errors.content?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -208,17 +200,17 @@ export default function EditAppointmentScreen() {
             <View className='h-20 w-full' />
           </VStack>
         </ScrollView>
-        <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: 12 }}>
+        <View className='px-4 py-2 bg-card border-t border-border' style={{ paddingBottom: 12 }}>
           <Button
             action='primary'
             variant='solid'
             size='lg'
             onPress={onSubmit}
             isDisabled={isPending}
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
           >
-            {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-            <ButtonText className='text-jego-primary-foreground'>Envoyer</ButtonText>
+            {isPending && <ButtonSpinner className='text-primary-foreground' />}
+            <ButtonText className='text-primary-foreground'>Envoyer</ButtonText>
           </Button>
         </View>
       </KeyboardAvoidingView>

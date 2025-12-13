@@ -64,28 +64,28 @@ export const LogoutModal = ({ ref }: Props) => {
 
   return (
     <AlertDialog isOpen={open} onClose={() => {}}>
-      <AlertDialogBackdrop className='bg-black/50' />
-      <AlertDialogContent className='bg-jego-card'>
+      <AlertDialogBackdrop />
+      <AlertDialogContent>
         <AlertDialogHeader className='justify-center'>
-          <Text className='text-lg font-bold text-jego-foreground text-center'>Confirmer la déconnexion</Text>
+          <Text className='text-lg font-bold text-foreground text-center'>Confirmer la déconnexion</Text>
         </AlertDialogHeader>
         <AlertDialogBody className=''>
-          <Text className='text-base text-center text-jego-muted-foreground'>
+          <Text className='text-base text-center text-muted-foreground'>
             Êtes-vous sûr de vouloir vous déconnecter ?
           </Text>
         </AlertDialogBody>
         <AlertDialogFooter>
           <Button
-            disabled={loggingOut}
-            className='flex-1 rounded-full border-jego-border'
+            isDisabled={loggingOut}
+            className='flex-1 rounded-full border-border'
             variant='outline'
             onPress={() => setOpen(false)}
           >
-            <ButtonText className='text-jego-muted-foreground'>NON</ButtonText>
+            <ButtonText className='text-foreground'>NON</ButtonText>
           </Button>
           <Button
-            disabled={loggingOut}
-            className='flex-1 rounded-full bg-jego-primary'
+            isDisabled={loggingOut}
+            className='flex-1 rounded-full bg-primary'
             variant='solid'
             onPress={() => {
               if (auth?.token) {
@@ -98,8 +98,8 @@ export const LogoutModal = ({ ref }: Props) => {
               }
             }}
           >
-            {loggingOut && <Spinner className='text-jego-primary-foreground' />}
-            {!loggingOut && <ButtonText className='text-jego-primary-foreground'>OUI</ButtonText>}
+            {loggingOut && <Spinner className='text-primary-foreground' />}
+            {!loggingOut && <ButtonText className='text-primary-foreground'>OUI</ButtonText>}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

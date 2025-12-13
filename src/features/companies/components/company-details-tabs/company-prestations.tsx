@@ -16,7 +16,7 @@ const CompanyPrestations = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Prestations offertes</Text>
+      <Text className={'text-xl font-semibold text-foreground mb-3'}>Prestations offertes</Text>
       {prestations.length === 0 ? (
         <EmptyContent text={'Aucune prestation disponible pour cette entreprise.'} />
       ) : (
@@ -24,12 +24,12 @@ const CompanyPrestations = ({ company }: Props) => {
           {prestations.map((prestation) => (
             <Card key={prestation.id}>
               <HStack space='lg' className={'flex justify-between items-start'}>
-                <Text className='text-lg font-semibold text-jego-foreground'>{prestation.label}</Text>
+                <Text className='text-lg font-semibold text-foreground'>{prestation.label}</Text>
                 {prestation.price && (
-                  <Text className={'font-semibold text-jego-primary'}>{formatPrice(Number(prestation.price))}</Text>
+                  <Text className={'font-semibold text-primary'}>{formatPrice(Number(prestation.price))}</Text>
                 )}
               </HStack>
-              <Text className='text-sm text-jego-muted-foreground'>{prestation.description}</Text>
+              <Text className='text-sm text-muted-foreground'>{prestation.description}</Text>
             </Card>
           ))}
         </VStack>

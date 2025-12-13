@@ -70,15 +70,15 @@ export default function VerifyEmailChangeScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Vérifier le changement d&apos;e-mail
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>
+            <Text className='text-sm text-muted-foreground'>
               Entrez le code envoyé à votre nouvelle adresse e-mail.
             </Text>
           </VStack>
@@ -96,7 +96,7 @@ export default function VerifyEmailChangeScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Code de vérification</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='verificationCode'
@@ -109,8 +109,8 @@ export default function VerifyEmailChangeScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>
                       {errors.verificationCode?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -124,10 +124,10 @@ export default function VerifyEmailChangeScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-full mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-primary'
             >
-              {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Valider</ButtonText>
+              {isPending && <ButtonSpinner className='text-primary-foreground' />}
+              <ButtonText className='text-primary-foreground'>Valider</ButtonText>
             </Button>
           </VStack>
           <View className='h-20' />

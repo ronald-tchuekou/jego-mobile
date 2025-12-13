@@ -34,7 +34,7 @@ const CompanyRatingAverage = ({ companyId }: Props) => {
           scale={1}
           disabled
         />
-        <Text className='text-base text-jego-muted-foreground'>{ratingValue.toFixed(1)}/5</Text>
+        <Text className='text-base text-muted-foreground'>{ratingValue.toFixed(1)}/5</Text>
       </HStack>
     </Skeleton>
   )

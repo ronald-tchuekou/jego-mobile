@@ -8,9 +8,9 @@ export default function ChatScreen() {
   const [search, setSearch] = useState('')
 
   return (
-    <View className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-background'>
       <HeaderContainer>
-        <Text className='text-3xl font-bold text-jego-card-foreground'>Messages</Text>
+        <Text className='text-3xl font-bold text-card-foreground'>Messages</Text>
         <SearchInput placeholder='Rechercher un contact...' onChangeText={setSearch} />
       </HeaderContainer>
       <ConversationsList search={search} />

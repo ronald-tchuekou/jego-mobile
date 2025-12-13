@@ -26,7 +26,7 @@ const CompanyReviews = ({ company }: Props) => {
 
   return (
     <>
-      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Avis sur l&apos;entreprise</Text>
+      <Text className={'text-xl font-semibold text-foreground mb-3'}>Avis sur l&apos;entreprise</Text>
       {isLoading ? (
         <LoaderContent />
       ) : reviews.length === 0 ? (
@@ -43,7 +43,7 @@ const CompanyReviews = ({ company }: Props) => {
                     <AvatarImage source={profileSrc} />
                   </Avatar>
                   <VStack space='xs'>
-                    <Text className={'line-clamp-1 text-jego-foreground font-bold'}>{review.user.displayName}</Text>
+                    <Text className={'line-clamp-1 text-foreground font-bold'}>{review.user.displayName}</Text>
                     <HStack space='md' className={'flex items-center'}>
                       <Rating
                         disabled
@@ -53,7 +53,7 @@ const CompanyReviews = ({ company }: Props) => {
                         maxRating={5}
                         baseColor={'rgba(150, 150, 150, 0.4)'}
                       />
-                      <Text className={'block text-xs text-jego-muted-foreground'}>{formatDate(review.createdAt)}</Text>
+                      <Text className={'block text-xs text-muted-foreground'}>{formatDate(review.createdAt)}</Text>
                     </HStack>
                   </VStack>
                 </HStack>

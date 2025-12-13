@@ -1,11 +1,12 @@
-import { followingKey } from '@/src/lib/query-kye'
+import { companyKey, followingKey } from '@/src/lib/query-kye'
 import CompanyFollowingService, { CreateCompanyFollowingDto } from '@/src/services/campany-following-service'
 import { useAuthStore } from '@/src/stores/auth-store'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import Toast from 'react-native-toast-message'
 
 export default function useToggleFollowing(companyId: string) {
+  const queryClient = useQueryClient()
   const auth = useAuthStore((s) => s.auth)
 
   const {
@@ -31,6 +32,7 @@ export default function useToggleFollowing(companyId: string) {
     },
     onSuccess: () => {
       refetch()
+      queryClient.invalidateQueries({ queryKey: companyKey.detail(companyId) }).then()
     },
     onError: (error) => {
       Toast.show({
@@ -48,6 +50,7 @@ export default function useToggleFollowing(companyId: string) {
     },
     onSuccess() {
       refetch()
+      queryClient.invalidateQueries({ queryKey: companyKey.detail(companyId) }).then()
     },
     onError: (error) => {
       Toast.show({

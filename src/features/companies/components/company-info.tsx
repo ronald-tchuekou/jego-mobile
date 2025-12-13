@@ -31,13 +31,13 @@ export const CompanyInfo = ({ companyId }: Props) => {
           <AvatarImage source={companyLogo} alt={data?.name || 'Company logo'} />
         </Avatar>
         <View className='flex-1'>
-          <Text className='font-medium text-lg text-jego-foreground'>{data?.name || '- - - -'} </Text>
-          <Text className='text-xs text-jego-primary'>{data?.category?.name || '- - - -'}</Text>
+          <Text className='font-medium text-lg text-foreground'>{data?.name || '- - - -'} </Text>
+          <Text className='text-xs text-primary'>{data?.category?.name || '- - - -'}</Text>
         </View>
       </HStack>
       {isLoading && (
-        <View className='absolute top-0 bottom-0 left-0 right-0 bg-jego-background flex justify-center items-center'>
-          <Spinner size={'small'} className='text-jego-primary' />
+        <View className='absolute top-0 bottom-0 left-0 right-0 bg-background flex justify-center items-center'>
+          <Spinner size={'small'} className='text-primary' />
         </View>
       )}
     </Card>

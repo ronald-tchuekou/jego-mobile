@@ -24,7 +24,7 @@ export default function CommentResponseWrapper({ commentId }: Props) {
   if (!comments.length) {
     return (
       <Center className='min-h-20'>
-        <Text className='text-sm text-jego-muted-foreground'>Aucune réponse au commentaire pour le moment</Text>
+        <Text className='text-sm text-muted-foreground'>Aucune réponse au commentaire pour le moment</Text>
       </Center>
     )
   }

@@ -71,17 +71,15 @@ export default function UpdateEmailScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Changer votre adresse e-mail
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>
-              Entrez votre nouveau courriel et votre mot de passe.
-            </Text>
+            <Text className='text-sm text-muted-foreground'>Entrez votre nouveau courriel et votre mot de passe.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
@@ -97,7 +95,7 @@ export default function UpdateEmailScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Nouvelle adresse e-mail</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='email'
@@ -112,10 +110,8 @@ export default function UpdateEmailScreen() {
                     />
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.email?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.email?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -129,7 +125,7 @@ export default function UpdateEmailScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Mot de passe actuel</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='password'
@@ -143,14 +139,12 @@ export default function UpdateEmailScreen() {
                       onSubmitEditing={onSubmit}
                     />
                     <InputSlot className='pr-3' onPress={() => setShowPassword((v) => !v)}>
-                      <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                      <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                     </InputSlot>
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
-                      {errors.password?.message}
-                    </FormControlErrorText>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>{errors.password?.message}</FormControlErrorText>
                   </FormControlError>
                 </FormControl>
               )}
@@ -162,10 +156,10 @@ export default function UpdateEmailScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-full mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-primary'
             >
-              {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Mettre à jour l&apos;e-mail</ButtonText>
+              {isPending && <ButtonSpinner className='text-primary-foreground' />}
+              <ButtonText className='text-primary-foreground'>Mettre à jour l&apos;e-mail</ButtonText>
             </Button>
           </VStack>
           <View className='h-20' />

@@ -9,11 +9,11 @@ type Props = {
 const CompanyAbout = ({ company }: Props) => {
   return (
     <>
-      <Text className={'text-xl font-semibold text-jego-foreground mb-3'}>Biographie</Text>
+      <Text className={'text-xl font-semibold text-foreground mb-3'}>Biographie</Text>
       {!company.description ? (
         <EmptyContent text={'Aucune description disponible pour cette entreprise.'} />
       ) : (
-        <Text className='text-base text-jego-foreground'>{company.description}</Text>
+        <Text className='text-base text-foreground'>{company.description}</Text>
       )}
     </>
   )

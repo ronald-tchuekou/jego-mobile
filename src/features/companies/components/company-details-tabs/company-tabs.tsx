@@ -2,11 +2,10 @@ import { Box } from '@/src/components/ui/box'
 import { Button, ButtonIcon } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { CompanyModel } from '@/src/services/company-service'
-import { BuildingIcon, ClockIcon, ImageIcon, InfoIcon, ListIcon, ListTodoIcon } from 'lucide-react-native'
+import { BuildingIcon, ClockIcon, ImageIcon, ListIcon, ListTodoIcon } from 'lucide-react-native'
 import { memo, useState } from 'react'
 import { View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
-import CompanyAbout from './company-about'
 import CompanyGallery from './company-gallery'
 import CompanyPosts from './company-posts'
 import CompanyPrestations from './company-prestations'
@@ -18,11 +17,11 @@ type Props = {
 }
 
 const tabContent = [
-  {
-    title: 'A propos',
-    value: 'about',
-    icon: InfoIcon,
-  },
+  // {
+  //   title: 'A propos',
+  //   value: 'about',
+  //   icon: InfoIcon,
+  // },
   {
     title: 'Posts',
     value: 'posts',
@@ -51,7 +50,7 @@ const tabContent = [
 ]
 
 const CompanyTabsComponent = ({ company }: Props) => {
-  const [activeTab, setActiveTab] = useState('about')
+  const [activeTab, setActiveTab] = useState('posts')
 
   function isActive(value: string) {
     return value === activeTab
@@ -59,26 +58,23 @@ const CompanyTabsComponent = ({ company }: Props) => {
 
   return (
     <View className='py-5 w-full'>
-      <HStack space='xs' className='justify-between border border-jego-border rounded-xl p-1 bg-jego-card'>
+      <HStack space='xs' className='justify-between border border-border rounded-xl p-1 bg-card'>
         {tabContent.map((tab) => (
           <Button
             key={tab.value}
             variant='link'
-            className={cnBase(
-              'border-jego-border flex-1 rounded-lg bg-transparent',
-              isActive(tab.value) && 'bg-jego-accent',
-            )}
+            className={cnBase('border-border flex-1 rounded-lg bg-transparent', isActive(tab.value) && 'bg-accent')}
             onPress={() => setActiveTab(tab.value)}
           >
             <ButtonIcon
               as={tab.icon}
-              className={cnBase('text-jego-muted-foreground', isActive(tab.value) && 'text-jego-primary')}
+              className={cnBase('text-muted-foreground', isActive(tab.value) && 'text-primary')}
             />
           </Button>
         ))}
       </HStack>
       <Box className='mt-3'>
-        {activeTab === 'about' && <CompanyAbout company={company} />}
+        {/* {activeTab === 'about' && <CompanyAbout company={company} />} */}
         {activeTab === 'posts' && <CompanyPosts company={company} />}
         {activeTab === 'services' && <CompanyPrestations company={company} />}
         {activeTab === 'gallery' && <CompanyGallery company={company} />}

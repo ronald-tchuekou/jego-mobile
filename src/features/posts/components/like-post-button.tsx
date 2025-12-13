@@ -44,7 +44,7 @@ export function LikePostButton({ post, orientation = 'horizontal' }: Props) {
       >
         <ButtonIcon
           as={HeartIcon}
-          className={cnBase('stroke-white fill-white', isLiked ? 'fill-jego-primary stroke-jego-primary' : undefined)}
+          className={cnBase('stroke-white fill-white', isLiked ? 'fill-primary stroke-primary' : undefined)}
         />
         <ButtonText size='lg' className='text-white'>
           {compactNumber(likes)}
@@ -54,14 +54,14 @@ export function LikePostButton({ post, orientation = 'horizontal' }: Props) {
 
   return (
     <Button size='lg' variant='link' onPress={handleClick} className='px-4'>
-      <ButtonText size='lg' className='text-jego-muted-foreground'>
+      <ButtonText size='lg' className='text-muted-foreground'>
         {compactNumber(likes)}
       </ButtonText>
       <ButtonIcon
         as={HeartIcon}
         className={cnBase(
-          'stroke-jego-muted-foreground fill-jego-muted-foreground',
-          isLiked ? 'fill-jego-primary stroke-jego-primary' : undefined,
+          'stroke-muted-foreground fill-muted-foreground',
+          isLiked ? 'fill-primary stroke-primary' : undefined,
         )}
       />
     </Button>

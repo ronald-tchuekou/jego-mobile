@@ -30,20 +30,20 @@ const JobApplicationItemComponent = ({ application }: Props) => {
             <AvatarImage source={companyLogo} alt={application.job.companyName || ''} />
           </Avatar>
           <VStack className='flex-1' space='xs'>
-            <Text className='text-base font-medium text-jego-foreground' numberOfLines={1}>
+            <Text className='text-base font-medium text-foreground' numberOfLines={1}>
               {application.job.title || "Offre d'emploi"}
             </Text>
             {application.job.companyName && (
               <HStack className='items-center gap-1'>
-                <Icon as={IconBriefcase} size='sm' className='text-jego-muted-foreground' />
-                <Text className='text-xs text-jego-muted-foreground' numberOfLines={1}>
+                <Icon as={IconBriefcase} size='sm' className='text-muted-foreground' />
+                <Text className='text-xs text-muted-foreground' numberOfLines={1}>
                   {application.job.companyName}
                 </Text>
               </HStack>
             )}
             <HStack className='items-center gap-1'>
-              <Icon as={IconCalendar} size='sm' className='text-jego-muted-foreground' />
-              <Text className='text-xs text-jego-muted-foreground'>
+              <Icon as={IconCalendar} size='sm' className='text-muted-foreground' />
+              <Text className='text-xs text-muted-foreground'>
                 Candidature envoyée le {formatDate(application.createdAt)}
               </Text>
             </HStack>

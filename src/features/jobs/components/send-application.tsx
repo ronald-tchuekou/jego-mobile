@@ -4,6 +4,7 @@ import { Button, ButtonSpinner, ButtonText } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
+import { globalStyles } from '@/src/lib/global-styles'
 import { applicationKey, jobKey, userCVKey } from '@/src/lib/query-kye'
 import { getFileTypeName } from '@/src/lib/utils'
 import JobApplicationService from '@/src/services/job-application-service'
@@ -14,11 +15,10 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { IconCircle, IconCircleFilled, IconFileCv } from '@tabler/icons-react-native'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'expo-router'
+import { useColorScheme } from 'nativewind'
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import Toast from 'react-native-toast-message'
-import { useColorScheme } from 'nativewind'
-import { globalStyles } from '@/src/lib/global-styles'
 
 type Props = {
   job: JobModel | null
@@ -120,21 +120,21 @@ const SendApplication = ({ job }: Props) => {
 
   return (
     <>
-      <View className='px-4 py-2 bg-jego-card border-t border-jego-border' style={{ paddingBottom: 12 }}>
+      <View className='px-4 py-2 bg-card border-t border-border' style={{ paddingBottom: 12 }}>
         {alreadyApplied ? (
-          <View className='mt-2 rounded-full border border-jego-border py-3 px-4 bg-jego-card'>
-            <Text className='text-center text-sm text-jego-muted-foreground'>Vous avez déjà postulé à ce job.</Text>
+          <View className='mt-2 rounded-full border border-border py-3 px-4 bg-card'>
+            <Text className='text-center text-sm text-muted-foreground'>Vous avez déjà postulé à ce job.</Text>
           </View>
         ) : (
           <Button
-            disabled={!job}
+            isDisabled={!job}
             action='primary'
             variant='solid'
             size='lg'
-            className='rounded-full mt-2 bg-jego-primary'
+            className='rounded-full mt-2 bg-primary'
             onPress={openSheet}
           >
-            <ButtonText className='text-jego-primary-foreground'>Postuler maintenant</ButtonText>
+            <ButtonText className='text-primary-foreground'>Postuler maintenant</ButtonText>
           </Button>
         )}
       </View>
@@ -156,17 +156,17 @@ const SendApplication = ({ job }: Props) => {
           backgroundColor: 'red',
         }}
       >
-        <BottomSheetView className='px-5 py-4 bg-jego-card rounded-t-2xl'>
-          <Text className='text-xl font-semibold text-jego-foreground'>Envoyer ma candidature</Text>
+        <BottomSheetView className='px-5 py-4 bg-card rounded-t-2xl'>
+          <Text className='text-xl font-semibold text-foreground'>Envoyer ma candidature</Text>
           {!!job?.title && (
-            <Text className='text-base text-jego-muted-foreground mt-1'>
-              Job: <Text className='font-medium text-jego-primary'>{job.title}</Text>
+            <Text className='text-base text-muted-foreground mt-1'>
+              Job: <Text className='font-medium text-primary'>{job.title}</Text>
             </Text>
           )}
 
-          <View className='h-[1px] bg-jego-border my-3' />
+          <View className='h-[1px] bg-border my-3' />
 
-          <Text className='text-base font-medium text-jego-foreground mb-2'>Sélectionner un CV</Text>
+          <Text className='text-base font-medium text-foreground mb-2'>Sélectionner un CV</Text>
 
           {isFetchingCvs ? (
             <LoaderContent />
@@ -179,22 +179,22 @@ const SendApplication = ({ job }: Props) => {
                     key={cv.id}
                     onPress={() => setSelectedCvPath(cv.path)}
                     className={`p-3 flex flex-row items-center gap-2 rounded-lg border ${
-                      selected ? 'border-jego-primary bg-jego-primary/10' : 'border-jego-border'
+                      selected ? 'border-primary bg-primary/10' : 'border-border'
                     }`}
                   >
-                    <Icon as={IconFileCv} size='xl' className='text-jego-foreground' />
+                    <Icon as={IconFileCv} size='xl' className='text-foreground' />
                     <View className='flex-1'>
-                      <Text className='text-base text-jego-foreground' numberOfLines={1}>
+                      <Text className='text-base text-foreground' numberOfLines={1}>
                         {cv.name}
                       </Text>
-                      <Text className='text-sm text-jego-muted-foreground' numberOfLines={1}>
+                      <Text className='text-sm text-muted-foreground' numberOfLines={1}>
                         {getFileTypeName(cv.type)}
                       </Text>
                     </View>
                     {selected ? (
                       <IconCircleFilled color={'red'} style={{ height: 20, width: 20 }} />
                     ) : (
-                      <Icon as={IconCircle} style={{ height: 24, width: 24 }} className='text-jego-muted-foreground' />
+                      <Icon as={IconCircle} style={{ height: 24, width: 24 }} className='text-muted-foreground' />
                     )}
                   </Pressable>
                 )
@@ -231,21 +231,21 @@ const SendApplication = ({ job }: Props) => {
               isDisabled={sendMutation.isPending}
               onPress={closeSheet}
             >
-              <ButtonText className={'text-jego-secondary-foreground'}>Annuler</ButtonText>
+              <ButtonText className={'text-secondary-foreground'}>Annuler</ButtonText>
             </Button>
             <Button
               action='primary'
               variant='solid'
               size='lg'
-              className='rounded-full bg-jego-primary flex-1'
+              className='rounded-full bg-primary flex-1'
               isDisabled={!selectedCvPath || sendMutation.isPending || !job}
               onPress={handleSubmitApplication}
             >
-              <ButtonText className='text-jego-primary-foreground'>
+              <ButtonText className='text-primary-foreground'>
                 {sendMutation.isPending ? (
-                  <ButtonSpinner className='text-jego-primary-foreground' />
+                  <ButtonSpinner className='text-primary-foreground' />
                 ) : (
-                  <ButtonText className='text-jego-primary-foreground'>Envoyer</ButtonText>
+                  <ButtonText className='text-primary-foreground'>Envoyer</ButtonText>
                 )}
               </ButtonText>
             </Button>

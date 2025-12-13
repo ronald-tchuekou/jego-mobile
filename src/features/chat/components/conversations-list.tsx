@@ -2,7 +2,7 @@ import EmptyContent from '@/src/components/base/empty-content'
 import { LoaderContent } from '@/src/components/base/loader-content'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useRouter } from 'expo-router'
-import { FlatList, RefreshControl } from 'react-native'
+import { FlatList } from 'react-native'
 import useGetContacts from '../hooks/use-get-contacts'
 import ConversationItem from './conversation-item'
 
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function ConversationsList({ search }: Props) {
-  const { isLoading, data, refetch, isRefetching} = useGetContacts()
+  const { isLoading, data} = useGetContacts()
   const router = useRouter()
   const auth = useAuthStore((state) => state.auth)
   const currentUserId = auth?.user?.id
@@ -38,7 +38,6 @@ export default function ConversationsList({ search }: Props) {
     <FlatList
       className='flex-1'
       data={filteredConversations || []}
-      refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
       ListEmptyComponent={isLoading ? <LoaderContent /> : <EmptyContent text={'Pas de conversation pour le moment.'} />}
       renderItem={({ item }) => (
         <ConversationItem

@@ -15,15 +15,15 @@ export default function JobApplicationsListScreen() {
   })
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Mes candidatures
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>Toutes vos candidatures de jobs.</Text>
+            <Text className='text-sm text-muted-foreground'>Toutes vos candidatures de jobs.</Text>
           </VStack>
         </HStack>
       </HeaderContainer>

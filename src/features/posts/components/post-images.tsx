@@ -1,10 +1,10 @@
 import { Image } from '@/src/components/ui/image'
+import { IMAGES } from '@/src/lib/images'
 import { getImageUri } from '@/src/lib/utils'
 import { MediaModel } from '@/src/services/post-service'
+import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from 'react-native'
-import { useRouter } from 'expo-router'
-import { IMAGES } from '@/src/lib/images'
 
 type Props = {
   author: string
@@ -27,21 +27,19 @@ export function PostImages({ medias, author }: Props) {
   }
 
   const getItemLayout = (_: unknown, index: number) => ({ length: width || 0, offset: (width || 0) * index, index })
+  const previewImage = (url: string, tag: string) =>
+    router.push(`/preview/image?url=${url}&tag=${tag}&title=${author}`)
 
   const renderItem = ({ item }: { item: MediaModel }) => {
     const imgUrl = getImageUri(item.url)
     return (
-      <TouchableOpacity
-        onPress={() => router.push(`/preview/image?url=${imgUrl.uri}&tag=${item.id}&title=${author}`)}
-        style={{ width }}
-      >
+      <TouchableOpacity activeOpacity={0.7} onPress={() => previewImage(imgUrl.uri, item.id)} style={{ width }}>
         <Image
           source={imgUrl}
           style={item.metadata?.aspectRatio ? { aspectRatio: item.metadata?.aspectRatio } : undefined}
           className={`w-full h-[400px] bg-black ${
             item.metadata?.aspectRatio ? `aspect-${item.metadata.aspectRatio}` : 'aspect-video'
           }`}
-          defaultSource={IMAGES.image_loader}
           resizeMode='contain'
           alt={item.name || 'Media'}
         />
@@ -53,7 +51,7 @@ export function PostImages({ medias, author }: Props) {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => router.push(`/preview/image?url=${imageUrl.uri}&tag=${media.id}&title=${author}`)}
+        onPress={() => previewImage(imageUrl.uri, media.id)}
         className={`w-full h-[400px] bg-black mb-4 ${
           media.metadata?.aspectRatio ? `aspect-${media.metadata.aspectRatio}` : 'aspect-video'
         }`}

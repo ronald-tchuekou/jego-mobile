@@ -59,15 +59,15 @@ export default function CommentResponseItem({ commentResponse }: Props) {
       <VStack className='flex-1'>
         <HStack className='justify-between'>
           <VStack>
-            <Text className='font-semibold text-base text-jego-foreground'>{commentResponse.user.displayName}</Text>
-            <Text className='text-xs text-jego-muted-foreground'>{formatDate(commentResponse.createdAt)}</Text>
+            <Text className='font-semibold text-base text-foreground'>{commentResponse.user.displayName}</Text>
+            <Text className='text-xs text-muted-foreground'>{formatDate(commentResponse.createdAt)}</Text>
           </VStack>
           {isOwner && (
             <Menu
               placement={'bottom right'}
               trigger={({ ...props }) => (
                 <Button {...props} size={'sm'} variant={'link'} className={'p-2'}>
-                  <ButtonIcon as={MoreHorizontalIcon} className={'text-jego-foreground'} />
+                  <ButtonIcon as={MoreHorizontalIcon} className={'text-foreground'} />
                 </Button>
               )}
             >
@@ -76,13 +76,13 @@ export default function CommentResponseItem({ commentResponse }: Props) {
                 <MenuItemLabel className={'ml-2'}>Modifier</MenuItemLabel>
               </MenuItem>
               <MenuItem textValue={'Supprimer'} onPress={() => deleteMutation.mutate()}>
-                <Icon size={'sm'} as={Trash2Icon} className={'text-jego-destructive'} />
-                <MenuItemLabel className={'text-jego-destructive ml-2'}>Supprimer</MenuItemLabel>
+                <Icon size={'sm'} as={Trash2Icon} className={'text-destructive'} />
+                <MenuItemLabel className={'text-destructive ml-2'}>Supprimer</MenuItemLabel>
               </MenuItem>
             </Menu>
           )}
         </HStack>
-        <Text className='text-sm text-jego-foreground mt-1'>{commentResponse.comment}</Text>
+        <Text className='text-sm text-foreground mt-1'>{commentResponse.comment}</Text>
       </VStack>
     </HStack>
   )

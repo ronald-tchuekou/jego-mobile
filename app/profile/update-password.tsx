@@ -73,15 +73,15 @@ export default function UpdatePasswordScreen() {
   const onSubmit = form.handleSubmit((data) => mutate(data))
 
   return (
-    <View style={{ flex: 1 }} className='bg-jego-background'>
+    <View style={{ flex: 1 }} className='bg-background'>
       <HeaderContainer>
         <HStack space='md'>
           <BackButton />
           <VStack className='flex-1'>
-            <Text className='font-semibold text-base text-jego-foreground' numberOfLines={1}>
+            <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               Changer le mot de passe
             </Text>
-            <Text className='text-sm text-jego-muted-foreground'>
+            <Text className='text-sm text-muted-foreground'>
               Entrez votre mot de passe actuel et votre nouveau mot de passe.
             </Text>
           </VStack>
@@ -99,7 +99,7 @@ export default function UpdatePasswordScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Mot de passe actuel</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='currentPassword'
@@ -113,12 +113,12 @@ export default function UpdatePasswordScreen() {
                       onSubmitEditing={() => form.setFocus('newPassword')}
                     />
                     <InputSlot className='pr-3' onPress={() => setShowCurrent((v) => !v)}>
-                      <InputIcon as={showCurrent ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                      <InputIcon as={showCurrent ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                     </InputSlot>
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>
                       {errors.currentPassword?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -134,7 +134,7 @@ export default function UpdatePasswordScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Nouveau mot de passe</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='newPassword'
@@ -148,12 +148,12 @@ export default function UpdatePasswordScreen() {
                       onSubmitEditing={() => form.setFocus('confirmNewPassword')}
                     />
                     <InputSlot className='pr-3' onPress={() => setShowNew((v) => !v)}>
-                      <InputIcon as={showNew ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                      <InputIcon as={showNew ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                     </InputSlot>
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>
                       {errors.newPassword?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -169,7 +169,7 @@ export default function UpdatePasswordScreen() {
                   <FormControlLabel>
                     <FormControlLabelText>Confirmer le nouveau mot de passe</FormControlLabelText>
                   </FormControlLabel>
-                  <Input size='xl' className='rounded-lg bg-jego-card'>
+                  <Input size='xl' className='rounded-lg bg-card'>
                     <InputField
                       ref={field.ref}
                       testID='confirmNewPassword'
@@ -183,12 +183,12 @@ export default function UpdatePasswordScreen() {
                       onSubmitEditing={onSubmit}
                     />
                     <InputSlot className='pr-3' onPress={() => setShowConfirm((v) => !v)}>
-                      <InputIcon as={showConfirm ? EyeIcon : EyeOffIcon} className='text-jego-muted-foreground' />
+                      <InputIcon as={showConfirm ? EyeIcon : EyeOffIcon} className='text-muted-foreground' />
                     </InputSlot>
                   </Input>
                   <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-jego-destructive' />
-                    <FormControlErrorText className='text-jego-destructive'>
+                    <FormControlErrorIcon as={AlertCircleIcon} size='xs' className='text-destructive' />
+                    <FormControlErrorText className='text-destructive'>
                       {errors.confirmNewPassword?.message}
                     </FormControlErrorText>
                   </FormControlError>
@@ -216,10 +216,10 @@ export default function UpdatePasswordScreen() {
               size='lg'
               onPress={onSubmit}
               isDisabled={isPending}
-              className='rounded-full mt-2 bg-jego-primary'
+              className='rounded-full mt-2 bg-primary'
             >
-              {isPending && <ButtonSpinner className='text-jego-primary-foreground' />}
-              <ButtonText className='text-jego-primary-foreground'>Mettre à jour le mot de passe</ButtonText>
+              {isPending && <ButtonSpinner className='text-primary-foreground' />}
+              <ButtonText className='text-primary-foreground'>Mettre à jour le mot de passe</ButtonText>
             </Button>
           </VStack>
           <View className='h-20' />

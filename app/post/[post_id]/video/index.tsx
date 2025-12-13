@@ -1,4 +1,5 @@
 import { BackButton } from '@/src/components/base/back-button'
+import { LoaderContent } from '@/src/components/base/loader-content'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon, ButtonText } from '@/src/components/ui/button'
 import { Center } from '@/src/components/ui/center'
@@ -15,11 +16,10 @@ import { ArrowLeftIcon, MessageCircleMoreIcon } from 'lucide-react-native'
 import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { cnBase } from 'tailwind-variants'
-import { LoaderContent } from '@/src/components/base/loader-content'
 
 export default function PostVideoPlayerScreen1() {
   // Params
-  const { post_id } = useLocalSearchParams<{ post_id: string }>()
+  const { post_id, thumbnail } = useLocalSearchParams<{ post_id: string; thumbnail?: string }>()
 
   // Queries
   const { data, isLoading: isLoadingPost } = useGetPostById(post_id)
@@ -43,7 +43,7 @@ export default function PostVideoPlayerScreen1() {
       <HStack space='md' className='px-4 py-2 bg-transparent'>
         <BackButton iconClassName='text-gray-400' />
         <Avatar size='md'>
-          <AvatarImage source={avatar as any} />
+          <AvatarImage source={avatar} />
         </Avatar>
         <VStack className='flex-1'>
           <Text className='font-semibold text-base text-gray-300' numberOfLines={1}>
@@ -63,8 +63,8 @@ export default function PostVideoPlayerScreen1() {
           <Text className='text-base text-white/70'>Oops! Aucune vidéo trouvée.</Text>
           <Text className='text-sm text-white/70'>{"La vidéo que vous cherchez n'existe pas ou a été supprimée."}</Text>
           <Button size='lg' variant='link' className='px-4'>
-            <ButtonIcon as={ArrowLeftIcon} size={'xl'} className={cnBase('stroke-jego-muted-foreground')} />
-            <ButtonText size='sm' className='text-jego-muted-foreground'>
+            <ButtonIcon as={ArrowLeftIcon} size={'xl'} className={cnBase('stroke-muted-foreground')} />
+            <ButtonText size='sm' className='text-muted-foreground'>
               Retour
             </ButtonText>
           </Button>
@@ -72,7 +72,7 @@ export default function PostVideoPlayerScreen1() {
       ) : (
         <>
           {/* Video player */}
-          {sourceUri && <VideoPlayer sourceUri={sourceUri} />}
+          {sourceUri && <VideoPlayer sourceUri={sourceUri} thumbnail={thumbnail} />}
 
           {/* Action buttons */}
           <VStack space={'md'} className='absolute bottom-32 right-2 px-1 py-3 bg-black/30 rounded-full'>

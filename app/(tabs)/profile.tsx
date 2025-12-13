@@ -24,44 +24,43 @@ export default function ProfileScreen() {
   const router = useRouter()
 
   return (
-    <View className='flex-1 bg-jego-background'>
+    <View className='flex-1 bg-background'>
       <HeaderContainer>
-        <Text className='text-3xl font-bold text-jego-card-foreground'>Gestion du compte</Text>
+        <Text className='text-3xl font-bold text-card-foreground'>Gestion du compte</Text>
       </HeaderContainer>
       <ScrollView className='p-4'>
         <ProfileImage />
 
         {/* Opérations */}
-        <Text className='text-base font-medium text-jego-foreground mt-5'>Opérations</Text>
+        <Text className='text-base font-medium text-foreground mt-5'>Opérations</Text>
         <Card className='mt-2 p-0'>
-          <View className='h-[1px] bg-jego-border' />
           <ActionItem icon={IconCalendar} title='Mes rendez-vous' onPress={() => router.push('/appointments')} />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={IconBriefcase} title='Mes candidatures' onPress={() => router.push('/job-applications')} />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={IconHeartHandshake} title='Mes followings' onPress={() => router.push('/followings')} />
         </Card>
 
         {/* Gestion du compte */}
-        <Text className='text-base font-medium text-jego-foreground mt-5'>Gestion du compte</Text>
+        <Text className='text-base font-medium text-foreground mt-5'>Gestion du compte</Text>
         <Card className='mt-2 p-0'>
           <ActionItem
             icon={UserIcon}
             title='Informations personnelles'
             onPress={() => router.push('/profile/update-info')}
           />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={MailIcon} title='Adresse email' onPress={() => router.push('/profile/update-email')} />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={IconLock} title='Mot de passe' onPress={() => router.push('/profile/update-password')} />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={IconFileCv} title='Mes CV' onPress={() => router.push('/profile/cv-files')} />
-          <View className='h-[1px] bg-jego-border' />
+          <View className='h-[1px] bg-border' />
           <ActionItem icon={IconLogout} title='Déconnexion' onPress={() => logoutModalRef.current?.open()} />
         </Card>
 
         {/* Danger zone */}
-        <Text className='text-base font-medium text-jego-foreground mt-5'>Zone dangereuse</Text>
+        <Text className='text-base font-medium text-foreground mt-5'>Zone dangereuse</Text>
         <Card className='mt-2 p-0'>
           <ActionItem
             destructive
@@ -71,8 +70,8 @@ export default function ProfileScreen() {
           />
         </Card>
         <View className='h-5' />
-        <Text className='text-sm text-jego-muted-foreground text-center'>{`Version ${Constants.expoConfig?.version}`}</Text>
-        <Text className='text-sm text-jego-muted-foreground text-center'>
+        <Text className='text-sm text-muted-foreground text-center'>{`Version ${Constants.expoConfig?.version}`}</Text>
+        <Text className='text-sm text-muted-foreground text-center'>
           © {new Date().getFullYear()} Jego. Tous droits réservés.
         </Text>
         <View className='h-12' />
@@ -92,8 +91,8 @@ type Props = {
 const ActionItem = ({ icon, title, destructive, onPress }: Props) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress} className={cnBase('flex-row h-14 items-center gap-3 px-4')}>
-      <Icon as={icon} size='xl' className={cnBase(destructive ? 'text-jego-destructive' : 'text-jego-foreground')} />
-      <Text className={cnBase('text-base font-medium', destructive ? 'text-jego-destructive' : 'text-jego-foreground')}>
+      <Icon as={icon} size='xl' className={cnBase(destructive ? 'text-destructive' : 'text-foreground')} />
+      <Text className={cnBase('text-base font-medium', destructive ? 'text-destructive' : 'text-foreground')}>
         {title}
       </Text>
     </TouchableOpacity>
