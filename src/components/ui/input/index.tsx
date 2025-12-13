@@ -29,7 +29,7 @@ cssInterop(PrimitiveIcon, {
 })
 
 const inputStyle = tva({
-  base: 'border-jego-border flex-row overflow-hidden content-center data-[hover=true]:border-jego-border data-[focus=true]:border-jego-primary data-[focus=true]:hover:border-jego-primary data-[disabled=true]:opacity-40 data-[disabled=true]:hover:border-jego-border items-center',
+  base: 'border-border flex-row overflow-hidden content-center data-[hover=true]:border-border data-[focus=true]:border-primary data-[focus=true]:hover:border-primary data-[disabled=true]:opacity-40 data-[disabled=true]:hover:border-border items-center',
 
   variants: {
     size: {
@@ -41,19 +41,19 @@ const inputStyle = tva({
 
     variant: {
       underlined:
-        'rounded-none border-b data-[invalid=true]:border-b-2 data-[invalid=true]:border-error-700 data-[invalid=true]:hover:border-error-700 data-[invalid=true]:data-[focus=true]:border-error-700 data-[invalid=true]:data-[focus=true]:hover:border-error-700 data-[invalid=true]:data-[disabled=true]:hover:border-error-700',
+        'rounded-none border-b data-[invalid=true]:border-b-2 data-[invalid=true]:border-destructive data-[invalid=true]:hover:border-destructive data-[invalid=true]:data-[focus=true]:border-destructive data-[invalid=true]:data-[focus=true]:hover:border-destructive data-[invalid=true]:data-[disabled=true]:hover:border-destructive',
 
       outline:
-        'rounded border data-[invalid=true]:border-error-700 data-[invalid=true]:hover:border-error-700 data-[invalid=true]:data-[focus=true]:border-error-700 data-[invalid=true]:data-[focus=true]:hover:border-error-700 data-[invalid=true]:data-[disabled=true]:hover:border-error-700 data-[focus=true]:web:ring-1 data-[focus=true]:web:ring-inset data-[focus=true]:web:ring-indicator-jego-primary data-[invalid=true]:web:ring-1 data-[invalid=true]:web:ring-inset data-[invalid=true]:web:ring-indicator-error data-[invalid=true]:data-[focus=true]:hover:web:ring-1 data-[invalid=true]:data-[focus=true]:hover:web:ring-inset data-[invalid=true]:data-[focus=true]:hover:web:ring-indicator-error data-[invalid=true]:data-[disabled=true]:hover:web:ring-1 data-[invalid=true]:data-[disabled=true]:hover:web:ring-inset data-[invalid=true]:data-[disabled=true]:hover:web:ring-indicator-error',
+        'rounded border data-[invalid=true]:border-destructive data-[invalid=true]:hover:border-destructive data-[invalid=true]:data-[focus=true]:border-destructive data-[invalid=true]:data-[focus=true]:hover:border-destructive data-[invalid=true]:data-[disabled=true]:hover:border-destructive data-[focus=true]:web:ring-1 data-[focus=true]:web:ring-inset data-[focus=true]:web:ring-primary data-[invalid=true]:web:ring-1 data-[invalid=true]:web:ring-inset data-[invalid=true]:web:ring-destructive data-[invalid=true]:data-[focus=true]:hover:web:ring-1 data-[invalid=true]:data-[focus=true]:hover:web:ring-inset data-[invalid=true]:data-[focus=true]:hover:web:ring-destructive data-[invalid=true]:data-[disabled=true]:hover:web:ring-1 data-[invalid=true]:data-[disabled=true]:hover:web:ring-inset data-[invalid=true]:data-[disabled=true]:hover:web:ring-destructive',
 
       rounded:
-        'rounded-full border data-[invalid=true]:border-error-700 data-[invalid=true]:hover:border-error-700 data-[invalid=true]:data-[focus=true]:border-error-700 data-[invalid=true]:data-[focus=true]:hover:border-error-700 data-[invalid=true]:data-[disabled=true]:hover:border-error-700 data-[focus=true]:web:ring-1 data-[focus=true]:web:ring-inset data-[focus=true]:web:ring-indicator-jego-primary data-[invalid=true]:web:ring-1 data-[invalid=true]:web:ring-inset data-[invalid=true]:web:ring-indicator-error data-[invalid=true]:data-[focus=true]:hover:web:ring-1 data-[invalid=true]:data-[focus=true]:hover:web:ring-inset data-[invalid=true]:data-[focus=true]:hover:web:ring-indicator-error data-[invalid=true]:data-[disabled=true]:hover:web:ring-1 data-[invalid=true]:data-[disabled=true]:hover:web:ring-inset data-[invalid=true]:data-[disabled=true]:hover:web:ring-indicator-error',
+        'rounded-full border data-[invalid=true]:border-destructive data-[invalid=true]:hover:border-destructive data-[invalid=true]:data-[focus=true]:border-destructive data-[invalid=true]:data-[focus=true]:hover:border-destructive data-[invalid=true]:data-[disabled=true]:hover:border-destructive data-[focus=true]:web:ring-1 data-[focus=true]:web:ring-inset data-[focus=true]:web:ring-primary data-[invalid=true]:web:ring-1 data-[invalid=true]:web:ring-inset data-[invalid=true]:web:ring-destructive data-[invalid=true]:data-[focus=true]:hover:web:ring-1 data-[invalid=true]:data-[focus=true]:hover:web:ring-inset data-[invalid=true]:data-[focus=true]:hover:web:ring-destructive data-[invalid=true]:data-[disabled=true]:hover:web:ring-1 data-[invalid=true]:data-[disabled=true]:hover:web:ring-inset data-[invalid=true]:data-[disabled=true]:hover:web:ring-destructive',
     },
   },
 })
 
 const inputIconStyle = tva({
-  base: 'justify-center items-center text-jego-muted-foreground fill-none',
+  base: 'justify-center items-center text-muted-foreground fill-none',
   parentVariants: {
     size: {
       '2xs': 'h-3 w-3',
@@ -71,7 +71,7 @@ const inputSlotStyle = tva({
 })
 
 const inputFieldStyle = tva({
-  base: 'flex-1 text-jego-foreground py-0 px-3 placeholder:text-jego-muted-foreground h-full ios:leading-[0px] web:cursor-text web:data-[disabled=true]:cursor-not-allowed',
+  base: 'flex-1 text-foreground py-0 px-3 placeholder:text-muted-foreground h-full ios:leading-[0px] web:cursor-text web:data-[disabled=true]:cursor-not-allowed',
 
   parentVariants: {
     variant: {

@@ -1,9 +1,8 @@
 'use client'
 import { createAlertDialog } from '@gluestack-ui/core/alert-dialog/creator'
+import type { VariantProps } from '@gluestack-ui/utils/nativewind-utils'
 import { tva, useStyleContext, withStyleContext } from '@gluestack-ui/utils/nativewind-utils'
 import React from 'react'
-
-import type { VariantProps } from '@gluestack-ui/utils/nativewind-utils'
 import { AnimatePresence, createMotionAnimatedComponent, Motion, MotionComponentProps } from '@legendapp/motion'
 import { cssInterop } from 'nativewind'
 import { Pressable, ScrollView, View, ViewStyle } from 'react-native'
@@ -50,7 +49,7 @@ const alertDialogStyle = tva({
 })
 
 const alertDialogContentStyle = tva({
-  base: 'bg-background-0 rounded-lg overflow-hidden border border-outline-100 p-6',
+  base: 'bg-card rounded-lg overflow-hidden border border-border p-6',
   parentVariants: {
     size: {
       xs: 'w-[60%] max-w-[360px]',
@@ -63,7 +62,7 @@ const alertDialogContentStyle = tva({
 })
 
 const alertDialogCloseButtonStyle = tva({
-  base: 'group/alert-dialog-close-button z-10 rounded-sm p-2 data-[focus-visible=true]:bg-background-100 web:cursor-pointer outline-0',
+  base: 'group/alert-dialog-close-button z-10 rounded-sm p-2 web:cursor-pointer outline-0',
 })
 
 const alertDialogHeaderStyle = tva({
@@ -77,7 +76,7 @@ const alertDialogFooterStyle = tva({
 const alertDialogBodyStyle = tva({ base: 'py-6' })
 
 const alertDialogBackdropStyle = tva({
-  base: 'absolute left-0 top-0 right-0 bottom-0 bg-background-dark web:cursor-default',
+  base: 'absolute left-0 top-0 right-0 bottom-0 bg-black/70 web:cursor-default',
 })
 
 type IAlertDialogProps = React.ComponentPropsWithoutRef<typeof UIAccessibleAlertDialog> &

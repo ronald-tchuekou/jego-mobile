@@ -1,9 +1,9 @@
-import React, { useState, createContext, useContext, useMemo, forwardRef } from 'react'
+import { getBreakPointValue, useBreakpointValue } from '@gluestack-ui/utils/hooks'
 import type { VariantProps } from '@gluestack-ui/utils/nativewind-utils'
-import { View, Dimensions, Platform, ViewProps } from 'react-native'
-import { gridStyle, gridItemStyle } from './styles'
 import { cssInterop } from 'nativewind'
-import { useBreakpointValue, getBreakPointValue } from '@gluestack-ui/utils/hooks'
+import React, { createContext, forwardRef, useContext, useMemo, useState } from 'react'
+import { Dimensions, Platform, View, ViewProps } from 'react-native'
+import { gridItemStyle, gridStyle } from './styles'
 const { width: DEVICE_WIDTH } = Dimensions.get('window')
 const GridContext = createContext<any>({})
 function arrangeChildrenIntoRows({

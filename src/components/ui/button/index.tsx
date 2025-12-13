@@ -1,7 +1,7 @@
 'use client'
 import { createButton } from '@gluestack-ui/core/button/creator'
 import { PrimitiveIcon, UIIcon } from '@gluestack-ui/core/icon/creator'
-import { tva, useStyleContext, withStyleContext, type VariantProps } from '@gluestack-ui/utils/nativewind-utils'
+import { tva, useStyleContext, type VariantProps, withStyleContext } from '@gluestack-ui/utils/nativewind-utils'
 import { cssInterop } from 'nativewind'
 import React from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
@@ -32,22 +32,21 @@ cssInterop(PrimitiveIcon, {
 })
 
 const buttonStyle = tva({
-  base: 'group/button rounded bg-primary-500 flex-row items-center justify-center data-[focus-visible=true]:web:outline-none data-[focus-visible=true]:web:ring-2 data-[disabled=true]:opacity-40 gap-2',
+  base: 'group/button rounded-lg bg-primary flex-row items-center justify-center data-[disabled=true]:opacity-40 gap-2',
   variants: {
     action: {
-      primary:
-        'bg-primary-500 data-[hover=true]:bg-primary-600 data-[active=true]:bg-primary-700 border-primary-300 data-[hover=true]:border-primary-400 data-[active=true]:border-primary-500 data-[focus-visible=true]:web:ring-indicator-info',
+      primary: 'bg-primary data-[active=true]:bg-primary/70 border-primary data-[active=true]:border-primary/70',
       secondary:
-        'bg-secondary-500 border-secondary-300 data-[hover=true]:bg-secondary-600 data-[hover=true]:border-secondary-400 data-[active=true]:bg-secondary-700 data-[active=true]:border-secondary-700 data-[focus-visible=true]:web:ring-indicator-info',
+        'bg-secondary border-secondary data-[hover=true]:border-secondary data-[active=true]:bg-secondary/70 data-[active=true]:border-secondary/7',
       positive:
-        'bg-success-500 border-success-300 data-[hover=true]:bg-success-600 data-[hover=true]:border-success-400 data-[active=true]:bg-success-700 data-[active=true]:border-success-500 data-[focus-visible=true]:web:ring-indicator-info',
+        'bg-success border-success data-[hover=true]:bg-success/80 data-[hover=true]:border-success/80 data-[active=true]:bg-success/70 data-[active=true]:border-success/70',
       negative:
-        'bg-error-500 border-error-300 data-[hover=true]:bg-error-600 data-[hover=true]:border-error-400 data-[active=true]:bg-error-700 data-[active=true]:border-error-500 data-[focus-visible=true]:web:ring-indicator-info',
-      default: 'bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+        'bg-destructive border-destructive data-[hover=true]:bg-destructive/80 data-[active=true]:bg-destructive/70 data-[active=true]:border-destructive/70',
+      default: 'bg-transparent border-border data-[active=true]:bg-accent',
     },
     variant: {
-      link: 'px-0',
-      outline: 'bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+      link: 'px-0 data-[active=true]:bg-accent',
+      outline: 'bg-transparent border data-[active=true]:bg-accent',
       solid: '',
     },
 
@@ -57,65 +56,133 @@ const buttonStyle = tva({
       md: 'px-5 h-10',
       lg: 'px-6 h-11',
       xl: 'px-7 h-12',
+      'icon-xs': 'size-8 rounded-full',
+      'icon-sm': 'size-9 rounded-full',
+      'icon-md': 'size-10 rounded-full',
+      'icon-lg': 'size-11 rounded-full',
+      'icon-xl': 'size-12 rounded-full',
     },
   },
   compoundVariants: [
     {
       action: 'primary',
       variant: 'link',
-      class: 'px-0 bg-transparent data-[hover=true]:bg-transparent data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-primary/10',
     },
     {
       action: 'secondary',
       variant: 'link',
-      class: 'px-0 bg-transparent data-[hover=true]:bg-transparent data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-secondary',
     },
     {
       action: 'positive',
       variant: 'link',
-      class: 'px-0 bg-transparent data-[hover=true]:bg-transparent data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-success/10',
     },
     {
       action: 'negative',
       variant: 'link',
-      class: 'px-0 bg-transparent data-[hover=true]:bg-transparent data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-destructive/10',
     },
     {
       action: 'primary',
       variant: 'outline',
-      class: 'bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-primary/10',
     },
     {
       action: 'secondary',
       variant: 'outline',
-      class: 'bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-secondary',
     },
     {
       action: 'positive',
       variant: 'outline',
-      class: 'bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-success/10',
     },
     {
       action: 'negative',
       variant: 'outline',
-      class: 'bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
+      class: 'bg-transparent  data-[active=true]:bg-destructive/10',
     },
   ],
 })
 
+const parentCompoundVariants = [
+  {
+    variant: 'solid',
+    action: 'primary',
+    class: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+  },
+  {
+    variant: 'solid',
+    action: 'secondary',
+    class: 'text-secondary-foreground data-[active=true]:text-secondary-foreground',
+  },
+  {
+    variant: 'solid',
+    action: 'positive',
+    class: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+  },
+  {
+    variant: 'solid',
+    action: 'negative',
+    class: 'text-destructive-foreground data-[active=true]:text-destructive-foreground',
+  },
+  {
+    variant: 'outline',
+    action: 'primary',
+    class: 'text-primary data-[active=true]:text-primary',
+  },
+  {
+    variant: 'outline',
+    action: 'secondary',
+    class: 'text-secondary-foreground data-[active=true]:text-secondary-foreground',
+  },
+  {
+    variant: 'outline',
+    action: 'positive',
+    class: 'text-success data-[active=true]:text-success',
+  },
+  {
+    variant: 'outline',
+    action: 'negative',
+    class: 'text-destructive data-[active=true]:text-destructive',
+  },
+  {
+    variant: 'link',
+    action: 'primary',
+    class: 'text-primary data-[active=true]:text-primary',
+  },
+  {
+    variant: 'link',
+    action: 'secondary',
+    class: 'text-secondary-foreground data-[active=true]:text-secondary-foreground',
+  },
+  {
+    variant: 'link',
+    action: 'positive',
+    class: 'text-success data-[active=true]:text-success',
+  },
+  {
+    variant: 'link',
+    action: 'negative',
+    class: 'text-destructive data-[active=true]:text-destructive',
+  },
+]
+
 const buttonTextStyle = tva({
-  base: 'text-typography-0 font-semibold web:select-none',
+  base: 'text-primary-foreground font-semibold',
   parentVariants: {
     action: {
-      primary: 'text-primary-600 data-[hover=true]:text-primary-600 data-[active=true]:text-primary-700',
-      secondary: 'text-typography-500 data-[hover=true]:text-typography-600 data-[active=true]:text-typography-700',
-      positive: 'text-success-600 data-[hover=true]:text-success-600 data-[active=true]:text-success-700',
-      negative: 'text-error-600 data-[hover=true]:text-error-600 data-[active=true]:text-error-700',
+      primary: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+      secondary: 'text-secondary-foreground data-[active=true]:text-secondary-foreground',
+      positive: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+      negative: 'text-destructive-foreground data-[active=true]:text-destructive-foreground',
     },
     variant: {
-      link: 'data-[hover=true]:underline data-[active=true]:underline',
-      outline: '',
-      solid: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
+      link: 'text-foreground data-[active=true]:text-foreground',
+      outline: 'text-foreground data-[active=true]:text-foreground',
+      solid: 'text-foreground data-[active=true]:text-foreground',
     },
     size: {
       xs: 'text-xs',
@@ -125,57 +192,16 @@ const buttonTextStyle = tva({
       xl: 'text-xl',
     },
   },
-  parentCompoundVariants: [
-    {
-      variant: 'solid',
-      action: 'primary',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-    {
-      variant: 'solid',
-      action: 'secondary',
-      class: 'text-typography-800 data-[hover=true]:text-typography-800 data-[active=true]:text-typography-800',
-    },
-    {
-      variant: 'solid',
-      action: 'positive',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-    {
-      variant: 'solid',
-      action: 'negative',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-    {
-      variant: 'outline',
-      action: 'primary',
-      class: 'text-primary-500 data-[hover=true]:text-primary-500 data-[active=true]:text-primary-500',
-    },
-    {
-      variant: 'outline',
-      action: 'secondary',
-      class: 'text-typography-500 data-[hover=true]:text-primary-600 data-[active=true]:text-typography-700',
-    },
-    {
-      variant: 'outline',
-      action: 'positive',
-      class: 'text-primary-500 data-[hover=true]:text-primary-500 data-[active=true]:text-primary-500',
-    },
-    {
-      variant: 'outline',
-      action: 'negative',
-      class: 'text-primary-500 data-[hover=true]:text-primary-500 data-[active=true]:text-primary-500',
-    },
-  ],
+  parentCompoundVariants,
 })
 
 const buttonIconStyle = tva({
   base: 'fill-none',
   parentVariants: {
     variant: {
-      link: 'data-[hover=true]:underline data-[active=true]:underline',
-      outline: '',
-      solid: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
+      link: 'text-foreground data-[active=true]:text-foreground',
+      outline: 'text-foreground data-[active=true]:text-foreground',
+      solid: 'text-foreground data-[active=true]:text-foreground',
     },
     size: {
       xs: 'h-3.5 w-3.5',
@@ -185,35 +211,14 @@ const buttonIconStyle = tva({
       xl: 'h-5 w-5',
     },
     action: {
-      primary: 'text-primary-600 data-[hover=true]:text-primary-600 data-[active=true]:text-primary-700',
-      secondary: 'text-typography-500 data-[hover=true]:text-typography-600 data-[active=true]:text-typography-700',
-      positive: 'text-success-600 data-[hover=true]:text-success-600 data-[active=true]:text-success-700',
-
-      negative: 'text-error-600 data-[hover=true]:text-error-600 data-[active=true]:text-error-700',
+      primary: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+      secondary:
+        'text-secondary-foreground data-[hover=true]:text-secondary-foreground data-[active=true]:text-secondary-foreground',
+      positive: 'text-primary-foreground data-[active=true]:text-primary-foreground',
+      negative: 'text-destructive data-[hover=true]:text-destructive data-[active=true]:text-destructive',
     },
   },
-  parentCompoundVariants: [
-    {
-      variant: 'solid',
-      action: 'primary',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-    {
-      variant: 'solid',
-      action: 'secondary',
-      class: 'text-typography-800 data-[hover=true]:text-typography-800 data-[active=true]:text-typography-800',
-    },
-    {
-      variant: 'solid',
-      action: 'positive',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-    {
-      variant: 'solid',
-      action: 'negative',
-      class: 'text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0',
-    },
-  ],
+  parentCompoundVariants,
 })
 
 const buttonGroupStyle = tva({
@@ -347,4 +352,3 @@ ButtonIcon.displayName = 'ButtonIcon'
 ButtonGroup.displayName = 'ButtonGroup'
 
 export { Button, ButtonGroup, ButtonIcon, ButtonSpinner, ButtonText }
-

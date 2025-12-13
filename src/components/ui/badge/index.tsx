@@ -1,21 +1,22 @@
 'use client'
 import { PrimitiveIcon, UIIcon } from '@gluestack-ui/core/icon/creator'
-import { tva, useStyleContext, withStyleContext, type VariantProps } from '@gluestack-ui/utils/nativewind-utils'
+import { tva, useStyleContext, type VariantProps, withStyleContext } from '@gluestack-ui/utils/nativewind-utils'
 import { cssInterop } from 'nativewind'
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Svg } from 'react-native-svg'
+
 const SCOPE = 'BADGE'
 
 const badgeStyle = tva({
   base: 'flex-row items-center rounded-sm data-[disabled=true]:opacity-50 px-2 py-1',
   variants: {
     action: {
-      error: 'bg-background-error border-error-300',
-      warning: 'bg-background-warning border-warning-300',
-      success: 'bg-background-success border-success-300',
-      info: 'bg-background-info border-info-300',
-      muted: 'bg-background-muted border-background-300',
+      error: 'bg-destructive/20 border-destructive',
+      warning: 'bg-warning/20 border-warning',
+      success: 'bg-success/20 border-success',
+      info: 'bg-info/20 border-info',
+      muted: 'bg-muted border-muted-foreground',
     },
     variant: {
       solid: '',
@@ -30,15 +31,15 @@ const badgeStyle = tva({
 })
 
 const badgeTextStyle = tva({
-  base: 'text-typography-700 font-body font-normal tracking-normal uppercase',
+  base: 'text-muted-foreground font-body font-normal tracking-normal uppercase',
 
   parentVariants: {
     action: {
-      error: 'text-error-600',
-      warning: 'text-warning-600',
-      success: 'text-success-600',
-      info: 'text-info-600',
-      muted: 'text-background-800',
+      error: 'text-destructive',
+      warning: 'text-warning',
+      success: 'text-success',
+      info: 'text-info',
+      muted: 'text-muted-foreground',
     },
     size: {
       sm: 'text-2xs',

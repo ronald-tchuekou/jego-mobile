@@ -10,20 +10,20 @@ import { Text, View } from 'react-native'
 const SCOPE = 'ALERT'
 
 const alertStyle = tva({
-  base: 'items-center py-3 px-4 rounded-md flex-row gap-2 border-outline-100',
+  base: 'items-center py-3 px-4 rounded-md flex-row gap-2 border-border',
 
   variants: {
     action: {
-      error: 'bg-background-error',
-      warning: 'bg-background-warning',
-      success: 'bg-background-success',
-      info: 'bg-background-info',
-      muted: 'bg-background-muted',
+      error: 'bg-destructive/10',
+      warning: 'bg-warning/10',
+      success: 'bg-success/10',
+      info: 'bg-info/10',
+      muted: 'bg-muted',
     },
 
     variant: {
       solid: '',
-      outline: 'border bg-background-0',
+      outline: 'border bg-background',
     },
   },
 })
@@ -69,11 +69,11 @@ const alertTextStyle = tva({
   },
   parentVariants: {
     action: {
-      error: 'text-error-800',
-      warning: 'text-warning-800',
-      success: 'text-success-800',
-      info: 'text-info-800',
-      muted: 'text-background-800',
+      error: 'text-destructive',
+      warning: 'text-warning',
+      success: 'text-success',
+      info: 'text-info',
+      muted: 'text-muted-foreground',
     },
   },
 })
@@ -92,11 +92,11 @@ const alertIconStyle = tva({
   },
   parentVariants: {
     action: {
-      error: 'text-error-800',
-      warning: 'text-warning-800',
-      success: 'text-success-800',
-      info: 'text-info-800',
-      muted: 'text-background-800',
+      error: 'text-destructive',
+      warning: 'text-warning',
+      success: 'text-success',
+      info: 'text-info',
+      muted: 'text-foreground',
     },
   },
 })

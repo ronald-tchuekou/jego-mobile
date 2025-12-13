@@ -7,6 +7,7 @@ import { tva, withStyleContext } from '@gluestack-ui/utils/nativewind-utils'
 import { cssInterop } from 'nativewind'
 
 import React from 'react'
+
 export const UILink = createLink({
   Root: withStyleContext(Pressable),
   Text: Text,
@@ -20,7 +21,7 @@ const linkStyle = tva({
 })
 
 const linkTextStyle = tva({
-  base: 'underline text-primary-600 data-[hover=true]:text-info-600 data-[hover=true]:no-underline data-[active=true]:text-info-700 font-normal font-body web:font-sans web:tracking-sm web:my-0 web:bg-transparent web:border-0 web:box-border web:display-inline web:list-none web:margin-0 web:padding-0 web:position-relative web:text-start web:whitespace-pre-wrap web:word-wrap-break-word',
+  base: 'underline text-destructive data-[hover=true]:text-info data-[hover=true]:no-underline data-[active=true]:text-info font-normal font-body web:font-sans web:tracking-sm web:my-0 web:bg-transparent web:border-0 web:box-border web:display-inline web:list-none web:margin-0 web:padding-0 web:position-relative web:text-start web:whitespace-pre-wrap web:word-wrap-break-word',
 
   variants: {
     isTruncated: {

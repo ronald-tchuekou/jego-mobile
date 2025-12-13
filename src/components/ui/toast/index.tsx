@@ -18,25 +18,25 @@ const SCOPE = 'TOAST'
 cssInterop(MotionView, { className: 'style' })
 
 const toastStyle = tva({
-  base: 'p-4 m-1 rounded-md gap-1 web:pointer-events-auto shadow-hard-5 border-outline-100',
+  base: 'p-4 m-1 rounded-md gap-1 web:pointer-events-auto shadow-hard-5 border-border',
   variants: {
     action: {
-      error: 'bg-error-800',
-      warning: 'bg-warning-700',
-      success: 'bg-success-700',
-      info: 'bg-info-700',
-      muted: 'bg-background-800',
+      error: 'bg-destructive/20',
+      warning: 'bg-warning/20',
+      success: 'bg-success/20',
+      info: 'bg-info/20',
+      muted: 'bg-muted',
     },
 
     variant: {
       solid: '',
-      outline: 'border bg-background-0',
+      outline: 'border bg-background',
     },
   },
 })
 
 const toastTitleStyle = tva({
-  base: 'text-typography-0 font-medium font-body tracking-md text-left',
+  base: 'text-foreground font-medium font-body tracking-md text-left',
   variants: {
     isTruncated: {
       true: '',
@@ -81,27 +81,27 @@ const toastTitleStyle = tva({
     {
       variant: 'outline',
       action: 'error',
-      class: 'text-error-800',
+      class: 'text-destructive',
     },
     {
       variant: 'outline',
       action: 'warning',
-      class: 'text-warning-800',
+      class: 'text-warning',
     },
     {
       variant: 'outline',
       action: 'success',
-      class: 'text-success-800',
+      class: 'text-success',
     },
     {
       variant: 'outline',
       action: 'info',
-      class: 'text-info-800',
+      class: 'text-info',
     },
     {
       variant: 'outline',
       action: 'muted',
-      class: 'text-background-800',
+      class: 'text-muted-foreground',
     },
   ],
 })
@@ -137,8 +137,8 @@ const toastDescriptionStyle = tva({
   },
   parentVariants: {
     variant: {
-      solid: 'text-typography-50',
-      outline: 'text-typography-900',
+      solid: 'text-muted-foreground',
+      outline: 'text-foreground',
     },
   },
 })

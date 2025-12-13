@@ -18,7 +18,7 @@ type ISkeletonTextProps = React.ComponentProps<typeof View> &
   }
 
 const Skeleton = forwardRef<React.ComponentRef<typeof Animated.View>, ISkeletonProps>(function Skeleton(
-  { className, variant, children, startColor = 'bg-background-200', isLoaded = false, speed = 2, ...props },
+  { className, variant, children, startColor = 'bg-muted', isLoaded = false, speed = 2, ...props },
   ref,
 ) {
   const pulseAnim = new Animated.Value(1)
@@ -68,7 +68,7 @@ const Skeleton = forwardRef<React.ComponentRef<typeof Animated.View>, ISkeletonP
 })
 
 const SkeletonText = forwardRef<React.ComponentRef<typeof View>, ISkeletonTextProps>(function SkeletonText(
-  { className, _lines, isLoaded = false, startColor = 'bg-background-200', gap = 2, children, ...props },
+  { className, _lines, isLoaded = false, startColor = 'bg-muted', gap = 2, children, ...props },
   ref,
 ) {
   if (!isLoaded) {
