@@ -9,13 +9,13 @@ import { Svg } from 'react-native-svg'
 const SCOPE = 'BADGE'
 
 const badgeStyle = tva({
-  base: 'flex-row items-center rounded-sm data-[disabled=true]:opacity-50 px-2 py-1',
+  base: 'flex-row border items-center rounded-sm data-[disabled=true]:opacity-50 px-2 py-1',
   variants: {
     action: {
-      error: 'bg-destructive/20 border-destructive',
-      warning: 'bg-warning/20 border-warning',
-      success: 'bg-success/20 border-success',
-      info: 'bg-info/20 border-info',
+      error: 'bg-destructive/10 border-destructive',
+      warning: 'bg-warning/10 border-warning',
+      success: 'bg-success/10 border-success',
+      info: 'bg-info/10 border-info',
       muted: 'bg-muted border-muted-foreground',
     },
     variant: {

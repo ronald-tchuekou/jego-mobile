@@ -36,6 +36,10 @@ export const globalStyles = {
       light: '#EBEBEBFF',
       dark: '#3A2727FF',
     },
+    input: {
+      light: '#EBEBEBFF',
+      dark: '#3A2727FF',
+    },
   },
   button_icon: {
     sm: {

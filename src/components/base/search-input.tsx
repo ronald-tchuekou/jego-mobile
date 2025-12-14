@@ -23,7 +23,7 @@ export const SearchInput = ({ placeholder, onChangeText, className }: Props) => 
   }
 
   return (
-    <Input className={cnBase('rounded-full border-border', className)}>
+    <Input className={cnBase('rounded-full border-border bg-input', className)}>
       <InputSlot className='pl-3'>
         <InputIcon as={SearchIcon} className='text-muted-foreground' />
       </InputSlot>
