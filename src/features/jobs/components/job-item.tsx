@@ -21,7 +21,7 @@ const JobItemComponent = ({ job }: Props) => {
 
   return (
     <Link href={`/job/${job.id}`}>
-      <Card className='p-0 border border-border'>
+      <Card className='p-0'>
         <VStack className='gap-3 p-4'>
           {/* Company Info */}
           <HStack className='items-center gap-3'>

@@ -6,13 +6,13 @@ import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Badge, BadgeText } from '@/src/components/ui/badge'
 import { Card } from '@/src/components/ui/card'
 import { HStack } from '@/src/components/ui/hstack'
-import { CalendarDaysIcon, GlobeIcon, Icon, MailIcon, PhoneIcon } from '@/src/components/ui/icon'
+import { CalendarDaysIcon, Icon } from '@/src/components/ui/icon'
 import { VStack } from '@/src/components/ui/vstack'
 import SendApplication from '@/src/features/jobs/components/send-application'
 import useGetJob from '@/src/features/jobs/hooks/use-get-job'
 import { formatDate, getCompanyLogoUri } from '@/src/lib/utils'
 import { JobModel, JobStatus } from '@/src/services/job-service'
-import { IconMapPinFilled, IconUsers } from '@tabler/icons-react-native'
+import { IconBrowser, IconMail, IconMapPinFilled, IconPhone, IconUsers } from '@tabler/icons-react-native'
 import { Link, useLocalSearchParams } from 'expo-router'
 import { ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -30,12 +30,13 @@ export default function JobDetailsScreen() {
             <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {job?.title || '- - -'}
             </Text>
-            <Text className='text-sm text-typography-600'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
+            <Text className='text-sm text-foreground'>Publié le {job ? formatDate(job.createdAt) : '- - -'}</Text>
           </VStack>
         </HStack>
       </HeaderContainer>
 
       <ScrollView className='flex-1 bg-background' contentContainerClassName={'bg-background'}>
+        <View className={'h-5'} />
         {isLoading ? (
           <LoaderContent />
         ) : !job ? (
@@ -122,7 +123,7 @@ const Content = ({ job }: { job: JobModel }) => {
 
                 <HStack space='md'>
                   {/* Company Avatar */}
-                  <Avatar size='lg' className='size-20'>
+                  <Avatar size='md'>
                     <AvatarImage source={getCompanyLogoUri(job.companyLogo || undefined)} alt={job.companyName || ''} />
                   </Avatar>
 
@@ -154,7 +155,7 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!website && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={GlobeIcon} size='md' className='text-muted-foreground' />
+                        <Icon as={IconBrowser} size='md' className='text-muted-foreground' />
                         <Text className='text-sm text-primary'>
                           <Link href={website as any}>{job.companyWebsite}</Link>
                         </Text>
@@ -163,7 +164,7 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!job.companyEmail && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={MailIcon} size='md' className='text-muted-foreground' />
+                        <Icon as={IconMail} size='md' className='text-muted-foreground' />
                         <Text className='text-sm text-primary'>
                           <Link href={`mailto:${job.companyEmail}`}>{job.companyEmail}</Link>
                         </Text>
@@ -172,7 +173,7 @@ const Content = ({ job }: { job: JobModel }) => {
 
                     {!!job.companyPhone && (
                       <HStack className='items-center gap-2'>
-                        <Icon as={PhoneIcon} size='md' className='text-muted-foreground' />
+                        <Icon as={IconPhone} size='md' className='text-muted-foreground' />
                         <Text className='text-sm text-primary'>
                           <Link href={`tel:${job.companyPhone}`}>{job.companyPhone}</Link>
                         </Text>
