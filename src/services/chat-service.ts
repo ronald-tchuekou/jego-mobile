@@ -110,7 +110,7 @@ const ChatService = {
     return data?.data
   },
 
-  async getConversationMessages(conversationId: string, token: string, page: number = 1, limit: number = 50) {
+  async getConversationMessages(conversationId: string, token: string, page: number = 1, limit: number = 500) {
     const query = objectToQueryString({ page, limit })
     const { data, error } = await fetchHelper<{
       data: PaginateResponse<Message>
