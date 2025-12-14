@@ -4,9 +4,8 @@ import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Button, ButtonIcon } from '@/src/components/ui/button'
 import { HStack } from '@/src/components/ui/hstack'
 import { VStack } from '@/src/components/ui/vstack'
-import { env } from '@/src/lib/env'
 import { postCommentKey } from '@/src/lib/query-kye'
-import { formatDate } from '@/src/lib/utils'
+import { formatDate, getUserProfileImageUri } from '@/src/lib/utils'
 import { Toast, ToastTitle, useToast } from '@/src/components/ui/toast'
 import PostCommentResponseService, { PostCommentResponseModel } from '@/src/services/post-comment-response-service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -16,7 +15,6 @@ import { Text } from 'react-native'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { Menu, MenuItem, MenuItemLabel } from '@/src/components/ui/menu'
 import { Icon } from '@/src/components/ui/icon'
-import { IMAGES } from '@/src/lib/images'
 import { useCommentStore } from '@/src/stores/comment-store'
 
 type Props = { commentResponse: PostCommentResponseModel }
@@ -47,9 +45,7 @@ export default function CommentResponseItem({ commentResponse }: Props) {
     },
   })
 
-  const profileSrc = commentResponse.user?.profileImage
-    ? { uri: `${env.API_URL}/v1/${commentResponse.user.profileImage}` }
-    : IMAGES.default_user_avatar
+  const profileSrc = getUserProfileImageUri(commentResponse.user?.profileImage)
 
   return (
     <HStack space='sm' className='items-start'>
