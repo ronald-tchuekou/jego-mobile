@@ -42,7 +42,7 @@ export default function PostDetailsScreen() {
             <Text className='font-semibold text-base text-foreground' numberOfLines={1}>
               {company?.name || data?.user?.displayName || '- - -'}
             </Text>
-            <Text className='text-sm text-typography-600'>
+            <Text className='text-sm text-muted-foreground'>
               {data?.createdAt ? formatDate(data.createdAt) : '- - -'}
             </Text>
           </VStack>
