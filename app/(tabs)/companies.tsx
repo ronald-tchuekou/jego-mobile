@@ -19,9 +19,9 @@ export default function CompaniesScreen() {
           <SearchInput className='flex-1' placeholder='Rechercher une entreprise...' onChangeText={setSearch} />
           <Button
             variant='outline'
-            size='lg'
-            action='secondary'
-            className='p-0 rounded-full'
+            size='icon-lg'
+            action={'default'}
+            className='p-0'
             style={globalStyles.button_icon.lg}
           >
             <ButtonIcon as={FilterIcon} size='lg' />

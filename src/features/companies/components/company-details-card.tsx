@@ -6,9 +6,8 @@ import { HStack } from '@/src/components/ui/hstack'
 import { Icon } from '@/src/components/ui/icon'
 import { compactNumber, getCompanyLogoUri, pluralize } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
-import { IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react-native'
+import { IconMail, IconMapPin, IconPhone } from '@tabler/icons-react-native'
 import { Link } from 'expo-router'
-import { MailIcon } from 'lucide-react-native'
 import { Text, View } from 'react-native'
 import ChatButton from './chat-button'
 import CompanyRatingAverage from './company-details-tabs/company-rating-average'
@@ -42,19 +41,19 @@ export const CompanyDetailsCard = ({ company }: Props) => {
           {compactNumber(followersCount)} {pluralize('follower', followersCount)}
         </Text>
         <HStack className='items-start gap-2 mt-4'>
-          <Icon as={MailIcon} size='lg' className='text-muted-foreground' />
+          <Icon as={IconMail} size='lg' className='text-muted-foreground' />
           <Text className='text-sm flex-1 text-muted-foreground'>
             <Link href={`mailto:${company.email}`}>{company.email || '- - -'}</Link>
           </Text>
         </HStack>
         <HStack className='items-start gap-2 mt-2'>
-          <Icon as={IconPhoneFilled} size='lg' className='text-muted-foreground' />
+          <Icon as={IconPhone} size='lg' className='text-muted-foreground' />
           <Text className='text-sm flex-1 text-muted-foreground'>
             <Link href={`tel:${company.phone}`}>{company.phone || '- - -'}</Link>
           </Text>
         </HStack>
         <HStack className='items-start gap-2 mt-2'>
-          <Icon as={IconMapPinFilled} size='lg' className='text-muted-foreground' />
+          <Icon as={IconMapPin} size='lg' className='text-muted-foreground' />
           <Text className='text-sm flex-1 text-muted-foreground'>{company.address || '- - -'}</Text>
         </HStack>
       </View>

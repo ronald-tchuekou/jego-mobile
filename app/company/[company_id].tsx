@@ -38,18 +38,20 @@ export default function PostDetailsScreen() {
         </HStack>
       </HeaderContainer>
 
-      <ScrollView className='flex-1 p-4'>
-        {isLoading ? (
-          <LoaderContent />
-        ) : !data ? (
-          <EmptyContent text={"Cette entreprise n'existe pas."} />
-        ) : (
-          <>
-            <CompanyDetailsCard company={data} />
-            <CompanyTabs company={data} />
-          </>
-        )}
-        <View className='h-20' />
+      <ScrollView className='flex-1'>
+        <View className={'px-4 py-10'}>
+          {isLoading ? (
+            <LoaderContent />
+          ) : !data ? (
+            <EmptyContent text={"Cette entreprise n'existe pas."} />
+          ) : (
+            <>
+              <CompanyDetailsCard company={data} />
+              <CompanyTabs company={data} />
+            </>
+          )}
+          <View className='h-20' />
+        </View>
       </ScrollView>
     </View>
   )

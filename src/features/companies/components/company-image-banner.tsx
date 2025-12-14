@@ -2,7 +2,7 @@ import { Image } from '@/src/components/ui/image'
 import { IMAGES } from '@/src/lib/images'
 import { getFullUrl } from '@/src/lib/utils'
 import { CompanyModel } from '@/src/services/company-service'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import { Text, View } from 'react-native'
 import { cnBase } from 'tailwind-variants'
 
@@ -11,7 +11,7 @@ type Props = {
   className?: string
 }
 
-const CompanyImageBannerComponent = ({ company, className }: Props) => {
+export const CompanyImageBanner = ({ company, className }: Props) => {
   const [hasError, setHasError] = useState(false)
 
   const companyImageBanner = company?.bannerImage
@@ -21,12 +21,12 @@ const CompanyImageBannerComponent = ({ company, className }: Props) => {
   return (
     <View
       className={cnBase(
-        'w-full overflow-hidden rounded-t-xl bg-accent border-b border-border aspect-[4/1] relative',
+        'w-full overflow-hidden rounded-t-xl bg-secondary dark:bg-secondary/20 border-b border-border aspect-[4/1] relative',
         className,
       )}
     >
       {hasError ? (
-        <View className='absolute inset-0 bg-muted flex items-center justify-center'>
+        <View className='absolute inset-0 bg-transparent flex items-center justify-center'>
           <Text className='text-muted-foreground text-sm text-center p-4'>
             Erreur lors du chargement de l&apos;image
           </Text>
@@ -35,7 +35,7 @@ const CompanyImageBannerComponent = ({ company, className }: Props) => {
         <Image
           source={companyImageBanner}
           alt={company.name}
-          className={cnBase('flex-1 object-cover object-center aspect-[4/1]')}
+          className={cnBase('flex-1 object-coverb bg-transparent object-center aspect-[4/1]')}
           onError={() => {
             setHasError(true)
           }}
@@ -46,5 +46,3 @@ const CompanyImageBannerComponent = ({ company, className }: Props) => {
     </View>
   )
 }
-
-export const CompanyImageBanner = memo(CompanyImageBannerComponent)
