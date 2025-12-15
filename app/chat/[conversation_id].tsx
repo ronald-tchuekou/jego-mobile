@@ -19,21 +19,19 @@ export default function ConversationScreen() {
   const currentUserId = auth?.user?.id
 
   const getOtherParticipant = () => {
-    if (!conversation?.participants || conversation.participants.length < 2) return null
+    if (!conversation?.participants || (conversation?.participants && conversation.participants.length < 2)) return null
 
     const participant1 = conversation.participants[0]
     const participant2 = conversation.participants[1]
 
-    if (participant1?.userId === currentUserId) {
-      return participant2?.user || null
+    if (participant1.userId === currentUserId) {
+      return participant2.user
     }
 
-    return participant1?.user || null
+    return participant1.user
   }
 
   const otherParticipant = getOtherParticipant()
-
-  if (!conversation_id) return <EmptyContent text='Aucune conversation sélectionnée' />
 
   return (
     <SafeAreaView className='flex-1 bg-card'>
@@ -45,14 +43,17 @@ export default function ConversationScreen() {
           </Avatar>
           <VStack className='flex-1'>
             <Text className='font-semibold text-lg text-foreground' numberOfLines={1}>
-              {otherParticipant ? `${otherParticipant.firstName} ${otherParticipant.lastName}` : 'Utilisateur'}
+              {otherParticipant ? `${otherParticipant.firstName} ${otherParticipant.lastName}` : '- - -'}
             </Text>
           </VStack>
         </HStack>
       </HeaderContainer>
-
       <View className={'bg-background flex-1'}>
-        <MessagesList conversationId={conversation_id} />
+        {conversation_id ? (
+          <MessagesList conversationId={conversation_id} />
+        ) : (
+          <EmptyContent text='Aucune conversation sélectionnée' />
+        )}
       </View>
     </SafeAreaView>
   )

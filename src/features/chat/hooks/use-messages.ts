@@ -6,6 +6,7 @@ import { IMessage } from 'react-native-gifted-chat'
 import { getFullUrl } from '@/src/lib/utils'
 import { IMAGES } from '@/src/lib/images'
 import Toast from 'react-native-toast-message'
+import usePusherSubscribe from '@/src/hooks/use-pusher-subscribe'
 
 const useMessages = (conversationId: string | null) => {
   const auth = useAuthStore((state) => state.auth)
@@ -19,6 +20,9 @@ const useMessages = (conversationId: string | null) => {
       return ChatService.getConversationMessages(conversationId, auth.token)
     },
   })
+
+  // Subscriptions
+  usePusherSubscribe(refetch)
 
   // Store message to the API
   const { mutate: sendMessage, isPending: isSendingMessage } = useMutation({
