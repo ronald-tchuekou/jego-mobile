@@ -4,14 +4,17 @@ import QueryProviders from '@/src/providers/query-provider'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useColorScheme } from 'nativewind'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import Toast from 'react-native-toast-message'
+import { PusherProvider } from '@/src/providers/pusher-provider'
+import useTheme from '@/src/hooks/use-theme'
 
 const AppStack = () => {
   const auth = useAuthStore((s) => s.auth)
-  const { colorScheme } = useColorScheme()
+  const theme = useTheme()
+
+  console.log('User id: ', auth?.user.id)
 
   return (
     <>
@@ -44,7 +47,7 @@ const AppStack = () => {
           <Stack.Screen name='reset-password' options={{ headerShown: false }} />
         </Stack.Protected>
       </Stack>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={theme} />
     </>
   )
 }
@@ -55,7 +58,9 @@ export default function RootLayout() {
       <GluestackUIProvider>
         <GestureHandlerRootView>
           <QueryProviders>
-            <AppStack />
+            <PusherProvider>
+              <AppStack />
+            </PusherProvider>
             <Toast visibilityTime={6000} />
           </QueryProviders>
         </GestureHandlerRootView>
