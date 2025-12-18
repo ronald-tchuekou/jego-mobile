@@ -1,6 +1,6 @@
 import { appointKey } from '@/src/lib/query-kye'
 import CompanyAppointmentRequestService, {
-    type CompanyAppointmentRequestModel,
+  type CompanyAppointmentRequestModel,
 } from '@/src/services/company-appointment-request-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useQuery } from '@tanstack/react-query'
@@ -56,4 +56,3 @@ export default function useGetAppointments(options?: Options) {
     meta: data?.meta,
   }
 }
-

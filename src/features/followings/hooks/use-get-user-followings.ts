@@ -48,4 +48,3 @@ export default function useGetUserFollowings(options?: Options) {
     meta: data?.meta,
   }
 }
-

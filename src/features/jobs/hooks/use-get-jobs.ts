@@ -3,12 +3,12 @@ import JobService, { JobStatus } from '@/src/services/job-service'
 import { QueryFilters, useQuery } from '@tanstack/react-query'
 
 type Options = {
-   filter: QueryFilters & {companyName?: string}
+  filter: QueryFilters & { companyName?: string }
 }
 
 export default function useGetJobs(options?: Options) {
-   const { filter = {} } = options || {}
-   
+  const { filter = {} } = options || {}
+
   // React Query for data fetching
   const { data, isLoading, isRefetching, refetch } = useQuery({
     queryKey: jobKey.list(filter),
@@ -24,7 +24,7 @@ export default function useGetJobs(options?: Options) {
 
   return {
     jobs: data?.data || [],
-     isLoading,
+    isLoading,
     isRefetching,
     refetch,
     totalCount: data?.meta.total || 0,

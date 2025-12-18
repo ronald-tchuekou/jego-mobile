@@ -27,8 +27,7 @@ export function PostImages({ medias, author }: Props) {
   }
 
   const getItemLayout = (_: unknown, index: number) => ({ length: width || 0, offset: (width || 0) * index, index })
-  const previewImage = (url: string, tag: string) =>
-    router.push(`/preview/image?url=${url}&tag=${tag}&title=${author}`)
+  const previewImage = (url: string, tag: string) => router.push(`/preview/image?url=${url}&tag=${tag}&title=${author}`)
 
   const renderItem = ({ item }: { item: MediaModel }) => {
     const imgUrl = getImageUri(item.url)

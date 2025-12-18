@@ -39,9 +39,9 @@
     "expo-haptics": "~15.0.8",
     "expo-image": "~3.0.11",
     "expo-image-picker": "~17.0.10",
-    "expo-linking": "~8.0.10",
+    "expo-linking": "~8.0.11",
     "expo-network": "~8.0.8",
-    "expo-router": "~6.0.19",
+    "expo-router": "~6.0.20",
     "expo-secure-store": "~15.0.8",
     "expo-splash-screen": "~31.0.12",
     "expo-status-bar": "~3.0.9",
@@ -90,6 +90,15 @@
   },
   "resolutions": {
     "expo-manifests": "1.0.9"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@pusher/pusher-websocket-react-native"
+        ]
+      }
+    }
   },
   "private": true
 }

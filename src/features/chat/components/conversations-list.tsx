@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function ConversationsList({ search }: Props) {
-  const { isLoading, data} = useGetContacts()
+  const { isLoading, data } = useGetContacts()
   const router = useRouter()
   const auth = useAuthStore((state) => state.auth)
   const currentUserId = auth?.user?.id

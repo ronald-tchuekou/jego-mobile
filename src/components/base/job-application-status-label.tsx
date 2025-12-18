@@ -1,15 +1,9 @@
-import { Text, View } from "react-native"
+import { Text, View } from 'react-native'
 
 export function JobApplicationStatusLabel({ status }: { status: string }) {
   if (!status) return null
   const label =
-    status === 'pending'
-      ? 'En attente'
-      : status === 'accepted'
-        ? 'Accepté'
-        : status === 'rejected'
-          ? 'Rejeté'
-          : status
+    status === 'pending' ? 'En attente' : status === 'accepted' ? 'Accepté' : status === 'rejected' ? 'Rejeté' : status
 
   const colorClasses =
     status === 'pending'
@@ -35,4 +29,3 @@ export function JobApplicationStatusLabel({ status }: { status: string }) {
     </View>
   )
 }
-

@@ -1,7 +1,5 @@
 import { applicationKey } from '@/src/lib/query-kye'
-import JobApplicationService, {
-  type JobApplicationModel,
-} from '@/src/services/job-application-service'
+import JobApplicationService, { type JobApplicationModel } from '@/src/services/job-application-service'
 import { useAuthStore } from '@/src/stores/auth-store'
 import { useQuery } from '@tanstack/react-query'
 
@@ -53,4 +51,3 @@ export default function useGetJobApplications(options?: Options) {
     meta: data?.meta,
   }
 }
-

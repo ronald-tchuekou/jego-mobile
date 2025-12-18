@@ -18,7 +18,7 @@ import {
   ActionsheetScrollView,
   ActionsheetSectionHeaderText,
   ActionsheetSectionList,
-  ActionsheetVirtualizedList
+  ActionsheetVirtualizedList,
 } from './select-actionsheet'
 
 const SelectTriggerWrapper = React.forwardRef<

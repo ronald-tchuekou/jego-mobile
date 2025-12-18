@@ -95,9 +95,7 @@ export function pluralize(word: string, count: number) {
  * @returns The URI of the company logo
  */
 export function getCompanyLogoUri(logo?: string | null) {
-  return logo
-    ? { uri: getFullUrl(logo) }
-    : IMAGES.default_company_logo
+  return logo ? { uri: getFullUrl(logo) } : IMAGES.default_company_logo
 }
 
 /**
@@ -106,9 +104,7 @@ export function getCompanyLogoUri(logo?: string | null) {
  * @returns The URI of the user profile image
  */
 export function getUserProfileImageUri(profileImage?: string | null) {
-  return profileImage
-    ? { uri: getFullUrl(profileImage)}
-    : IMAGES.default_user_avatar
+  return profileImage ? { uri: getFullUrl(profileImage) } : IMAGES.default_user_avatar
 }
 
 /**
@@ -117,7 +113,7 @@ export function getUserProfileImageUri(profileImage?: string | null) {
  * @returns The URI of the image
  */
 export function getImageUri(path: string) {
-  return { uri: getFullUrl(path)}
+  return { uri: getFullUrl(path) }
 }
 
 /**

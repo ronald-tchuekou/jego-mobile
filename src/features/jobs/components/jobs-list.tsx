@@ -17,7 +17,9 @@ function JobsList({ search }: Props) {
       refreshing={isRefetching}
       onEndReachedThreshold={0.5}
       refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
-      ListEmptyComponent={isLoading ? <LoaderContent /> : <EmptyContent text={'Aucune offre d\'emploi pour le moment.'} />}
+      ListEmptyComponent={
+        isLoading ? <LoaderContent /> : <EmptyContent text={"Aucune offre d'emploi pour le moment."} />
+      }
       renderItem={({ item }) => <JobItem job={item} />}
       keyExtractor={(item, index) => `${item.id}-${index}`}
     />
