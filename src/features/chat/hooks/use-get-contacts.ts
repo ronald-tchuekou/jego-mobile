@@ -16,7 +16,7 @@ const useGetContacts = () => {
     enabled: !!auth?.token,
   })
 
-  usePusherSubscribe(refetch)
+  usePusherSubscribe('new_message', refetch)
 
   return { isLoading, data, refetch, isRefetching }
 }

@@ -22,7 +22,7 @@ const useMessages = (conversationId: string | null) => {
   })
 
   // Subscriptions
-  usePusherSubscribe(refetch)
+  usePusherSubscribe('new_message', refetch)
 
   // Store message to the API
   const { mutate: sendMessage, isPending: isSendingMessage } = useMutation({
